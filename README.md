@@ -2,7 +2,7 @@
 
 Repositório do projeto interdisciplinar **Discovid** de 1.º ano do curso Tecnologias e Sistemas de Informação para a Web da Escola Superior de Media Artes e Design - Instituto Politécnico do Porto.
 
-Acessível em: https://wwww.discovid.pt
+Acessível em: https://www.discovid.pt
 
 Desenvolvido por:
 
