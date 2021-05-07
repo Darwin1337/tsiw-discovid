@@ -1,0 +1,54 @@
+/* Fonts */
+
+@import url("..\\fonts\\roboto\\roboto.css");
+@import url("..\\fonts\\gotham\\gotham.css");
+
+/* Cores */
+
+:root {
+    --azul-pri: #131E4C;
+    --azul-sec: #4A4969;
+    --laranja: #C49043;
+    --cinza-claro: #F8F8FA;
+    --cinza-escuro: #8F8EA0;
+}
+
+/* Geral */
+
+* {
+  font-family: 'Gotham', sans-serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  background: var(--cinza-claro);
+  scroll-behavior: smooth;
+}
+
+.svg-inline--fa {
+  color: var(--laranja) !important;
+}
+
+/* Navbar */
+
+nav {
+  height: 125px;
+  background-color: var(--azul-pri);
+}
+
+nav .nav-item {
+  width: 125px;
+}
+
+nav .nav-link {
+  font-weight: bolder;
+  color: white;
+  text-align: center;
+}
+
+nav .navbar-brand img {
+  max-width: 60%;
+}
