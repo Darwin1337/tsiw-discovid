@@ -18,12 +18,12 @@
 * {
   font-family: 'Gotham', sans-serif;
   font-weight: normal;
-  margin: 0;
-  padding: 0;
 }
 
 html, body {
   height: 100%;
+  margin: 0;
+  padding: 0;
   background: var(--cinza-claro);
   scroll-behavior: smooth;
 }
@@ -49,6 +49,26 @@ nav .nav-link {
   font-weight: bold;
   color: white;
   text-align: center;
+}
+
+nav .nav-link:focus {
+  color: white;
+}
+
+nav .nav-link:hover,
+nav .nav-link:active {
+  color: var(--laranja);
+}
+
+nav .active .nav-link,
+nav .active .nav-link:hover,
+nav .active .nav-link:active,
+nav .active .nav-link:focus {
+  color: var(--cinza-escuro);
+}
+
+nav .w-50 a {
+  line-height: 28px;
 }
 
 nav .navbar-brand img {
@@ -85,19 +105,80 @@ nav .dropdown-toggle {
   line-height: 25px;
 }
 
-nav .w-50 a {
-  line-height: 28px;
+nav .navbar-nav .user .dropdown-menu {
+  left: -35px;
 }
 
 nav hr {
-  border: 2px solid white;
+  border: 1px solid white;
   color: white;
   background-color: white;
+  border-top: 1px solid white;
+  opacity: .75;
 }
+
+nav .mobile #nav-toggler {
+  position: fixed;
+  left: 25px;
+  top: 45px;
+}
+
+nav .mobile .navbar-brand {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+nav .mobile .navbar-brand img {
+  margin-right: 9px;
+}
+
+nav .mobile li:first-child hr {
+  margin-top: 25px;
+}
+
+nav .mobile .logged-user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+
+nav .mobile .logged-user {
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 20px;
+}
+
+nav .mobile .logged-user a,
+nav .mobile .logged-user a:hover {
+  color: var(--laranja);
+  font-weight: bolder;
+}
+
+/* Media queries */
+
 
 @media screen and (max-width: 1200px) {
   nav .nav-item {
     padding-left: 5px;
     padding-right: 5px;
+  }
+}
+
+@media screen and (max-width: 1092px) {
+  nav .navbar-nav .user .dropdown-menu {
+    left: -55px;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  nav .mobile .nav-link {
+    text-align: left;
+  }
+
+  nav .mobile ul {
+    padding-bottom: 25px;
   }
 }
