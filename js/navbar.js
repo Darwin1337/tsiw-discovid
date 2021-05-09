@@ -19,10 +19,10 @@ $(window).resize(function() {
 
 function ChangeIcon() {
   if (!$("#nav-toggler").hasClass("collapsed")) {
-    $("#navbar-logo").attr("src", "img\\menu-logo-mobile.svg");
+    $("#navbar-logo").attr("src", "img\\menu-logo-mobile.png");
     $("#navbar-logo").css("margin-right", "0px");
   } else {
-    $("#navbar-logo").attr("src", "img\\logo-mobile.svg");
+    $("#navbar-logo").attr("src", "img\\logo-mobile.png");
     $("#navbar-logo").css("margin-right", "9px");
   }
 }
@@ -31,7 +31,7 @@ function CheckResolution() {
   if ($(window).width() < 992) {
     if (!isDisplayMobile) {
       ApplyMobileNavbar();
-      $("#navbar-logo").attr("src", "img\\logo-mobile.svg");
+      $("#navbar-logo").attr("src", "img\\logo-mobile.png");
     }
     return true;
   } else {
@@ -104,7 +104,7 @@ function ApplyMobileNavbar() {
             <span class="navbar-toggler-icon"></span>
         </button>
         <a href="/" class="navbar-brand">
-          <img id="navbar-logo" src="img\\logo-mobile.svg" class="d-inline-block align-top" alt="Logótipo Discovid">
+          <img id="navbar-logo" src="img\\logo-mobile.png" class="d-inline-block align-top" alt="Logótipo Discovid">
         </a>
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
             <ul class="navbar-nav w-100 justify-content-start">

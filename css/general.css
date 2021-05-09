@@ -118,7 +118,7 @@ nav hr {
 }
 
 nav .mobile #nav-toggler {
-  position: fixed;
+  position: absolute;
   left: 25px;
   top: 45px;
 }
