@@ -28,7 +28,7 @@ html, body {
   scroll-behavior: smooth;
 }
 
-.svg-inline--fa {
+nav .svg-inline--fa {
   color: var(--laranja) !important;
 }
 nav .covid-drop .svg-inline--fa {
@@ -163,7 +163,6 @@ nav .mobile .logged-user a:hover {
 }
 
 /* Media queries */
-
 
 @media screen and (max-width: 1200px) {
   nav .nav-item {
