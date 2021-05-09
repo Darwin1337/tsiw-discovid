@@ -4,6 +4,7 @@ $(document).ready(function() {
     if (CheckResolution()) {
       isDisplayMobile = true;
       ApplyMobileNavbar();
+      UpdateActiveLink();
     } else {
       ApplyDesktopNavbar();
     }
@@ -21,9 +22,11 @@ function ChangeIcon() {
   if (!$("#nav-toggler").hasClass("collapsed")) {
     $("#navbar-logo").attr("src", "img\\menu-logo-mobile.png");
     $("#navbar-logo").css("margin-right", "0px");
+    $("#navbar-logo").css("margin-top", "0px");
   } else {
     $("#navbar-logo").attr("src", "img\\logo-mobile.png");
-    $("#navbar-logo").css("margin-right", "9px");
+    $("#navbar-logo").css("margin-right", "22px");
+    $("#navbar-logo").css("margin-top", "4px");
   }
 }
 
@@ -63,10 +66,10 @@ function ApplyDesktopNavbar() {
               </li>
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-syringe"></i>  COVID-19</a>
-                  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                      <li><a class="dropdown-item" href="#">Sintomas</a></li>
+                  <ul class="covid-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
+                      <li><a class="dropdown-item" href="#"><i class="fas fa-exclamation-circle"></i>  Sintomas</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="#">Tracking</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fas fa-chart-line"></i>  Tracking</a></li>
                   </ul>
               </li>
               <li class="nav-item">
@@ -109,7 +112,7 @@ function ApplyMobileNavbar() {
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
             <ul class="navbar-nav w-100 justify-content-start">
                 <li><hr class="dropdown-divider"></li>
-                <li class="nav-item active"><a class="nav-link" href="#">POSTOS</a></li>
+                <li class="nav-item active"><a class="nav-link" href="#"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">LOJA</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">SINTOMAS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">TRACKING</a></li>
@@ -128,4 +131,8 @@ function ApplyMobileNavbar() {
         </div>
       </div>
     </nav>`);
+}
+
+function UpdateActiveLink() {
+  // Complete this
 }

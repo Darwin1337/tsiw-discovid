@@ -31,6 +31,9 @@ html, body {
 .svg-inline--fa {
   color: var(--laranja) !important;
 }
+nav .covid-drop .svg-inline--fa {
+  color: white !important;
+}
 
 /* Navbar */
 
@@ -127,10 +130,12 @@ nav .mobile .navbar-brand {
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-right: 0;
 }
 
 nav .mobile .navbar-brand img {
-  margin-right: 9px;
+  margin-right: 22px;
+  margin-top: 4px;
 }
 
 nav .mobile li:first-child hr {
