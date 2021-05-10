@@ -9,6 +9,7 @@
     --azul-pri: #131E4C;
     --azul-sec: #4A4969;
     --laranja: #C49043;
+    --laranja-escuro: #C47B43;
     --cinza-claro: #F8F8FA;
     --cinza-escuro: #8F8EA0;
 }
@@ -162,22 +163,98 @@ nav .mobile .logged-user a:hover {
   font-weight: bolder;
 }
 
+/* Botões */
+
+/* Fundo laranja e texto branco */
+
+.btn-laranja {
+  border: 0;
+  background-color: var(--laranja);
+  color: white;
+  transition: .3s;
+}
+
+.btn-laranja:hover {
+  background-color: var(--laranja-escuro);
+  color: white;
+  transition: .3s;
+}
+
+/* Cartas */
+
+/* Carta de estabelecimento */
+
+.card-sta {
+  border: 0;
+  padding: 15px;
+  background-color: white;
+  border-radius: 5px;
+  margin-bottom: 2.5rem;
+}
+
+.card-sta .card-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+}
+
+.card-sta .card-title {
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.card-sta .card-title p {
+  font-weight: 500;
+  color: var(--laranja);
+  margin: 5px 0px 5px;
+}
+
+.card-sta .card-subtitle p {
+  font-weight: normal;
+  color: var(--azul-pri);
+  margin-bottom: 1.75rem;
+}
+
+.card-sta .card-description p {
+  margin: 0;
+}
+
+.card-sta .card-description p,
+.card-sta .card-description p i {
+  font-weight: 500;
+  color: var(--cinza-escuro);
+}
+
+.card-sta .card-buttons {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+}
+
 /* Media queries */
 
-@media screen and (max-width: 1200px) {
+@media (max-width: 1200px) {
   nav .nav-item {
     padding-left: 5px;
     padding-right: 5px;
   }
+
+  .card-sta .card-buttons {
+    padding-top: 20px;
+    justify-content: center;
+  }
 }
 
-@media screen and (max-width: 1092px) {
+@media (max-width: 1092px) {
   nav .navbar-nav .user .dropdown-menu {
     left: -55px;
   }
 }
 
-@media screen and (max-width: 992px) {
+@media (max-width: 992px) {
   nav .mobile .nav-link {
     text-align: left;
   }

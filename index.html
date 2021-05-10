@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Projeto da interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
-  <meta name="keywords" content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="keywords"
+    content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -17,23 +18,155 @@
 </head>
 
 <body id="index">
-  <div class="nav-area"></div>
+  <header>
+    <div class="nav-area"></div>
+  </header>
 
-  <div class="content-area">
-    <div class="container-fluid">
-      <div class="jumbotron-wrapper">
-        <div class="jumbotron">
+  <main>
+    <div class="content-area">
+      <div class="container-fluid">
+        <div class="jumbotron-wrapper">
+          <div class="jumbotron">
+            <div class="container">
+              <div class="jumbotron-text">
+                <h1 class="display-4">Precisa de se testar?</h1>
+                <p class="lead">efetue já a sua marcação!</p>
+                <div class="jumbotron-buttons">
+                  <a class="btn btn-primary btn-lg" href="#" role="button">Ceder Localização</a>
+                  <p>ou</p>
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Introduza uma localidade...">
+                    <div class="input-group-append">
+                      <button class="btn input-group-text"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="map-section">
+        <div class="map-results pt-5 pb-2">
           <div class="container">
-            <div class="jumbotron-text">
-              <h1 class="display-4">Precisa de se testar?</h1>
-              <p class="lead">efetue já a sua marcação!</p>
-              <div class="jumbotron-buttons">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Ceder Localização</a>
-                <p>ou</p>
-                <div class="input-group">
-                  <input type="text" class="form-control" placeholder="Introduza uma localidade...">
-                  <div class="input-group-append">
-                    <button class="btn input-group-text"><i class="fas fa-chevron-right"></i></button>
+            <h3>A mostrar resultados de: <span>Porto, Porto</span></h3>
+          </div>
+        </div>
+        <div class="map-frame">
+          <div class="container-fluid">
+            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+              src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Vila%20do%20Conde+(Escika%20Superior%20de%20Media%20Artes%20e%20Design)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="results-section pt-5 pb-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <div style="width: 100%; padding: 0px 15px;">
+                <h2 class="results-title">Postos encontrados</h2>
+                <h3 class="results-description pb-4">(3 resultados)</h3>
+                <div class="results-cards">
+                  <div class="card-sta">
+                    <div class="row">
+                      <div class="col-xl-9">
+                        <div class="card-text">
+                          <div class="card-title">
+                            <p>Multiusos de Gondomar</p>
+                          </div>
+                          <div class="card-subtitle">
+                            <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                          </div>
+                          <div class="card-description">
+                            <p>5km • Diagnóstico | Antigénio | Serológico&nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-3">
+                        <div class="card-buttons">
+                          <button type="button" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-sta">
+                    <div class="row">
+                      <div class="col-xl-9">
+                        <div class="card-text">
+                          <div class="card-title">
+                            <p>Multiusos de Gondomar</p>
+                          </div>
+                          <div class="card-subtitle">
+                            <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                          </div>
+                          <div class="card-description">
+                            <p>5km • Diagnóstico | Antigénio | Serológico&nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-3">
+                        <div class="card-buttons">
+                          <button type="button" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-sta">
+                    <div class="row">
+                      <div class="col-xl-9">
+                        <div class="card-text">
+                          <div class="card-title">
+                            <p>Multiusos de Gondomar</p>
+                          </div>
+                          <div class="card-subtitle">
+                            <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                          </div>
+                          <div class="card-description">
+                            <p>5km • Diagnóstico | Antigénio | Serológico&nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xl-3">
+                        <div class="card-buttons">
+                          <button type="button" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div style="width: 100%; padding: 0px 15px;">
+                <h2 class="results-title">Filtrar resultados</h2>
+                <h3 class="results-description pb-4">Experimente todos os filtros <span style="font-weight: bold;">aqui</span></h3>
+                <div class="filters p-3">
+                  <div class="filter-locale pb-4">
+                    <select class="form-select" data-live-search="true">
+                      <option selected>Open this select menu</option>
+                      <option value="1">One</option>
+                      <option value="2">Two</option>
+                      <option value="3">Three</option>
+                    </select>
+                  </div>
+                  <div class="filter-test-type pb-4">
+                    <select class="form-select">
+                      <option selected>Tipo de teste</option>
+                      <option value="1">Diagnóstico</option>
+                      <option value="2">Antigénio</option>
+                      <option value="3">Serológico</option>
+                    </select>
+                  </div>
+                  <div class="filter-price pb-4">
+                    <label for="customRange3" class="form-label">Example range</label>
+                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+                  </div>
+                  <div class="filter-distance pb-4">
+                    <label for="customRange3" class="form-label">Example range</label>
+                    <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+                  </div>
+                  <div>
+                    <button type="button" class="btn w-100 btn-laranja">Aplicar filtros</button>
                   </div>
                 </div>
               </div>
@@ -42,11 +175,7 @@
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="container pt-5">
-    <h1>Work in progress.</h1>
-  </div>
+  </main>
 
   <!-- Scripts do projeto -->
   <script type="text/javascript" src="vendor\jquery\jquery-3.6.0.min.js"></script>
