@@ -116,6 +116,17 @@
   border-radius: 5px;
 }
 
+.results-section .filters select {
+  background-color: var(--cinza-claro);
+  border: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--cinza-escuro);
+}
+
+.results-section .filters input[type=range] {
+  color: var(--laranja);
+  background-color: var(--laranja);
+}
 
 @media (max-width: 767px) {
   .content-area .jumbotron .jumbotron-buttons {

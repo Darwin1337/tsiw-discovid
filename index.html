@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Projeto da interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
+  <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
   <meta name="keywords"
     content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
@@ -142,12 +142,20 @@
                 <h3 class="results-description pb-4">Experimente todos os filtros <span style="font-weight: bold;">aqui</span></h3>
                 <div class="filters p-3">
                   <div class="filter-locale pb-4">
-                    <select class="form-select" data-live-search="true">
-                      <option selected>Open this select menu</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
+
+
+                    <input class="select-input localidades-select" list=localidades>
+                    <button class="select-button localidades-select">▼</button>
+                    <datalist class="select-datalist localidades-select" id="localidades">
+                      <select class="select-select localidades-select" multiple size=4>
+                        <option value="1">Vila do Conde</option>
+                        <option value="2">Póvoa de Varzim</option>
+                        <option value="3">Vila Nova de Gaia</option>
+                        <option value="4">Peso da Régua</option>
+                      </select>
+                    </datalist>
+
+
                   </div>
                   <div class="filter-test-type pb-4">
                     <select class="form-select">
@@ -181,6 +189,7 @@
   <script type="text/javascript" src="vendor\jquery\jquery-3.6.0.min.js"></script>
   <script type="text/javascript" src="vendor\bootstrap\js\bootstrap.bundle.min.js"></script>
   <script type="text/javascript" src="vendor\fontawesome\js\all.min.js"></script>
+  <script type="text/javascript" src="js\general.js"></script>
   <script type="text/javascript" src="js\navbar.js"></script>
   <script type="text/javascript">
     // Scripts here
