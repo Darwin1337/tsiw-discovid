@@ -1,14 +1,14 @@
-const registar=document.querySelector("#pills-registar-tab")
-const login=document.querySelector("#pills-login-tab")
-registar.addEventListener("click",function(){
-  registar.classList.remove("register-tab")
-  registar.classList.add("login-tab")
-  login.classList.remove("login-tab")
-  login.classList.add("register-tab")
-})
-login.addEventListener("click",function(){
-  registar.classList.remove("login-tab")
-  registar.classList.add("register-tab")
-  login.classList.remove("register-tab")
-  login.classList.add("login-tab")
-})
+$(".btn-pills").click(function(event) {
+  for (let i = 0; i < $(".btn-pills").length; i++) {
+    if ($(".btn-pills")[i] != event.target) {
+      if ($(".btn-pills")[i].classList.contains("active-tab")) {
+        $(".btn-pills")[i].classList.remove("active-tab");
+      }
+      if (!$(".btn-pills")[i].classList.contains("unactive-tab")) {
+        $(".btn-pills")[i].classList.add("unactive-tab");
+      }
+    }
+  }
+  event.target.classList.remove("unactive-tab");
+  event.target.classList.add("active-tab");
+});

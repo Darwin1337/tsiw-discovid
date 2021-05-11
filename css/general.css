@@ -180,6 +180,19 @@ nav .mobile .logged-user a:hover {
   transition: .3s;
 }
 
+.btn-azul-pri {
+  border: 0;
+  background-color: var(--azul-pri);
+  color: white;
+  transition: .3s;
+}
+
+.btn-azul-pri:hover {
+  background-color: var(--azul-sec);
+  color: white;
+  transition: .3s;
+}
+
 /* Cartas */
 
 /* Carta de estabelecimento */
@@ -236,6 +249,100 @@ nav .mobile .logged-user a:hover {
 
 /* Select */
 
+.select2-container--default .select2-selection--single {
+  border: 0;
+  background-color: var(--cinza-claro);
+  border-radius: 5px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  color: var(--cinza-escuro);
+  font-family: 'Roboto', sans-serif;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: var(--laranja) transparent transparent transparent;
+  border-width: 8px 5px 0 5px;
+  left: 40%;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  border-color: transparent transparent var(--laranja) transparent;
+  border-width: 0 5px 8px 5px;
+}
+
+.select2-container--open .select2-dropdown--below  {
+  border: 0;
+  background-color: var(--cinza-claro);
+  border-radius: 5px;
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 0;
+  color: var(--cinza-escuro);
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field::placeholder {
+  color: var(--cinza-escuro);
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field:focus {
+  outline: 0;
+  -webkit-box-shadow:inset 0px 0px 0px 2px var(--laranja);
+  -moz-box-shadow:inset 0px 0px 0px 2px var(--laranja);
+  box-shadow:inset 0px 0px 0px 2px var(--laranja);
+}
+
+.select2-container--open .select2-dropdown--below li {
+  font-family: 'Roboto', sans-serif;
+}
+
+.select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: var(--azul-sec);
+}
+
+.select2-results__message {
+  font-size: 1rem;
+  color: var(--cinza-escuro);
+}
+
+/* Range sliders */
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 7px;
+  background: #E7D2B3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border-radius: 5px;
+}
+
+input[type="range"]:hover {
+  opacity: 1;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--laranja);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: var(--laranja);
+  cursor: pointer;
+}
 
 /* Media queries */
 

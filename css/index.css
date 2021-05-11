@@ -123,11 +123,6 @@
   color: var(--cinza-escuro);
 }
 
-.results-section .filters input[type=range] {
-  color: var(--laranja);
-  background-color: var(--laranja);
-}
-
 @media (max-width: 767px) {
   .content-area .jumbotron .jumbotron-buttons {
     flex-direction: column;

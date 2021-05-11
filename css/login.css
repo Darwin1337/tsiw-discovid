@@ -20,7 +20,7 @@
   color: white;
 }
 
-.login-tab {
+.active-tab {
   background-color: #EC8E00;
   padding: 20px;
   border: 1px solid #ec8e00;
@@ -29,7 +29,7 @@
   width: 100%;
 }
 
-.register-tab {
+.unactive-tab {
   color: #131e4c;
   background-color: transparent;
   border: 1px solid #ec8e00;
