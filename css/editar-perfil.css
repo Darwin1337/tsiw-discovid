@@ -15,3 +15,140 @@
   padding: 20px;
   width: 100%;
 }
+
+#pills-encomendas .encomenda{
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+.img-encomenda-mini{
+  width: 4rem;
+}
+.ver-encomenda{
+  background: var(--laranja);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.color-azul-princ{
+  color: var(--azul-pri);
+}
+.color-laranja{
+  color: var(--laranja);
+}
+.check-style{
+  height: 20px;
+  width: 20px;
+}
+.check-style input:checked{
+  background-color: var(--laranja);
+}
+.span-checkbox{
+  padding-left: 10px;
+}
+#pills-marcacoes .marcacao{
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+.ver-marcacao{
+  background: var(--laranja);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+}
+.cancelar-marcacao{
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+}
+.descricao-marcacao{
+  font-weight: 500;
+  color: var(--cinza-escuro);
+}
+#pills-notificacoes .notificacoes{
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+}
+
+.fechar-notificacao{
+  padding: 6px;
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 7px;
+}
+
+.background-modal{
+  background-color: var(--cinza-claro);
+}
+
+.info-posto-marcacao{
+  background: white;
+  text-align: left;
+  padding: 50px;
+}
+.span-5estrelas{
+  width: 92%;
+  height: 4px;
+  background-color: green;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+.span-4estrelas{
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+.span-3estrelas{
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+.span-2estrelas{
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+.span-1estrelas{
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+.info-posto-marcacao span#valor{
+  width: 5%;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+.tab-pane .row{
+  --bs-gutter-x: 0;
+  --bs-gutter-y: 0;
+}
+}

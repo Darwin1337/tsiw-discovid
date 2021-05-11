@@ -8,7 +8,7 @@
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Discovid - Editar Perfil</title>
+  <title>Discovid - Perfil</title>
   <link rel="icon" href="img/icon.svg">
   <link rel="stylesheet" href="vendor\bootstrap\css\bootstrap.min.css">
   <link rel="stylesheet" href="vendor\fontawesome\css\all.min.css">
@@ -21,39 +21,184 @@
   <div class="nav-area"></div>
 
   <div class="container">
+    
     <div class="row mt-4 pt-5">
       <div class="col"></div>
       <div class="col-md-10">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item w-25" role="presentation">
-            <button class="btn-pills active active-tab" id="pills-perfil-tab" data-bs-toggle="pill" data-bs-target="#pills-perfil" type="button" role="tab" aria-controls="pills-perfil" aria-selected="true">Perfil</button>
-          </li>
-          <li class="nav-item w-25" role="presentation">
-            <button class="btn-pills unactive-tab" id="pills-marcacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-marcacoes" type="button" role="tab" aria-controls="pills-marcacoes" aria-selected="false">Marcações</button>
-          </li>
-          <li class="nav-item w-25" role="presentation">
-            <button class="btn-pills unactive-tab" id="pills-encomendas-tab" data-bs-toggle="pill" data-bs-target="#pills-encomendas" type="button" role="tab" aria-controls="pills-encomendas" aria-selected="false">Encomendas</button>
-          </li>
-          <li class="nav-item w-25" role="presentation">
-            <button class="btn-pills unactive-tab" id="pills-notificacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-notificacoes" type="button" role="tab" aria-controls="pills-notificacoes" aria-selected="false">Notificações</button>
-          </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-perfil" role="tabpanel" aria-labelledby="pills-perfil-tab">
-            Perfil
+          <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <div class="col-6 col-md-3">
+              <li class="nav-item" role="presentation">
+                <button class="btn-pills active active-tab" id="pills-perfil-tab" data-bs-toggle="pill" data-bs-target="#pills-perfil" type="button" role="tab" aria-controls="pills-perfil" aria-selected="true">Perfil</button>
+              </li>
+            </div>
+            <div class="col-6 col-md-3">
+              <li class="nav-item" role="presentation">
+                <button class="btn-pills unactive-tab" id="pills-marcacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-marcacoes" type="button" role="tab" aria-controls="pills-marcacoes" aria-selected="false">Marcações</button>
+              </li>
+            </div>
+            <div class="col-6 col-md-3">
+              <li class="nav-item" role="presentation">
+                <button class="btn-pills unactive-tab" id="pills-encomendas-tab" data-bs-toggle="pill" data-bs-target="#pills-encomendas" type="button" role="tab" aria-controls="pills-encomendas" aria-selected="false">Encomendas</button>
+              </li>
+            </div>
+            <div class="col-6 col-md-3">
+              <li class="nav-item" role="presentation">
+                <button class="btn-pills unactive-tab" id="pills-notificacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-notificacoes" type="button" role="tab" aria-controls="pills-notificacoes" aria-selected="false">Notificações</button>
+              </li>
+            </div>
+          </ul>
+        
+      </div>
+      <div class="col"></div>
+
+      <div class="tab-content" id="pills-tabContent">
+
+        <div class="tab-pane fade show active" id="pills-perfil" role="tabpanel" aria-labelledby="pills-perfil-tab">
+          Perfil
+        </div>
+
+<!--Marcações-->
+        <div class="tab-pane fade" id="pills-marcacoes" role="tabpanel" aria-labelledby="pills-marcacoes-tab">
+          <div class="row flex-column-reverse flex-md-row">
+            <div class="col-md-9 marcacao">
+              <div class="row d-flex align-items-center">
+                <div class="col-md-6 color-azul-princ">
+                  <h5 class="color-laranja">Multiusos de Gondomar</h5>
+                  <p class="pt-4 mb-1">Av. Multiusos, 4420-230 S.Cosme</p>
+                  <p>18,90€</p>
+                  <p class="descricao-marcacao">Marcação realizada em: 25/04/2021 às 23:32h | Teste RT-PCR &nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                </div>
+                <div class="col-md-3 color-azul-princ ">
+                  <p><b>Estado: </b>Agendado</p>
+                </div>
+                
+                <div class="col-md-3 text-center">
+                  <button class="cancelar-marcacao mb-4">Cancelar <span><i class="fas fa-times"></i></span> </button>
+                  <button class="ver-marcacao" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Detalhes <span><i class="fas fa-arrow-right"></i></span> </button>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-fullscreen">
+                      <div class="modal-content background-modal">
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <div class="modal-body">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-md-6 text-left">
+                                <h3>Informação do posto</h3>
+                                <div class="col-md-12 info-posto-marcacao text-left color-azul-princ">
+                                  <h5>MULTIUSOS DE GONDOMAR</h5>
+                                  <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                                  <p>5KM</p>
+                                  <p>09:00h - 20:00h</p>
+                                  <div class="row">
+                                    <div class="col-md-12 col-xl-3 col-sm-12 col-12">
+                                      <h4 class="color-laranja">5,0</h4>
+                                    </div>
+                                    <div class="col-md-12 col-xl-6 col-sm-12 col-12 d-flex align-items-center ">
+                                      <span id="valor">5</span>
+                                      <span class="span-5estrelas "></span>
+                                    </div>
+                                    <div class="col-xl-3"></div>
+                                    <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                                    <div class="col-md-12 col-xl-6 col-sm-12 col-12 d-flex align-items-center ">
+                                      <span id="valor">4</span>
+                                      <span class="span-4estrelas "></span>
+                                    </div>
+                                    <div class="col-xl-3"></div>
+                                    <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                                    <div class="col-md-12 col-xl-6 col-sm-12 col-12 d-flex align-items-center ">
+                                      <span id="valor">3</span>
+                                      <span class="span-3estrelas "></span>
+                                    </div>
+                                    <div class="col-xl-3"></div>
+                                    <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                                    <div class="col-md-12 col-xl-6 col-sm-12 col-12 d-flex align-items-center ">
+                                      <span id="valor">2</span>
+                                      <span class="span-2estrelas "></span>
+                                    </div>
+                                    <div class="col-xl-3"></div>
+                                    <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                                    <div class="col-md-12 col-xl-6 col-sm-12 col-12 d-flex align-items-center ">
+                                      <span id="valor">1</span>
+                                      <span class="span-1estrelas "></span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            <div class="col-md-3 color-azul-princ ">
+              <h5 class="color-laranja">Ordenar por data</h5>
+              <div class="d-flex align-items-center pt-3">
+                <input type="checkbox" class="check-style"><span class="span-checkbox">Mais recente para mais antigo</span>
+              </div>
+              <div class="d-flex align-items-center pt-3 pb-3">
+                <input type="checkbox" class="check-style"><span class="span-checkbox">Mais antigo para mais recente</span>
+              </div>
+            </div>
           </div>
-          <div class="tab-pane fade" id="pills-marcacoes" role="tabpanel" aria-labelledby="pills-marcacoes-tab">
-            Marcações
+        </div>
+      
+<!--Encomendas-->
+        <div class="tab-pane fade" id="pills-encomendas" role="tabpanel" aria-labelledby="pills-encomendas-tab">
+          <div class="row flex-column-reverse flex-md-row">
+            <div class="col-md-9 encomenda">
+              <div class="row d-flex align-items-center">
+                <div class="col-md-6 color-azul-princ">
+                  <h5 class="color-laranja">Encomenda 123</h5>
+                  <p class="pt-4 mb-1">Encomenda realizada a 20 Abr, 2020</p>
+                  <p>Prazo previsto para entrega até 25 de abril</p>
+                  
+                  
+                </div>
+                <div class="col-md-3 color-azul-princ ">
+                  <p><b>Estado: </b>Processado</p>
+                </div>
+                
+                <div class="col-md-3">
+                  <button class="ver-encomenda">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+                </div>
+                  <div class="col-md-12">
+                    <img class="card-img-top mx-auto img-encomenda-mini pt-3" src="img/loja/M01.png">
+                  </div>
+              </div>
+              
+            </div>
+            <div class="col-md-3 color-azul-princ ">
+              <h5 class="color-laranja">Ordenar por data</h5>
+              <div class="d-flex align-items-center pt-3">
+                <input type="checkbox" class="check-style"><span class="span-checkbox">Mais recente para mais antigo</span>
+              </div>
+              <div class="d-flex align-items-center pt-3 pb-3">
+                <input type="checkbox" class="check-style"><span class="span-checkbox">Mais antigo para mais recente</span>
+              </div>
+            </div>
           </div>
-          <div class="tab-pane fade" id="pills-encomendas" role="tabpanel" aria-labelledby="pills-encomendas-tab">
-            Encomendas
-          </div>
-          <div class="tab-pane fade" id="pills-notificacoes" role="tabpanel" aria-labelledby="pills-notificacoes-tab">
-            Notificações
+        </div>
+<!--Notificações-->
+        <div class="tab-pane fade" id="pills-notificacoes" role="tabpanel" aria-labelledby="pills-notificacoes-tab">
+          <div class="row notificacoes d-flex align-items-center justify-content-center text-center mt-5">
+            <div class="col-md-4 color-laranja pt-2 pb-2">
+              O seu teste é já daqui a 1 dia
+            </div>
+            <div class="col-md-4 color-azul-princ pt-2 pb-2">
+              <a><b>Ver marcação</b></a>
+            </div>
+            <div class="col-md-4 pt-2 pb-2">
+              <button class="fechar-notificacao">Fechar notificação <span><i class="fas fa-times"></i></span> </button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="col"></div>
     </div>
   </div>
 
