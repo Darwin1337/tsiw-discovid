@@ -100,6 +100,7 @@
   background: white;
   text-align: left;
   padding: 50px;
+  border-radius: 7px;
 }
 .span-5estrelas{
   width: 92%;
@@ -143,6 +144,50 @@
 }
 .info-posto-marcacao span#valor{
   width: 5%;
+  text-align: center;
+}
+.metodo-pagamento{
+  background-color: white;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.imprimir-fatura{
+  border: none;
+  background-color: var(--laranja);
+  color: white;
+  border-radius: 7px;
+  padding: 6px;
+}
+.avaliar-posto{
+  border: none;
+  background-color: var(--azul-pri);
+  color: white;
+  border-radius: 7px;
+  padding: 6px;
+}
+.identar-15{
+  left: 15px;
+  position: relative;
+  color:#8f8ea0;
+}
+.fechar-modal{
+  text-align: right;
+  padding-right: 4rem;
+  padding-top: 2rem;
+  font-size: 33px;
+}
+.avaliacao-entidade{
+  flex-wrap:wrap
+}
+
+.bg-pd-br{
+  background-color: white;
+  padding: 20px;
+  border-radius: 7px;
+}
+.pontuacao{
+  font-size: 4rem;
   text-align: center;
 }
 
