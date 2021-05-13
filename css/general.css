@@ -2,6 +2,7 @@
 
 @import url("..\\fonts\\roboto\\roboto.css");
 @import url("..\\fonts\\gotham\\gotham.css");
+@import url("..\\fonts\\discovid\\style.css");
 
 /* Cores */
 
@@ -29,11 +30,9 @@ html, body {
   scroll-behavior: smooth;
 }
 
-nav .svg-inline--fa {
-  color: var(--laranja) !important;
-}
-nav .covid-drop .svg-inline--fa {
-  color: white !important;
+.discovid-icon {
+  font-family: 'discovid';
+  color: black;
 }
 
 /* Navbar */
@@ -119,6 +118,14 @@ nav hr {
   background-color: white;
   border-top: 1px solid white;
   opacity: .75;
+}
+
+nav .svg-inline--fa {
+  color: var(--laranja) !important;
+}
+
+nav .covid-drop .svg-inline--fa {
+  color: white !important;
 }
 
 nav .mobile #nav-toggler {
@@ -343,6 +350,44 @@ input[type="range"]::-moz-range-thumb {
   background: var(--laranja);
   cursor: pointer;
 }
+
+/* Footer */
+
+footer {
+  background-color: var(--azul-pri);
+}
+
+footer .discovid-icon {
+  font-size: 1.25rem;
+  color: var(--laranja);
+}
+
+footer h6 {
+  color: var(--laranja);
+}
+
+footer p,
+footer p a {
+  font-family: 'Gotham', sans-serif;
+  color: white;
+  font-weight: 100;
+  text-decoration: none;
+}
+
+footer p a {
+  font-weight: 300;
+  transition: .3s;
+}
+
+footer p a:hover {
+  color: var(--cinza-escuro);
+  transition: .3s;
+}
+
+/* fix this */
+/* footer a i {
+  color: white !important;
+} */
 
 /* Media queries */
 
