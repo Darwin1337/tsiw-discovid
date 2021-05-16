@@ -1,410 +1,396 @@
-/*Editar Perfil Page*/
+/* Stylesheet global  */
 
-.active-tab {
-background-color: var(--laranja);
-padding: 20px;
-border: 1px solid var(--laranja);
-border-radius: 2px;
-color: white;
-width: 100%;
+@import url("general.css");
+
+/* Página inicial */
+
+/* Jumbotron */
+
+.content-area .container-fluid {
+  padding: 0;
 }
 
-.unactive-tab {
-color: #131e4c;
-background-color: transparent;
-border: 1px solid var(--laranja);
-border-radius: 2px;
-padding: 20px;
-width: 100%;
+.content-area .jumbotron-wrapper {
+  width: 100%;
+  height: 350px;
 }
 
-#pills-encomendas .encomenda{
-padding: 20px;
-background: white;
-border-radius: 10px;
+.content-area .jumbotron-wrapper .jumbotron {
+  width: 100%;
+  height: 100%;
+  background-image: url("../img/index/banner-img.png");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.img-encomenda-mini{
-width: 4rem;
+.content-area .jumbotron h1 {
+  color: white;
+  font-weight: bolder;
 }
 
-.ver-encomenda{
-background: var(--laranja);
-color: white;
-border: none;
-border-radius: 7px;
-padding: 6px;
-padding-left: 15px;
-padding-right: 15px;
+.content-area .jumbotron p {
+  color: white;
+  font-weight: bolder;
 }
 
-.color-azul-princ{
-color: var(--azul-pri);
+.content-area .jumbotron .container {
+  height: 100%;
 }
 
-.color-laranja{
-color: var(--laranja);
+.content-area .jumbotron .jumbotron-text {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.check-style{
-height: 20px;
-width: 20px;
+.content-area .jumbotron .jumbotron-buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 100%;
+  padding-top: 30px;
 }
 
-.check-style input:checked{
-background-color: var(--laranja);
+.content-area .jumbotron .jumbotron-buttons p {
+  padding: 0px 15px 0px;
+  margin: 0;
 }
 
-.span-checkbox{
-padding-left: 10px;
+.content-area .jumbotron .jumbotron-buttons .btn {
+  background-color: white;
+  color: var(--azul-pri);
+  border: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  max-width: 300px;
 }
 
-#pills-marcacoes .marcacao{
-padding: 20px;
-background: white;
-border-radius: 10px;
+.content-area .jumbotron .jumbotron-buttons .input-group {
+  max-width: 300px;
 }
 
-.ver-marcacao{
-background: var(--laranja);
-color: white;
-border: none;
-border-radius: 7px;
-padding: 6px;
-padding-left: 15px;
-padding-right: 15px;
-width: auto;
+.content-area .jumbotron .jumbotron-buttons .input-group input[type=text] {
+  font-family: "Roboto", sans-serif;
 }
 
-.cancelar-marcacao{
-background: red;
-color: white;
-border: none;
-border-radius: 7px;
-padding: 6px;
-padding-left: 15px;
-padding-right: 15px;
-width: auto;
+.content-area .jumbotron .jumbotron-buttons .input-group .input-group-text {
+  height: 100%;
+  background-color: var(--laranja);
+  border: 0;
 }
 
-.descricao-marcacao{
-font-weight: 500;
-color: var(--cinza-escuro);
+.content-area .jumbotron .jumbotron-buttons .input-group .input-group-text {
+  color: white !important;
 }
 
-#pills-notificacoes .notificacoes{
-padding: 20px;
-background: white;
-border-radius: 10px;
+/* Secção do mapa: resultados */
+
+.map-section .map-results h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
 }
 
-.fechar-notificacao{
-padding: 6px;
-background: red;
-border: none;
-color: white;
-border-radius: 7px;
+.map-section .map-results span {
+  font-weight: 300;
 }
 
-.background-modal{
-background-color: var(--cinza-claro);
+/* Secção do mapa: mapa */
+
+.map-section .map-frame iframe {
+  width: 100%;
+  height: 500px;
 }
 
-.info-posto-marcacao{
-background: white;
-text-align: left;
-padding: 50px;
-border-radius: 7px;
+/* Secção dos resultados: postos encontrados */
+
+.results-section .results-title {
+  font-weight: bolder;
+  font-size: 1.5rem;
+  color: var(--azul-sec);
 }
 
-.span-5estrelas{
-width: 92%;
-height: 4px;
-background-color: green;
-display: inline-block;
-border-radius: 20px;
-margin-left: 10px;
+.results-section .results-description {
+  font-size: 1.25rem;
+  color: var(--azul-sec);
+  font-weight: 300;
 }
 
-.span-4estrelas{
-width: 92%;
-height: 4px;
-background-color: #C8C8C8;
-display: inline-block;
-border-radius: 20px;
-margin-left: 10px;
+.results-section .filters {
+  background-color: white;
+  border-radius: 5px;
 }
 
-.span-3estrelas{
-width: 92%;
-height: 4px;
-background-color: #C8C8C8;
-display: inline-block;
-border-radius: 20px;
-margin-left: 10px;
+.results-section .filters select {
+  background-color: var(--cinza-claro);
+  border: 0;
+  font-family: 'Roboto', sans-serif;
+  color: var(--cinza-escuro);
 }
 
-.span-2estrelas{
-width: 92%;
-height: 4px;
-background-color: #C8C8C8;
-display: inline-block;
-border-radius: 20px;
-margin-left: 10px;
+/* Página de editar perfil */
+
+#pills-encomendas .encomenda {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
 }
 
-.span-1estrelas{
-width: 92%;
-height: 4px;
-background-color: #C8C8C8;
-display: inline-block;
-border-radius: 20px;
-margin-left: 10px;
+.img-encomenda-mini {
+  width: 4rem;
 }
 
-.info-posto-marcacao span#valor{
-width: 5%;
-text-align: center;
+.ver-encomenda {
+  background: var(--laranja);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.metodo-pagamento{
-background-color: white;
-padding: 10px;
-border-radius: 7px;
+.check-style {
+  height: 20px;
+  width: 20px;
 }
 
-.imprimir-fatura{
-border: none;
-background-color: var(--laranja);
-color: white;
-border-radius: 7px;
-padding: 6px;
+.check-style input:checked {
+  background-color: var(--laranja);
 }
 
-.avaliar-posto{
-border: none;
-background-color: var(--azul-pri);
-color: white;
-border-radius: 7px;
-padding: 6px;
+.span-checkbox {
+  padding-left: 10px;
 }
 
-.identar-15{
-left: 15px;
-position: relative;
-color:#8f8ea0;
+#pills-marcacoes .marcacao {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
 }
 
-.fechar-modal{
-text-align: right;
-padding-right: 4rem;
-padding-top: 2rem;
-font-size: 33px;
+.ver-marcacao {
+  background: var(--laranja);
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
 }
 
-.avaliacao-entidade{
-flex-wrap:wrap
+.cancelar-marcacao {
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
 }
 
-.bg-pd-br{
-background-color: white;
-padding: 20px;
-border-radius: 7px;
+.descricao-marcacao {
+  font-weight: 500;
+  color: var(--cinza-escuro);
 }
 
-.pontuacao{
-font-size: 4rem;
-text-align: center;
+#pills-notificacoes .notificacoes {
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
 }
 
-.bg-cinza{
-background-color: #DBDBDB;
+.fechar-notificacao {
+  padding: 6px;
+  background: red;
+  border: none;
+  color: white;
+  border-radius: 7px;
 }
 
-.bg-laranja{
-background-color: var(--laranja);
-}
+/* Página de Iniciar Sessão */
 
-.border-7px{
-border-radius: 7px;
-}
-
-.botao-imprimir{
-background-color: var(--laranja);
-    border: none;
-    color: white;
-    padding: 10px;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-@media (max-width: 767px) {
-.tab-pane .row{
---bs-gutter-x: 0;
---bs-gutter-y: 0;
-}
-}
-
-/*Login Page*/
 .input-login {
-    width: 100%;
-    padding: 13px;
-    border: none;
-    box-shadow: 0px 1px 5px #aaaaaa;
-    border-radius: 2px;
+  width: 100%;
+  padding: 13px;
+  border: none;
+  box-shadow: 0px 1px 5px #aaaaaa;
+  border-radius: 2px;
 }
-  
+
 .input-login:focus {
-    outline: none;
-    box-shadow: 0px 2px 10px var(--laranja);
+  outline: none;
+  box-shadow: 0px 2px 10px var(--laranja);
 }
 
 .btn-login {
-    background-color: var(--laranja);
-    border: none;
-    width: 100%;
-    padding: 20px;
-    border-radius: 2px;
-    color: white;
+  background-color: var(--laranja);
+  border: none;
+  width: 100%;
+  padding: 20px;
+  border-radius: 2px;
+  color: white;
 }
-  
-/*Loja Page*/
+
+/* Página da loja */
+
 .card-product .card {
+  text-align: center;
+  border-radius: 15px;
+  border: none;
+}
+
+.card-product .card-title {
+  color: var(--laranja);
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+.card-product .card-body {
+  background-color: var(--azul-pri);
+  border-radius: 0px 0 15px 15px;
+}
+
+.card-product .card-text {
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.card-product .card-img-top {
+  border-radius: 15px;
+  max-width: 200px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.card-product .ver-descricao-button {
+  background: #0077FF;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: .9rem;
+  transition: .3s;
+}
+
+.card-product .ver-descricao-button:hover {
+  background: #0007FF;
+  color: white;
+  transition: .3s;
+}
+
+.card-product .add-cart-button {
+  background: var(--laranja);
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  font-size: .9rem;
+  transition: .3s;
+}
+
+.card-product .add-cart-button:hover {
+  background-color: var(--laranja-escuro);
+  transition: .3s;
+}
+
+.card-product .card-body {
+  margin-top: 10px;
+  color: white;
+}
+
+.store-products .row .col-xl-3 {
+  margin-top: 25px;
+}
+
+.store-cart {
+  background-color: white;
+  padding: 1rem;
+}
+
+.store-cart .cart-content input[type=number] {
+  background-color: var(--cinza-claro);
+  border: 0;
+  max-width: 75px;
+}
+
+.store-cart .cart-content p {
+  margin: 0;
+}
+
+.store-cart .cart-content .img-cart {
+  max-width: 40% !important;
+  min-width: 75px !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.store-cart .cart-content .titulo-cart {
+  color: var(--laranja);
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.store-cart .cart-content .preco-cart {
+  color: var(--azul-pri);
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+}
+
+.store-cart .cart-content .remover {
+  font-size: 1.5rem;
+  color: red;
+}
+
+.store-cart .cart-content .preco-total-cart {
+  color: var(--azul-pri);
+  font-weight: bold;
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+.store-cart .cart-content .btn-laranja {
+  width: 18rem;
+}
+
+/* Media queries */
+
+@media (max-width: 767px) {
+  .content-area .jumbotron .jumbotron-buttons {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0px 25px;
+  }
+
+  .content-area .jumbotron .jumbotron-buttons p {
+    padding: 10px 0px 10px;
+  }
+  
+  .card-product .cart-description {
+    padding-top: 5%;
+  }
+
+  .carrinho .col-md-3 p {
+    padding-top: 5%;
+    padding-bottom: 2%;
     text-align: center;
-    border-radius: 15px;
-    border: none;
   }
-  
-  .card-product .card-title {
-    color: var(--laranja);
-    font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
+
+  .cart-content .row div:not(:last-child) {
+    margin-bottom: 10px;
   }
-  
-  .card-product .card-body {
-    background-color: var(--azul-pri);
-    border-radius: 0px 0 15px 15px;
+
+  .tab-pane .row {
+    --bs-gutter-x: 0;
+    --bs-gutter-y: 0;
   }
-  
-  .card-product .card-text {
-    color: white;
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-  }
-  
-  .card-product .card-img-top {
-    border-radius: 15px;
-    max-width: 200px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-  }
-  
-  .card-product .ver-descricao-button {
-    background: #0077FF;
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: .9rem;
-    transition: .3s;
-  }
-  
-  .card-product .ver-descricao-button:hover {
-    background: #0007FF;
-    color: white;
-    transition: .3s;
-  }
-  
-  .card-product .add-cart-button {
-    background: var(--laranja);
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    border-radius: 5px;
-    border: none;
-    font-size: .9rem;
-    transition: .3s;
-  }
-  
-  .card-product .add-cart-button:hover {
-    background-color: var(--laranja-escuro);
-    transition: .3s;
-  }
-  
-  .card-product .card-body {
-    margin-top: 10px;
-    color: white;
-  }
-  
-  .store-products .row .col-xl-3 {
-    margin-top: 25px;
-  }
-  
-  .store-cart {
-    background-color: white;
-    padding: 1rem;
-  }
-  
-  .store-cart .cart-content input[type=number] {
-    background-color: var(--cinza-claro);
-    border: 0;
-    max-width: 75px;
-  }
-  
-  .store-cart .cart-content p {
-    margin: 0;
-  }
-  
-  .store-cart .cart-content .img-cart {
-    max-width: 40% !important;
-    min-width: 75px !important;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  
-  .store-cart .cart-content .titulo-cart {
-    color: var(--laranja);
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .store-cart .cart-content .preco-cart {
-    color: var(--azul-pri);
-    font-weight: bold;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .store-cart .cart-content .remover {
-    font-size: 1.5rem;
-    color: red;
-  }
-  
-  .store-cart .cart-content .preco-total-cart {
-    color: var(--azul-pri);
-    font-weight: bold;
-    font-size: 1rem;
-    font-family: 'Roboto', sans-serif;
-  }
-  
-  .store-cart .cart-content .btn-laranja {
-    width: 18rem;
-  }
-  
-  @media (max-width: 767px) {
-    .card-product .cart-description {
-      padding-top: 5%;
-    }
-  
-    .carrinho .col-md-3 p {
-      padding-top: 5%;
-      padding-bottom: 2%;
-      text-align: center;
-    }
-  
-    .cart-content .row div:not(:last-child) {
-      margin-bottom: 10px;
-    }
-  }
+}

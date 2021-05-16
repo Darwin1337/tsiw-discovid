@@ -1,8 +1,6 @@
 let isDisplayMobile = false;
 let imgPath = "..\\"
 
-
-
 $(document).ready(function() {
     if (CheckResolution()) {
       isDisplayMobile = true;
@@ -49,8 +47,6 @@ function CheckResolution() {
   }
   return false;
 }
-
-
 
 function ApplyDesktopNavbar() {
   $(".nav-area").html(
@@ -105,7 +101,6 @@ function ApplyDesktopNavbar() {
   </nav>`);
 }
 
-
 function ApplyMobileNavbar() {
   $(".nav-area").html(`
     <nav class="navbar navbar-expand-lg">
@@ -140,8 +135,23 @@ function ApplyMobileNavbar() {
     </nav>`);
 }
 
-
 function UpdateActiveLink() {
   // Complete this
 }
 
+// Mudar a cor das pills ao clicar
+
+$(".btn-pills").click(function(event) {
+  for (let i = 0; i < $(".btn-pills").length; i++) {
+    if ($(".btn-pills")[i] != event.target) {
+      if ($(".btn-pills")[i].classList.contains("active-tab")) {
+        $(".btn-pills")[i].classList.remove("active-tab");
+      }
+      if (!$(".btn-pills")[i].classList.contains("unactive-tab")) {
+        $(".btn-pills")[i].classList.add("unactive-tab");
+      }
+    }
+  }
+  event.target.classList.remove("unactive-tab");
+  event.target.classList.add("active-tab");
+});

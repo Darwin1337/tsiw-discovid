@@ -368,7 +368,7 @@ input[type="range"]::-moz-range-thumb {
   color: white;
   width: 100%;
 }
-  
+
 .unactive-tab {
   color: #131e4c;
   background-color: transparent;
@@ -376,6 +376,140 @@ input[type="range"]::-moz-range-thumb {
   border-radius: 2px;
   padding: 20px;
   width: 100%;
+}
+
+/* Modals */
+
+.background-modal {
+  background-color: var(--cinza-claro);
+}
+
+.info-posto-marcacao {
+  background: white;
+  text-align: left;
+  padding: 50px;
+  border-radius: 7px;
+}
+
+.span-5estrelas {
+  width: 92%;
+  height: 4px;
+  background-color: green;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.span-4estrelas {
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.span-3estrelas {
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.span-2estrelas {
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.span-1estrelas {
+  width: 92%;
+  height: 4px;
+  background-color: #C8C8C8;
+  display: inline-block;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.info-posto-marcacao span#valor {
+  width: 5%;
+  text-align: center;
+}
+
+.metodo-pagamento {
+  background-color: white;
+  padding: 10px;
+  border-radius: 7px;
+}
+
+.imprimir-fatura {
+  border: none;
+  background-color: var(--laranja);
+  color: white;
+  border-radius: 7px;
+  padding: 6px;
+}
+
+.avaliar-posto {
+  border: none;
+  background-color: var(--azul-pri);
+  color: white;
+  border-radius: 7px;
+  padding: 6px;
+}
+
+.identar-15 {
+  left: 15px;
+  position: relative;
+  color: #8f8ea0;
+}
+
+.fechar-modal {
+  text-align: right;
+  padding-right: 4rem;
+  padding-top: 2rem;
+  font-size: 33px;
+}
+
+.avaliacao-entidade {
+  flex-wrap: wrap
+}
+
+.bg-pd-br {
+  background-color: white;
+  padding: 20px;
+  border-radius: 7px;
+}
+
+.pontuacao {
+  font-size: 4rem;
+  text-align: center;
+}
+
+.bg-cinza {
+  background-color: #DBDBDB;
+}
+
+.bg-laranja {
+  background-color: var(--laranja);
+}
+
+.border-7px {
+  border-radius: 7px;
+}
+
+.botao-imprimir {
+  background-color: var(--laranja);
+  border: none;
+  color: white;
+  padding: 10px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 /* Footer */
@@ -389,32 +523,37 @@ footer .discovid-icon {
   color: var(--laranja);
 }
 
-footer h6 {
-  color: var(--laranja);
-}
-
 footer p,
 footer p a {
-  font-family: 'Gotham', sans-serif;
-  color: white;
-  font-weight: 100;
+  font-family: 'Roboto', sans-serif;
+  color: var(--cinza-escuro);
+  font-weight: 500;
   text-decoration: none;
 }
 
-footer p a {
-  font-weight: 300;
-  transition: .3s;
-}
-
+footer p:hover,
 footer p a:hover {
-  color: var(--cinza-escuro);
-  transition: .3s;
+  color: var(--cinza-claro);
+  transition: .2s;
 }
 
-/* fix this */
-/* footer a i {
-  color: white !important;
-} */
+footer .footer-socials a {
+  color: var(--cinza-escuro) !important;
+  transition: .2s;
+}
+
+footer .footer-socials a:hover {
+  color: var(--cinza-claro) !important;
+  transition: .2s;
+}
+
+footer .footer-socials .me-4 {
+  margin-left: 1.5rem !important;
+}
+
+footer h6 {
+  color: var(--laranja);
+}
 
 /* Media queries */
 
@@ -445,5 +584,3 @@ footer p a:hover {
     padding-bottom: 25px;
   }
 }
-
-
