@@ -1,7 +1,7 @@
 .active-tab {
-  background-color: #EC8E00;
+  background-color: var(--laranja);
   padding: 20px;
-  border: 1px solid #ec8e00;
+  border: 1px solid var(--laranja);
   border-radius: 2px;
   color: white;
   width: 100%;
@@ -10,7 +10,7 @@
 .unactive-tab {
   color: #131e4c;
   background-color: transparent;
-  border: 1px solid #ec8e00;
+  border: 1px solid var(--laranja);
   border-radius: 2px;
   padding: 20px;
   width: 100%;
@@ -189,6 +189,23 @@
 .pontuacao{
   font-size: 4rem;
   text-align: center;
+}
+.bg-cinza{
+  background-color: #DBDBDB;
+}
+.bg-laranja{
+  background-color: var(--laranja);
+}
+.border-7px{
+  border-radius: 7px;
+}
+.botao-imprimir{
+  background-color: var(--laranja);
+    border: none;
+    color: white;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 @media (max-width: 767px) {

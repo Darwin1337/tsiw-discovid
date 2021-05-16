@@ -1,6 +1,8 @@
 let isDisplayMobile = false;
 let imgPath = "..\\"
 
+
+
 $(document).ready(function() {
     if (CheckResolution()) {
       isDisplayMobile = true;
@@ -48,6 +50,8 @@ function CheckResolution() {
   return false;
 }
 
+
+
 function ApplyDesktopNavbar() {
   $(".nav-area").html(
     `<nav class="navbar navbar-expand-lg justify-content-center">
@@ -64,7 +68,7 @@ function ApplyDesktopNavbar() {
                   <a class="nav-link" href="#"><i class="fas fa-map-marker"></i>  Postos</a>
               </li>
               <li class="nav-item">
-                  <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>  Loja</a>
+                  <a class="nav-link" href="../html/loja.html"><i class="fas fa-shopping-cart"></i>  Loja</a>
               </li>
               <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-syringe"></i>  COVID-19</a>
@@ -84,7 +88,7 @@ function ApplyDesktopNavbar() {
                   <img src="${imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;&nbsp;Diogo
                   </a>
                   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                      <li><a class="dropdown-item" href="#">Editar perfil</a></li>
+                      <li><a class="dropdown-item" href="#" id="editar-perfil-redirect">Editar perfil</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">As minhas marcações</a></li>
                       <li><hr class="dropdown-divider"></li>
@@ -100,6 +104,7 @@ function ApplyDesktopNavbar() {
     </div>
   </nav>`);
 }
+
 
 function ApplyMobileNavbar() {
   $(".nav-area").html(`
@@ -124,7 +129,7 @@ function ApplyMobileNavbar() {
                   <img src="${imgPath}img\\user-icon.svg" width="60" height="60">
                   <li class="nav-item logged-user"><a>BEM-VINDO, DIOGO</a></li>
                 </div>
-                <li class="nav-item"><a class="nav-link" href="#">EDITAR PERFIL</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" id="editar-perfil-redirect">EDITAR PERFIL</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">AS MINHAS MARCAÇÕES</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">AS MINHAS ENCOMENDAS</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">NOTIFICAÇÕES</a></li>
@@ -135,6 +140,8 @@ function ApplyMobileNavbar() {
     </nav>`);
 }
 
+
 function UpdateActiveLink() {
   // Complete this
 }
+

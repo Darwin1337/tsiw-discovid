@@ -15,6 +15,14 @@
     --cinza-escuro: #8F8EA0;
 }
 
+.color-azul-princ{
+  color: var(--azul-pri);
+}
+
+.color-laranja{
+  color: var(--laranja);
+}
+
 /* Geral */
 
 * {
@@ -351,6 +359,25 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
 }
 
+/*Tabs*/
+.active-tab {
+  background-color: var(--laranja);
+  padding: 20px;
+  border: 1px solid var(--laranja);
+  border-radius: 2px;
+  color: white;
+  width: 100%;
+}
+  
+.unactive-tab {
+  color: #131e4c;
+  background-color: transparent;
+  border: 1px solid var(--laranja);
+  border-radius: 2px;
+  padding: 20px;
+  width: 100%;
+}
+
 /* Footer */
 
 footer {
@@ -418,3 +445,5 @@ footer p a:hover {
     padding-bottom: 25px;
   }
 }
+
+
