@@ -557,7 +557,7 @@ footer h6 {
 
 /* Media queries */
 
-@media (max-width: 1200px) {
+@media (max-width: 1199px) {
   nav .nav-item {
     padding-left: 5px;
     padding-right: 5px;
@@ -569,13 +569,13 @@ footer h6 {
   }
 }
 
-@media (max-width: 1092px) {
+@media (max-width: 1091px) {
   nav .navbar-nav .user .dropdown-menu {
     left: -55px;
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
   nav .mobile .nav-link {
     text-align: left;
   }
