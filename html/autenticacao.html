@@ -8,7 +8,7 @@
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Discovid - Autenticação</title>
+  <title>Discovid - Iniciar sessão</title>
   <link rel="icon" href="..\img\icon.svg">
   <link rel="stylesheet" href="..\css\lib\bootstrap\css\bootstrap.min.css">
   <link rel="stylesheet" href="..\css\lib\fontawesome\css\all.min.css">
@@ -33,43 +33,51 @@
         <div class="tab-content" id="pills-tabContent">
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-login-tab">
             <div class="pb-4">
-              <input type="text" class="input-login" placeholder="Email">
+              <input type="text" class="input-login-registar" placeholder="Email">
             </div>
             <div class="pb-4">
-              <input type="password" class="input-login" placeholder="Password">
+              <input type="password" class="input-login-registar" placeholder="Password">
             </div>
             <p class="pb-1"><a>Esqueceu-se da password?</a></p>
             <button type="submit" class="btn-login">Entrar</button>
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-registar-tab">
+            <div class="mb-2">
+              <select id="TipoUser" class="input-login-registar">
+                <option disabled selected>Escolha uma opção</option>
+                <option>Utilizador normal</option>
+                <option>Entidade</option>
+              </select>
+            </div>
             <form>
-              <div class="mb-2">
-                <input id="RegistoPNOME" type="text" class="form-control" name="p_nome" placeholder="Primeiro nome" value="">
+              
+              <!-- <div class="mb-2">
+                <input id="RegistoPNOME" type="text" class="input-login-registar" name="p_nome" placeholder="Primeiro nome" value="">
               </div>
               <div class="mb-2">
-                <input id="RegistoUNOME" type="text" class="form-control" name="u_nome" placeholder="Último nome" value="">
+                <input id="RegistoUNOME" type="text" class="input-login-registar" name="u_nome" placeholder="Último nome" value="">
               </div>
               <div class="mb-2">
-                <input id="RegistoEMAIL" type="email" class="form-control" name="email" placeholder="Endereço de e-mail" value="">
+                <input id="RegistoEMAIL" type="email" class="input-login-registar" name="email" placeholder="Endereço de e-mail" value="">
               </div>
               <div class="mb-2">
-                <input id="RegistoPASSWORD" type="text" class="form-control" name="password" placeholder="Password" value="">
+                <input id="RegistoPASSWORD" type="text" class="input-login-registar" name="password" placeholder="Password" value="">
               </div>
               <div class="mb-2">
-                <input id="RegistoNIF" type="number" class="form-control" name="nif" placeholder="NIF" value="">
+                <input id="RegistoNIF" type="number" class="input-login-registar" name="nif" placeholder="NIF" value="">
               </div>
               <div class="mb-2">
-                <input id="RegistoTLM" type="number" class="form-control" name="tlm" placeholder="N.º de telemóvel" value="">
+                <input id="RegistoTLM" type="number" class="input-login-registar" name="tlm" placeholder="N.º de telemóvel" value="">
               </div>
               <div class="mb-2">
-                <input id="RegistoDATANASC" type="date" class="form-control" name="data_nasc" placeholder="Data de nascimento" value="">
+                <input id="RegistoDATANASC" type="date" class="input-login-registar" name="data_nasc" placeholder="Data de nascimento" value="">
               </div>
               <div class="mb-2">
                 <input id="RegistoCONSEMAIL" type="checkbox" class="check-style"><span class="span-checkbox">Consinto a utilização do meu e-mail</span>
               </div>
               <div>
                 <input id="RegistoSUBMIT" type="sumbit" class="btn btn-primary" value="Efetuar registo">
-              </div>
+              </div> -->
             </form>
           </div>
         </div>
@@ -104,6 +112,7 @@
             <p><i class="fas fa-home me-3"></i> Rua D. Sancho I, n.º 981</p>
             <p><i class="fas fa-envelope me-3"></i> contacto@discovid.pt</p>
             <p><i class="fas fa-phone me-3"></i> +351 252 291 700</p>
+            <p><i class="fas fa-print me-3"></i> +351 252 291 700</p>
           </div>
         </div>
       </div>

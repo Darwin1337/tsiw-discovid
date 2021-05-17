@@ -1,6 +1,6 @@
 /* Stylesheet global  */
-
 @import url("general.css");
+
 
 /* Página inicial */
 
@@ -213,7 +213,9 @@
 
 /* Página de Iniciar Sessão */
 
-.input-login {
+
+
+.input-login-registar {
   width: 100%;
   padding: 13px;
   border: none;
@@ -221,7 +223,7 @@
   border-radius: 2px;
 }
 
-.input-login:focus {
+.input-login-registar:focus {
   outline: none;
   box-shadow: 0px 2px 10px var(--laranja);
 }
