@@ -36,7 +36,10 @@ class App {
 
   #instantiateViews() {
     const path = window.location.pathname
-    const route = path.substr(path.lastIndexOf('/') + 1);
+    let route = path.substr(path.lastIndexOf('/') + 1);
+    if (route.indexOf(".") > -1) {
+      route = route.split('.')[0];
+    }
     const views = this.#getViews(route);
     for (const view of views) {
         new view();
