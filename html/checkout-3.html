@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
+  <meta name="keywords" content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Discovid - Checkout - 3</title>
+  <link rel="icon" href="..\img\icon.svg">
+  <link rel="stylesheet" href="..\css\lib\bootstrap\css\bootstrap.min.css">
+  <link rel="stylesheet" href="..\css\lib\fontawesome\css\all.min.css">
+  <link rel="stylesheet" href="..\css\lib\select2\css\select2.min.css">
+  <link rel="stylesheet" href="..\css\pages.css">
+</head>
+
+<body id="checkout">
+  <div class="nav-area"></div>
+
+  <div class="container my-5 color-azul-princ">
+    <h4 class="text-center mt-5">Checkout</h4>
+    <div class="row justify-content-center">
+      <div class="col-md-12 d-flex justify-content-center mt-3">
+        <p class="ps-3 pe-3 color-azul-princ">1. Entrega</p>
+        <p class="ps-3 pe-3 color-azul-princ">2. Pagamento</p>
+        <p class="ps-3 pe-3 fw-bold color-azul-princ">3. Confirmar</p>
+      </div>
+    </div>
+      <hr>
+      <div class="row mt-3 bg-pd-br me-0 ms-0">
+        <div class="col-xl-12 ">
+          <div class="col-xl-12 d-flex justify-content-between flex-wrap">
+            <div class="col-xl-6">
+              <p>Artigos</p>
+            </div>
+            <div class="col-0 text-end">
+              <p>Preço</p>
+            </div>
+            <div class="col-0 text-end">
+              <p>Descontos</p>
+            </div>
+            <div class="col-0 text-end">
+              <p>Total</p>
+            </div>
+          </div>
+          <hr>
+          <div class="col-xl-12">
+                <div class="row">
+                  <div class="col-xl-1 col-2 col-sm-2 col-md-2">
+                    <img src="../img/loja/M01.png" class="w-100" alt="">
+                  </div>
+                  <div class="col-xl-5 col-7">
+                    <p><span class="color-laranja"><b>1x</b> </span><b class="color-azul-princ">Mascara cirúrgica (pack 50uni)</b></p>
+                    <p>#0001</p>
+                  </div>
+                  <div class="col-xl-2 col-3 d-flex justify-content-end ">
+                    <p>3,00€ x 1</p>
+                  </div>
+                  <div class="col-xl-2 col-0 d-flex justify-content-end ">
+                    <p></p>
+                  </div>
+                  <div class="col-xl-2 col-0 d-flex justify-content-end ">
+                    <p>3,00€</p>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-end">
+                    <p class="me-4">Subtotal</p>
+                    <p>3,00€</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-end">
+                    <p class="me-4">Envio</p>
+                    <p>3,99€</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-end">
+                    <p class="me-4">Total</p>
+                    <p>6,99€</p>
+                  </div>
+                </div>
+                <hr>
+            </div>
+          </div>
+            
+          <div class="row">
+            <div class="col-xl-3">
+              <h6>Endereço de envio</h6>
+              <hr>
+              <p>Rua de trás, 123</p>
+              <p>1234-123</p>
+              <p>Gondomar</p>
+              <p>912345678</p>
+            </div>
+            <div class="col-xl-3 ">
+              <h6>Faturação</h6>
+              <hr>
+              <p>António José</p>
+              <p>Rua de trás, 123</p>
+              <p>1234-123</p>
+              <p>Gondomar</p>
+            </div>
+            <div class="col-xl-3">
+              <h6>Método de envio</h6>
+              <hr>
+              <p>Nacex</p>
+            </div>
+            <div class="col-xl-3 ">
+              <h6>Pagamento</h6>
+              <hr>
+              <p>Paypal</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-xl-8">
+
+          </div>
+          <div class="col-xl-4">
+            <button class="btn-100">Confirmar encomenda</button>
+          </div>
+
+        </div>
+        
+      </div>   
+    </div>
+  </div>
+
+  <footer class="text-center text-lg-start text-muted">
+    <section class="p-2">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4"><span class="discovid-icon me-3">&#xe900;</span>DISCOVID</h6>
+            <p>
+              Discovid é uma plataforma de marcação e gestão de testes de COVID-19 desenvolvida com o intuito de facilitar a escolha de postos/estabelecimentos de testagem.
+            </p>
+          </div>
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Covid</h6>
+            <p><a href="postos.html" class="text-reset">Postos</a></p>
+            <p><a href="loja.html" class="text-reset">Loja</a></p>
+            <p><a href="tracking.html" class="text-reset">Tracking</a></p>
+            <p><a href="sintomas.html" class="text-reset">Sintomas</a></p>
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Discovid</h6>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Termos e condições</a></p>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Política de proteção de dados</a></p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contactos</h6>
+            <p><i class="fas fa-home me-3"></i> Rua D. Sancho I, n.º 981</p>
+            <p><i class="fas fa-envelope me-3"></i> contacto@discovid.pt</p>
+            <p><i class="fas fa-phone me-3"></i> +351 252 291 700</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="d-flex justify-content-center align-items-center p-2 ">
+      <div class="footer-socials">
+        <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); color: #ccc;">© 2021
+      <a class="text-reset fw-bold text-decoration-none">DISCOVID.pt</a>
+    </div>
+  </footer>
+
+  <!-- Scripts do projeto -->
+  <script type="text/javascript" src="..\js\lib\jquery\jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\bootstrap\js\bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\fontawesome\js\all.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2.full.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
+  <script type="text/javascript" src="..\js\misc.js"></script>
+  <script type="text/javascript">
+    // Scripts here
+  </script>
+</body>
+
+</html>

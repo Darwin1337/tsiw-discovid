@@ -363,6 +363,40 @@
   width: 18rem;
 }
 
+/*Checkou - 2*/
+.metodos-de-pagamento{
+  height: 60px;
+  background: white;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metodos-de-pagamento-2{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (max-width: 1199px) {
+  .margin-15{
+    margin-top: 1.5rem;
+  }
+  .metodos-de-pagamento-2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+  }
+  .metodos-de-pagamento{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-top: .5rem;
+  }
+}
+
+
 /* Media queries */
 
 @media (max-width: 767px) {
