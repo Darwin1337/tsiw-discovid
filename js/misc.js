@@ -64,21 +64,21 @@ function ApplyDesktopNavbar() {
       <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
           <ul class="main-nav navbar-nav w-100 justify-content-center">
               <li id="postos" class="nav-item">
-                  <a class="nav-link" href="../html/postos.html"><i class="fas fa-map-marker"></i>  Postos</a>
+                  <a class="nav-link" href="../html/postos"><i class="fas fa-map-marker"></i>  Postos</a>
               </li>
               <li id="loja" class="nav-item">
-                  <a class="nav-link" href="../html/loja.html"><i class="fas fa-shopping-cart"></i>  Loja</a>
+                  <a class="nav-link" href="../html/loja"><i class="fas fa-shopping-cart"></i>  Loja</a>
               </li>
               <li id="covid" class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-syringe"></i>  COVID-19</a>
                   <ul class="covid-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                      <li id="sintomas"><a class="dropdown-item" href="../html/sintomas.html"><i class="fas fa-exclamation-circle"></i>  Sintomas</a></li>
+                      <li id="sintomas"><a class="dropdown-item" href="../html/sintomas"><i class="fas fa-exclamation-circle"></i>  Sintomas</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li id="tracking"><a class="dropdown-item" href="../html/tracking.html"><i class="fas fa-chart-line"></i>  Tracking</a></li>
+                      <li id="tracking"><a class="dropdown-item" href="../html/tracking"><i class="fas fa-chart-line"></i>  Tracking</a></li>
                   </ul>
               </li>
               <li id="testes" class="nav-item">
-                  <a class="nav-link" href="../html/testes.html"><i class="fas fa-info"></i>  Testes</a>
+                  <a class="nav-link" href="../html/testes"><i class="fas fa-info"></i>  Testes</a>
               </li>
           </ul>
           <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
@@ -87,13 +87,13 @@ function ApplyDesktopNavbar() {
                   <img src="${imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top">Diogo
                   </a>
                   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                      <li><a class="dropdown-item" href="../html/editar-perfil.html" id="editar-perfil-redirect">Editar perfil</a></li>
+                      <li><a class="dropdown-item" href="../html/editar-perfil" id="editar-perfil-redirect">Editar perfil</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas marcações</a></li>
+                      <li><a class="dropdown-item" href="../html/editar-perfil">As minhas marcações</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas encomendas</a></li>
+                      <li><a class="dropdown-item" href="../html/editar-perfil">As minhas encomendas</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li><a class="dropdown-item" href="../html/editar-perfil.html">Notificações</a></li>
+                      <li><a class="dropdown-item" href="../html/editar-perfil">Notificações</a></li>
                       <li><hr class="dropdown-divider"></li>
                       <li><a class="dropdown-item" href="#">Terminar sessão</a></li>
                   </ul>
@@ -118,20 +118,20 @@ function ApplyMobileNavbar() {
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
             <ul class="main-nav navbar-nav w-100 justify-content-start">
                 <li><hr class="dropdown-divider"></li>
-                <li id="postos" class="nav-item active"><a class="nav-link" href="../html/postos.html"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
-                <li id="loja" class="nav-item"><a class="nav-link" href="../html/loja.html">LOJA</a></li>
-                <li id="sintomas" class="nav-item"><a class="nav-link" href="../html/sintomas.html">SINTOMAS</a></li>
-                <li id="tracking" class="nav-item"><a class="nav-link" href="../html/tracking.html">TRACKING</a></li>
-                <li id="testes" class="nav-item"><a class="nav-link" href="../html/testes.html">INFO. TESTES</a></li>
+                <li id="postos" class="nav-item active"><a class="nav-link" href="../html/postos"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
+                <li id="loja" class="nav-item"><a class="nav-link" href="../html/loja">LOJA</a></li>
+                <li id="sintomas" class="nav-item"><a class="nav-link" href="../html/sintomas">SINTOMAS</a></li>
+                <li id="tracking" class="nav-item"><a class="nav-link" href="../html/tracking">TRACKING</a></li>
+                <li id="testes" class="nav-item"><a class="nav-link" href="../html/testes">INFO. TESTES</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <div class="logged-user-info">
                   <img src="${imgPath}img\\user-icon.svg" width="60" height="60">
                   <li class="nav-item logged-user"><a>BEM-VINDO, DIOGO</a></li>
                 </div>
-                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html" id="editar-perfil-redirect">EDITAR PERFIL</a></li>
-                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html">AS MINHAS MARCAÇÕES</a></li>
-                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html">AS MINHAS ENCOMENDAS</a></li>
-                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html">NOTIFICAÇÕES</a></li>
+                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil" id="editar-perfil-redirect">EDITAR PERFIL</a></li>
+                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil">AS MINHAS MARCAÇÕES</a></li>
+                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil">AS MINHAS ENCOMENDAS</a></li>
+                <li class="nav-item"><a class="nav-link" href="../html/editar-perfil">NOTIFICAÇÕES</a></li>
                 <li class="nav-item"><a class="nav-link">TERMINAR SESSÃO</a></li>
             </ul>
         </div>
