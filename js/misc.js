@@ -84,7 +84,7 @@ function ApplyDesktopNavbar() {
           <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
               <li class="nav-item dropdown user">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="${imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" alt="">&nbsp;&nbsp;Diogo
+                  <img src="${imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top">Diogo
                   </a>
                   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
                       <li><a class="dropdown-item" href="#" id="editar-perfil-redirect">Editar perfil</a></li>
@@ -111,8 +111,8 @@ function ApplyMobileNavbar() {
         <button id="nav-toggler" onclick="ChangeIcon();" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a href="/" class="navbar-brand">
-          <img id="navbar-logo" src="${imgPath}img\\logo-mobile.svg" class="d-inline-block align-top" alt="Logótipo Discovid">
+        <a class="navbar-brand">
+          <img href="/" id="navbar-logo" src="${imgPath}img\\logo-mobile.svg" class="d-inline-block align-top" alt="Logótipo Discovid">
         </a>
         <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
             <ul class="navbar-nav w-100 justify-content-start">
