@@ -2,14 +2,17 @@ let isDisplayMobile = false;
 let imgPath = "..\\"
 
 $(document).ready(function() {
-    if (CheckResolution()) {
-      isDisplayMobile = true;
-      ApplyMobileNavbar();
-      UpdateActiveLink();
-    } else {
-      ApplyDesktopNavbar();
-    }
-    if ($("body").attr("id") == "index") { imgPath = "" }
+  if ($("body").attr("id") == "index") {
+    imgPath = "";
+  }
+
+  if (CheckResolution()) {
+    isDisplayMobile = true;
+    ApplyMobileNavbar();
+    UpdateActiveLink();
+  } else {
+    ApplyDesktopNavbar();
+  }
 });
 
 $(window).resize(function() {
