@@ -10,6 +10,7 @@ $(document).ready(function() {
       ApplyDesktopNavbar();
     }
     if ($("body").attr("id") == "index") { imgPath = "" }
+    console.log("IMG Path: " + imgPath);
 });
 
 $(window).resize(function() {
