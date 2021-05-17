@@ -112,6 +112,10 @@ nav .dropdown-menu a:hover {
   color: var(--azul-pri);
 }
 
+nav .dropdown-menu .active a {
+  color: var(--azul-pri) !important;
+}
+
 nav .dropdown-toggle {
   line-height: 25px;
 }
@@ -134,6 +138,10 @@ nav .svg-inline--fa {
 
 nav .covid-drop .svg-inline--fa {
   color: white !important;
+}
+
+nav .covid-drop .active .svg-inline--fa {
+  color: var(--azul-pri) !important;
 }
 
 nav .mobile #nav-toggler {
@@ -176,6 +184,10 @@ nav .mobile .logged-user a,
 nav .mobile .logged-user a:hover {
   color: var(--laranja);
   font-weight: bolder;
+}
+
+nav #navbar-logo:hover {
+  cursor: pointer;
 }
 
 /* Botões */

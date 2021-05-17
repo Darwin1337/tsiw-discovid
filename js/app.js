@@ -35,7 +35,7 @@ class App {
   }
 
   #instantiateViews() {
-    const path = window.location.pathname
+    const path = window.location.pathname;
     let route = path.substr(path.lastIndexOf('/') + 1);
     if (route.indexOf(".") > -1) {
       route = route.split('.')[0];
