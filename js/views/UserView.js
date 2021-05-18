@@ -64,6 +64,7 @@ userType.addEventListener("change", ()=>{
     <input id="RegistoTLM" type="number" class="input-login-registar" name="tlm" placeholder="N.º de telemóvel" value="">
   </div>
   <div class="mb-2">
+    <span>Data de nascimento</span>
     <input id="RegistoDATANASC" type="date" class="input-login-registar" name="data_nasc" placeholder="Data de nascimento" value="">
   </div>
   <div class="mb-2">
@@ -74,11 +75,14 @@ userType.addEventListener("change", ()=>{
   </div>`
   }
   else{
+    $(document).ready(function() {
+      $('.js-example-basic-multiple').select2();
+    });
     form.innerHTML=`<div class="mb-2">
-    <input id="EntidadeNome" type="text" class="input-login-registar" name="p_nome" placeholder="Nome Entidade" value="">
+    <input id="EntidadeNome" type="text" class="input-login-registar" name="nome_entidade" placeholder="Nome Entidade" value="">
   </div>
   <div class="mb-2">
-    <input id="EntidadeNIF" type="text" class="input-login-registar" name="u_nome" placeholder="NIF" value="">
+    <input id="EntidadeNIF" type="text" class="input-login-registar" name="nif" placeholder="NIF" value="">
   </div>
   <div class="mb-2">
     <input id="EntidadeEmail" type="email" class="input-login-registar" name="email" placeholder="Endereço de e-mail" value="">
@@ -87,15 +91,23 @@ userType.addEventListener("change", ()=>{
     <input id="RegistoPASSWORD" type="password" class="input-login-registar" name="password" placeholder="Password" value="">
   </div>
   <div class="mb-2">
-    <input id="EntidadeWebsite" type="link" class="input-login-registar" name="nif" placeholder="Website" value="">
+    <input id="EntidadeWebsite" type="link" class="input-login-registar" name="website" placeholder="Website" value="">
   </div>
   <div class="mb-2">
     <span>Documento</span>
-    <input id="EntidadeDocumento" type="file" class="input-login-registar" name="tlm" placeholder="Documento" value="">
+    <input id="EntidadeDocumento" type="file" class="input-login-registar" name="documento" placeholder="Documento" value="">
+  </div>
+  <div class="mb-2">
+    <span>Testes disponiveis</span>  
+    <select class="js-example-basic-multiple input-login-registar" name="states[]" multiple="multiple" required>
+      <option>Teste PCR</option>
+      <option>Teste Rápido Antigénio</option>
+      <option>Teste Pesquisa Anticorpos</option>
+    </select>
   </div>
   <div class="mb-2">
     <span>Hora de Abertura</span>
-    <input id="HoraAbertura" type="time" class="input-login-registar" name="data_nasc" value="">
+    <input id="HoraAbertura" type="time" class="input-login-registar" name="hora_abertura" value="">
   </div>
   <div class="mb-2">
     <span>Hora de Fecho</span>
@@ -114,7 +126,7 @@ userType.addEventListener("change", ()=>{
     <input id="HoraFecho" type="checkbox" class="">
   </div>
   <div>
-    <input id="RegistoSUBMIT" type="sumbit" class="btn-login text-center" value="Efetuar registo">
+    <button id="RegistoSUBMIT" type="sumbit" class="btn-login text-center">Efetuar registo</button>
   </div>`
   }
 })

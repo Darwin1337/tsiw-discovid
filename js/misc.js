@@ -217,3 +217,5 @@ $(".btn-pills").click(function(event) {
     $($(this).attr("data-bs-target")).addClass("active");
   }
 });
+
+
