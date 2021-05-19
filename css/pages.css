@@ -122,6 +122,11 @@
   border-radius: 5px;
 }
 
+.results-section .filter-price span,
+.results-section .filter-distance span {
+  font-size: .75rem;
+}
+
 .results-section .filters select {
   background-color: var(--cinza-claro);
   border: 0;
@@ -410,7 +415,7 @@
   .content-area .jumbotron .jumbotron-buttons p {
     padding: 10px 0px 10px;
   }
-  
+
   .card-product .cart-description {
     padding-top: 5%;
   }

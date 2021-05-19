@@ -20,7 +20,6 @@ $(window).resize(function() {
   } else if (isDisplayMobile && !CheckResolution()) {
     isDisplayMobile = false;
   }
-  console.log(isDisplayMobile)
 });
 
 function ChangeIcon() {
@@ -84,7 +83,7 @@ function ApplyDesktopNavbar() {
           <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
               <li class="nav-item dropdown user">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="${imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top">Diogo
+                  <img src="${imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;">Diogo
                   </a>
                   <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
                       <li><a class="dropdown-item" href="../html/editar-perfil" id="editar-perfil-redirect">Editar perfil</a></li>
@@ -218,4 +217,22 @@ $(".btn-pills").click(function(event) {
   }
 });
 
+function updateRange(a, b) {
+  if (a == "currentMinPriceValue") {
+    $("#" + a).html("<b>" + parseFloat(b).toFixed(2) + "€" + "</b>");
+    $("#preco_max").attr("min", parseFloat(b).toFixed(2));
+    let sthg = ((parseFloat(200) + parseFloat(parseFloat(b).toFixed(2))));
+    if (String(sthg).indexOf(".") > -1) {
+      sthg = parseInt(String(sthg).split(".")[0]);
+    }
+    $("#preco_max").attr("value", sthg/2);
+    $("#preco_max").val(sthg/2);
+    $("#maxMinPrice").html(parseFloat(b).toFixed(2) + "€");
+    $("#currentMaxPriceValue").html("<b>" + parseFloat(sthg/2).toFixed(2) + "€</b>");
+  } else if (a == "currentDistanceValue") {
+    $("#" + a).html("<b>" + b + "km" + "</b>");
+  } else if (a == "currentMaxPriceValue") {
+    $("#" + a).html("<b>" + parseFloat(b).toFixed(2) + "€</b>");
+  }
 
+}
