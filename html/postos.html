@@ -55,22 +55,6 @@
                 </div>
                 <hr class="w-100 mb-3">
                 <div class="filters filter-price w-100">
-                  <label for="preco" class="form-label">Preço máximo (em euros)</label><br>
-                  <div class="row d-flex align-items-center">
-                    <div class="col-4 d-flex">
-                      <span id="maxMinPrice">0.50€</span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center">
-                      <span id="currentMaxPriceValue"><b>200.00€</b></span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-end">
-                      <span>200.00€</span>
-                    </div>
-                  </div>
-                  <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
-                </div>
-                <hr class="w-100 mb-3">
-                <div class="filters filter-price w-100">
                   <label for="preco" class="form-label">Preço mínimo (em euros)</label><br>
                   <div class="row d-flex align-items-center">
                     <div class="col-4 d-flex">
@@ -84,6 +68,22 @@
                     </div>
                   </div>
                   <input class="w-100" type="range" min="0.50" max="200" step="0.50" value="0.50" id="preco_min" oninput="updateRange('currentMinPriceValue', this.value);" onchange="updateRange('currentMinPriceValue', this.value);">
+                </div>
+                <hr class="w-100 mb-3">
+                <div class="filters filter-price w-100">
+                  <label for="preco" class="form-label">Preço máximo (em euros)</label><br>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex">
+                      <span id="maxMinPrice">0.50€</span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                      <span id="currentMaxPriceValue"><b>200.00€</b></span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                      <span>200.00€</span>
+                    </div>
+                  </div>
+                  <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
                 </div>
                 <hr class="w-100 mb-3">
                 <div class="filters filter-distance w-100">
