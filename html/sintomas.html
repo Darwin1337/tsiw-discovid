@@ -19,9 +19,226 @@
 <body id="sintomas">
   <div class="nav-area"></div>
 
-  <div class="container my-5">
-    <h2>Página por fazer.</h2>
-  </div>
+  <main class="content-area">
+    <div class="container-fluid">
+      <div class="jumbotron-wrapper">
+        <div class="jumbotron">
+          <div class="container">
+            <div class="jumbotron-text">
+              <h1 class="display-4">Sinto-me adoentado</h1>
+              <p class="lead">será que tenho COVID-19...?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <h4>Responda às seguintes questões e descubra a probabilidade de ter contraído a doença. <span style="font-family: 'Roboto', sans-serif;"><strong>Este questionário não substitui de maneira nenhuma a consulta de especialistas ligando para a linha 24 (808 24 24 24) ou deslocando-se ao seu centro de saúde.</strong></span></h4>
+      <div class="cards mt-5">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card-sint mb-4">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>1</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Indique o seu género</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="gender-male" class="check-style">
+                      <label for="gender-male" class="span-checkbox"><strong>Masculino</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="gender-female" class="check-style">
+                      <label for="gender-female" class="span-checkbox"><strong>Feminino</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-sint mb-4">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>2</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Teve COVID-19 nos últimos 90 dias?</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="gotcovid-yes" class="check-style">
+                      <label for="gotcovid-yes" class="span-checkbox"><strong>Sim</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="gotcovid-no" class="check-style">
+                      <label for="gotcovid-no" class="span-checkbox"><strong>Não</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-sint mb-4">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>3</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Tem 40 graus de febre ou superior?</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="fever-yes" class="check-style">
+                      <label for="fever-yes" class="span-checkbox"><strong>Sim</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="fever-no" class="check-style">
+                      <label for="fever-no" class="span-checkbox"><strong>Não</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-sint mobile-margin">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>4</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Tem algum destes problemas?</h3>
+                  <div class="card-sint-options">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-one" class="check-style">
+                          <label for="fourth-one" class="span-checkbox"><strong>Sente-se muito mal e tem a pele suada e mais fria que o habitual</strong></label>
+                        </div>
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-two" class="check-style">
+                          <label for="fourth-two" class="span-checkbox"><strong>Sinais de confusão mental</strong></label>
+                        </div>
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-three" class="check-style">
+                          <label for="fourth-three" class="span-checkbox"><strong>Temperatura acima de 41ºC</strong></label>
+                        </div>
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-four" class="check-style">
+                          <label for="fourth-four" class="span-checkbox"><strong>Desmaiou ou sente que vai desmaiar</strong></label>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-fifth" class="check-style">
+                          <label for="fourth-fifth" class="span-checkbox"><strong>Teve uma convulsão</strong></label>
+                        </div>
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-sixth" class="check-style">
+                          <label for="fourth-sixth" class="span-checkbox"><strong>Falta de ar grave</strong></label>
+                        </div>
+                        <div class="d-flex align-items-center pt-3">
+                          <input type="checkbox" id="fourth-seventh" class="check-style">
+                          <label for="fourth-seventh" class="span-checkbox"><strong>Nenhum dos anteriores</strong></label>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card-sint mb-4">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>5</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Apareceu inchaço dos lábios, língua, face ou garganta nas últimas 2 horas?</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="fifth-yes" class="check-style">
+                      <label for="fifth-yes" class="span-checkbox"><strong>Sim</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="fifth-no" class="check-style">
+                      <label for="fifth-no" class="span-checkbox"><strong>Não</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-sint mb-4">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>6</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Tem atualmente pieira ou respiração ruidosa?</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="sixth-yes" class="check-style">
+                      <label for="sixth-yes" class="span-checkbox"><strong>Sim</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="sixth-no" class="check-style">
+                      <label for="sixth-no" class="span-checkbox"><strong>Não</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-sint mb-4">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>7</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Nas últimas 2 semanas começou com tosse, ou agravou a tosse que habitualmente tem?</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="seventh-yes" class="check-style">
+                      <label for="seventh-yes" class="span-checkbox"><strong>Sim</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="seventh-no" class="check-style">
+                      <label for="seventh-no" class="span-checkbox"><strong>Não</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-sint">
+              <div class="row">
+                <div class="col-md-2 d-flex align-items-center justify-content-center">
+                  <h1><strong>8</strong></h1>
+                </div>
+                <div class="col-md-10">
+                  <h3>Perdeu o cheiro ou olfato nos últimos 7 dias?</h3>
+                  <div class="card-sint-options">
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="eighth-yes" class="check-style">
+                      <label for="eighth-yes" class="span-checkbox"><strong>Sim</strong></label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="eighth-no" class="check-style">
+                      <label for="eighth-no" class="span-checkbox"><strong>Não</strong></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 d-flex justify-content-center">
+        <input type="button" class="btn btn-laranja" value="Verificar">
+      </div>
+      <div class="sintomas-result mt-5">
+        <h3><strong>Resultado</strong></h3>
+        <p>Complete todas as questões e pressione o botão <strong>Verificar</strong>, o resultado irá aparecer aqui.</p>
+      </div>
+    </div>
+  </main>
 
   <footer class="text-center text-lg-start text-muted">
     <section class="p-2">

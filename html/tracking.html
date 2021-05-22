@@ -19,9 +19,76 @@
 <body id="tracking">
   <div class="nav-area"></div>
 
-  <div class="container my-5">
-    <h2>Página por fazer.</h2>
-  </div>
+  <main class="content-area">
+    <div class="container-fluid">
+      <div class="jumbotron-wrapper">
+        <div class="jumbotron">
+          <div class="container">
+            <div class="jumbotron-text">
+              <h1 class="display-4">COVID-19 no mundo</h1>
+              <p class="lead">e em Portugal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container my-5">
+      <div class="tracking-introduction">
+        <h3>Todos os dados aqui presentes foram obtidos utilizando a API de COVID-19 disponibilizada pela <span class="color-laranja"><strong>VOST</strong></span>, podendo ser consultada <a href="#" class="color-laranja text-decoration-none"><strong>aqui</strong></a>.</h3>
+        <h3><strong>Última atualização:</strong> <span style="font-family: 'Roboto', sans-serif;">27/04/2021 às 16:34h</span></h3>
+      </div>
+      <div class="tracking-cards mt-5">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card-tra">
+              <h2>No mundo</h2>
+              <h3>Casos Totais</h3>
+              <p>149,157,946</p>
+              <h3>Óbitos</h3>
+              <p>3,143,013</p>
+              <h3>Recuperados</h3>
+              <p>126,795,194</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-tra">
+              <h2>Portugal</h2>
+              <h3>Casos Totais</h3>
+              <p>834,991</p>
+              <h3>Óbitos</h3>
+              <p>16,970</p>
+              <h3>Recuperados</h3>
+              <p>794,205</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card-tra">
+              <h2>Vila do Conde</h2>
+              <h3>Confirmados</h3>
+              <p>38</p>
+              <h3>Incidência</h3>
+              <p>43</p>
+              <span>*Dados do dia 21/04/2021</span>
+              <div class="filter-locale my-3">
+                <select class="select-localidades" style="width: 100%; height: 40px;" name="state">
+                  <option disabled="disabled" selected>Localidade</option>
+                  <option value="1">Porto</option>
+                  <option value="2">Póvoa de Varzim</option>
+                  <option value="3">Vila do Conde</option>
+                  <option value="3">Gondomar</option>
+                  <option value="3">Peso da Régua</option>
+                </select>
+              </div>
+              <div class="w-100">
+                <input type="button" class="btn btn-laranja w-100" value="Atualizar">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <footer class="text-center text-lg-start text-muted">
     <section class="p-2">
@@ -77,7 +144,11 @@
   <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
   <script type="text/javascript" src="..\js\misc.js"></script>
   <script type="text/javascript">
-    // Scripts here
+    $(document).ready(function() {
+      $('.select-localidades').select2({
+        searchInputPlaceholder: 'Pesquisar localidade...'
+      });
+    });
   </script>
 </body>
 

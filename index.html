@@ -54,8 +54,11 @@
         </div>
         <div class="map-frame">
           <div class="container-fluid">
-            <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-              src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Vila%20do%20Conde+(Escika%20Superior%20de%20Media%20Artes%20e%20Design)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+            <div id="map" class="g-map">
+
+            </div>
+            <!-- <iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
+              src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Vila%20do%20Conde+(Escika%20Superior%20de%20Media%20Artes%20e%20Design)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe> -->
           </div>
         </div>
       </div>
@@ -101,7 +104,7 @@
                           </div>
                           <div class="row second-row">
                             <div class="card-icons col d-flex justify-content-flex-end">
-                              <span><i class="fas fa-check" data-toggle="tooltip" data-placement="top" title="Entidade registada"></i></span>
+                              <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
                             </div>
                           </div>
                         </div>
@@ -143,9 +146,9 @@
                           </div>
                           <div class="row second-row">
                             <div class="card-icons col d-flex justify-content-flex-end">
-                              <span><i class="fas fa-check" data-toggle="tooltip" data-placement="top" title="Entidade registada"></i></span>
                               <span><i class="fas fa-car" data-toggle="tooltip" data-placement="top" title="Posto drive-thru"></i></span>
                               <span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>
+                              <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
                             </div>
                           </div>
                         </div>
@@ -184,8 +187,8 @@
                           </div>
                           <div class="row second-row">
                             <div class="card-icons col d-flex justify-content-flex-end">
-                              <span><i class="fas fa-car" data-toggle="tooltip" data-placement="top" title="Posto drive-thru"></i></span>
                               <span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>
+                              <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
                             </div>
                           </div>
                         </div>
@@ -225,13 +228,13 @@
                         <span>1km</span>
                       </div>
                       <div class="col-4 d-flex justify-content-center">
-                        <span id="currentDistanceValue"><b>150km</b></span>
+                        <span id="currentDistanceValue"><b>15km</b></span>
                       </div>
                       <div class="col-4 d-flex justify-content-end">
                         <span>300km</span>
                       </div>
                     </div>
-                    <input class="w-100" type="range" min="1" max="300" step="1" id="distancia" oninput="updateRange('currentDistanceValue', this.value);" onchange="updateRange('currentDistanceValue', this.value);">
+                    <input class="w-100" type="range" min="1" max="300" step="1" value="15" id="distancia" oninput="updateRange('currentDistanceValue', this.value);" onchange="updateRange('currentDistanceValue', this.value);">
                   </div>
                   <div class="filter-price pb-4">
                     <label for="preco" class="form-label">Preço mínimo (em euros)</label><br>
@@ -255,13 +258,13 @@
                         <span id="maxMinPrice">0.50€</span>
                       </div>
                       <div class="col-4 d-flex justify-content-center">
-                        <span id="currentMaxPriceValue"><b>100.00€</b></span>
+                        <span id="currentMaxPriceValue"><b>200.00€</b></span>
                       </div>
                       <div class="col-4 d-flex justify-content-end">
                         <span>200.00€</span>
                       </div>
                     </div>
-                    <input class="w-100" type="range" min="0.50" max="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
+                    <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
                   </div>
                   <div>
                     <button type="button" class="btn w-100 btn-azul-pri">Aplicar filtros</button>
@@ -338,6 +341,9 @@
       });
       $(function () { $('[data-toggle="tooltip"]').tooltip() });
     });
+  </script>
+  <script type="text/javascript">
+    var _0x4918=["\x48\x65\x79\x21\x20\x54\x68\x69\x73\x20\x63\x6F\x64\x65\x20\x68\x61\x73\x20\x62\x65\x65\x6E\x20\x6F\x62\x66\x75\x73\x63\x61\x74\x65\x64\x2E","\x6C\x6F\x67"];console[_0x4918[1]](_0x4918[0])
   </script>
 </body>
 

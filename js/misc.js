@@ -5,12 +5,17 @@ $(document).ready(function() {
   if ($("body").attr("id") == "index") {
     imgPath = "";
   }
-
   if (CheckResolution()) {
     isDisplayMobile = true;
     ApplyMobileNavbar();
+    if ($("body").attr("id") == "testes") {
+      ApplyMobileCarousel();
+    }
   } else {
     ApplyDesktopNavbar();
+    if ($("body").attr("id") == "testes") {
+      ApplyDesktopCarousel();
+    }
   }
 });
 
@@ -35,15 +40,21 @@ function ChangeIcon() {
 }
 
 function CheckResolution() {
-  if ($(window).width() < 992) {
+  if (window.innerWidth < 992) {
     if (!isDisplayMobile) {
       ApplyMobileNavbar();
+      if ($("body").attr("id") == "testes") {
+        ApplyMobileCarousel();
+      }
       $("#navbar-logo").attr("src", imgPath + "img\\logo-mobile.svg");
     }
     return true;
   } else {
     if (isDisplayMobile) {
       ApplyDesktopNavbar();
+      if ($("body").attr("id") == "testes") {
+        ApplyDesktopCarousel();
+      }
       $("#navbar-logo").attr("src", imgPath + "img\\logo.svg");
     }
   }
@@ -63,7 +74,7 @@ function ApplyDesktopNavbar() {
       <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
           <ul class="main-nav navbar-nav w-100 justify-content-center">
               <li id="postos" class="nav-item">
-                  <a class="nav-link" href="../html/postos"><i class="fas fa-map-marker"></i>  Postos</a>
+                  <a class="nav-link" href="../html/postos"><i class="fas fa-map-marker-alt"></i>  Postos</a>
               </li>
               <li id="loja" class="nav-item">
                   <a class="nav-link" href="../html/loja"><i class="fas fa-shopping-cart"></i>  Loja</a>
@@ -71,13 +82,13 @@ function ApplyDesktopNavbar() {
               <li id="covid" class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-syringe"></i>  COVID-19</a>
                   <ul class="covid-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                      <li id="sintomas"><a class="dropdown-item" href="../html/sintomas"><i class="fas fa-exclamation-circle"></i>  Sintomas</a></li>
+                      <li id="sintomas"><a class="dropdown-item" href="../html/sintomas"><i class="fas fa-head-side-cough"></i>  Sintomas</a></li>
                       <li><hr class="dropdown-divider"></li>
-                      <li id="tracking"><a class="dropdown-item" href="../html/tracking"><i class="fas fa-chart-line"></i>  Tracking</a></li>
+                      <li id="tracking"><a class="dropdown-item" href="../html/tracking"><i class="fas fa-analytics"></i>  Tracking</a></li>
                   </ul>
               </li>
               <li id="testes" class="nav-item">
-                  <a class="nav-link" href="../html/testes"><i class="fas fa-info"></i>  Testes</a>
+                  <a class="nav-link" href="../html/testes"><i class="fas fa-info-circle"></i>  Testes</a>
               </li>
           </ul>
           <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
@@ -235,4 +246,86 @@ function updateRange(a, b) {
     $("#" + a).html("<b>" + parseFloat(b).toFixed(2) + "€</b>");
   }
 
+}
+
+function ApplyMobileCarousel() {
+  $(".cards-testes").html(`<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div id="rt-pcr" style="margin: 0 auto;" class="d-block card-tes">
+          <div style="min-height: 400px;" class="card-tes d-flex justify-content-center align-items-center">
+            <h2>Testes RT-PCR</h2>
+          </div>
+          <div class="teste-button text-center">
+            <input type="button" onclick="window.location.replace('#conteudo-rtpcr')" class="btn btn-azul-pri" value="Saiba mais">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div id="antigenio" style="margin: 0 auto;" class="d-block card-tes">
+          <div style="min-height: 400px;" class="card-tes d-flex justify-content-center align-items-center">
+            <h2 class="text-center">Testes de Antigénio</h2>
+          </div>
+          <div class="teste-button text-center">
+            <input type="button" onclick="window.location.replace('#conteudo-antigenio')" class="btn btn-azul-pri" value="Saiba mais">
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <div id="serologicos" style="margin: 0 auto;" class="d-block card-tes">
+          <div style="min-height: 400px;" class="card-tes d-flex justify-content-center align-items-center">
+            <h2>Testes Serológicos</h2>
+          </div>
+          <div class="teste-button text-center">
+            <input type="button" onclick="window.location.replace('#conteudo-serologicos')" class="btn" value="Saiba mais">
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>`)
+}
+
+function ApplyDesktopCarousel() {
+  $(".cards-testes").html(`<div class="cards-testes">
+    <div class="row">
+      <div class="col-sm-4 d-flex justify-content-center">
+        <div id="rt-pcr" class="card-tes">
+          <div class="h-100 d-flex justify-content-center align-items-center">
+            <h2>Testes RT-PCR</h2>
+          </div>
+          <div class="teste-button text-center">
+            <input type="button" onclick="window.location.replace('#conteudo-rtpcr')" class="btn btn-azul-pri" value="Saiba mais">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-center">
+        <div id="antigenio" class="card-tes">
+          <div class="h-100 d-flex justify-content-center align-items-center">
+            <h2 class="text-center">Testes de Antigénio</h2>
+          </div>
+          <div class="teste-button text-center">
+            <input type="button" onclick="window.location.replace('#conteudo-antigenio')" class="btn btn-azul-pri" value="Saiba mais">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 d-flex justify-content-center">
+        <div id="serologicos" class="card-tes">
+          <div class="h-100 d-flex justify-content-center align-items-center">
+            <h2>Testes Serológicos</h2>
+          </div>
+          <div class="teste-button text-center">
+            <input type="button" onclick="window.location.replace('#conteudo-serologicos')" class="btn" value="Saiba mais">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>`)
 }

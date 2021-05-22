@@ -17,11 +17,425 @@
 </head>
 
 <body id="postos">
-  <div class="nav-area"></div>
+  <header>
+    <div class="nav-area"></div>
+  </header>
 
-  <div class="container my-5">
-    <h2>Página por fazer.</h2>
-  </div>
+  <div class="custom-scrollbar container-fluid">
+    <div class="row">
+        <div class="col-md-4 col-lg-4 col-xl-3 px-0" style="background-color: white; box-shadow: 5px 0 5px -2px #ccc;">
+            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark">
+              <a class="d-flex align-items-center mb-md-0 me-md-auto text-decoration-none" style="color: var(--azul-pri);">
+                  <span class="fs-5 d-sm-inline" style="font-weight: 700;"><span class="discovid-icon me-3">&#xe900;</span>Filtrar resultados</span>
+              </a>
+              <div class="side-nav mb-4">
+                <hr class="w-100 mb-3">
+                <div class="w-100">
+                  <p class="m-0 text-center"><b>Diversos</b></p>
+                </div>
+                <hr class="w-100 mb-3">
+                <div class="filters filter-locale w-100">
+                  <select class="select-localidades" style="width: 100%; height: 40px;" name="state">
+                    <option disabled="disabled" selected>Localidade</option>
+                    <option value="1">Porto</option>
+                    <option value="2">Póvoa de Varzim</option>
+                    <option value="3">Vila do Conde</option>
+                    <option value="3">Gondomar</option>
+                    <option value="3">Peso da Régua</option>
+                  </select>
+                </div>
+                <hr class="w-100 mb-3">
+                <div class="filters filter-test-type w-100">
+                  <select class="select-testes" style="width: 100%" name="state">
+                    <option disabled="disabled" selected>Tipo de teste</option>
+                    <option value="1">Diagnóstico</option>
+                    <option value="2">Antigénio</option>
+                    <option value="3">Serológico</option>
+                  </select>
+                </div>
+                <hr class="w-100 mb-3">
+                <div class="filters filter-price w-100">
+                  <label for="preco" class="form-label">Preço máximo (em euros)</label><br>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex">
+                      <span id="maxMinPrice">0.50€</span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                      <span id="currentMaxPriceValue"><b>200.00€</b></span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                      <span>200.00€</span>
+                    </div>
+                  </div>
+                  <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
+                </div>
+                <hr class="w-100 mb-3">
+                <div class="filters filter-price w-100">
+                  <label for="preco" class="form-label">Preço mínimo (em euros)</label><br>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex">
+                      <span>0.50€</span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                      <span id="currentMinPriceValue"><b>0.50€</b></span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                      <span>200.00€</span>
+                    </div>
+                  </div>
+                  <input class="w-100" type="range" min="0.50" max="200" step="0.50" value="0.50" id="preco_min" oninput="updateRange('currentMinPriceValue', this.value);" onchange="updateRange('currentMinPriceValue', this.value);">
+                </div>
+                <hr class="w-100 mb-3">
+                <div class="filters filter-distance w-100">
+                  <label for="distancia" class="form-label">Distância (em quilómetros)</label><br>
+                  <div class="row d-flex align-items-center">
+                    <div class="col-4 d-flex">
+                      <span>1km</span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center">
+                      <span id="currentDistanceValue"><b>15km</b></span>
+                    </div>
+                    <div class="col-4 d-flex justify-content-end">
+                      <span>300km</span>
+                    </div>
+                  </div>
+                  <input class="w-100" type="range" min="1" max="300" step="1" value="15" id="distancia" oninput="updateRange('currentDistanceValue', this.value);" onchange="updateRange('currentDistanceValue', this.value);">
+                </div>
+                <hr class="w-100">
+                <div class="filters filters-schedules w-100">
+                  <div class="d-flex align-items-center pt-3">
+                    <input type="checkbox" id="drive-thru" class="check-style">
+                    <label for="drive-thru" class="span-checkbox">Posto Drive-Thru</label>
+                  </div>
+                  <div class="d-flex align-items-center pt-3">
+                    <input type="checkbox" id="call-me" class="check-style">
+                    <label for="call-me" class="span-checkbox"><i>Call me</i> disponível</label>
+                  </div>
+                </div>
+                <hr class="w-100 mb-3">
+                <p class="m-0 text-center"><b>Estatísticas</b></p>
+                <hr class="w-100 mb-3">
+                <div class="filters filters-schedules w-100">
+                  <div>
+                    <p class="m-0" style="font-size: .9rem;"><strong>Agendamentos</strong></p>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="schedules-high" class="check-style">
+                      <label for="schedules-high" class="span-checkbox">Mais agendamentos</label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="schedules-low" class="check-style">
+                      <label for="schedules-low" class="span-checkbox">Menos agendamentos</label>
+                    </div>
+                  </div>
+                </div>
+                <hr class="w-100">
+                <div class="filters filters-likes w-100">
+                  <div>
+                    <p class="m-0" style="font-size: .9rem;"><strong>Gostos</strong></p>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="likes-high" class="check-style">
+                      <label for="likes-high" class="span-checkbox">Mais gostos</label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="likes-low" class="check-style">
+                      <label for="likes-low" class="span-checkbox">Menos gostos</label>
+                    </div>
+                  </div>
+                </div>
+                <hr class="w-100">
+                <div class="filters filters-ratings w-100">
+                  <div>
+                    <p class="m-0" style="font-size: .9rem;"><strong>Classificação</strong></p>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="rating-high" class="check-style">
+                      <label for="rating-high" class="span-checkbox">Mais alta</label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="rating-low" class="check-style">
+                      <label for="rating-low" class="span-checkbox">Mais baixa</label>
+                    </div>
+                  </div>
+                </div>
+                <hr class="w-100">
+                <div class="filters filters-availability w-100">
+                  <div>
+                    <p class="m-0" style="font-size: .9rem;"><strong>Disponibilidade</strong></p>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="availability-high" class="check-style">
+                      <label for="availability-high" class="span-checkbox">Mais rápida</label>
+                    </div>
+                    <div class="d-flex align-items-center pt-3">
+                      <input type="checkbox" id="availability-low" class="check-style">
+                      <label for="availability-low" class="span-checkbox">Mais demorada</label>
+                    </div>
+                  </div>
+                </div>
+                <hr class="w-100">
+              </div>
+            </div>
+            <div class="w-100 mb-3 text-center">
+              <button type="button" class="btn btn-azul-pri" style="width: 80%;">Aplicar filtros</button>
+            </div>
+        </div>
+        <div class="col-md-8 col-lg-8 col-xl-9 py-3">
+          <div style="width: 100%; padding: 0px 15px;">
+            <h2 class="results-title mb-3">Postos encontrados <span class="results-description" style="font-weight: 300; font-size: 1.25rem;">(3 resultados)</span></h2>
+            <div class="results-cards">
+              <div class="card-sta">
+                <div class="row">
+                  <div class="col-md-5 col-xl-8">
+                    <div class="card-text">
+                      <div class="card-title">
+                        <p>Multiusos de Gondomar</p>
+                      </div>
+                      <div class="card-subtitle mb-3">
+                        <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                      </div>
+                      <div class="card-description mb-1">
+                        <p>5km • Diagnóstico | Antigénio | Serológico<i class="far fa-question-circle" style="margin-left: 5px;"></i></p>
+                      </div>
+                      <div class="card-rating">
+                        <span class="">4,3 • </span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-4">
+                    <div class="card-buttons d-flex">
+                      <div class="row first-row">
+                        <div class="col-4">
+                          <span>~14€</span>
+                        </div>
+                        <div class="col-8">
+                          <button type="button" style="min-width: 115px;" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      <div class="row second-row">
+                        <div class="card-icons col d-flex justify-content-flex-end">
+                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-sta">
+                <div class="row">
+                  <div class="col-md-5 col-xl-8">
+                    <div class="card-text">
+                      <div class="card-title">
+                        <p>Multiusos de Gondomar</p>
+                      </div>
+                      <div class="card-subtitle mb-3">
+                        <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                      </div>
+                      <div class="card-description mb-1">
+                        <p>5km • Diagnóstico | Antigénio | Serológico<i class="far fa-question-circle" style="margin-left: 5px;"></i></p>
+                      </div>
+                      <div class="card-rating">
+                        <span class="">5,0 • </span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-4">
+                    <div class="card-buttons d-flex">
+                      <div class="row first-row">
+                        <div class="col-4">
+                          <span>~18€</span>
+                        </div>
+                        <div class="col-8">
+                          <button type="button" style="min-width: 115px;" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      <div class="row second-row">
+                        <div class="card-icons col d-flex justify-content-flex-end">
+                          <span><i class="fas fa-car" data-toggle="tooltip" data-placement="top" title="Posto drive-thru"></i></span>
+                          <span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>
+                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-sta">
+                <div class="row">
+                  <div class="col-md-5 col-xl-8">
+                    <div class="card-text">
+                      <div class="card-title">
+                        <p>Multiusos de Gondomar</p>
+                      </div>
+                      <div class="card-subtitle mb-3">
+                        <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                      </div>
+                      <div class="card-description mb-1">
+                        <p>5km • Diagnóstico | Antigénio | Serológico<i class="far fa-question-circle" style="margin-left: 5px;"></i></p>
+                      </div>
+                      <div class="card-rating">
+                        <span class="">1,9 • </span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-4">
+                    <div class="card-buttons d-flex">
+                      <div class="row first-row">
+                        <div class="col-4">
+                          <span>~15€</span>
+                        </div>
+                        <div class="col-8">
+                          <button type="button" style="min-width: 115px;" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      <div class="row second-row">
+                        <div class="card-icons col d-flex justify-content-flex-end">
+                          <span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>
+                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-sta">
+                <div class="row">
+                  <div class="col-md-5 col-xl-8">
+                    <div class="card-text">
+                      <div class="card-title">
+                        <p>Multiusos de Gondomar</p>
+                      </div>
+                      <div class="card-subtitle mb-3">
+                        <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                      </div>
+                      <div class="card-description mb-1">
+                        <p>5km • Diagnóstico | Antigénio | Serológico<i class="far fa-question-circle" style="margin-left: 5px;"></i></p>
+                      </div>
+                      <div class="card-rating">
+                        <span class="">4,3 • </span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-4">
+                    <div class="card-buttons d-flex">
+                      <div class="row first-row">
+                        <div class="col-4">
+                          <span>~14€</span>
+                        </div>
+                        <div class="col-8">
+                          <button type="button" style="min-width: 115px;" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      <div class="row second-row">
+                        <div class="card-icons col d-flex justify-content-flex-end">
+                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-sta">
+                <div class="row">
+                  <div class="col-md-5 col-xl-8">
+                    <div class="card-text">
+                      <div class="card-title">
+                        <p>Multiusos de Gondomar</p>
+                      </div>
+                      <div class="card-subtitle mb-3">
+                        <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                      </div>
+                      <div class="card-description mb-1">
+                        <p>5km • Diagnóstico | Antigénio | Serológico<i class="far fa-question-circle" style="margin-left: 5px;"></i></p>
+                      </div>
+                      <div class="card-rating">
+                        <span class="">5,0 • </span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-4">
+                    <div class="card-buttons d-flex">
+                      <div class="row first-row">
+                        <div class="col-4">
+                          <span>~18€</span>
+                        </div>
+                        <div class="col-8">
+                          <button type="button" style="min-width: 115px;" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      <div class="row second-row">
+                        <div class="card-icons col d-flex justify-content-flex-end">
+                          <span><i class="fas fa-car" data-toggle="tooltip" data-placement="top" title="Posto drive-thru"></i></span>
+                          <span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>
+                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-sta">
+                <div class="row">
+                  <div class="col-md-5 col-xl-8">
+                    <div class="card-text">
+                      <div class="card-title">
+                        <p>Multiusos de Gondomar</p>
+                      </div>
+                      <div class="card-subtitle mb-3">
+                        <p>Av. Multiusos, 4420-230 S. Cosme</p>
+                      </div>
+                      <div class="card-description mb-1">
+                        <p>5km • Diagnóstico | Antigénio | Serológico<i class="far fa-question-circle" style="margin-left: 5px;"></i></p>
+                      </div>
+                      <div class="card-rating">
+                        <span class="">1,9 • </span>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-7 col-xl-4">
+                    <div class="card-buttons d-flex">
+                      <div class="row first-row">
+                        <div class="col-4">
+                          <span>~15€</span>
+                        </div>
+                        <div class="col-8">
+                          <button type="button" style="min-width: 115px;" class="btn btn-laranja" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                        </div>
+                      </div>
+                      <div class="row second-row">
+                        <div class="card-icons col d-flex justify-content-flex-end">
+                          <span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>
+                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
 
   <footer class="text-center text-lg-start text-muted">
     <section class="p-2">
@@ -77,7 +491,15 @@
   <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
   <script type="text/javascript" src="..\js\misc.js"></script>
   <script type="text/javascript">
-    // Scripts here
+    $(document).ready(function() {
+      $('.select-localidades').select2({
+        searchInputPlaceholder: 'Pesquisar localidade...'
+      });
+      $('.select-testes').select2({
+        searchInputPlaceholder: 'Pesquisar tipo...'
+      });
+      $(function () { $('[data-toggle="tooltip"]').tooltip() });
+    });
   </script>
 </body>
 
