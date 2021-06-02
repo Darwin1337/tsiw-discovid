@@ -45,4 +45,17 @@ function updateRange(a, b) {
     $("#" + a).html("<b>" + parseFloat(b).toFixed(2) + "€</b>");
   }
 
+
 }
+
+var x = document.getElementById("ceder-localizacao");
+
+x.addEventListener("click", function(){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
+    });
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+})
