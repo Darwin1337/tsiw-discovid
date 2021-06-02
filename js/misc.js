@@ -48,7 +48,7 @@ function updateRange(a, b) {
 
 }
 
-<<<<<<< Updated upstream
+
 if ($("body").attr("id") == "index") {
   var x = document.getElementById("ceder-localizacao");
   x.addEventListener("click", function(){
@@ -60,18 +60,7 @@ if ($("body").attr("id") == "index") {
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
   })
-=======
-var x = document.getElementById("ceder-localizacao");
-
-x.addEventListener("click", function(){
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
-    });
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-})
+}
 
 function initMap() {
   const coordenadas = { lat: 41.366514, lng: -8.74018 };
@@ -103,5 +92,4 @@ function addMarker(location, map) {
     position: location,
     map: map,
   });
->>>>>>> Stashed changes
 }
