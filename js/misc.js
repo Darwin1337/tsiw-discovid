@@ -48,14 +48,15 @@ function updateRange(a, b) {
 
 }
 
-var x = document.getElementById("ceder-localizacao");
-
-x.addEventListener("click", function(){
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
-    });
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-})
+if ($("body").attr("id") == "index") {
+  var x = document.getElementById("ceder-localizacao");
+  x.addEventListener("click", function(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
+      });
+    } else {
+      x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+  })
+}

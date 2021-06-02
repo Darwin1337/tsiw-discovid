@@ -1,5 +1,6 @@
 import UserView from "./views/UserView.js";
 import NavbarView from "./views/NavbarView.js";
+import UserController from "./controllers/UserController.js";
 
 class App {
   constructor() {
@@ -9,31 +10,17 @@ class App {
       'autenticacao': [NavbarView, UserView]
     };
 
-    // import dummy data for testing purposes
-    //this.#importDataFixtures();
-
-    // instantiate the views mapped in the routes object
+    this.#importDataFixtures();
     this.#instantiateViews();
   }
 
   #importDataFixtures() {
-    // const users = [
-    //     {
-    //         id: 1,
-    //         username: 'user1',
-    //         password: 'pass1'
-    //     },
-    //     {
-    //         id: 2,
-    //         username: 'user2',
-    //         password: 'pass2'
-    //     }
-    // ];
-    //
-    // // Load the fixtures in case there is no data in the local storage
-    // if (!localStorage.users) {
-    //     localStorage.setItem('users', JSON.stringify(users));
-    // }
+    this.userController = new UserController();
+    if (!localStorage.users) {
+      this.userController.register("Diogo", "Borges", "diogo@borges.pt", "123", "123456789", "001", new Date(), true);
+      this.userController.register("Diogo", "Oliveira", "diogo@oliveira.pt", "123", "123456789", "002", new Date(), false);
+      this.userController.register("Gonçalo", "Gama", "goncalo@gama.pt", "123", "123456789", "003", new Date(), true);
+    }
   }
 
   #instantiateViews() {

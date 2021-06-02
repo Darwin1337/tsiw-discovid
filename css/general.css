@@ -586,8 +586,17 @@ input[type="range"]::-moz-range-thumb {
 }
 
 /* Botão de encerrar sessão */
+
 #logout-button:hover {
   cursor: pointer;
+}
+
+/* SweetAlert2 */
+
+.swal2-styled.swal2-confirm {
+  background-color: var(--laranja) !important;
+  outline: 0 !important;
+  border: 0 !important;
 }
 
 /* Footer */

@@ -51,21 +51,20 @@ export default class NavbarView {
 
   ApplyDesktopNavbar() {
     let RenderAuthentication = null;
-
     if (this.userController.isAnyUserLoggedIn()) {
       RenderAuthentication = `
       <li class="nav-item dropdown user">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span id="loggedUserName"><b>${this.userController.getLoggedInUsername().pnome}</b></span>
+          <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span id="loggedUserName"><b>${this.userController.getLoggedInUsername().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUsername().pnome.slice(1)}</b></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="../html/editar-perfil" id="editar-perfil-redirect">Editar perfil</a></li>
+              <li><a class="dropdown-item" href="../html/editar-perfil.html" id="editar-perfil-redirect">Editar perfil</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil">As minhas marcações</a></li>
+              <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas marcações</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil">As minhas encomendas</a></li>
+              <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas encomendas</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil">Notificações</a></li>
+              <li><a class="dropdown-item" href="../html/editar-perfil.html">Notificações</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" id="logout-button">Terminar sessão</a></li>
           </ul>
@@ -73,7 +72,7 @@ export default class NavbarView {
     } else {
       RenderAuthentication = `
         <li id="autenticacao" class="nav-item">
-          <a class="nav-link" href="../html/autenticacao"><i class="fas fa-sign-in-alt"></i>  Autenticação</a>
+          <a class="nav-link" href="../html/autenticacao.html"><i class="fas fa-sign-in-alt"></i>  Autenticação</a>
         </li>`
     }
 
@@ -89,21 +88,21 @@ export default class NavbarView {
           <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
               <ul class="main-nav navbar-nav w-100 justify-content-center">
                   <li id="postos" class="nav-item">
-                      <a class="nav-link" href="../html/postos"><i class="fas fa-map-marker-alt"></i>  Postos</a>
+                      <a class="nav-link" href="../html/postos.html"><i class="fas fa-map-marker-alt"></i>  Postos</a>
                   </li>
                   <li id="loja" class="nav-item">
-                      <a class="nav-link" href="../html/loja"><i class="fas fa-shopping-cart"></i>  Loja</a>
+                      <a class="nav-link" href="../html/loja.html"><i class="fas fa-shopping-cart"></i>  Loja</a>
                   </li>
                   <li id="covid" class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-syringe"></i>  COVID-19</a>
                       <ul class="covid-drop dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-                          <li id="sintomas"><a class="dropdown-item" href="../html/sintomas"><i class="fas fa-head-side-cough"></i>  Sintomas</a></li>
+                          <li id="sintomas"><a class="dropdown-item" href="../html/sintomas.html"><i class="fas fa-head-side-cough"></i>  Sintomas</a></li>
                           <li><hr class="dropdown-divider"></li>
-                          <li id="tracking"><a class="dropdown-item" href="../html/tracking"><i class="fas fa-analytics"></i>  Tracking</a></li>
+                          <li id="tracking"><a class="dropdown-item" href="../html/tracking.html"><i class="fas fa-analytics"></i>  Tracking</a></li>
                       </ul>
                   </li>
                   <li id="testes" class="nav-item">
-                      <a class="nav-link" href="../html/testes"><i class="fas fa-info-circle"></i>  Testes</a>
+                      <a class="nav-link" href="../html/testes.html"><i class="fas fa-info-circle"></i>  Testes</a>
                   </li>
               </ul>
               <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
@@ -141,14 +140,14 @@ export default class NavbarView {
           <img src="${this.imgPath}img\\user-icon.svg" width="60" height="60">
             <li class="nav-item logged-user"><a>BEM-VINDO, <span class="text-uppercase"><b>${this.userController.getLoggedInUsername().pnome}</b></span></a></li>
         </div>
-        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil" id="editar-perfil-redirect">EDITAR PERFIL</a></li>
-        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil">AS MINHAS MARCAÇÕES</a></li>
-        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil">AS MINHAS ENCOMENDAS</a></li>
-        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil">NOTIFICAÇÕES</a></li>
+        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html" id="editar-perfil-redirect">EDITAR PERFIL</a></li>
+        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html">AS MINHAS MARCAÇÕES</a></li>
+        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html">AS MINHAS ENCOMENDAS</a></li>
+        <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html">NOTIFICAÇÕES</a></li>
         <li class="nav-item"><a class="nav-link" id="logout-button">TERMINAR SESSÃO</a></li>`
     } else {
       RenderAuthentication = `
-        <li id="autenticacao" class="nav-item"><a class="nav-link" href="../html/autenticacao">AUTENTICAÇÃO</a></li>`
+        <li id="autenticacao" class="nav-item"><a class="nav-link" href="../html/autenticacao.html">AUTENTICAÇÃO</a></li>`
     }
 
     $(".nav-area").html(`
@@ -163,11 +162,11 @@ export default class NavbarView {
             <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
                 <ul class="main-nav navbar-nav w-100 justify-content-start">
                     <li><hr class="dropdown-divider"></li>
-                    <li id="postos" class="nav-item active"><a class="nav-link" href="../html/postos"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
-                    <li id="loja" class="nav-item"><a class="nav-link" href="../html/loja">LOJA</a></li>
-                    <li id="sintomas" class="nav-item"><a class="nav-link" href="../html/sintomas">SINTOMAS</a></li>
-                    <li id="tracking" class="nav-item"><a class="nav-link" href="../html/tracking">TRACKING</a></li>
-                    <li id="testes" class="nav-item"><a class="nav-link" href="../html/testes">INFO. TESTES</a></li>
+                    <li id="postos" class="nav-item active"><a class="nav-link" href="../html/postos.html"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
+                    <li id="loja" class="nav-item"><a class="nav-link" href="../html/loja.html">LOJA</a></li>
+                    <li id="sintomas" class="nav-item"><a class="nav-link" href="../html/sintomas.html">SINTOMAS</a></li>
+                    <li id="tracking" class="nav-item"><a class="nav-link" href="../html/tracking.html">TRACKING</a></li>
+                    <li id="testes" class="nav-item"><a class="nav-link" href="../html/testes.html">INFO. TESTES</a></li>
                     <li><hr class="dropdown-divider"></li>
                     ${RenderAuthentication}
                 </ul>
@@ -195,7 +194,7 @@ export default class NavbarView {
           title: 'Tem a certeza que quer terminar sessão?',
           showDenyButton: true,
           confirmButtonText: `Sim`,
-          denyButtonText: `Cancelar`,
+          denyButtonText: `Cancelar`
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire('Sessão terminada com sucesso!', '', 'success')
