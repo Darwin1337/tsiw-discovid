@@ -20,6 +20,6 @@ export class UtilizadorNormalModel {
 
 export class UtilizadorEntidadeModel {
     constructor() {
-      console.log("Importou os dois :)");
+      // pass
     }
 }

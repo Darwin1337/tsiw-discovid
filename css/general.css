@@ -585,6 +585,11 @@ input[type="range"]::-moz-range-thumb {
   padding-right: 30px;
 }
 
+/* Botão de encerrar sessão */
+#logout-button:hover {
+  cursor: pointer;
+}
+
 /* Footer */
 
 footer {

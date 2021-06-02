@@ -388,7 +388,7 @@
 
 /* Postos */
 
-#postos hr {
+#postos .custom-scrollbar hr {
   display: block;
   height: 1px;
   border: 0;

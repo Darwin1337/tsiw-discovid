@@ -1,10 +1,12 @@
-import UserView from "./views/UserView.js"
+import UserView from "./views/UserView.js";
+import NavbarView from "./views/NavbarView.js";
 
 class App {
   constructor() {
     this.routes = {
-      '': [UserView],
-      'autenticacao': [UserView]
+      '': [NavbarView],
+      'default': [NavbarView],
+      'autenticacao': [NavbarView, UserView]
     };
 
     // import dummy data for testing purposes
@@ -36,13 +38,23 @@ class App {
 
   #instantiateViews() {
     const path = window.location.pathname;
-    let route = path.substr(path.lastIndexOf('/') + 1);
-    if (route.indexOf(".") > -1) {
-      route = route.split('.')[0];
+    let route = path;
+
+    try {
+      route.split("//");
+      route.split("\\");
+      route = path.substr(path.lastIndexOf('/') + 1);
+      if (route.indexOf(".") > -1) {
+        route = route.split('.')[0];
+      }
+    } catch {
+      route = "default";
     }
     const views = this.#getViews(route);
     for (const view of views) {
+      if (view != NavbarView) {
         new view();
+      }
     }
   }
 
@@ -52,3 +64,5 @@ class App {
 }
 
 new App();
+const NavbarInstance = new NavbarView();
+export default NavbarInstance;
