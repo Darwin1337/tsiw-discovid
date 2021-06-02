@@ -1,5 +1,6 @@
 import UserView from "./views/UserView.js";
 import NavbarView from "./views/NavbarView.js";
+import ProfileView from "./views/ProfileView.js";
 import AdminView from "./views/AdminView.js";
 
 // Import do controller para a 'dummy data' ficar mais legível e não muito extensa
@@ -14,7 +15,11 @@ class App {
       'checkout-1': [NavbarView],
       'checkout-2': [NavbarView],
       'checkout-3': [NavbarView],
+<<<<<<< Updated upstream
       'editar-perfil': [NavbarView],
+=======
+      'editar-perfil': [NavbarView,ProfileView],
+>>>>>>> Stashed changes
       'marcacoes': [NavbarView],
       'encomendas': [NavbarView],
       'notificacoes': [NavbarView],

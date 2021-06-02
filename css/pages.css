@@ -568,6 +568,33 @@
   font-weight: 300;
 }
 
+/*editar perfil*/
+.botao-guardar{
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  background: white;
+  border: 1px solid #c49043;
+  border-radius: 5px;
+  color: #c49043;
+  visibility: hidden;
+}
+
+.botao-editar{
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 15px;
+  padding-bottom: 10px;
+  background: #c49043;
+  color: white;
+  border: 1px solid #c49043;
+  border-radius: 5px;
+}
+#avatar-profile{
+  width: 7rem;
+}
+
 /* Media queries */
 
 @media (max-width: 1199px) {
