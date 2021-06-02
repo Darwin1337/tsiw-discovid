@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
+  <meta name="keywords" content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Discovid - Admin</title>
+  <link rel="icon" href="..\img\icon.svg">
+  <link rel="stylesheet" href="..\css\lib\bootstrap\css\bootstrap.min.css">
+  <link rel="stylesheet" href="..\css\lib\fontawesome\css\all.min.css">
+  <link rel="stylesheet" href="..\css\lib\select2\css\select2.min.css">
+  <link rel="stylesheet" href="..\css\pages.css">
+</head>
+
+<body id="checkout">
+  
+  <nav class="navbar navbar-expand-lg justify-content-center">
+    <div class="container">
+      <a class="navbar-brand d-flex w-50 me-auto">
+        <img id="navbar-logo" src="..\img\\logo_admin.svg" class="d-inline-block align-top" onclick="window.location.href = '..\';" alt="Logótipo Discovid">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsingNavbar">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
+          <ul class="main-nav navbar-nav w-100 justify-content-center">
+              <li id="postos" class="nav-item">
+                  <a class="nav-link" href="../html/postos"><i class="fas fa-location-arrow"></i>  Entidades</a>
+              </li>
+              <li id="loja" class="nav-item">
+                  <a class="nav-link" href="../html/loja"><i class="fas fa-shopping-cart"></i>  Produtos</a>
+              </li>
+              <li id="testes" class="nav-item">
+                  <a class="nav-link" href="../html/testes"><i class="fas fa-users-cog"></i>  Utilizadores</a>
+              </li>
+          </ul>
+          <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
+              <li class="nav-item dropdown user">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="..\img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top me-1">Diogo
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
+                      <li><a class="dropdown-item" href="">Sair de admin</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Terminar sessão</a></li>
+                  </ul>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5 color-azul-princ">
+    <h4 class="text-center mt-5">Entidades</h4>
+    <div class="row">
+      <div class="col-md-12 text-center mt-3">
+        <button class="btn btn-success btn-sm " href="#" role="button"><i class="fas fa-plus-circle me-1"></i>Adicionar Entidade</button>
+      </div>
+    </div>
+    
+    <table class="table table-striped mt-4">
+      <thead class="">
+        <tr class="text-center">
+          <th scope="col">ID</th>
+          <th scope="col">Nome</th>
+          <th scope="col">NIF</th>
+          <th scope="col">Email</th>
+          <th scope="col">Verificado</th>
+          <th scope="col">Verificar</th>
+          <th scope="col">Acções</th>
+        </tr>
+        
+      </thead>
+      <tbody>
+        <tr class="align-middle text-center">
+          <td>1001</td>
+          <td>Multiusos de Gondomar</td>
+          <td>123456789</td>
+          <td>clinica1@esmad.ipp.pt</td>
+          <td>Não</td>
+          <td><span class="icon-naoVerificar"><i class="fas fa-times-circle"></i></span><span class="icon-verificar"><i class="fas fa-check-double"></i></span></td>
+          <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span class="icon-remover-edit"><i class="far fa-edit"></i></span></td>
+        </tr>
+        <tr class="align-middle text-center">
+          <td>1001</td>
+          <td>Multiusos de Gondomar</td>
+          <td>123456789</td>
+          <td>clinica1@esmad.ipp.pt</td>
+          <td>Não</td>
+          <td><span class="icon-naoVerificar"><i class="fas fa-times-circle"></i></span><span class="icon-verificar"><i class="fas fa-check-double"></i></span></td>
+          <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span class="icon-remover-edit"><i class="far fa-edit"></i></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+    
+
+  <footer class="text-center text-lg-start text-muted">
+    <section class="p-2">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4"><span class="discovid-icon me-3">&#xe900;</span>DISCOVID</h6>
+            <p>
+              Discovid é uma plataforma de marcação e gestão de testes de COVID-19 desenvolvida com o intuito de facilitar a escolha de postos/estabelecimentos de testagem.
+            </p>
+          </div>
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Covid</h6>
+            <p><a href="postos.html" class="text-reset">Postos</a></p>
+            <p><a href="loja.html" class="text-reset">Loja</a></p>
+            <p><a href="tracking.html" class="text-reset">Tracking</a></p>
+            <p><a href="sintomas.html" class="text-reset">Sintomas</a></p>
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Discovid</h6>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Termos e condições</a></p>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Política de proteção de dados</a></p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contactos</h6>
+            <p><i class="fas fa-home me-3"></i> Rua D. Sancho I, n.º 981</p>
+            <p><i class="fas fa-envelope me-3"></i> contacto@discovid.pt</p>
+            <p><i class="fas fa-phone me-3"></i> +351 252 291 700</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="d-flex justify-content-center align-items-center p-2 ">
+      <div class="footer-socials">
+        <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); color: #ccc;">© 2021
+      <a class="text-reset fw-bold text-decoration-none">DISCOVID.pt</a>
+    </div>
+  </footer>
+
+  <!-- Scripts do projeto -->
+  <script type="text/javascript" src="..\js\lib\jquery\jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\bootstrap\js\bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\fontawesome\js\all.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2.full.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
+  <script type="text/javascript" src="..\js\misc.js"></script>
+  <script type="text/javascript">
+    // Scripts here
+  </script>
+</body>
+
+</html>
