@@ -15,11 +15,7 @@ class App {
       'checkout-1': [NavbarView],
       'checkout-2': [NavbarView],
       'checkout-3': [NavbarView],
-<<<<<<< Updated upstream
-      'editar-perfil': [NavbarView],
-=======
-      'editar-perfil': [NavbarView,ProfileView],
->>>>>>> Stashed changes
+      'editar-perfil': [NavbarView, ProfileView],
       'marcacoes': [NavbarView],
       'encomendas': [NavbarView],
       'notificacoes': [NavbarView],
