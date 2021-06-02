@@ -48,6 +48,7 @@ function updateRange(a, b) {
 
 }
 
+<<<<<<< Updated upstream
 if ($("body").attr("id") == "index") {
   var x = document.getElementById("ceder-localizacao");
   x.addEventListener("click", function(){
@@ -59,4 +60,48 @@ if ($("body").attr("id") == "index") {
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
   })
+=======
+var x = document.getElementById("ceder-localizacao");
+
+x.addEventListener("click", function(){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
+    });
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+})
+
+function initMap() {
+  const coordenadas = { lat: 41.366514, lng: -8.74018 };
+  const map = new google.maps.Map(document.getElementById("googleMap"), {
+    zoom: 15,
+    center: coordenadas,
+    zoomControl: true,
+    mapTypeControl: false,
+    scaleControl: false,
+    streetViewControl: false,
+    rotateControl: false,
+    fullscreenControl: false,
+    draggable: false,
+    scrollwheel: false
+  });
+  // This event listener calls addMarker() when the map is clicked.
+  google.maps.event.addListener(map, "click", (event) => {
+    addMarker(event.latLng, map);
+  });
+  // Add a marker at the center of the map.
+  addMarker(coordenadas, map);
+}
+
+// Adds a marker to the map.
+function addMarker(location, map) {
+  // Add the marker at the clicked location, and add the next-available label
+  // from the array of alphabetical characters.
+  new google.maps.Marker({
+    position: location,
+    map: map,
+  });
+>>>>>>> Stashed changes
 }
