@@ -50,7 +50,7 @@ export default class UserView {
           // pass
         }
         Swal.fire('Sucesso!', 'O registo foi concluído com sucesso!', 'success');
-        setTimeout(() => { location.replace("../../") }, 2000);
+        setTimeout(() => { location.reload(); }, 2000);
       } catch (e) {
         Swal.fire('Erro!', String(e).substring(7), 'error');
       }
