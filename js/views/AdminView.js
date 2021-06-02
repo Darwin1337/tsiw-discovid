@@ -157,7 +157,7 @@ export default class AdminView {
 
     // Verifica todos os itens da navbar e vê qual corresponde à pág. atual através do id do body
     for (const li of lis) {
-      if (li.id != undefined) {
+      if (li.id) {
         if (li.id == this.currentPage.id) {
           if (!li.classList.contains("active")) {
             li.classList.add("active");
@@ -176,7 +176,7 @@ export default class AdminView {
 
     // Verifica todos os itens da navbar e vê qual corresponde à pág. atual através do id do body
     for (const li of lis) {
-      if (li.id != undefined) {
+      if (li.id) {
         if (li.id == this.currentPage.id) {
           if (!li.classList.contains("active")) {
             li.classList.add("active");

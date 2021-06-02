@@ -66,15 +66,15 @@ export default class NavbarView {
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${this.userController.getLoggedInUserData().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUserData().pnome.slice(1)}</b></span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
+          <ul class="logged-ddmenu dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
               ${renderAdminNavItems}
-              <li><a class="dropdown-item" href="../html/editar-perfil.html" id="editar-perfil-redirect">Editar perfil</a></li>
+              <li id="editar-perfil"><a class="dropdown-item" href="../html/editar-perfil.html">Editar perfil</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/marcacoes.html">As minhas marcações</a></li>
+              <li id="marcacoes"><a class="dropdown-item" href="../html/marcacoes.html">As minhas marcações</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/encomendas.html">As minhas encomendas</a></li>
+              <li id="encomendas"><a class="dropdown-item" href="../html/encomendas.html">As minhas encomendas</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/notificacoes.html">Notificações</a></li>
+              <li id="notificacoes"><a class="dropdown-item" href="../html/notificacoes.html">Notificações</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" id="logout-button">Terminar sessão</a></li>
           </ul>
@@ -204,23 +204,27 @@ export default class NavbarView {
   }
 
   UpdateDesktopActiveLink() {
-    const lis = document.querySelectorAll(".main-nav li");
+    const liList = [document.querySelectorAll(".main-nav li"), document.querySelectorAll(".logged-ddmenu li")]
+    const dropdownItems = ["sintomas", "tracking", "encomendas", "editar-perfil", "notificacoes", "marcacoes"]
 
     // Verifica todos os itens da navbar e vê qual corresponde à pág. atual através do id do body
-    for (const li of lis) {
-      if (li.id != undefined) {
-        if (li.id == this.currentPage.id) {
-          if (!li.classList.contains("active")) {
-            li.classList.add("active");
-          }
-          if (this.currentPage.id == "sintomas" || this.currentPage.id == "tracking") {
-            if (!li.parentNode.parentNode.classList.contains("active")) {
-              li.parentNode.parentNode.classList.add("active");
+    for (let i = 0; i < liList.length; i++) {
+      let lis = liList[i];
+      for (const li of lis) {
+        if (li.id) {
+          if (li.id == this.currentPage.id) {
+            if (!li.classList.contains("active")) {
+              li.classList.add("active");
             }
-          }
-        } else {
-          if (li.classList.contains("active")) {
-            li.classList.remove("active");
+            if (dropdownItems.some(page => page == this.currentPage.id)) {
+              if (!li.parentNode.parentNode.classList.contains("active")) {
+                li.parentNode.parentNode.classList.add("active");
+              }
+            }
+          } else {
+            if (li.classList.contains("active")) {
+              li.classList.remove("active");
+            }
           }
         }
       }
@@ -232,7 +236,7 @@ export default class NavbarView {
 
     // Verifica todos os itens da navbar e vê qual corresponde à pág. atual através do id do body
     for (const li of lis) {
-      if (li.id != undefined) {
+      if (li.id) {
         if (li.id == this.currentPage.id) {
           if (!li.classList.contains("active")) {
             li.classList.add("active");
