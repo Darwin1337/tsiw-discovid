@@ -28,7 +28,7 @@
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           <div class="col-6 col-md-3">
             <li class="nav-item" role="presentation">
-              <button class="btn-pills active active-tab" id="pills-perfil-tab" data-bs-toggle="pill" data-bs-target="#pills-perfil" type="button" role="tab" aria-controls="pills-perfil" aria-selected="true">Perfil</button>
+              <a href="editar-perfil.html"><button class="btn-pills unactive-tab" id="pills-perfil-tab" data-bs-toggle="pill" data-bs-target="#pills-perfil" type="button" role="tab" aria-controls="pills-perfil" aria-selected="true">Perfil</button></a>
             </li>
           </div>
           <div class="col-6 col-md-3">
@@ -43,7 +43,7 @@
           </div>
           <div class="col-6 col-md-3">
             <li class="nav-item" role="presentation">
-              <a href="notificacoes.html"><button class="btn-pills unactive-tab" id="pills-notificacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-notificacoes" type="button" role="tab" aria-controls="pills-notificacoes" aria-selected="false">Notificações</button></a>
+              <button class="btn-pills active active-tab" id="pills-notificacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-notificacoes" type="button" role="tab" aria-controls="pills-notificacoes" aria-selected="false">Notificações</button>
             </li>
           </div>
         </ul>
@@ -52,9 +52,20 @@
       <div class="col"></div>
 
       <div class="tab-content" id="pills-tabContent">
-        <!--Editar perfil-->
-        <div class="tab-pane fade show my-5 active show" id="pills-perfil" role="tabpanel" aria-labelledby="pills-perfil-tab">
-          Perfil
+        
+        <!--Notificações-->
+        <div class="tab-pane fade my-5 show active" id="pills-notificacoes" role="tabpanel" aria-labelledby="pills-notificacoes-tab">
+          <div class="row notificacoes d-flex align-items-center justify-content-center text-center mt-5">
+            <div class="col-md-4 color-laranja pt-2 pb-2">
+              O seu teste é já daqui a 1 dia
+            </div>
+            <div class="col-md-4 color-azul-princ pt-2 pb-2">
+              <a><b>Ver marcação</b></a>
+            </div>
+            <div class="col-md-4 pt-2 pb-2">
+              <button class="fechar-notificacao">Fechar notificação <span><i class="fas fa-times"></i></span> </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

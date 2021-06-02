@@ -11,6 +11,7 @@ $(".btn-pills").click(function(event) {
   }
   event.target.classList.remove("unactive-tab");
   event.target.classList.add("active-tab");
+  
   for (tab of $(".tab-pane")) {
     if (tab.classList.contains("show")) {
       tab.classList.remove("show");
@@ -44,35 +45,23 @@ function updateRange(a, b) {
   } else if (a == "currentMaxPriceValue") {
     $("#" + a).html("<b>" + parseFloat(b).toFixed(2) + "€</b>");
   }
-
-
 }
 
-<<<<<<< Updated upstream
 if ($("body").attr("id") == "index") {
   var x = document.getElementById("ceder-localizacao");
+  //Ir buscar a latitude e longitude do utilizador
   x.addEventListener("click", function(){
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
+        getLocalityFromLatLong(position.coords.latitude, position.coords.longitude)
       });
     } else {
       x.innerHTML = "Geolocation is not supported by this browser.";
     }
   })
-=======
-var x = document.getElementById("ceder-localizacao");
+}
 
-x.addEventListener("click", function(){
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      x.innerHTML = position.coords.latitude + " | " + position.coords.longitude;
-    });
-  } else { 
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-})
-
+//Criar um mapa e as suas defenições 
 function initMap() {
   const coordenadas = { lat: 41.366514, lng: -8.74018 };
   const map = new google.maps.Map(document.getElementById("googleMap"), {
@@ -87,21 +76,28 @@ function initMap() {
     draggable: false,
     scrollwheel: false
   });
-  // This event listener calls addMarker() when the map is clicked.
-  google.maps.event.addListener(map, "click", (event) => {
-    addMarker(event.latLng, map);
-  });
-  // Add a marker at the center of the map.
+  //Invocar a função addMarker para adicionar um ponto ao mapa 
   addMarker(coordenadas, map);
 }
 
-// Adds a marker to the map.
+//Adicionar um marcador ao map
 function addMarker(location, map) {
-  // Add the marker at the clicked location, and add the next-available label
-  // from the array of alphabetical characters.
   new google.maps.Marker({
     position: location,
     map: map,
   });
->>>>>>> Stashed changes
+}
+
+//Descobrir a localidade onde o utilizador se encontra
+function getLocalityFromLatLong(lat,long){
+  let x= $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
+    for (var i = 0; i < data.results.length; i++) {
+      if (data.results[i].types[0] == "locality") {
+          let localidadeBanner=document.querySelector("#localidade-banner")
+          localidadeBanner.value=""
+          localidadeBanner.value=(data.results[i].address_components[0].long_name)
+      }
+    }
+    console.log(data)
+  });
 }

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
+  <meta name="keywords"
+    content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Discovid - Perfil</title>
+  <link rel="icon" href="..\img\icon.svg">
+  <link rel="stylesheet" href="..\css\lib\bootstrap\css\bootstrap.min.css">
+  <link rel="stylesheet" href="..\css\lib\fontawesome\css\all.min.css">
+  <link rel="stylesheet" href="..\css\lib\select2\css\select2.min.css">
+  <link rel="stylesheet" href="..\css\pages.css">
+</head>
+
+<body id="editar-perfil">
+  <div class="nav-area"></div>
+
+  <div class="container">
+
+    <div class="row mt-4 pt-5">
+      <div class="col"></div>
+      <div class="col-md-10">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+          <div class="col-6 col-md-3">
+            <li class="nav-item" role="presentation">
+              <a href="editar-perfil.html"><button class="btn-pills unactive-tab" id="pills-perfil-tab" data-bs-toggle="pill" data-bs-target="#pills-perfil" type="button" role="tab" aria-controls="pills-perfil" aria-selected="true">Perfil</button></a>
+            </li>
+          </div>
+          <div class="col-6 col-md-3">
+            <li class="nav-item" role="presentation">
+              <a href="marcacoes.html"><button class="btn-pills  unactive-tab" id="pills-marcacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-marcacoes" type="button" role="tab" aria-controls="pills-marcacoes" aria-selected="false">Marcações</button></a>
+            </li>
+          </div>
+          <div class="col-6 col-md-3">
+            <li class="nav-item" role="presentation">
+              <button class="btn-pills active active-tab" id="pills-encomendas-tab" data-bs-toggle="pill" data-bs-target="#pills-encomendas" type="button" role="tab" aria-controls="pills-encomendas" aria-selected="false">Encomendas</button>
+            </li>
+          </div>
+          <div class="col-6 col-md-3">
+            <li class="nav-item" role="presentation">
+              <a href="notificacoes.html"><button class="btn-pills unactive-tab" id="pills-notificacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-notificacoes" type="button" role="tab" aria-controls="pills-notificacoes" aria-selected="false">Notificações</button></a>
+            </li>
+          </div>
+        </ul>
+
+      </div>
+      <div class="col"></div>
+
+      <div class="tab-content" id="pills-tabContent">
+      
+
+        <!--Encomendas-->
+        <div class="tab-pane fade my-5 show active" id="pills-encomendas" role="tabpanel" aria-labelledby="pills-encomendas-tab">
+          <div class="row flex-column-reverse flex-md-row">
+            <div class="col-md-9 encomenda">
+              <div class="row d-flex align-items-center">
+                <div class="col-md-6 color-azul-princ">
+                  <h5 class="color-laranja">Encomenda 123</h5>
+                  <p class="pt-4 mb-1">Encomenda realizada a 20 Abr, 2020</p>
+                  <p>Prazo previsto para entrega até 25 de abril</p>
+
+
+                </div>
+                <div class="col-md-3 color-azul-princ ">
+                  <p><b>Estado: </b>Processado</p>
+                </div>
+
+                <div class="col-md-3">
+                  <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+                </div>
+                <div class="col-md-12">
+                  <img class="card-img-top mx-auto img-encomenda-mini pt-3" src="../img/loja/M01.png">
+                </div>
+              </div>
+
+            </div>
+            <div class="col-md-3 color-azul-princ ">
+              <h5 class="color-laranja">Ordenar por data</h5>
+              <div class="d-flex align-items-center pt-3">
+                <input type="checkbox" class="check-style"><span class="span-checkbox">Mais recente para mais antigo</span>
+              </div>
+              <div class="d-flex align-items-center pt-3 pb-3">
+                <input type="checkbox" class="check-style"><span class="span-checkbox">Mais antigo para mais recente</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal fade" id="modal-detalhes-encomenda" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content background-modal">
+              <div class="row">
+                <div class="col-md-12 fechar-modal">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="container">
+                  <div class="row mt-5">
+                    <div class="col-sm-12 col-md-12 col-xl-10">
+                      <div class="col-md-12 color-azul-princ">
+                        <h5 class="color-laranja mb-3">Encomenda 123</h5>
+                        <p><b>Estado: </b>Processado</p>
+                        <p>Encomenda realizada a 20 Abr. 2020</p>
+                        <div class="row ">
+                          <div class="col-md-12 bg-cinza border-7px mb-3">
+                            <p class="mt-3"><b>Prazo previsto para entrega até 25 de abril</b></p>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-xl-6 col-md-12 bg-pd-br">
+                            <div class="col-md-12 d-flex justify-content-between flex-wrap">
+                              <p>Artigos</p>
+                              <p>Preço</p>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-2">
+                                <img src="../img/loja/M01.png" class="w-100" alt="">
+                              </div>
+                              <div class="col-8">
+                                <p><span class="color-laranja"><b>1x</b> </span><b class="color-azul-princ">Mascara cirúrgica (pack 50uni)</b></p>
+                                <p>#0001 <span>3€</span></p>
+                              </div>
+                              <div class="col-2 d-flex justify-content-end ">
+                                <p>3€</p>
+                              </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                              <div class="col-12 d-flex justify-content-end">
+                                <p class="me-4">Subtotal</p>
+                                <p>7,50€</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-12 d-flex justify-content-end">
+                                <p class="me-4">Envio</p>
+                                <p>2,00€</p>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-12 d-flex justify-content-end bg-cinza border-7px mb-3 ">
+                                <p class="me-4 mt-3"><b>Total</b></p>
+                                <p class="mt-3"><b>9,50€</b></p>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                        <div class="row">
+
+                          <div class="col-md-6 mt-4">
+                            <p>Endereço de envio</p>
+                            <hr>
+                            <p class="mb-1">Rua de trás, 123</p>
+                            <p class="mb-1">1234-123</p>
+                            <p class="mb-1">Gondomar</p>
+                            <p class="mb-1">912345678</p>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <p>Faturação</p>
+                            <hr>
+                            <p class="mb-1">António José</p>
+                            <p class="mb-1">Rua de trás, 123</p>
+                            <p class="mb-1">1234-123</p>
+                            <p class="mb-1">Gondomar</p>
+                          </div>
+                          <div class="col-md-6 mt-4">
+                            <p>Pagamento</p>
+                            <hr>
+                            <p class="mb-1">Paypal</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-xl-2 ">
+                      <button class="border-7px bg-laranja botao-imprimir w-100">Imprimir fatura</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+       
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-lg-start text-muted">
+    <section class="p-2">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4"><span class="discovid-icon me-3">&#xe900;</span>DISCOVID</h6>
+            <p>
+              Discovid é uma plataforma de marcação e gestão de testes de COVID-19 desenvolvida com o intuito de facilitar a escolha de postos/estabelecimentos de testagem.
+            </p>
+          </div>
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Covid</h6>
+            <p><a href="postos.html" class="text-reset">Postos</a></p>
+            <p><a href="loja.html" class="text-reset">Loja</a></p>
+            <p><a href="tracking.html" class="text-reset">Tracking</a></p>
+            <p><a href="sintomas.html" class="text-reset">Sintomas</a></p>
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Discovid</h6>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Termos e condições</a></p>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Política de proteção de dados</a></p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contactos</h6>
+            <p><i class="fas fa-home me-3"></i> Rua D. Sancho I, n.º 981</p>
+            <p><i class="fas fa-envelope me-3"></i> contacto@discovid.pt</p>
+            <p><i class="fas fa-phone me-3"></i> +351 252 291 700</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="d-flex justify-content-center align-items-center p-2 ">
+      <div class="footer-socials">
+        <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); color: #ccc;">© 2021
+      <a class="text-reset fw-bold text-decoration-none">DISCOVID.pt</a>
+    </div>
+  </footer>
+
+  <!-- Scripts do projeto -->
+  <script type="module" src="../js/app.js"></script>
+  <script type="text/javascript" src="..\js\lib\jquery\jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\bootstrap\js\bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\fontawesome\js\all.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2.full.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
+  <script type="text/javascript" src="..\js\lib\sweetalert2\sweetalert2.all.min.js"></script>
+  <script type="text/javascript" src="..\js\misc.js"></script>
+  <script type="text/javascript">
+    // Scripts here
+  </script>
+</body>
+
+</html>

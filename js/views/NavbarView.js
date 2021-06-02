@@ -58,9 +58,9 @@ export default class NavbarView {
           <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span id="loggedUserName"><b>${this.userController.getLoggedInUsername().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUsername().pnome.slice(1)}</b></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-              <li><a class="dropdown-item" href="../html/editar-perfil.html" id="editar-perfil-redirect">Editar perfil</a></li>
+              <li><a class="dropdown-item" id="editar-perfil-redirect">Editar perfil</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas marcações</a></li>
+              <li><a class="dropdown-item" id="minhas-marcacoes-redirect">As minhas marcações</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas encomendas</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -345,3 +345,5 @@ function UpdateMobileActiveLink() {
     }
   });
 }
+
+
