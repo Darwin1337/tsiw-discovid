@@ -67,14 +67,10 @@ export default class NavbarView {
           <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${this.userController.getLoggedInUserData().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUserData().pnome.slice(1)}</b></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
-<<<<<<< Updated upstream
-              <li><a class="dropdown-item" id="editar-perfil-redirect">Editar perfil</a></li>
-=======
               ${renderAdminNavItems}
               <li><a class="dropdown-item" href="../html/editar-perfil.html" id="editar-perfil-redirect">Editar perfil</a></li>
->>>>>>> Stashed changes
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" id="minhas-marcacoes-redirect">As minhas marcações</a></li>
+              <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas marcações</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas encomendas</a></li>
               <li><hr class="dropdown-divider"></li>
@@ -361,63 +357,3 @@ export default class NavbarView {
       </div>`;
   }
 }
-<<<<<<< Updated upstream
-
-$(window).resize(function() {
-  if (!NavbarInstance.isDisplayMobile && NavbarInstance.CheckResolution()) {
-    NavbarInstance.isDisplayMobile = true;
-  } else if (NavbarInstance.isDisplayMobile && !NavbarInstance.CheckResolution()) {
-    NavbarInstance.isDisplayMobile = false;
-  }
-});
-
-function UpdateDesktopActiveLink() {
-  $('.main-nav li').each(function(i) {
-    if ($(this).attr("id") != undefined) {
-      if ($("body").attr("id") == $(this).attr("id")) {
-        if (!$(this).hasClass("active")) {
-          $(this).addClass("active");
-        }
-        if ($("body").attr("id") == "sintomas" || $("body").attr("id") == "tracking") {
-          if (!$(this).parent().parent().hasClass("active")) {
-            $(this).parent().parent().addClass("active");
-          }
-        }
-      } else {
-        if ($(this).hasClass("active")) {
-          $(this).removeClass("active");
-        }
-      }
-    }
-  });
-}
-
-function UpdateMobileActiveLink() {
-  $('.main-nav li').each(function(i) {
-    if ($(this).attr("id") != undefined) {
-      if ($("body").attr("id") == $(this).attr("id")) {
-
-        if (!$(this).hasClass("active")) {
-          $(this).addClass("active");
-        }
-
-        if ($(this).children().html().indexOf('<i class="fas fa-chevron-right"></i>') == -1) {
-          let savedText = $(this).children().html();
-          $(this).children().html(`<i class="fas fa-chevron-right"></i>  ${savedText}`);
-        }
-
-      } else {
-        if ($(this).hasClass("active")) {
-          $(this).removeClass("active");
-        }
-        if ($(this).children().html().indexOf('<i class="fas fa-chevron-right"></i>') > -1) {
-          $(this).children().html($(this).children().html().split('<i class="fas fa-chevron-right"></i>')[1].trim());
-        }
-      }
-    }
-  });
-}
-
-
-=======
->>>>>>> Stashed changes
