@@ -70,11 +70,11 @@ export default class NavbarView {
               ${renderAdminNavItems}
               <li><a class="dropdown-item" href="../html/editar-perfil.html" id="editar-perfil-redirect">Editar perfil</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas marcações</a></li>
+              <li><a class="dropdown-item" href="../html/marcacoes.html">As minhas marcações</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil.html">As minhas encomendas</a></li>
+              <li><a class="dropdown-item" href="../html/encomendas.html">As minhas encomendas</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="../html/editar-perfil.html">Notificações</a></li>
+              <li><a class="dropdown-item" href="../html/notificacoes.html">Notificações</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" id="logout-button">Terminar sessão</a></li>
           </ul>
