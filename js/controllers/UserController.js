@@ -1,7 +1,5 @@
-import {
-  UtilizadorNormalModel,
-  UtilizadorEntidadeModel
-} from "../models/UserModel.js"
+import UtilizadorNormalModel from "../models/UserModel.js"
+import UtilizadorEntidadeModel from "../models/PostosModel.js"
 
 export default class UserController {
   constructor() {

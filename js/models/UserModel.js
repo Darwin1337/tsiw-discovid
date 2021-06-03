@@ -1,4 +1,4 @@
-export class UtilizadorNormalModel {
+export default class UtilizadorNormalModel {
   constructor(id, pnome, unome, email, password, tlm, nif, data_nasc, consentimento_email) {
     this.id = id;
     this.pnome = pnome;
@@ -16,10 +16,14 @@ export class UtilizadorNormalModel {
     this.consentimento_email = consentimento_email;
     this.admin = false;
   }
-}
 
-export class UtilizadorEntidadeModel {
-    constructor() {
-      // pass
-    }
+  RegistarEndereco(id_endereco, id_utilizador, morada, cod_postal, id_localidade, lat, long) {
+    this.id_endereco = id_endereco;
+    this.id_utilizador = id_utilizador;
+    this.morada = morada;
+    this.cod_postal = cod_postal;
+    this.id_localidade = id_localidade;
+    this.lat = lat;
+    this.long = long;
+  }
 }
