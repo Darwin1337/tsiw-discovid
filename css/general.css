@@ -415,18 +415,36 @@ input[type="range"]::-moz-range-thumb {
   background-color: var(--laranja);
   padding: 20px;
   border: 1px solid var(--laranja);
-  border-radius: 2px;
+  border-radius: 5px;
   color: white;
   width: 100%;
+  font-weight: 500;
+  transition: .3s ease-in;
+  white-space: nowrap;
+  transition: .3s;
+}
+
+.active-tab:hover {
+  background-color: var(--laranja-escuro);
+  transition: .3s;
 }
 
 .unactive-tab {
-  color: #131e4c;
+  color: var(--azul-pri);
   background-color: transparent;
   border: 1px solid var(--laranja);
-  border-radius: 2px;
+  border-radius: 5px;
   padding: 20px;
   width: 100%;
+  font-weight: 500;
+  transition: .3s ease-out;
+  white-space: nowrap;
+  transition: .3s;
+}
+
+.unactive-tab:hover {
+  background-color: #dfdfe1;
+  transition: .3s;
 }
 
 /* Scrollbar */
@@ -589,6 +607,15 @@ input[type="range"]::-moz-range-thumb {
 
 #logout-button:hover {
   cursor: pointer;
+}
+
+/* Input groups */
+
+.input-group-text {
+  background-color: white;
+  border: 1px solid white;
+  color: var(--azul-sec);
+  border-radius: 5px;
 }
 
 /* SweetAlert2 */

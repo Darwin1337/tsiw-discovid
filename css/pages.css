@@ -245,26 +245,71 @@
 
 /* Página de Iniciar Sessão */
 
+.input-login {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 5px;
+}
+
+.input-login:focus {
+  outline: none;
+  box-shadow: 1px 1px 5px #e7d2b3;
+}
+
 .input-login-registar {
   width: 100%;
   padding: 13px;
   border: none;
-  box-shadow: 0px 1px 5px #aaaaaa;
-  border-radius: 2px;
+  border-radius: 5px;
+  box-shadow: 0px 1px 5px #ccc;
 }
 
 .input-login-registar:focus {
   outline: none;
-  box-shadow: 0px 2px 10px var(--laranja);
+  box-shadow: 1px 1px 5px #e7d2b3;
 }
 
 .btn-login {
   background-color: var(--laranja);
   border: none;
   width: 100%;
-  padding: 20px;
-  border-radius: 2px;
+  padding: 10px;
+  border-radius: 5px;
   color: white;
+  font-weight: 500;
+  transition: .3s;
+}
+
+.btn-login:hover {
+  background-color: var(--laranja-escuro);
+  transition: .3s;
+}
+
+#autenticacao .ver-pw label {
+  color: var(--azul-pri);
+  font-weight: 500;
+}
+
+#autenticacao .main-content a {
+  text-decoration: none;
+  color: var(--cinza-escuro);
+  font-weight: 500;
+  transition: .3s;
+}
+
+#autenticacao .main-content a:hover {
+  color: #474750;
+  transition: .3s;
+}
+
+#autenticacao .input-group {
+  box-shadow: 0px 1px 5px #ccc;
+  /* box-shadow: 1px 1px 5px #e7d2b3; */
+}
+
+#autenticacao .input-group:focus {
+  box-shadow: 1px 1px 5px #e7d2b3;
 }
 
 /* Página da loja */

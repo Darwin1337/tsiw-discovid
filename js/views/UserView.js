@@ -5,6 +5,9 @@ export default class UserView {
     this.userController = new UserController();
     this.loadLoginDOM();
     this.bindTypeButtons();
+
+    // Event listener para quando a checkbox de "ver password" é checkada
+    this.BindViewPasswordCheckbox();
   }
 
   loadNormalDOM() {
@@ -157,6 +160,16 @@ export default class UserView {
         $('.js-example-basic-multiple').select2();
         $(".change-type").attr("id", "form-reg-entidade");
         new UserView().loadPostoDOM();
+      }
+    });
+  }
+
+  BindViewPasswordCheckbox() {
+    document.getElementById("view-password").addEventListener("click", () => {
+      if (document.getElementById("view-password").checked == true) {
+        document.getElementById("loginPASSWORD").setAttribute("type", "text");
+      } else {
+        document.getElementById("loginPASSWORD").setAttribute("type", "password");
       }
     });
   }

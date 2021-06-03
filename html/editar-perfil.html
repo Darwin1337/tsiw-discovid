@@ -21,44 +21,40 @@
   <div class="nav-area"></div>
 
   <div class="container">
-
     <div class="row mt-5">
       <div class="col"></div>
       <div class="col-md-10">
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <ul class="nav nav-pills mb-3">
           <div class="col-6 col-md-3">
             <li class="nav-item" role="presentation">
-              <button class="btn-pills active active-tab" id="pills-perfil-tab" data-bs-toggle="pill" data-bs-target="#pills-perfil" type="button" role="tab" aria-controls="pills-perfil" aria-selected="true">Perfil</button>
+              <button class="btn-pills active active-tab" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Perfil</button>
             </li>
           </div>
           <div class="col-6 col-md-3">
             <li class="nav-item" role="presentation">
-              <a href="marcacoes.html"><button class="btn-pills  unactive-tab" id="pills-marcacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-marcacoes" type="button" role="tab" aria-controls="pills-marcacoes" aria-selected="false">Marcações</button></a>
+              <button class="btn-pills unactive-tab" style="border-radius: 0px;" onclick="window.location.replace('marcacoes.html');">Marcações</button>
             </li>
           </div>
           <div class="col-6 col-md-3">
             <li class="nav-item" role="presentation">
-              <a href="encomendas.html"><button class="btn-pills unactive-tab" id="pills-encomendas-tab" data-bs-toggle="pill" data-bs-target="#pills-encomendas" type="button" role="tab" aria-controls="pills-encomendas" aria-selected="false">Encomendas</button></a>
+              <button class="btn-pills unactive-tab" style="border-radius: 0px;" onclick="window.location.replace('encomendas.html');">Encomendas</button>
             </li>
           </div>
           <div class="col-6 col-md-3">
             <li class="nav-item" role="presentation">
-              <a href="notificacoes.html"><button class="btn-pills unactive-tab" id="pills-notificacoes-tab" data-bs-toggle="pill" data-bs-target="#pills-notificacoes" type="button" role="tab" aria-controls="pills-notificacoes" aria-selected="false">Notificações</button></a>
+              <button class="btn-pills unactive-tab" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;" onclick="window.location.replace('notificacoes.html');">Notificações</button>
             </li>
           </div>
         </ul>
-
       </div>
       <div class="col"></div>
 
-      <div class="tab-content mt-5" id="pills-tabContent">
-        <!--Editar perfil-->
+      <div class="tab-content my-5">
         <div class="row" id="campos-editar-perfil">
             <div class="col-md-12 d-flex flex-column align-items-center align-self-center">
               <img class="" id="avatar-profile" src="../img/user-icon.svg">
               <input type="file" class="mt-3" value="Escolher Imagem"  accept="image/png, image/jpeg">
             </div>
-
             <div class="col-md-6 mt-3">
               <span>ID</span>
               <input type="text" class="input-login-registar" disabled value="1021">
@@ -97,8 +93,8 @@
         </div>
         <div class="row">
           <div class="col-md-12 d-flex justify-content-between">
-            <button class="botao-guardar mt-3 mb-5" id="guardar-alteracoes">Guardar alterações</button>
-            <button class="botao-editar mt-3 mb-5" id="ativar-campos">Editar</button>
+            <button class="botao-guardar my-2" id="guardar-alteracoes">Guardar alterações</button>
+            <button class="botao-editar my-2" id="ativar-campos">Editar</button>
           </div>
         </div>
       </div>

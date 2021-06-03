@@ -116,7 +116,7 @@ export default class NavbarView {
                       <a class="nav-link" href="../html/testes.html"><i class="fas fa-info-circle"></i>  Testes</a>
                   </li>
               </ul>
-              <ul class="nav navbar-nav ms-auto w-50 justify-content-end">
+              <ul class="try nav navbar-nav ms-auto w-50 justify-content-end">
                 ${renderAuthentication}
               </ul>
           </div>
@@ -204,7 +204,7 @@ export default class NavbarView {
   }
 
   UpdateDesktopActiveLink() {
-    const liList = [document.querySelectorAll(".main-nav li"), document.querySelectorAll(".logged-ddmenu li")]
+    const liList = [document.querySelectorAll(".main-nav li"), document.querySelectorAll(".logged-ddmenu li"), document.querySelectorAll(".try li")]
     const dropdownItems = ["sintomas", "tracking", "encomendas", "editar-perfil", "notificacoes", "marcacoes"]
 
     // Verifica todos os itens da navbar e vê qual corresponde à pág. atual através do id do body
