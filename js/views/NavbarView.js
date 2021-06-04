@@ -24,6 +24,7 @@ export default class NavbarView {
   }
 
   VerifyScreenResolution(ignore) {
+    
     // Verifica se a largura da window corresponde a mobile ou a desktop e aplica as devidas funções
     // Se o argumento "true" for enviado o método irá ignorar a resolução da window e irá aplicar a navbar de acordo com o estado da variável this.isDisplayMobile
     ignore = (ignore == true) ? true : false;
@@ -57,7 +58,7 @@ export default class NavbarView {
     if (this.userController.isAnyUserLoggedIn()) {
       if (this.userController.isLoggedUserAnAdmin()) {
         renderAdminNavItems = `
-          <li><a class="dropdown-item" href="../html/admin-entidades" id="admin">Modo administrador</a></li>
+          <li><a class="dropdown-item" href="../html/admin-entidades.html" id="admin">Modo administrador</a></li>
           <li><hr class="dropdown-divider"></li>`;
       }
 
