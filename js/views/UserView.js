@@ -245,10 +245,10 @@ export default class UserView {
   ApplyGeolocationData(position) {
     // A função geolocation.getCurrentPosition() é async portanto não há acesso às variáveis da classe
     const specificLocaleController = new LocaleController();
+    console.log("link: " + 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4')
     $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
       document.getElementById("morada-morada").value = data.results[0].address_components[1].long_name + ", " + data.results[0].address_components[0].long_name;
       document.getElementById("morada-codpostal").value = data.results[0].address_components[5].long_name;
-      console.log("link: " + 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4')
       let municipio = null;
       for (var i = 0; i < data.results.length; i++) {
         if (data.results[i].types[0] == "administrative_area_level_2") {
