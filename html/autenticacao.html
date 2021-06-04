@@ -8,7 +8,7 @@
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Discovid - Iniciar sessão</title>
+  <title>Discovid - Autenticação</title>
   <link rel="icon" href="..\img\icon.svg">
   <link rel="stylesheet" href="..\css\lib\bootstrap\css\bootstrap.min.css">
   <link rel="stylesheet" href="..\css\lib\fontawesome\css\all.min.css">
@@ -53,46 +53,68 @@
                 <button type="submit" class="btn-login">Entrar</button>
               </div>
             </form>
+            <hr id="custom-hr-login" class="mt-5">
+            <div class="d-flex justify-content-between mt-5 login-with">
+              <i class="fab fa-facebook"></i>
+              <i class="fab fa-apple"></i>
+              <i class="fab fa-google"></i>
+              <i class="fab fa-twitter"></i>
+            </div>
           </div>
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-registar-tab">
-            <div class="mb-2">
+            <div class="mb-5">
+              <label for="TipoUser" class="mb-3" style="font-weight: 500;">Tipo de utilizador:</label>
               <select id="TipoUser" class="input-login-registar">
                 <option disabled selected>Escolha uma opção</option>
                 <option>Utilizador normal</option>
                 <option>Entidade</option>
               </select>
             </div>
-            <form class="change-type">
-
-              <!-- <div class="mb-2">
-                <input id="RegistoPNOME" type="text" class="input-login-registar" name="p_nome" placeholder="Primeiro nome" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoUNOME" type="text" class="input-login-registar" name="u_nome" placeholder="Último nome" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoEMAIL" type="email" class="input-login-registar" name="email" placeholder="Endereço de e-mail" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoPASSWORD" type="text" class="input-login-registar" name="password" placeholder="Password" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoNIF" type="number" class="input-login-registar" name="nif" placeholder="NIF" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoTLM" type="number" class="input-login-registar" name="tlm" placeholder="N.º de telemóvel" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoDATANASC" type="date" class="input-login-registar" name="data_nasc" placeholder="Data de nascimento" value="">
-              </div>
-              <div class="mb-2">
-                <input id="RegistoCONSEMAIL" type="checkbox" class="check-style"><span class="span-checkbox">Consinto a utilização do meu e-mail</span>
-              </div>
-              <div>
-                <input id="RegistoSUBMIT" type="sumbit" class="btn btn-primary" value="Efetuar registo">
-              </div> -->
-            </form>
+            <hr class="mb-3">
+            <div class="change-type">
+              <p style="font-weight: 500; color: var(--laranja);">Não sabe o que escolher?</p>
+              <p><b>Utilizador normal:</b> Pode efetuar e gerir marcações de testes, utilizar a loja e usufruir das promoções e ofertas que o <b>Discovid</b> dispõe.</p>
+              <p><b>Utilizador entidade:</b> Pode anunciar os seus testes na plataforma e gerir as marcações no seu estabelecimento.</p>
+            </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add-morada" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Adicionar morada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="text-center mb-4">
+            <button class="btn btn-azul-pri" id="geolocation-fill">Ceder Localização</button>
+          </div>
+          <div class="text-center">
+            <p>ou</p>
+          </div>
+          <form id="morada-form">
+            <div class="mb-4">
+              <input type="text" id="morada-morada" class="input-login-registar" placeholder="Morada" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <input id="morada-codpostal" type="text" class="input-login-registar" placeholder="Cód. Postal" required>
+              </div>
+              <div class="col-md-6 mb-2 modal-select">
+                <select class="select-localidades" style="width: 100%; height: 40px;" required>
+                  <option disabled="disabled" selected>Localidade</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-laranja">Adicionar</button>
         </div>
       </div>
     </div>
@@ -155,7 +177,10 @@
   <script type="text/javascript" src="..\js\lib\sweetalert2\sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="..\js\misc.js"></script>
   <script type="text/javascript">
-    // pass
+    $('.select-localidades').select2({
+      dropdownParent: $('#add-morada'),
+      searchInputPlaceholder: 'Pesquisar localidade...'
+    });
   </script>
 </body>
 

@@ -286,6 +286,33 @@
   transition: .3s;
 }
 
+#custom-hr-login {
+  border: none;
+  overflow: visible;
+  text-align: center;
+  height: 1px;
+}
+
+#custom-hr-login:after {
+  background: #fff;
+  content: 'Continuar com';
+  padding: 0 4px;
+  position: relative;
+  top: -13px;
+}
+
+.login-with {
+  font-size: 2rem;
+  color: var(--azul-sec);
+  transition: .3s;
+}
+
+.login-with svg:hover {
+  color: var(--azul-pri);
+  cursor: pointer;
+  transition: .3s;
+}
+
 #autenticacao .ver-pw label {
   color: var(--azul-pri);
   font-weight: 500;
@@ -310,6 +337,45 @@
 
 #autenticacao .input-group:focus {
   box-shadow: 1px 1px 5px #e7d2b3;
+}
+
+.card-morada {
+  background-color: white;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.card-morada svg:hover {
+  cursor: pointer;
+}
+
+.card-morada p {
+  color: var(--azul-sec);
+  font-weight: 700;
+}
+
+.card-morada .morada-edit {
+  color: #68b564;
+  transition: .3s;
+}
+
+.card-morada .morada-edit:hover {
+  color: #41753e;
+  transition: .3s;
+}
+
+.card-morada .morada-remove {
+  color: #f55347;
+  transition: .3s;
+}
+
+.card-morada .morada-remove:hover {
+  color: #ab4038;
+  transition: .3s;
+}
+
+.card-morada .morada-default {
+  color: #38d3eb;
 }
 
 /* Página da loja */

@@ -315,6 +315,14 @@ nav #navbar-logo:hover {
 
 /* Select */
 
+.modal-select .select2-container--default .select2-selection--single {
+  height: 50px;
+  border: 0;
+  background-color: white;
+  box-shadow: 0px 1px 5px #ccc;
+  border-radius: 5px;
+}
+
 .select2-container--default .select2-selection--single {
   height: 35px;
   border: 0;
@@ -325,6 +333,13 @@ nav #navbar-logo:hover {
 .select2-container--default .select2-selection--single .select2-selection__rendered {
   color: var(--cinza-escuro);
   font-family: 'Roboto', sans-serif;
+}
+
+.modal-select .select2-container--default .select2-selection--single .select2-selection__arrow b {
+  border-color: var(--laranja) transparent transparent transparent;
+  border-width: 8px 5px 0 5px;
+  left: 40%;
+  top: 85%;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__arrow b {
@@ -369,6 +384,10 @@ nav #navbar-logo:hover {
 .select2-results__message {
   font-size: 1rem;
   color: var(--cinza-escuro);
+}
+
+.modal-select .select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 50px;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {

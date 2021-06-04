@@ -17,7 +17,7 @@ export default class UtilizadorEntidadeModel {
     this.data_criacao = new Date();
   }
 
-  RegistarEndereco(id_endereco, id_entidade, morada, cod_postal, id_localidade, lat, long) {
+  RegistarEndereco(id_endereco, id_entidade, morada, cod_postal, id_localidade, lat, long, etiqueta, predefinido) {
     this.id_endereco = id_endereco;
     this.id_entidade = id_entidade;
     this.morada = morada;
@@ -25,5 +25,7 @@ export default class UtilizadorEntidadeModel {
     this.id_localidade = id_localidade;
     this.lat = lat;
     this.long = long;
+    this.etiqueta = etiqueta;
+    this.predefinido = predefinido;
   }
 }

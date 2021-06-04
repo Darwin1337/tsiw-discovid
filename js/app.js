@@ -3,7 +3,7 @@ import NavbarView from "./views/NavbarView.js";
 import ProfileView from "./views/ProfileView.js";
 import AdminView from "./views/AdminView.js";
 
-// Import do controller para a 'dummy data' ficar mais legível e não muito extensa
+// Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
 
 class App {
@@ -35,13 +35,21 @@ class App {
   }
 
   #importDataFixtures() {
-    this.userController = new UserController();
+    // Localidades - aqui é usado JQuery para evitar as burocracias do plain javascript (XMLHttpRequest)
+    if (!localStorage.localidades) {
+      $.getJSON("../data/localidades.json", function(nome) {
+        localStorage.setItem("localidades", JSON.stringify(nome))
+      });
+    }
+
+    // Utilizadores
     if (!localStorage.users) {
+      this.userController = new UserController();
       this.userController.register("Diogo", "Borges", "diogo@borges.pt", "123", "123456789", "001", new Date(), true);
       this.userController.register("Diogo", "Oliveira", "diogo@oliveira.pt", "123", "123456789", "002", new Date(), false);
       this.userController.register("Gonçalo", "Gama", "goncalo@gama.pt", "123", "123456789", "003", new Date(), true);
+      this.userController.changeUserType("goncalo@gama.pt", "admin");
     }
-    this.userController.changeUserType("goncalo@gama.pt", "admin");
   }
 
   #instantiateViews() {

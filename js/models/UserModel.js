@@ -17,7 +17,7 @@ export default class UtilizadorNormalModel {
     this.admin = false;
   }
 
-  RegistarEndereco(id_endereco, id_utilizador, morada, cod_postal, id_localidade, lat, long) {
+  RegistarEndereco(id_endereco, id_utilizador, morada, cod_postal, id_localidade, lat, long, etiqueta, predefinido) {
     this.id_endereco = id_endereco;
     this.id_utilizador = id_utilizador;
     this.morada = morada;
@@ -25,5 +25,7 @@ export default class UtilizadorNormalModel {
     this.id_localidade = id_localidade;
     this.lat = lat;
     this.long = long;
+    this.etiqueta = etiqueta;
+    this.predefinido = predefinido;
   }
 }

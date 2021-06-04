@@ -11,7 +11,7 @@ $(".btn-pills").click(function(event) {
   }
   event.target.classList.remove("unactive-tab");
   event.target.classList.add("active-tab");
-  
+
   for (tab of $(".tab-pane")) {
     if (tab.classList.contains("show")) {
       tab.classList.remove("show");
@@ -61,7 +61,7 @@ if ($("body").attr("id") == "index") {
   })
 }
 
-//Criar um mapa e as suas defenições 
+//Criar um mapa e as suas defenições
 function initMap() {
   const coordenadas = { lat: 41.366514, lng: -8.74018 };
   const map = new google.maps.Map(document.getElementById("googleMap"), {
@@ -76,7 +76,7 @@ function initMap() {
     draggable: false,
     scrollwheel: false
   });
-  //Invocar a função addMarker para adicionar um ponto ao mapa 
+  //Invocar a função addMarker para adicionar um ponto ao mapa
   addMarker(coordenadas, map);
 }
 
@@ -90,14 +90,13 @@ function addMarker(location, map) {
 
 //Descobrir a localidade onde o utilizador se encontra
 function getLocalityFromLatLong(lat,long){
-  let x= $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
+  $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng='+lat+','+long+'&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
     for (var i = 0; i < data.results.length; i++) {
-      if (data.results[i].types[0] == "locality") {
+      if (data.results[i].types[0] == "administrative_area_level_2") {
           let localidadeBanner=document.querySelector("#localidade-banner")
           localidadeBanner.value=""
           localidadeBanner.value=(data.results[i].address_components[0].long_name)
       }
     }
-    console.log(data)
   });
 }
