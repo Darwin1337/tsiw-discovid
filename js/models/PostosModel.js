@@ -1,5 +1,5 @@
 export default class UtilizadorEntidadeModel {
-  constructor(id, nome, unome, email, password, tlm, nif, data_nasc, consentimento_email) {
+  constructor(id, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado, verificado, id_verificador) {
     this.id = id;
     this.nome = nome;
     this.nif = nif;
