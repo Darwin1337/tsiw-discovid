@@ -245,17 +245,46 @@ export default class UserView {
   ApplyGeolocationData(position) {
     // A função geolocation.getCurrentPosition() é async portanto não há acesso às variáveis da classe
     const specificLocaleController = new LocaleController();
+
     console.log("link: " + 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4')
     $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
-      document.getElementById("morada-morada").value = data.results[0].address_components[1].long_name + ", " + data.results[0].address_components[0].long_name;
-      document.getElementById("morada-codpostal").value = data.results[0].address_components[5].long_name;
       let municipio = null;
-      for (var i = 0; i < data.results.length; i++) {
+      let porta = null;
+      let morada = null;
+      let cod_postal = null;
+      for (let i = 0; i < data.results.length; i++) {
+        for (let j = 0; j < data.results[i].address_components.length; j++) {
+          if (morada == null) {
+            if (data.results[i].address_components[j].types[0] == "route") {
+              morada = data.results[i].address_components[j].long_name;
+            }
+          }
+          if (porta == null) {
+            if (data.results[i].address_components[j].types[0] == "street_number") {
+              porta = data.results[i].address_components[j].long_name;
+            }
+          }
+          if (cod_postal == null) {
+            if (data.results[i].address_components[j].types[0] == "postal_code") {
+              cod_postal = data.results[i].address_components[j].long_name;
+            }
+          }
+          if (porta != null && morada != null && cod_postal != null) {
+            break;
+          }
+        }
         if (data.results[i].types[0] == "administrative_area_level_2") {
           municipio = data.results[i].address_components[0].long_name;
-          break;
+          if (porta != null && morada != null && municipio != null && cod_postal != null) {
+            break;
+          }
         }
       }
+      porta = (porta == null) ? "" : porta;
+      morada = (morada == null) ? "" : morada;
+      cod_postal = (cod_postal == null) ? "" : cod_postal;
+      document.getElementById("morada-morada").value = morada + ", " + porta;
+      document.getElementById("morada-codpostal").value = cod_postal;
       if (municipio) {
         // A livraria Select2 obriga ao uso do JQuery
         const selectVal = specificLocaleController.SearchLocaleByName(municipio);
