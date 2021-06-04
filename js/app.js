@@ -10,6 +10,7 @@ class App {
   constructor() {
     this.routes = {
       '': [NavbarView],
+      'index': [NavbarView],
       'default': [NavbarView],
       'autenticacao': [NavbarView, UserView],
       'checkout-1': [NavbarView],

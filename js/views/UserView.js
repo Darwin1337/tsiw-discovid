@@ -23,6 +23,9 @@ export default class UserView {
 
     // Se o utilizador premir o botão "ceder localização" preencher automaticamente o formulário de morada
     this.GeoLocationAutoComplete();
+
+    // Event listener para quando o botão de adicionar morada é pressionado
+    this.BindAddAddress();
   }
 
   LoadNormalRegisterInputs() {
@@ -298,5 +301,9 @@ export default class UserView {
         Swal.fire('Erro!', "Não foi possível determinar o seu município.", 'error');
       }
     });
+  }
+
+  BindAddAddress() {
+    // pass
   }
 }

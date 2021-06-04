@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
-  <meta name="keywords" content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="keywords"
+    content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,10 +25,12 @@
       <div class="col-lg-6 col-md-8 col-sm-12">
         <ul class="nav nav-pills" id="pills-tab" role="tablist">
           <li class="nav-item w-50" role="presentation">
-            <button class="btn-pills active active-tab" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Iniciar Sessão</button>
+            <button class="btn-pills active active-tab" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;" id="pills-login-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
+              aria-selected="true">Iniciar Sessão</button>
           </li>
           <li class="nav-item w-50" role="presentation">
-            <button class="btn-pills unactive-tab" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;" id="pills-registar-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Registo</button>
+            <button class="btn-pills unactive-tab" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;" id="pills-registar-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab"
+              aria-controls="pills-profile" aria-selected="false">Registo</button>
           </li>
         </ul>
         <hr class="my-5">
@@ -89,14 +92,14 @@
           <h5 class="modal-title" id="exampleModalLabel">Adicionar morada</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <div class="modal-body">
-          <div class="text-center mb-4">
-            <button class="btn btn-azul-pri" id="geolocation-fill">Ceder Localização</button>
-          </div>
-          <div class="text-center">
-            <p>ou</p>
-          </div>
-          <form id="morada-form">
+        <form id="morada-form">
+          <div class="modal-body">
+            <div class="text-center mb-4">
+              <button class="btn btn-azul-pri" id="geolocation-fill">Ceder Localização</button>
+            </div>
+            <div class="text-center">
+              <p>ou</p>
+            </div>
             <div class="mb-4">
               <input type="text" id="morada-morada" class="input-login-registar" placeholder="Morada" required>
             </div>
@@ -110,12 +113,12 @@
                 </select>
               </div>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-laranja">Adicionar</button>
-        </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-laranja" id="btn-add-morada">Adicionar</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
