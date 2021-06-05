@@ -100,3 +100,38 @@ function getLocalityFromLatLong(lat,long){
     }
   });
 }
+
+
+
+function ckChange(ckType){
+  var ckName = document.getElementsByName(ckType.name);
+  var checked = document.getElementById(ckType.id);
+
+  if (checked.checked) {
+    for(var i=0; i < ckName.length; i++){
+
+        if(!ckName[i].checked){
+            ckName[i].disabled = true;
+        }else{
+            ckName[i].disabled = false;
+        }
+    } 
+  }
+  else {
+    for(var i=0; i < ckName.length; i++){
+      ckName[i].disabled = false;
+    } 
+  }    
+}
+
+for (sintoma of document.getElementsByClassName("a")) {
+  sintoma.addEventListener("click", event => {
+    let isAnyChecked = Array.from(document.getElementsByClassName("a")).some(sin => sin.checked == true);
+    if (isAnyChecked) {
+      document.getElementsByClassName("b")[0].disabled = true;
+    } else {
+      document.getElementsByClassName("b")[0].disabled = false;
+    }
+  });
+}
+
