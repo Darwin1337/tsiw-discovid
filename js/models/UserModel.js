@@ -10,7 +10,7 @@ export default class UtilizadorNormalModel {
     this.nif = nif;
     this.data_nasc = data_nasc;
     this.pontos = 0;
-    this.avatar = "https://i.imgur.com/LiVd4Tm.png";
+    this.avatar = "https://i.ibb.co/BZTyP4Z/icon.png";
     this.avatar_mudado = false;
     this.data_criacao = new Date();
     this.consentimento_email = consentimento_email;

@@ -1,6 +1,6 @@
 import UserController from '../controllers/UserController.js';
 
-export default class AdminView {
+export default class AdminUsersView {
   constructor() {
     // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
     this.userController = new UserController();
@@ -16,6 +16,8 @@ export default class AdminView {
       // Aplica a devida navbar (ApplyMobileNavbar ou ApplyDesktopNavbar)
       // Se o argumento "true" for enviado o método irá ignorar a resolução da window e irá aplicar a navbar de acordo com o estado da variável this.isDisplayMobile
       this.VerifyScreenResolution(true);
+
+      this.ListAllUsers();
 
       // Verifica mudanças na resolução e aplica a devida navbar (ApplyMobileNavbar ou ApplyDesktopNavbar)
       window.addEventListener('resize', this.VerifyScreenResolution.bind(this));
@@ -214,6 +216,21 @@ export default class AdminView {
           }
         });
       });
+    }
+  }
+
+  //listar todos os utilizadores registados
+  ListAllUsers(){
+    const x = this.userController.getAllNormalUsers();
+    for (let i = 0; i < x.length; i++) {
+      document.getElementById("tabela-users").innerHTML+=`<tr class="align-middle text-center">
+      <td scope="row"><img style="width:3rem" src="${x[i].avatar}"></td>
+      <td>${x[i].id}</td>
+      <td>${x[i].pnome}</td>
+      <td>${x[i].unome}</td>
+      <td>${x[i].email}</td>
+      <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span class="icon-remover-edit"><i class="far fa-edit"></i></span></td>
+       </tr>`
     }
   }
 }

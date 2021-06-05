@@ -1,7 +1,8 @@
 import UserView from "./views/UserView.js";
 import NavbarView from "./views/NavbarView.js";
 import ProfileView from "./views/ProfileView.js";
-import AdminView from "./views/AdminView.js";
+import AdminUsersView from "./views/AdminUsersView.js";
+
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -25,10 +26,10 @@ class App {
       'sintomas': [NavbarView],
       'testes': [NavbarView],
       'tracking': [NavbarView],
-      'admin-entidades': [AdminView],
-      'admin-utilizadores': [AdminView],
-      'admin-produtos': [AdminView],
-      'admin-gamificacoes': [AdminView]
+      'admin-entidades': [AdminUsersView],
+      'admin-utilizadores': [AdminUsersView]
+      // 'admin-produtos': [AdminView],
+      // 'admin-gamificacoes': [AdminView]
     };
 
     this.#importDataFixtures();

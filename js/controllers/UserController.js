@@ -6,6 +6,10 @@ export default class UserController {
     this.users = localStorage.users ? JSON.parse(localStorage.users) : [];
   }
 
+  getAllNormalUsers(){
+    return this.users;
+  }
+
   changeUserType(email, tipo) {
     const userIdx = this.users.findIndex(user => user.email === email);
     if (tipo == "admin") {
@@ -26,6 +30,21 @@ export default class UserController {
       let loggedInUserInfo = {
         'id': newId
       };
+    } else {
+      throw Error("Os dados introduzidos já estão registados na plataforma.");
+    }
+  }
+
+  atualizar(a, b, c, d, e, f, g, h) {
+    if (this.users.some(user => user.id === this.getLoggedInUserData.id)) {
+      alert("aaa")
+      // const newId = this.users.length > 0 ? this.users[this.users.length - 1].id + 1 : 1;
+      // this.users.push(new UtilizadorNormalModel(newId, a, b, c, d, e, f, g, h));
+      // let teste = new UtilizadorEntidadeModel();
+      // localStorage.setItem('users', JSON.stringify(this.users));
+      // let loggedInUserInfo = {
+      //   'id': newId
+      // };
     } else {
       throw Error("Os dados introduzidos já estão registados na plataforma.");
     }
@@ -71,4 +90,5 @@ export default class UserController {
     }
     return null;
   }
+  
 }
