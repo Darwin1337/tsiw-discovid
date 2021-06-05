@@ -24,7 +24,7 @@ export default class NavbarView {
   }
 
   VerifyScreenResolution(ignore) {
-    
+
     // Verifica se a largura da window corresponde a mobile ou a desktop e aplica as devidas funções
     // Se o argumento "true" for enviado o método irá ignorar a resolução da window e irá aplicar a navbar de acordo com o estado da variável this.isDisplayMobile
     ignore = (ignore == true) ? true : false;
@@ -270,7 +270,7 @@ export default class NavbarView {
         }).then((result) => {
           if (result.isConfirmed) {
             Swal.fire('Sessão terminada com sucesso!', '', 'success')
-            this.userController.logout();
+            this.userController.UserLogout();
             setTimeout(() => { location.replace("../../") }, 1000);
           }
         });

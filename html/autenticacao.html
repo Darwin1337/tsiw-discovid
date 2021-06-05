@@ -89,16 +89,19 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Adicionar morada</h5>
+          <h5 class="modal-title">Adicionar morada</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form id="morada-form">
           <div class="modal-body">
             <div class="text-center mb-4">
-              <button class="btn btn-azul-pri" id="geolocation-fill">Ceder Localização</button>
+              <button type="button" class="btn btn-azul-pri" id="geolocation-fill">Ceder Localização</button>
             </div>
             <div class="text-center">
               <p>ou</p>
+            </div>
+            <div class="mb-4">
+              <input type="text" id="morada-etiqueta" class="input-login-registar" placeholder="Etiqueta" required>
             </div>
             <div class="mb-4">
               <input type="text" id="morada-morada" class="input-login-registar" placeholder="Morada" required>
@@ -109,14 +112,57 @@
               </div>
               <div class="col-md-6 mb-2 modal-select">
                 <select class="select-localidades" style="width: 100%; height: 40px;" required>
-                  <option disabled="disabled" selected>Localidade</option>
+                  <option disabled="disabled" value="0" selected>Localidade</option>
                 </select>
+              </div>
+              <div class="d-flex align-items-center mt-3 mb-4">
+                <input type="checkbox" id="morada-default" class="check-style">
+                <label for="morada-default" class="span-checkbox"><strong>Morada principal</strong></label>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-laranja" id="btn-add-morada">Adicionar</button>
+            <button type="submit" class="btn btn-laranja" id="btn-add-morada">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="edit-morada" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Editar morada</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="edit-morada-form">
+          <div class="modal-body">
+            <div class="mb-4">
+              <input type="text" id="edit-morada-etiqueta" class="input-login-registar" placeholder="Etiqueta" required>
+            </div>
+            <div class="mb-4">
+              <input type="text" id="edit-morada-morada" class="input-login-registar" placeholder="Morada" required>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-2">
+                <input id="edit-morada-codpostal" type="text" class="input-login-registar" placeholder="Cód. Postal" required>
+              </div>
+              <div class="col-md-6 mb-2 modal-select">
+                <select class="edit-select-localidades" style="width: 100%; height: 40px;" required>
+                  <option disabled="disabled" value="0" selected>Localidade</option>
+                </select>
+              </div>
+              <div class="d-flex align-items-center mt-3 mb-4">
+                <input type="checkbox" id="edit-morada-default" class="check-style">
+                <label for="edit-morada-default" class="span-checkbox"><strong>Morada principal</strong></label>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-laranja" id="btn-edit-morada">Guardar</button>
           </div>
         </form>
       </div>
@@ -182,6 +228,11 @@
   <script type="text/javascript">
     $('.select-localidades').select2({
       dropdownParent: $('#add-morada'),
+      searchInputPlaceholder: 'Pesquisar localidade...'
+    });
+
+    $('.edit-select-localidades').select2({
+      dropdownParent: $('#edit-morada'),
       searchInputPlaceholder: 'Pesquisar localidade...'
     });
   </script>

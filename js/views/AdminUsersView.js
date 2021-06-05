@@ -17,7 +17,13 @@ export default class AdminUsersView {
       // Se o argumento "true" for enviado o método irá ignorar a resolução da window e irá aplicar a navbar de acordo com o estado da variável this.isDisplayMobile
       this.VerifyScreenResolution(true);
 
-      this.ListAllUsers();
+      // Carregar os dados dos utilizadores para a tabela
+      // Se estivermos na página de utilizadores
+      if (this.currentPage.id == "admin-postos") {
+        // pass
+      } else if (this.currentPage.id == "admin-utilizadores") {
+        this.ListAllUsers();
+      }
 
       // Verifica mudanças na resolução e aplica a devida navbar (ApplyMobileNavbar ou ApplyDesktopNavbar)
       window.addEventListener('resize', this.VerifyScreenResolution.bind(this));
@@ -41,6 +47,7 @@ export default class AdminUsersView {
   }
 
   VerifyScreenResolution(ignore) {
+    console.log("resized");
     // Verifica se a largura da window corresponde a mobile ou a desktop e aplica as devidas funções
     // Se o argumento "true" for enviado o método irá ignorar a resolução da window e irá aplicar a navbar de acordo com o estado da variável this.isDisplayMobile
     ignore = (ignore == true) ? true : false;
@@ -212,25 +219,28 @@ export default class AdminUsersView {
           if (result.isConfirmed) {
             Swal.fire('Sessão terminada com sucesso!', '', 'success')
             this.userController.logout();
-            setTimeout(() => { location.replace("../../") }, 1000);
+            setTimeout(() => {
+              location.replace("../../")
+            }, 1000);
           }
         });
       });
     }
   }
 
-  //listar todos os utilizadores registados
-  ListAllUsers(){
+  ListAllUsers() {
+    // Lista todos os utilizadores registados
     const x = this.userController.getAllNormalUsers();
     for (let i = 0; i < x.length; i++) {
-      document.getElementById("tabela-users").innerHTML+=`<tr class="align-middle text-center">
-      <td scope="row"><img style="width:3rem" src="${x[i].avatar}"></td>
-      <td>${x[i].id}</td>
-      <td>${x[i].pnome}</td>
-      <td>${x[i].unome}</td>
-      <td>${x[i].email}</td>
-      <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span class="icon-remover-edit"><i class="far fa-edit"></i></span></td>
-       </tr>`
+      document.getElementById("tabela-users").innerHTML += `
+      <tr class="align-middle text-center">
+        <td scope="row"><img style="width:3rem" src="${x[i].avatar}"></td>
+        <td>${x[i].id}</td>
+        <td>${x[i].pnome}</td>
+        <td>${x[i].unome}</td>
+        <td>${x[i].email}</td>
+        <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span class="icon-remover-edit"><i class="far fa-edit"></i></span></td>
+      </tr>`;
     }
   }
 }

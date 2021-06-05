@@ -9,6 +9,10 @@ export default class LocaleController {
     return this.localidades;
   }
 
+  GetNameById(id) {
+    return this.localidades.find(localidade => localidade.id == id);
+  }
+
   SearchLocaleByName(nome) {
     // Se não encontrar retorna undefined
     return this.localidades.find(localidade => localidade.nome.toLowerCase() === nome.toLowerCase());

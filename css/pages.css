@@ -339,6 +339,12 @@
   box-shadow: 1px 1px 5px #e7d2b3;
 }
 
+#moradas-content button {
+  outline: none;
+  border: 0;
+  background-color: transparent;
+}
+
 .card-morada {
   background-color: white;
   padding: 15px;

@@ -1,8 +1,7 @@
-import UserView from "./views/UserView.js";
+import AutenticacaoView from "./views/AutenticacaoView.js";
 import NavbarView from "./views/NavbarView.js";
 import ProfileView from "./views/ProfileView.js";
 import AdminUsersView from "./views/AdminUsersView.js";
-
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -13,7 +12,7 @@ class App {
       '': [NavbarView],
       'index': [NavbarView],
       'default': [NavbarView],
-      'autenticacao': [NavbarView, UserView],
+      'autenticacao': [NavbarView, AutenticacaoView],
       'checkout-1': [NavbarView],
       'checkout-2': [NavbarView],
       'checkout-3': [NavbarView],
@@ -47,10 +46,10 @@ class App {
     // Utilizadores
     if (!localStorage.users) {
       this.userController = new UserController();
-      this.userController.register("Diogo", "Borges", "diogo@borges.pt", "123", "123456789", "001", new Date(), true);
-      this.userController.register("Diogo", "Oliveira", "diogo@oliveira.pt", "123", "123456789", "002", new Date(), false);
-      this.userController.register("Gonçalo", "Gama", "goncalo@gama.pt", "123", "123456789", "003", new Date(), true);
-      this.userController.changeUserType("goncalo@gama.pt", "admin");
+      this.userController.NormalUser_Register("Diogo", "Borges", "diogo@borges.pt", "123", "123456789", "001", new Date(), true);
+      this.userController.NormalUser_Register("Diogo", "Oliveira", "diogo@oliveira.pt", "123", "123456789", "002", new Date(), false);
+      this.userController.NormalUser_Register("Gonçalo", "Gama", "goncalo@gama.pt", "123", "123456789", "003", new Date(), true);
+      this.userController.ChangeUserType("goncalo@gama.pt", "admin");
     }
   }
 
