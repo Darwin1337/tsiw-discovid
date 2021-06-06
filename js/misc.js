@@ -60,32 +60,35 @@ if ($("body").attr("id") == "index") {
     }
   })
 }
-
+const clinicasPequenas=[]
 //Criar um mapa e as suas defenições
 function initMap() {
-  const coordenadas = { lat: 41.366514, lng: -8.74018 };
+
   const map = new google.maps.Map(document.getElementById("googleMap"), {
-    zoom: 15,
-    center: coordenadas,
-    zoomControl: true,
-    mapTypeControl: false,
-    scaleControl: false,
-    streetViewControl: false,
-    rotateControl: false,
-    fullscreenControl: false,
-    draggable: false,
-    scrollwheel: false
+    zoom: 10,
+    center: {lat: 41.1749771, lng: -8.5462703},
+    
   });
   //Invocar a função addMarker para adicionar um ponto ao mapa
-  addMarker(coordenadas, map);
+  addMarker(map);
 }
 
 //Adicionar um marcador ao map
-function addMarker(location, map) {
-  new google.maps.Marker({
-    position: location,
-    map: map,
-  });
+function addMarker(map) {
+  for (let i = 0; i < clinicasPequenas.length; i++) {
+    const beach = clinicasPequenas[i];
+    const marker=new google.maps.Marker({
+      position: { lat: beach[0], lng: beach[1]},
+      map,
+    });
+    marker.addListener("click", () => {
+      infowindow.open(map, marker);
+    });
+    const contentString=`<div><h5>${beach[3]}</h5></div>`
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString,
+    });
+  }
 }
 
 //Descobrir a localidade onde o utilizador se encontra
@@ -98,6 +101,18 @@ function getLocalityFromLatLong(lat,long){
           localidadeBanner.value=(data.results[i].address_components[0].long_name)
       }
     }
+  });
+}
+
+function getLatLongFromAdressAndPin(address,nome){
+  $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
+    let lng=0
+    let lat=0
+    for (var i = 0; i < data.results.length; i++) {
+      lat=data.results[i].geometry.location.lat
+      lng=data.results[i].geometry.location.lng
+    }
+    clinicasPequenas.push([lat,lng,address,nome])
   });
 }
 
@@ -118,4 +133,25 @@ if (document.querySelector("body").id == "sintomas") {
       }
     });
   }
+}
+
+document.querySelector("#teste1").addEventListener("click", () => {
+  getLatLongFromAdressAndPin("R. da Ferraria 96, 4435-250","Clinica da Venda Nova")
+  getLatLongFromAdressAndPin("Av. da Conduta 161, 4435-485")
+  getLatLongFromAdressAndPin("R. Dom João de Castro Nº 509, 4435-674")
+  getLatLongFromAdressAndPin("R. Dom António Castro Meireles 559, 4435-639")
+  getLatLongFromAdressAndPin("Estrada da Circunvalação 706, 4435-178")
+  getLatLongFromAdressAndPin("R. Fernão de Magalhães 314, 4435-481")
+  getLatLongFromAdressAndPin("R. Dr. Eduardo Santos Silva 645, 4200-258")
+  getLatLongFromAdressAndPin("R. 5 de Outubro 1, 4420-086")
+  initMap()
+});
+
+document.querySelector("#teste2").addEventListener("click", () => {
+  clearOverlays()
+  initMap()
+});
+
+function clearOverlays() {
+  clinicasPequenas.length = 0;
 }
