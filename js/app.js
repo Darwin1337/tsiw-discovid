@@ -9,6 +9,8 @@ import LojaView from "./views/LojaView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
+import TestsController from "./controllers/TestsController.js";
+import LocaleController from "./controllers/LocaleController.js";
 
 class App {
   constructor() {
@@ -26,7 +28,7 @@ class App {
       'marcacoes': [NavbarView],
       'encomendas': [NavbarView],
       'notificacoes': [NavbarView],
-      'loja': [NavbarView, LojaView],
+      'loja': [NavbarView],
       'postos': [NavbarView],
       'sintomas': [NavbarView],
       'testes': [NavbarView],
@@ -49,12 +51,38 @@ class App {
       });
     }
 
-    // Utilizadores
-    if (!localStorage.users) {
+    // Testes
+    if (!localStorage.testes) {
+      this.testsController = new TestsController();
+      this.testsController.AddTest("Serológico");
+      this.testsController.AddTest("Antigénio");
+      this.testsController.AddTest("RT-PCR");
+    }
+
+    // Utilizadores normais
+    if (!localStorage.utilizadores_normais) {
       this.userController = new UserController();
+      this.localeController = new LocaleController();
+
+      // User 1: Geral
       this.userController.NormalUser_Register("Diogo", "Borges", "diogo@borges.pt", "123", "123456789", "001", new Date(), true);
-      this.userController.NormalUser_Register("Diogo", "Oliveira", "diogo@oliveira.pt", "123", "123456789", "002", new Date(), false);
+      // User 1: Morada
+      this.userController.NormalUser_RegisterAddress(
+        this.userController.getUserByEmail("diogo@borges.pt").id, "Rua da Âncora 100", "4400-297", 295, 37.080801, -8.307273199999999, "Gaia", true);
+
+      // User 2: Geral
       this.userController.NormalUser_Register("Gonçalo", "Gama", "goncalo@gama.pt", "123", "123456789", "003", new Date(), true);
+      // User 2: Morada
+      this.userController.NormalUser_RegisterAddress(
+        this.userController.getUserByEmail("goncalo@gama.pt").id, "Rua Nuno Álvares 87", "4420-024", 110, 41.14293268029151, -8.564717419708497, "Gondomar", true);
+
+      // User 3: Geral
+      this.userController.NormalUser_Register("Diogo", "Oliveira", "diogo@oliveira.pt", "123", "123456789", "002", new Date(), false);
+      // User 3: Morada
+      this.userController.NormalUser_RegisterAddress(
+        this.userController.getUserByEmail("diogo@oliveira.pt").id, "Rua Oliveirinhas 98", "4420-330", 110, 41.140604, -8.525415799999999, "Gondomar", true);
+
+      // Transformar o user 1 em admin
       this.userController.ChangeUserType("goncalo@gama.pt", "admin");
     }
   }

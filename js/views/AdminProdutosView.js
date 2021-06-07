@@ -8,8 +8,8 @@ export default class AdminProdutosView {
     if (this.currentPage.id=="admin-produtos") {
       this.LoadInputs()
       this.ListAllProducts()
-      this.AddProducts() 
-      this.RemoverProduto() 
+      this.AddProducts()
+      this.RemoverProduto()
       this.EditProduct()
       this.SetProdutosInfo()
     }
@@ -119,5 +119,5 @@ export default class AdminProdutosView {
         );
     });
   }
-    
+
 }

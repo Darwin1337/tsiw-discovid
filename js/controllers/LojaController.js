@@ -8,7 +8,7 @@ export default class LojaController {
   getAllProdutos() {
     return this.produtos;
   }
-  
+
   ProdutoAdd(nome, descricao, preco, imagem) {
     const newId = this.produtos.length > 0 ? this.produtos[this.produtos.length - 1].id + 1 : 1;
     this.produtos.push(new ProdutoModel(newId,descricao,preco,nome,imagem));
@@ -39,7 +39,7 @@ export default class LojaController {
     for (let i = 0; i < this.produtos.length; i++) {
       if (this.produtos[i]["nome"]==nome && this.produtos[i]["id"] != id) {
         x=true
-      }     
+      }
       if (x==false) {
         if (this.produtos[i]["id"] == id) {
           this.produtos[i].imagem = imagem;
@@ -48,8 +48,8 @@ export default class LojaController {
           this.produtos[i].preco = preco;
           break;
         }
-      }    
-    }  
+      }
+    }
     if(x==true){
       Swal.fire('Erro!', 'O produto não foi alterado!', 'error');
         event.preventDefault()
@@ -62,6 +62,6 @@ export default class LojaController {
       event.preventDefault()
       setTimeout(function(){location.reload()},1500);
     }
-    
+
   }
 }

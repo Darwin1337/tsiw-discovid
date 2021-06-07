@@ -50,7 +50,7 @@ export default class LojaView {
             break
           }
         }
-        
+
         if (aux==false) {
           for (let i = 0; i < x.length; i++) {
             if(x[i].id==btn.id){
@@ -79,7 +79,7 @@ export default class LojaView {
           }
           this.QuantidadeAlterada()
         }
-        
+
         this.CalcularTotal()
         aux=false
       });
@@ -101,7 +101,7 @@ export default class LojaView {
       for (let i = 0; i < x.length; i++) {
         if(x[i].id==btn1.id.split("-",3)[2]){
           total+=parseFloat(x[i].preco)*parseFloat(btn1.value)
-          
+
         }
       }
     }

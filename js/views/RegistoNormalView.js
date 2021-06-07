@@ -83,23 +83,14 @@ export default class RegistoNormalView {
             for (let i = 0; i < this.normalUserAddresses.length; i++) {
               if (!this.normalUserAddresses[i][4]) {
                 let current = this.normalUserAddresses[i];
-                // console.log("GMaps link: https://maps.googleapis.com/maps/api/geocode/json?address=" + this.normalUserAddresses[i][1].trim().split(" ").join("+").replace(",", "") + "+" + this.normalUserAddresses[i][2].trim().split(" ").join("+") + '+' + this.localeController.GetNameById(parseInt(this.normalUserAddresses[i][3])).nome.trim().split(" ").join("+") + "&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4");
                 $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + this.normalUserAddresses[i][1].trim().split(" ").join("+").replace(",", "") + "+" + this.normalUserAddresses[i][2].trim().split(" ").join("+") + '+' + this.localeController.GetNameById(parseInt(this.normalUserAddresses[i][3])).nome.trim().split(" ").join("+") + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
                   let lng = null;
                   let lat = null;
-                  // console.log("A procurar longitude e latitude para a morada de index " + i + ".")
-                  // console.log("GMaps API status: " + data.status)
                   if (data.status == "OK") {
-                    // console.log("Lat. e long. encontradas!")
                     lng = data.results[0].geometry.location.lng;
                     lat = data.results[0].geometry.location.lat;
-                    // console.log("Latitude: " + lat);
-                    // console.log("Longitude: " + lng);
-                  } else {
-                    // console.log("A API não conseguiu determinar a lat. e long. da morada em questão.")
                   }
                   // Como estamos num método async não temos acesso à instância da classe UserController portanto terá de ser instanciada uma para esse propósito
-                  // A função geolocation.getCurrentPosition() é async portanto não há acesso às variáveis da classe
                   const specificUserController = new UserController();
                   const usersRegistados = specificUserController.getAllNormalUsers();
 
@@ -112,7 +103,7 @@ export default class RegistoNormalView {
             // https://maps.googleapis.com/maps/api/geocode/json?address=Lugar+do+pa%C3%A7o+fontelas&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4
           Swal.fire('Sucesso!', 'O registo foi concluído com sucesso!', 'success');
           setTimeout(() => {
-            location.reload();
+            location.replace("autenticacao.html");
           }, 2000);
         } else {
           Swal.fire('Erro!', "Adicione pelo menos 1 morada!", 'error');

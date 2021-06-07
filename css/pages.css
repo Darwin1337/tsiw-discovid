@@ -339,7 +339,8 @@
   box-shadow: 1px 1px 5px #e7d2b3;
 }
 
-#moradas-content button {
+#moradas-content button,
+#tests-content button {
   outline: none;
   border: 0;
   background-color: transparent;
