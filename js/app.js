@@ -1,9 +1,11 @@
 import NavbarView from "./views/NavbarView.js";
 import ProfileView from "./views/ProfileView.js";
 import AdminUsersView from "./views/AdminUsersView.js";
+import AdminProdutosView from "./views/AdminProdutosView.js";
 import AutenticacaoView from "./views/AutenticacaoView.js";
 import RegistoNormalView from "./views/RegistoNormalView.js";
 import RegistoEntidadeView from "./views/RegistoEntidadeView.js";
+import LojaView from "./views/LojaView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -24,14 +26,14 @@ class App {
       'marcacoes': [NavbarView],
       'encomendas': [NavbarView],
       'notificacoes': [NavbarView],
-      'loja': [NavbarView],
+      'loja': [NavbarView, LojaView],
       'postos': [NavbarView],
       'sintomas': [NavbarView],
       'testes': [NavbarView],
       'tracking': [NavbarView],
       'admin-entidades': [AdminUsersView],
-      'admin-utilizadores': [AdminUsersView]
-      // 'admin-produtos': [AdminView],
+      'admin-utilizadores': [AdminUsersView],
+      'admin-produtos': [AdminUsersView, AdminProdutosView]
       // 'admin-gamificacoes': [AdminView]
     };
 

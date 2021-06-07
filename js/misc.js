@@ -99,6 +99,7 @@ function getLocalityFromLatLong(lat,long){
           let localidadeBanner=document.querySelector("#localidade-banner")
           localidadeBanner.value=""
           localidadeBanner.value=(data.results[i].address_components[0].long_name)
+          document.getElementById("localidade-resultados").innerHTML=`A mostrar resultados de: <span>${data.results[i].address_components[0].long_name}</span>`
       }
     }
   });
@@ -134,7 +135,7 @@ if (document.querySelector("body").id == "sintomas") {
     });
   }
 }
-
+if (document.querySelector("body").id == "index") {
 document.querySelector("#teste1").addEventListener("click", () => {
   getLatLongFromAdressAndPin("R. da Ferraria 96, 4435-250","Clinica da Venda Nova")
   getLatLongFromAdressAndPin("Av. da Conduta 161, 4435-485")
@@ -151,7 +152,7 @@ document.querySelector("#teste2").addEventListener("click", () => {
   clearOverlays()
   initMap()
 });
-
+}
 function clearOverlays() {
   clinicasPequenas.length = 0;
 }

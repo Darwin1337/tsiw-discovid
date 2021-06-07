@@ -263,15 +263,16 @@ export default class AdminUsersView {
        }
        for (let i = 0; i < x.length; i++) {
          if(x[i].id==btnEdit.id){
-           document.getElementById("avatar-profile").src = x[i].avatar;
-           document.getElementById("avatar-profile-edit").value = x[i].avatar;
-           document.getElementById("user-id").value = x[i].id;
-           document.getElementById("user-pnome").value = x[i].pnome;
-           document.getElementById("user-email").value = x[i].email;
-           document.getElementById("user-unome").value = x[i].unome;
-           document.getElementById("user-password").value = x[i].password;
-           document.getElementById("user-tlm").value = x[i].tlm;
-           document.getElementById("user-pontos").innerHTML = x[i].pontos;
+          document.getElementById("nome-user-a-editar").innerHTML = x[i].pnome + " "+x[i].unome;
+          document.getElementById("avatar-profile").src = x[i].avatar;
+          document.getElementById("avatar-profile-edit").value = x[i].avatar;
+          document.getElementById("user-id").value = x[i].id;
+          document.getElementById("user-pnome").value = x[i].pnome;
+          document.getElementById("user-email").value = x[i].email;
+          document.getElementById("user-unome").value = x[i].unome;
+          document.getElementById("user-password").value = x[i].password;
+          document.getElementById("user-tlm").value = x[i].tlm;
+          document.getElementById("user-pontos").innerHTML = x[i].pontos;
          }
        }
      });
