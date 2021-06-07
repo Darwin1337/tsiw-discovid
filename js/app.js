@@ -1,7 +1,9 @@
-import AutenticacaoView from "./views/AutenticacaoView.js";
 import NavbarView from "./views/NavbarView.js";
 import ProfileView from "./views/ProfileView.js";
 import AdminUsersView from "./views/AdminUsersView.js";
+import AutenticacaoView from "./views/AutenticacaoView.js";
+import RegistoNormalView from "./views/RegistoNormalView.js";
+import RegistoEntidadeView from "./views/RegistoEntidadeView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -13,6 +15,8 @@ class App {
       'index': [NavbarView],
       'default': [NavbarView],
       'autenticacao': [NavbarView, AutenticacaoView],
+      'registo-normal': [NavbarView, RegistoNormalView],
+      'registo-entidade': [NavbarView, RegistoEntidadeView],
       'checkout-1': [NavbarView],
       'checkout-2': [NavbarView],
       'checkout-3': [NavbarView],

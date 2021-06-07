@@ -67,7 +67,7 @@ function initMap() {
   const map = new google.maps.Map(document.getElementById("googleMap"), {
     zoom: 10,
     center: {lat: 41.1749771, lng: -8.5462703},
-    
+
   });
   //Invocar a função addMarker para adicionar um ponto ao mapa
   addMarker(map);

@@ -27,7 +27,6 @@ export default class AdminUsersView {
         this.AtualizarDados();
       }
 
-
       // Verifica mudanças na resolução e aplica a devida navbar (ApplyMobileNavbar ou ApplyDesktopNavbar)
       window.addEventListener('resize', this.VerifyScreenResolution.bind(this));
     } else if (!this.userController.isLoggedUserAnAdmin() || this.userController.isLoggedUserAnAdmin() == null) {
@@ -47,7 +46,6 @@ export default class AdminUsersView {
         window.location.replace("..\\..\\");
       });
     }
-   
   }
 
   VerifyScreenResolution(ignore) {
@@ -249,54 +247,53 @@ export default class AdminUsersView {
   }
 
   SetProfileInfo() {
-    for (const btnEdit of document.getElementsByClassName("aaaa")) {
-      btnEdit.addEventListener("click", () => {
-        const x = this.userController.getAllNormalUsers();
-        const x1 = this.userController.getAllNormalEnderecos();
-        for (let i = 0; i < x1.length; i++) {
-          if(btnEdit.id==x1[i].id_utilizador){
-            document.getElementById("user-morada").value = x1[i].morada;
-            document.getElementById("user-cep").value = x1[i].cod_postal;
-          }
-          else{
-            document.getElementById("user-morada").value = "";
-            document.getElementById("user-cep").value = "";
-          }
-        }
-        for (let i = 0; i < x.length; i++) {
-          if(x[i].id==btnEdit.id){
-            document.getElementById("avatar-profile").src = x[i].avatar;
-            document.getElementById("avatar-profile-edit").value = x[i].avatar;
-            document.getElementById("user-id").value = x[i].id;
-            document.getElementById("user-pnome").value = x[i].pnome;
-            document.getElementById("user-email").value = x[i].email;
-            document.getElementById("user-unome").value = x[i].unome;
-            document.getElementById("user-password").value = x[i].password;
-            document.getElementById("user-tlm").value = x[i].tlm;
-            document.getElementById("user-pontos").innerHTML = x[i].pontos;
-          }
-        }
-      });
-    }
-  }
+   for (const btnEdit of document.getElementsByClassName("aaaa")) {
+     btnEdit.addEventListener("click", () => {
+       const x = this.userController.getAllNormalUsers();
+       const x1 = this.userController.getAllNormalEnderecos();
+       for (let i = 0; i < x1.length; i++) {
+         if(btnEdit.id==x1[i].id_utilizador){
+           document.getElementById("user-morada").value = x1[i].morada;
+           document.getElementById("user-cep").value = x1[i].cod_postal;
+         }
+         else{
+           document.getElementById("user-morada").value = "";
+           document.getElementById("user-cep").value = "";
+         }
+       }
+       for (let i = 0; i < x.length; i++) {
+         if(x[i].id==btnEdit.id){
+           document.getElementById("avatar-profile").src = x[i].avatar;
+           document.getElementById("avatar-profile-edit").value = x[i].avatar;
+           document.getElementById("user-id").value = x[i].id;
+           document.getElementById("user-pnome").value = x[i].pnome;
+           document.getElementById("user-email").value = x[i].email;
+           document.getElementById("user-unome").value = x[i].unome;
+           document.getElementById("user-password").value = x[i].password;
+           document.getElementById("user-tlm").value = x[i].tlm;
+           document.getElementById("user-pontos").innerHTML = x[i].pontos;
+         }
+       }
+     });
+   }
+ }
 
   AtualizarDados(){
-    document.querySelector("#avatar-profile-edit").addEventListener("change", ()=>{
-      document.getElementById("avatar-profile").src=document.getElementById("avatar-profile-edit").value
-    })
-    document.querySelector("#btn-update-user").addEventListener("click", () => {
-      this.userController.Atualizar(
-        document.getElementById("user-id").value,
-        document.getElementById("avatar-profile-edit").value,
-        document.getElementById("user-pnome").value,
-        document.getElementById("user-unome").value,
-        document.getElementById("user-email").value,
-        document.getElementById("user-password").value,
-        document.getElementById("user-tlm").value,
-        document.getElementById("user-morada").value,
-        document.getElementById("user-cep").value
-        );
-    });
-  }
-
+   document.querySelector("#avatar-profile-edit").addEventListener("change", ()=>{
+     document.getElementById("avatar-profile").src=document.getElementById("avatar-profile-edit").value
+   })
+   document.querySelector("#btn-update-user").addEventListener("click", () => {
+     this.userController.Atualizar(
+       document.getElementById("user-id").value,
+       document.getElementById("avatar-profile-edit").value,
+       document.getElementById("user-pnome").value,
+       document.getElementById("user-unome").value,
+       document.getElementById("user-email").value,
+       document.getElementById("user-password").value,
+       document.getElementById("user-tlm").value,
+       document.getElementById("user-morada").value,
+       document.getElementById("user-cep").value
+       );
+   });
+ }
 }

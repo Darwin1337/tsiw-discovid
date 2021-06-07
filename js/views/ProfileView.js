@@ -9,8 +9,7 @@ export default class NavbarView {
     this.BindEditButtons();
 
     // Carregar a informação para os inputs;
-    this.SetProfileInfo();  
-   
+    this.SetProfileInfo();
   }
 
   BindEditButtons() {

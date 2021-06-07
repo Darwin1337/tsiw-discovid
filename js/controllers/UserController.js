@@ -7,6 +7,39 @@ export default class UserController {
     this.enderecos_normal = localStorage.enderecos_normal ? JSON.parse(localStorage.enderecos_normal) : [];
   }
 
+  getAllNormalEnderecos() {
+    return this.enderecos_normal;
+  }
+
+  Atualizar(id,avatar, pnome, unome, email, password, tlm, morada, cep) {
+   for (let i = 0; i < this.users.length; i++) {
+     if (this.users[i]["id"] == id) {
+       if (avatar!="https://i.ibb.co/BZTyP4Z/icon.png") {
+         this.users[i].avatar_mudado = true;
+       }
+       this.users[i].avatar = avatar;
+       this.users[i].pnome = pnome;
+       this.users[i].unome = unome;
+       this.users[i].email = email;
+       this.users[i].password = password;
+       this.users[i].tlm = tlm;
+       break;
+     }
+   }
+   for (let i = 0; i < this.enderecos_normal.length; i++) {
+     if (this.enderecos_normal[i]["id_utilizador"] == id) {
+       this.enderecos_normal[i].cod_postal = cep;
+       this.enderecos_normal[i].morada = morada;
+       break;
+     }
+   }
+
+   localStorage.removeItem("enderecos_normal");
+   localStorage.setItem("enderecos_normal", JSON.stringify(this.enderecos_normal));
+   localStorage.removeItem("users");
+   localStorage.setItem("users", JSON.stringify(this.users));
+ }
+ 
   ChangeUserType(email, tipo) {
     const userIdx = this.users.findIndex(user => user.email === email);
     if (tipo == "admin") {
@@ -90,37 +123,19 @@ export default class UserController {
   getAllNormalUsers() {
     return this.users;
   }
-  
-  getAllNormalEnderecos() {
-    return this.enderecos_normal;
-  }
 
-  Atualizar(id,avatar, pnome, unome, email, password, tlm, morada, cep) {
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i]["id"] == id) {
-        if (avatar!="https://i.ibb.co/BZTyP4Z/icon.png") {
-          this.users[i].avatar_mudado = true;
-        }
-        this.users[i].avatar = avatar;
-        this.users[i].pnome = pnome;
-        this.users[i].unome = unome;
-        this.users[i].email = email;
-        this.users[i].password = password;
-        this.users[i].tlm = tlm;
-        break;
-      }
+  atualizar(a, b, c, d, e, f, g, h) {
+    if (this.users.some(user => user.id === this.getLoggedInUserData.id)) {
+      alert("aaa")
+      // const newId = this.users.length > 0 ? this.users[this.users.length - 1].id + 1 : 1;
+      // this.users.push(new UtilizadorNormalModel(newId, a, b, c, d, e, f, g, h));
+      // let teste = new UtilizadorEntidadeModel();
+      // localStorage.setItem('users', JSON.stringify(this.users));
+      // let loggedInUserInfo = {
+      //   'id': newId
+      // };
+    } else {
+      throw Error("Os dados introduzidos já estão registados na plataforma.");
     }
-    for (let i = 0; i < this.enderecos_normal.length; i++) {
-      if (this.enderecos_normal[i]["id_utilizador"] == id) {
-        this.enderecos_normal[i].cod_postal = cep;
-        this.enderecos_normal[i].morada = morada;
-        break;
-      }
-    }
-
-    localStorage.removeItem("enderecos_normal");
-    localStorage.setItem("enderecos_normal", JSON.stringify(this.enderecos_normal));
-    localStorage.removeItem("users");
-    localStorage.setItem("users", JSON.stringify(this.users));
   }
 }

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
+  <meta name="keywords"
+    content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Discovid - Registo</title>
+  <link rel="icon" href="..\img\icon.svg">
+  <link rel="stylesheet" href="..\css\lib\bootstrap\css\bootstrap.min.css">
+  <link rel="stylesheet" href="..\css\lib\fontawesome\css\all.min.css">
+  <link rel="stylesheet" href="..\css\lib\select2\css\select2.min.css">
+  <link rel="stylesheet" href="..\css\pages.css">
+</head>
+
+<body id="autenticacao">
+  <div class="nav-area"></div>
+
+  <div class="container my-5 main-content">
+    <div class="row d-flex justify-content-center">
+      <div class="col-lg-6 col-md-8 col-sm-12">
+        <ul class="nav nav-pills" id="pills-tab" role="tablist">
+          <li class="nav-item w-50" role="presentation">
+            <button class="btn-pills unactive-tab" onclick="window.location.replace('autenticacao.html')" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px;">Iniciar Sessão</button>
+          </li>
+          <li class="nav-item w-50" role="presentation">
+            <button class="btn-pills active active-tab" style="border-top-left-radius: 0px; border-bottom-left-radius: 0px;">Registo</button>
+          </li>
+        </ul>
+        <div class="mt-3 d-flex flex-column">
+          <button type="button" class="btn btn-azul-pri my-3" onclick="window.location.replace('registo-normal.html')">Registo - Utilizador normal</button>
+        </div>
+        <form id="form-reg-entidade" class="mt-3">
+          <p style="font-weight: 500; color: var(--laranja);">Informações gerais</p>
+          <div class="mb-3">
+            <input id="EntidadeNome" type="text" class="input-login-registar" name="nome_entidade" placeholder="Nome Entidade" required>
+          </div>
+          <div class="d-flex align-items-center mb-3 ver-pw">
+            <input type="checkbox" id="ignore-nif-verifier" class="check-style">
+            <label for="ignore-nif-verifier" class="span-checkbox"><b>Ignorar verificação do NIF</b></label>
+          </div>
+          <div class="mb-3">
+            <input id="EntidadeNIF" type="number" class="input-login-registar" name="nif" placeholder="NIF" required>
+          </div>
+          <div class="mb-3">
+            <button type="button" id="verificar-nif" class="btn btn-azul-pri">Verificar NIF</button>
+          </div>
+          <div class="mb-2" id="result-nif"></div>
+          <div class="mb-2">
+            <input id="EntidadeEmail" type="email" class="input-login-registar" name="email" placeholder="Endereço de e-mail" required>
+          </div>
+          <div class="mb-3">
+            <input id="RegistoPASSWORD" type="password" class="input-login-registar" name="password" placeholder="Password" required>
+          </div>
+          <div class="d-flex align-items-center mb-3 ver-pw">
+            <input type="checkbox" id="view-password" class="check-style">
+            <label for="view-password" class="span-checkbox"><b>Ver palavra-passe</b></label>
+          </div>
+          <div class="mb-2">
+            <input id="EntidadeWebsite" type="link" class="input-login-registar" name="website" placeholder="Website" required>
+          </div>
+          <div class="mb-2">
+            <span>Testes disponiveis</span>
+            <select id="EntidadeTestes" class="js-example-basic-multiple input-login-registar" multiple="multiple" required>
+              <option>Teste PCR</option>
+              <option>Teste Rápido Antigénio</option>
+              <option>Teste Pesquisa Anticorpos</option>
+            </select>
+          </div>
+          <div class="mb-2">
+            <span>Hora de Abertura</span>
+            <input id="HoraAbertura" type="time" class="input-login-registar" required>
+          </div>
+          <div class="mb-2">
+            <span>Hora de Fecho</span>
+            <input id="HoraFecho" type="time" class="input-login-registar" required>
+          </div>
+          <div class="mb-3">
+            <span>Tempo estimado de cada teste (em minutos)</span>
+            <input id="TempoTeste" min="5" max="60" type="number" class="input-login-registar" required>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <input type="checkbox" id="drive-thru" class="check-style">
+            <label for="drive-thru" class="span-checkbox"><b>O estabelecimento é <i>drive-thru</i></b></label>
+          </div>
+          <div class="d-flex align-items-center mb-3">
+            <input type="checkbox" id="call-me-enable" class="check-style">
+            <label for="call-me-enable" class="span-checkbox"><b>Aceito receber pedidos <i>call me</i></b></label>
+          </div>
+          <div>
+            <button id="RegistoSUBMIT" type="sumbit" class="btn-login text-center">Efetuar registo</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer class="text-center text-lg-start text-muted">
+    <section class="p-2">
+      <div class="container text-center text-md-start mt-5">
+        <div class="row mt-3">
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4"><span class="discovid-icon me-3">&#xe900;</span>DISCOVID</h6>
+            <p>
+              Discovid é uma plataforma de marcação e gestão de testes de COVID-19 desenvolvida com o intuito de facilitar a escolha de postos/estabelecimentos de testagem.
+            </p>
+          </div>
+          <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Covid</h6>
+            <p><a href="postos.html" class="text-reset">Postos</a></p>
+            <p><a href="loja.html" class="text-reset">Loja</a></p>
+            <p><a href="tracking.html" class="text-reset">Tracking</a></p>
+            <p><a href="sintomas.html" class="text-reset">Sintomas</a></p>
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Discovid</h6>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Termos e condições</a></p>
+            <p><a href="https://youtu.be/dQw4w9WgXcQ" target="_blank" class="text-reset">Política de proteção de dados</a></p>
+          </div>
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+            <h6 class="text-uppercase fw-bold mb-4">Contactos</h6>
+            <p><i class="fas fa-home me-3"></i> Rua D. Sancho I, n.º 981</p>
+            <p><i class="fas fa-envelope me-3"></i> contacto@discovid.pt</p>
+            <p><i class="fas fa-phone me-3"></i> +351 252 291 700</p>
+            <p><i class="fas fa-print me-3"></i> +351 252 291 700</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="d-flex justify-content-center align-items-center p-2 ">
+      <div class="footer-socials">
+        <a href="" class="me-4 text-reset"><i class="fab fa-facebook-f"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-twitter"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-google"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-instagram"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-linkedin"></i></a>
+        <a href="" class="me-4 text-reset"><i class="fab fa-github"></i></a>
+      </div>
+    </section>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05); color: #ccc;">© 2021
+      <a class="text-reset fw-bold text-decoration-none">DISCOVID.pt</a>
+    </div>
+  </footer>
+
+  <!-- Scripts do projeto -->
+  <script type="module" src="../js/app.js"></script>
+  <script type="text/javascript" src="..\js\lib\jquery\jquery-3.6.0.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\bootstrap\js\bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\fontawesome\js\all.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2.full.min.js"></script>
+  <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
+  <script type="text/javascript" src="..\js\lib\sweetalert2\sweetalert2.all.min.js"></script>
+  <script type="text/javascript" src="..\js\misc.js"></script>
+  <script type="text/javascript">
+    // Ativa o select dos tipos de teste
+    $('.js-example-basic-multiple').select2();
+  </script>
+</body>
+
+</html>
