@@ -90,7 +90,8 @@ export default class RegistoEntidadeView {
                 this.registoHFECHO.value,
                 this.registoTTESTE.value,
                 this.registoDRIVETHRU.checked,
-                this.registoCALLME.checked);
+                this.registoCALLME.checked,
+                true);
 
               const usersRegistados = specificUserController.getAllEntityUsers();
               const userID = usersRegistados[usersRegistados.length - 1].id;

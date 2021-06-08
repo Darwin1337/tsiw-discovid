@@ -1,5 +1,5 @@
 export class UtilizadorEntidadeModel {
-  constructor(id, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me) {
+  constructor(id, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado) {
     this.id = id;
     this.nome = nome;
     this.nif = nif;
@@ -11,7 +11,7 @@ export class UtilizadorEntidadeModel {
     this.intervalo_consulta = intervalo_consulta;
     this.drive_thru = drive_thru;
     this.call_me = call_me;
-    this.registado = true;
+    this.registado = registado;
     this.verificado = false;
     this.id_verificador = null;
     this.data_criacao = new Date();

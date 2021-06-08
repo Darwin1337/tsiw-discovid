@@ -42,20 +42,31 @@ export default class UserController {
   }
 
   isAnyUserLoggedIn() {
+    // verificar se as entidades tambem tao logadas
     return sessionStorage.getItem('loggedInUserInfo') !== null ? true : false;
   }
 
   getLoggedInUserData() {
+    // mandar tambem entidades
     if (this.isAnyUserLoggedIn()) {
       return this.normalUsers.find(user => parseInt(user.id) === parseInt(JSON.parse(sessionStorage.getItem('loggedInUserInfo'))["id"]));
     }
     return null;
   }
 
-  getUserByEmail(email) {
+  getNormalUserByEmail(email) {
     const userIdx = this.normalUsers.findIndex(user => user.email === email);
     if (userIdx != -1) {
       return this.normalUsers[userIdx];
+    } else {
+      return null;
+    }
+  }
+
+  getEntityUserByEmail(email) {
+    const userIdx = this.entityUsers.findIndex(user => user.email === email);
+    if (userIdx != -1) {
+      return this.entityUsers[userIdx];
     } else {
       return null;
     }
@@ -123,10 +134,10 @@ export default class UserController {
     localStorage.setItem("enderecos_entidade", JSON.stringify(this.endEntidade));
   }
 
-  EntityUser_Register(nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me) {
+  EntityUser_Register(nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado) {
     if (!this.entityUsers.some(user => user.email == email) && !this.entityUsers.some(user => user.nif == nif)) {
       const newId = this.entityUsers.length > 0 ? this.entityUsers[this.entityUsers.length - 1].id + 1 : 1;
-      this.entityUsers.push(new UtilizadorEntidadeModel(newId, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me));
+      this.entityUsers.push(new UtilizadorEntidadeModel(newId, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado));
       localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
     } else {
       throw Error("Os dados introduzidos já estão registados na plataforma.");
