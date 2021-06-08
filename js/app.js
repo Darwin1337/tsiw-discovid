@@ -7,6 +7,7 @@ import RegistoNormalView from "./views/RegistoNormalView.js";
 import RegistoEntidadeView from "./views/RegistoEntidadeView.js";
 import LojaView from "./views/LojaView.js";
 import IndexView from "./views/IndexView.js";
+import PostosView from "./views/PostosView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -29,8 +30,8 @@ class App {
       'marcacoes': [NavbarView],
       'encomendas': [NavbarView],
       'notificacoes': [NavbarView],
-      'loja': [NavbarView],
-      'postos': [NavbarView],
+      'loja': [NavbarView, LojaView],
+      'postos': [NavbarView, PostosView],
       'sintomas': [NavbarView],
       'testes': [NavbarView],
       'tracking': [NavbarView],
