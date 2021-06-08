@@ -42,14 +42,23 @@ export default class UserController {
   }
 
   isAnyUserLoggedIn() {
-    // verificar se as entidades tambem tao logadas
     return sessionStorage.getItem('loggedInUserInfo') !== null ? true : false;
   }
 
-  getLoggedInUserData() {
-    // mandar tambem entidades
+  getLoggedInUserType() {
     if (this.isAnyUserLoggedIn()) {
-      return this.normalUsers.find(user => parseInt(user.id) === parseInt(JSON.parse(sessionStorage.getItem('loggedInUserInfo'))["id"]));
+      return JSON.parse(sessionStorage.getItem('loggedInUserInfo'))["tipo"];
+    }
+    return null;
+  }
+
+  getLoggedInUserData() {
+    if (this.isAnyUserLoggedIn()) {
+      if (this.getLoggedInUserType() == "normal") {
+        return this.normalUsers.find(user => parseInt(user.id) == parseInt(JSON.parse(sessionStorage.getItem('loggedInUserInfo'))["id"]));
+      } else if (this.getLoggedInUserType() == "posto") {
+        return this.entityUsers.find(user => parseInt(user.id) == parseInt(JSON.parse(sessionStorage.getItem('loggedInUserInfo'))["id"]));
+      }
     }
     return null;
   }
@@ -155,11 +164,21 @@ export default class UserController {
     if (this.normalUsers.some(user => user.email === email && user.password === password)) {
       let user = this.normalUsers.find(user => user.email === email && user.password === password);
       let loggedInUserInfo = {
-        'id': user.id
+        'id': user.id,
+        'tipo': 'normal'
       };
       sessionStorage.setItem('loggedInUserInfo', JSON.stringify(loggedInUserInfo));
     } else {
+      if (this.entityUsers.some(user => user.email == email && user.registado == true)) {
+        const user = this.entityUsers.find(user => user.email == email && user.registado == true);
+        let loggedInUserInfo = {
+          'id': user.id,
+          'tipo': 'posto'
+        };
+        sessionStorage.setItem('loggedInUserInfo', JSON.stringify(loggedInUserInfo));
+      } else {
         throw Error("Os dados introduzidos são inválidos");
+      }
     }
   }
 

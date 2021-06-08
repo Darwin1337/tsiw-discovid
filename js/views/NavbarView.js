@@ -54,6 +54,7 @@ export default class NavbarView {
     // Se não houver um utilizado logado as variáveis ficaram vazias ou com o código default da navbar
     let renderAuthentication = ``;
     let renderAdminNavItems = ``;
+    let renderNome = "";
 
     if (this.userController.isAnyUserLoggedIn()) {
       if (this.userController.isLoggedUserAnAdmin()) {
@@ -62,10 +63,16 @@ export default class NavbarView {
           <li><hr class="dropdown-divider"></li>`;
       }
 
+      if (this.userController.getLoggedInUserType() == "normal") {
+        renderNome = this.userController.getLoggedInUserData().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUserData().pnome.slice(1);
+      } else if (this.userController.getLoggedInUserType() == "posto") {
+          renderNome += this.userController.getLoggedInUserData().nome.split(" ")[0].charAt(0).toUpperCase() + this.userController.getLoggedInUserData().nome.split(" ")[0].slice(1) + " ";
+      }
+
       renderAuthentication = `
       <li class="nav-item dropdown user">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${this.userController.getLoggedInUserData().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUserData().pnome.slice(1)}</b></span>
+          <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${renderNome}</b></span>
           </a>
           <ul class="logged-ddmenu dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
               ${renderAdminNavItems}
@@ -136,16 +143,24 @@ export default class NavbarView {
     // Se não houver um utilizado logado as variáveis ficaram vazias ou com o código default da navbar
     let renderAuthentication = ``;
     let renderAdminNavItems = ``;
+    let renderNome = "";
 
     if (this.userController.isAnyUserLoggedIn()) {
       if (this.userController.isLoggedUserAnAdmin()) {
         renderAdminNavItems = `
           <li class="nav-item"><a class="nav-link" href="../html/admin-entidades.html" id="admin">MODO ADMINISTRADOR</a></li>`;
       }
+
+      if (this.userController.getLoggedInUserType() == "normal") {
+        renderNome = this.userController.getLoggedInUserData().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUserData().pnome.slice(1);
+      } else if (this.userController.getLoggedInUserType() == "posto") {
+          renderNome += this.userController.getLoggedInUserData().nome.split(" ")[0].charAt(0).toUpperCase() + this.userController.getLoggedInUserData().nome.split(" ")[0].slice(1) + " ";
+      }
+
       renderAuthentication = `
         <div class="logged-user-info">
           <img src="${this.imgPath}img\\user-icon.svg" width="60" height="60">
-            <li class="nav-item logged-user"><a>BEM-VINDO, <span class="text-uppercase"><b>${this.userController.getLoggedInUserData().pnome}</b></span></a></li>
+            <li class="nav-item logged-user"><a>BEM-VINDO, <span class="text-uppercase"><b>${renderNome}</b></span></a></li>
         </div>
         ${renderAdminNavItems}
         <li class="nav-item"><a class="nav-link" href="../html/editar-perfil.html" id="editar-perfil-redirect">EDITAR PERFIL</a></li>
