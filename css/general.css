@@ -555,7 +555,10 @@ input[type="range"]::-moz-range-thumb {
   background-color: white;
   padding: 10px;
   border-radius: 7px;
+  height: 4rem;
 }
+
+
 
 .imprimir-fatura {
   border: none;
