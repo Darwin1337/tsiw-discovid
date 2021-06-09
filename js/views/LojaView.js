@@ -4,8 +4,12 @@ export default class LojaView {
   constructor() {
     // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
     this.lojaController = new LojaController();
-    this.ListAllProducts()
-    this.AddToCart()
+
+    this.currentPage = document.querySelector("body");
+    if (this.currentPage.id=="loja") {
+      this.ListAllProducts()
+      this.AddToCart()
+    }
   }
 
   ListAllProducts() {
@@ -41,7 +45,7 @@ export default class LojaView {
     for (const btn of document.getElementsByClassName("add-cart-button")) {
       btn.addEventListener("click", () => {
         const x = this.lojaController.getAllProdutos();
-        for (const btn1 of document.getElementsByClassName("remover")) {
+        for (const btn1 of document.getElementsByClassName("remover-carrinho")) {
           if(btn.id==btn1.id){
             aux=true
             //Adicionar mais um ao valor que está na inputbox
@@ -55,7 +59,7 @@ export default class LojaView {
           for (let i = 0; i < x.length; i++) {
             if(x[i].id==btn.id){
               document.getElementById("carrinho-de-compras").innerHTML+=`
-              <div class="row">
+              <div class="row linha-produto" id="${x[i].id}">
                 <div class="col-3 col-md-3">
                   <img class="img-cart" src="${x[i].imagem}">
                 </div>
@@ -69,10 +73,11 @@ export default class LojaView {
                   <p class="preco-cart" id="preco-${x[i].id}">${x[i].preco}€</p>
                 </div>
                 <div class="col d-flex align-items-center justify-content-center">
-                  <span><i class="far fa-trash-alt remover" id="${x[i].id}"></i></span>
+                  <span class="remover-carrinho" id="${x[i].id}"><i class="far fa-trash-alt remover"></i></span>
                 </div>
+                <hr>
               </div>
-              <hr>
+              
               `
               break
             }
@@ -81,6 +86,7 @@ export default class LojaView {
         }
 
         this.CalcularTotal()
+        this.RemoverProdutoCarrinho()
         aux=false
       });
     }
@@ -89,7 +95,7 @@ export default class LojaView {
   QuantidadeAlterada(){
     for (const btn of document.getElementsByClassName("quantidade-produto")) {
       btn.addEventListener("change", () => {
-        alert("Falta acabar")
+        this.CalcularTotal()
       });
     }
   }
@@ -106,5 +112,18 @@ export default class LojaView {
       }
     }
     document.querySelector(".preco-total-cart").innerHTML=`${total}€`
+  }
+
+  RemoverProdutoCarrinho(){
+    for (const btnRemove of document.getElementsByClassName("remover-carrinho")) {
+      btnRemove.addEventListener("click", () => {
+        for (const row of document.getElementsByClassName("linha-produto")) {
+          if (btnRemove.id==row.id) {
+            row.remove();
+            this.CalcularTotal();
+          }
+        }
+      });
+    }
   }
 }

@@ -55,6 +55,7 @@ export default class NavbarView {
     let renderAuthentication = ``;
     let renderAdminNavItems = ``;
     let renderNome = "";
+    let renderImg = "";
 
     if (this.userController.isAnyUserLoggedIn()) {
       if (this.userController.isLoggedUserAnAdmin()) {
@@ -65,14 +66,17 @@ export default class NavbarView {
 
       if (this.userController.getLoggedInUserType() == "normal") {
         renderNome = this.userController.getLoggedInUserData().pnome.charAt(0).toUpperCase() + this.userController.getLoggedInUserData().pnome.slice(1);
+        renderImg = this.userController.getLoggedInUserData().avatar;
       } else if (this.userController.getLoggedInUserType() == "posto") {
           renderNome += this.userController.getLoggedInUserData().nome.split(" ")[0].charAt(0).toUpperCase() + this.userController.getLoggedInUserData().nome.split(" ")[0].slice(1) + " ";
+          renderImg = `${this.imgPath}img\\user-icon.svg`;
       }
 
       renderAuthentication = `
       <li class="nav-item dropdown user">
           <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="${this.imgPath}img\\user-icon.svg" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${renderNome}</b></span>
+          <!--<img src="${this.imgPath}img\\${renderImg}" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${renderNome}</b></span>-->
+          <img src="${renderImg}" width="30" height="30" class="d-inline-block align-top" style="margin-right: 5px;"><span><b>${renderNome}</b></span>
           </a>
           <ul class="logged-ddmenu dropdown-menu dropdown-menu-right" aria-labelledby="navbarScrollingDropdown">
               ${renderAdminNavItems}
