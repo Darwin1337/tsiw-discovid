@@ -384,6 +384,7 @@ export default class AdminUsersView {
         document.getElementById("posto-tempo-consulta-edit").value,
         document.getElementById("posto-morada-edit").value,
         document.getElementById("posto-cod_postal-edit").value,
+        $('.select-localidades-edit').find(':selected').val(),
         document.getElementById("posto-drive-edit").checked,
         document.getElementById("posto-call-edit").checked
         );
@@ -403,7 +404,7 @@ export default class AdminUsersView {
       this.BindViewPasswordCheckbox("view-password-criar", "posto-password-criar");
       if ( $('.select-localidades').find(':selected').val() != $('.select-localidades').find('option').first().val()) {
         console.log($('.select-localidades').find(':selected').val())
-      this.postoController.AddTest(
+      this.postoController.AddPosto(
         document.getElementById("posto-nome-criar").value,
         document.getElementById("posto-nif-criar").value,
         document.getElementById("posto-email-criar").value,

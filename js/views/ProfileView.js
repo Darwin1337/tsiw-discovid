@@ -1,5 +1,6 @@
 import UserController from '../controllers/UserController.js';
 import PostoController from '../controllers/PostosController.js';
+import LocaleController from '../controllers/LocaleController.js';
 
 export default class NavbarView {
   constructor() {
@@ -8,16 +9,27 @@ export default class NavbarView {
 
     this.postoController = new PostoController();
 
+    // Instanciar o LocaleController para ser possível adicionar as localidades aos selects
+    this.localeController = new LocaleController();
+
     // Event listeners para quando o utilizador pretende editar o seu perfil e guardar as suas alterações
     this.BindEditButtons();
 
-    // Carregar a informação para os inputs;
     
 
     this.currentPage = document.querySelector("body");
     if (this.currentPage.id == "editar-perfil") {
       this.VerificarTipoEMostrar();
       
+      
+    }
+  }
+
+  AddLocalesToSelect(target) {
+    const localidades = this.localeController.GetAllLocales();
+    const select = document.querySelector(target);
+    for (const localidade of localidades) {
+      select.innerHTML += `<option value="${localidade['id']}">${localidade['nome']}</option>`;
     }
   }
 
@@ -25,55 +37,6 @@ export default class NavbarView {
     const userInfo = this.userController.getLoggedInUserType();
     if (userInfo=="posto") {
       document.querySelector("#campos-editar-perfil").innerHTML=`
-<<<<<<< Updated upstream
-      <div class="col-md-6 mt-3">
-        <span>Nome</span>
-        <input type="text" class="input-login-registar" id="posto-nome" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>NIF</span>
-        <input type="text" class="input-login-registar"  id="posto-nif" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>E-mail</span>
-        <input type="text" class="input-login-registar" id="posto-email" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Palavra-Passe</span>
-        <input type="text" class="input-login-registar"  id="posto-password" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Website</span>
-        <input type="text" class="input-login-registar" id="posto-website" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Hora de abertura</span>
-        <input type="time" class="input-login-registar" id="posto-horario-abertura" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Hora de fecho</span>
-        <input type="time" class="input-login-registar" id="posto-horario-fecho" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Tempo de consulta</span>
-        <input type="text" class="input-login-registar" id="posto-tempo-consulta" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Morada</span>
-        <input type="text" class="input-login-registar" id="posto-morada" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Codigo Postal</span>
-        <input type="text" class="input-login-registar" id="posto-cod_postal" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Drive</span>
-        <input type="checkbox" class="input-login-registar" id="posto-drive" disabled value="">
-      </div>
-      <div class="col-md-6 mt-3">
-        <span>Call Me</span>
-        <input type="checkbox" class="input-login-registar" id="posto-call" disabled value="">
-=======
       <div class="row">
         <div class="col-md-6 mt-3">
           <span>Nome</span>
@@ -111,6 +74,12 @@ export default class NavbarView {
           <span>Codigo Postal</span>
           <input type="text" class="input-login-registar" id="posto-cod_postal" disabled value="">
         </div>
+        <div class="col-md-6 mt-3">
+          <span>Localidade</span>
+          <select class="select-localidades-edit" style="width: 100%; height: 40px;" disabled required>
+            <option disabled="disabled" value="0" selected>Localidade</option>
+          </select>
+        </div>
       </div>
       <div class="row">
         <div class="col-md-3 mt-3">
@@ -121,9 +90,13 @@ export default class NavbarView {
           <span>Call Me</span>
           <input type="checkbox" class="input-login-registar" id="posto-call" disabled value="">
         </div>
->>>>>>> Stashed changes
       </div>
       `
+      $('.select-localidades-edit').select2({
+        searchInputPlaceholder: 'Pesquisar localidade...'
+      });
+      // Carregar a informação para os inputs;
+      this.AddLocalesToSelect(".select-localidades-edit");
       this.SetProfileInfoPosto();
       
     }
@@ -173,6 +146,10 @@ export default class NavbarView {
     document.getElementById("ativar-campos").addEventListener("click", () => {
       for (const input of document.querySelectorAll("#campos-editar-perfil input")) {
         input.disabled = false;
+        
+      }
+      for (const select of document.querySelectorAll("#campos-editar-perfil select")) {
+        select.disabled = false;
       }
       document.getElementById("guardar-alteracoes").style.visibility = "visible";
       document.getElementById("ativar-campos").style.visibility = "hidden";
@@ -183,6 +160,9 @@ export default class NavbarView {
       document.getElementById("ativar-campos").style.visibility = "visible";
       for (const input of document.querySelectorAll("#campos-editar-perfil input")) {
         input.disabled = true;
+      }
+      for (const select of document.querySelectorAll("#campos-editar-perfil select")) {
+        select.disabled = true;
       }
       const userInfo = this.userController.getLoggedInUserType();
       if (userInfo=="posto") {
@@ -201,14 +181,15 @@ export default class NavbarView {
       if (userInfo.id==userInfoEnderecos[i].id_entidade) {
         document.getElementById("posto-morada").value = userInfoEnderecos[i].morada;
         document.getElementById("posto-cod_postal").value = userInfoEnderecos[i].cod_postal;
+        console.log(userInfoEnderecos[i].id_localidade)
+        console.log($('.select-localidades-edit').val(userInfoEnderecos[i].id_localidade))
+        $('.select-localidades-edit').val(userInfoEnderecos[i].id_localidade);
+        $('.select-localidades-edit').trigger('change');
+        break
       }
     }
     document.getElementById("posto-nome").value = userInfo.nome;
     document.getElementById("posto-email").value = userInfo.email;
-<<<<<<< Updated upstream
-    document.getElementById("posto-nif").value = userInfo.nif;
-=======
->>>>>>> Stashed changes
     document.getElementById("posto-password").value = userInfo.password;
     document.getElementById("posto-website").value = userInfo.website;
     document.getElementById("posto-horario-abertura").value = userInfo.horario_inicio;
@@ -236,15 +217,6 @@ export default class NavbarView {
     //document.getElementById("user-cep").value=this.userController.getLoggedInUserData().email;
   }
 
-<<<<<<< Updated upstream
-  UpdatePostosInfo() {
-    try {
-      const userInfo = this.userController.getLoggedInUserData();
-      this.postoController.EditPosto(
-        userInfo.id,
-        document.getElementById("posto-nome").value,
-        //document.getElementById("posto-nif").value,
-=======
   //Editar postos no editar perfil
   UpdatePostosInfo() {
     try {
@@ -253,7 +225,6 @@ export default class NavbarView {
       this.postoController.EditPosto(
         userInfo.id,
         document.getElementById("posto-nome").value,
->>>>>>> Stashed changes
         document.getElementById("posto-email").value,
         document.getElementById("posto-password").value,
         document.getElementById("posto-website").value,
@@ -262,6 +233,7 @@ export default class NavbarView {
         document.getElementById("posto-tempo-consulta").value,
         document.getElementById("posto-morada").value,
         document.getElementById("posto-cod_postal").value,
+        $('.select-localidades-edit').val(),
         document.getElementById("posto-drive").checked,
         document.getElementById("posto-call").checked
         )

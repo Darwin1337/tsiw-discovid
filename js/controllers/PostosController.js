@@ -17,7 +17,7 @@ export default class PostosController {
     return this.localidades;
   }
 
-  EditPosto(id, nome, email, password, website, horario_inicio, horario_fim, intervalo_consulta, morada, cod_postal, drive_thru, call_me){
+  EditPosto(id, nome, email, password, website, horario_inicio, horario_fim, intervalo_consulta, morada, cod_postal,localidade, drive_thru, call_me){
     let x=true
     // console.log(id)
     // console.log(nome)
@@ -35,13 +35,8 @@ export default class PostosController {
         x=false
       }
       if (x==false) {
-<<<<<<< Updated upstream
-        this.postos[i].nome = nome;
-        //this.postos[i].nif = nif;
-=======
         //Falta alterar a longitude e latitude
         this.postos[i].nome = nome;
->>>>>>> Stashed changes
         this.postos[i].email = email;
         this.postos[i].password = password;
         this.postos[i].website = website;
@@ -59,6 +54,7 @@ export default class PostosController {
         if (id==this.enderecos[i]["id_entidade"]) {
           this.enderecos[i].morada=morada;
           this.enderecos[i].cod_postal=cod_postal;
+          this.enderecos[i].id_localidade=localidade;
         }
       }
       localStorage.removeItem("enderecos_entidade");
@@ -71,14 +67,7 @@ export default class PostosController {
     }
 }
 
-<<<<<<< Updated upstream
-  // AddTest(nome) {
-  //   const newId = this.testes.length > 0 ? this.testes[this.testes.length - 1].id_teste + 1 : 1;
-  //   this.testes.push(new Postos(newId, nome));
-  //   localStorage.setItem("testes", JSON.stringify(this.testes));
-  // }
-=======
-  AddTest(nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta, morada, cod_postal, localidade,drive,call) {
+  AddPosto(nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta, morada, cod_postal, localidade,drive,call) {
     const newId = this.postos.length > 0 ? this.postos[this.postos.length - 1].id + 1 : 1;
     const newId2 = this.enderecos.length > 0 ? this.enderecos[this.enderecos.length - 1].id_endereco + 1 : 1;
     this.postos.push(new UtilizadorEntidadeModel(newId,nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta,drive,call,false));
@@ -86,5 +75,4 @@ export default class PostosController {
     localStorage.setItem("utilizadores_entidades", JSON.stringify(this.postos));
     localStorage.setItem("enderecos_entidade", JSON.stringify(this.enderecos));
   }
->>>>>>> Stashed changes
 }
