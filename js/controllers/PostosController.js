@@ -35,8 +35,13 @@ export default class PostosController {
         x=false
       }
       if (x==false) {
+<<<<<<< Updated upstream
         this.postos[i].nome = nome;
         //this.postos[i].nif = nif;
+=======
+        //Falta alterar a longitude e latitude
+        this.postos[i].nome = nome;
+>>>>>>> Stashed changes
         this.postos[i].email = email;
         this.postos[i].password = password;
         this.postos[i].website = website;
@@ -66,9 +71,20 @@ export default class PostosController {
     }
 }
 
+<<<<<<< Updated upstream
   // AddTest(nome) {
   //   const newId = this.testes.length > 0 ? this.testes[this.testes.length - 1].id_teste + 1 : 1;
   //   this.testes.push(new Postos(newId, nome));
   //   localStorage.setItem("testes", JSON.stringify(this.testes));
   // }
+=======
+  AddTest(nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta, morada, cod_postal, localidade,drive,call) {
+    const newId = this.postos.length > 0 ? this.postos[this.postos.length - 1].id + 1 : 1;
+    const newId2 = this.enderecos.length > 0 ? this.enderecos[this.enderecos.length - 1].id_endereco + 1 : 1;
+    this.postos.push(new UtilizadorEntidadeModel(newId,nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta,drive,call,false));
+    this.enderecos.push(new EnderecoEntidadeModel(newId2, newId,morada,cod_postal,localidade,0,0));
+    localStorage.setItem("utilizadores_entidades", JSON.stringify(this.postos));
+    localStorage.setItem("enderecos_entidade", JSON.stringify(this.enderecos));
+  }
+>>>>>>> Stashed changes
 }

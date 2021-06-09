@@ -25,6 +25,7 @@ export default class NavbarView {
     const userInfo = this.userController.getLoggedInUserType();
     if (userInfo=="posto") {
       document.querySelector("#campos-editar-perfil").innerHTML=`
+<<<<<<< Updated upstream
       <div class="col-md-6 mt-3">
         <span>Nome</span>
         <input type="text" class="input-login-registar" id="posto-nome" disabled value="">
@@ -72,6 +73,55 @@ export default class NavbarView {
       <div class="col-md-6 mt-3">
         <span>Call Me</span>
         <input type="checkbox" class="input-login-registar" id="posto-call" disabled value="">
+=======
+      <div class="row">
+        <div class="col-md-6 mt-3">
+          <span>Nome</span>
+          <input type="text" class="input-login-registar" id="posto-nome" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>E-mail</span>
+          <input type="text" class="input-login-registar" id="posto-email" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Palavra-Passe</span>
+          <input type="text" class="input-login-registar"  id="posto-password" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Website</span>
+          <input type="text" class="input-login-registar" id="posto-website" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Hora de abertura</span>
+          <input type="time" class="input-login-registar" id="posto-horario-abertura" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Hora de fecho</span>
+          <input type="time" class="input-login-registar" id="posto-horario-fecho" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Tempo de consulta</span>
+          <input type="text" class="input-login-registar" id="posto-tempo-consulta" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Morada</span>
+          <input type="text" class="input-login-registar" id="posto-morada" disabled value="">
+        </div>
+        <div class="col-md-6 mt-3">
+          <span>Codigo Postal</span>
+          <input type="text" class="input-login-registar" id="posto-cod_postal" disabled value="">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3 mt-3">
+          <span>Drive</span>
+          <input type="checkbox" class="input-login-registar" id="posto-drive" disabled value="">
+        </div>
+        <div class="col-md-3 mt-3">
+          <span>Call Me</span>
+          <input type="checkbox" class="input-login-registar" id="posto-call" disabled value="">
+        </div>
+>>>>>>> Stashed changes
       </div>
       `
       this.SetProfileInfoPosto();
@@ -155,7 +205,10 @@ export default class NavbarView {
     }
     document.getElementById("posto-nome").value = userInfo.nome;
     document.getElementById("posto-email").value = userInfo.email;
+<<<<<<< Updated upstream
     document.getElementById("posto-nif").value = userInfo.nif;
+=======
+>>>>>>> Stashed changes
     document.getElementById("posto-password").value = userInfo.password;
     document.getElementById("posto-website").value = userInfo.website;
     document.getElementById("posto-horario-abertura").value = userInfo.horario_inicio;
@@ -183,6 +236,7 @@ export default class NavbarView {
     //document.getElementById("user-cep").value=this.userController.getLoggedInUserData().email;
   }
 
+<<<<<<< Updated upstream
   UpdatePostosInfo() {
     try {
       const userInfo = this.userController.getLoggedInUserData();
@@ -190,6 +244,16 @@ export default class NavbarView {
         userInfo.id,
         document.getElementById("posto-nome").value,
         //document.getElementById("posto-nif").value,
+=======
+  //Editar postos no editar perfil
+  UpdatePostosInfo() {
+    try {
+      const userInfo = this.userController.getLoggedInUserData();
+      //enviar dados para PostosController -> EditPostos
+      this.postoController.EditPosto(
+        userInfo.id,
+        document.getElementById("posto-nome").value,
+>>>>>>> Stashed changes
         document.getElementById("posto-email").value,
         document.getElementById("posto-password").value,
         document.getElementById("posto-website").value,

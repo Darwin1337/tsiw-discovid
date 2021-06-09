@@ -13,6 +13,7 @@ import PostosView from "./views/PostosView.js";
 import UserController from "./controllers/UserController.js";
 import TestsController from "./controllers/TestsController.js";
 import LocaleController from "./controllers/LocaleController.js";
+import LojaController from "./controllers/LojaController.js";
 
 class App {
   constructor() {
@@ -59,6 +60,11 @@ class App {
       this.testsController.AddTest("Serológico");
       this.testsController.AddTest("Antigénio");
       this.testsController.AddTest("RT-PCR");
+    }
+
+    if (!localStorage.produtos) {
+      this.loja = new LojaController();
+      this.loja.ProdutoAdd("Mascara 50uni", "Mascara 50uni para proteção diaria contra virus","6","https://i.ibb.co/2Z2swPF/icon.png");
     }
 
     // Utilizadores

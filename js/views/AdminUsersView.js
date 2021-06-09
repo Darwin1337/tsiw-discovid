@@ -1,9 +1,16 @@
 import UserController from '../controllers/UserController.js';
+import PostoController from '../controllers/PostosController.js';
+import LocaleController from '../controllers/LocaleController.js';
 
 export default class AdminUsersView {
   constructor() {
     // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
     this.userController = new UserController();
+
+    this.postoController = new PostoController();
+
+    // Instanciar o LocaleController para ser possível adicionar as localidades aos selects
+    this.localeController = new LocaleController();
 
     // Página atual - todos os .html têm um id na tag body que descreve o nome da página
     this.currentPage = document.querySelector("body");
@@ -18,13 +25,22 @@ export default class AdminUsersView {
       this.VerifyScreenResolution(true);
 
       // Carregar os dados dos utilizadores para a tabela
+      
       // Se estivermos na página de utilizadores
-      if (this.currentPage.id == "admin-postos") {
-        // pass
+      if (this.currentPage.id == "admin-entidades") {
+        this.ListAllPostos();
+        this.SetPostosInfo();
+        this.AtualizarDadosPosto();
+        this.AddNewPosto();
+        
+        // Adicionar as localidades presentes na localstorage ao select de localidades
+        this.AddLocalesToSelect(".select-localidades");
+        this.AddLocalesToSelect(".select-localidades-edit");
+        this.BindViewPasswordCheckbox("view-password","posto-password-edit");
       } else if (this.currentPage.id == "admin-utilizadores") {
         this.ListAllUsers();
         this.SetProfileInfo();
-        this.AtualizarDados();
+        this.AtualizarDadosUser();
       }
 
       // Verifica mudanças na resolução e aplica a devida navbar (ApplyMobileNavbar ou ApplyDesktopNavbar)
@@ -230,6 +246,7 @@ export default class AdminUsersView {
     }
   }
 
+  //Users
   ListAllUsers() {
     // Lista todos os utilizadores registados
     const x = this.userController.getAllNormalUsers();
@@ -277,9 +294,9 @@ export default class AdminUsersView {
        }
      });
    }
- }
+  }
 
-  AtualizarDados(){
+  AtualizarDadosUser(){
    document.querySelector("#avatar-profile-edit").addEventListener("change", ()=>{
      document.getElementById("avatar-profile").src=document.getElementById("avatar-profile-edit").value
    })
@@ -296,5 +313,124 @@ export default class AdminUsersView {
        document.getElementById("user-cep").value
        );
    });
- }
+  }
+  //Postos
+  ListAllPostos(){
+    const x = this.userController.getAllEntityUsers();
+    let a="";
+    for (let i = 0; i < x.length; i++) {
+      if(x[i].verificado==false){
+        a="Não"
+      }
+      else{
+        a="Sim"
+      }
+      document.getElementById("tabela-postos").innerHTML += `
+      <tr class="align-middle text-center">
+        <td>${x[i].id}</td>
+        <td>${x[i].nome}</td>
+        <td>${x[i].nif}</td>
+        <td>${x[i].email}</td>
+        <td>${a}</td>
+        <td><span class="icon-naoVerificar"><i class="fas fa-times-circle"></i></span><span class="icon-verificar"><i class="fas fa-check-double"></i></span></td>
+        <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span data-bs-toggle="modal" data-bs-target="#admin-edit-postos" class="icon-remover-posto" id="${x[i].id}"><i class="far fa-edit"></i></span></td>
+      </tr>`;
+    }
+  }
+
+  SetPostosInfo() {
+    for (const btnEdit of document.getElementsByClassName("icon-remover-posto")) {
+      btnEdit.addEventListener("click", () => {
+        const x = this.userController.getAllEntityUsers();
+        const x1 = this.userController.getAllEntityEnderecos();
+        for (let i = 0; i < x1.length; i++) {
+          if(btnEdit.id==x1[i].id_entidade){
+            document.getElementById("posto-morada-edit").value = x1[i].morada;
+            document.getElementById("posto-cod_postal-edit").value = x1[i].cod_postal;
+            $('.select-localidades-edit').val([x1[i].id_localidade]);
+            $('.select-localidades-edit').trigger('change');
+          }
+        }
+        for (let i = 0; i < x.length; i++) {
+          if(x[i].id==btnEdit.id){
+            document.getElementById("nome-posto-a-editar").innerHTML = ` (${x[i].nome})`;
+            document.getElementById("posto-nome-edit").value = x[i].nome;
+            document.getElementById("posto-email-edit").value = x[i].email;
+            document.getElementById("posto-password-edit").value = x[i].password;
+            document.getElementById("posto-website-edit").value = x[i].website;
+            document.getElementById("posto-horario-abertura-edit").value = x[i].horario_inicio;
+            document.getElementById("posto-horario-fecho-edit").value = x[i].horario_fim;
+            document.getElementById("posto-tempo-consulta-edit").value = x[i].intervalo_consulta;
+            document.getElementById("posto-drive-edit").checked = x[i].drive_thru;
+            document.getElementById("posto-call-edit").checked = x[i].call_me;
+            document.querySelector(".editar-posto").id = x[i].id;
+          }
+        }
+      });
+    }
+    
+  }
+
+  AtualizarDadosPosto(){
+    document.querySelector("#posto-form-edit").addEventListener("submit", () => {
+      this.postoController.EditPosto(
+        document.querySelector(".editar-posto").id,
+        document.getElementById("posto-nome-edit").value,
+        document.getElementById("posto-email-edit").value,
+        document.getElementById("posto-password-edit").value,
+        document.getElementById("posto-website-edit").value,
+        document.getElementById("posto-horario-abertura-edit").value,
+        document.getElementById("posto-horario-fecho-edit").value,
+        document.getElementById("posto-tempo-consulta-edit").value,
+        document.getElementById("posto-morada-edit").value,
+        document.getElementById("posto-cod_postal-edit").value,
+        document.getElementById("posto-drive-edit").checked,
+        document.getElementById("posto-call-edit").checked
+        );
+    });
+   }
+
+  AddLocalesToSelect(target) {
+    const localidades = this.localeController.GetAllLocales();
+    const select = document.querySelector(target);
+    for (const localidade of localidades) {
+      select.innerHTML += `<option value="${localidade['id']}">${localidade['nome']}</option>`;
+    }
+  }
+  
+  AddNewPosto(){
+    document.querySelector("#posto-form-criar").addEventListener("submit", () => {  
+      this.BindViewPasswordCheckbox("view-password-criar", "posto-password-criar");
+      if ( $('.select-localidades').find(':selected').val() != $('.select-localidades').find('option').first().val()) {
+        console.log($('.select-localidades').find(':selected').val())
+      this.postoController.AddTest(
+        document.getElementById("posto-nome-criar").value,
+        document.getElementById("posto-nif-criar").value,
+        document.getElementById("posto-email-criar").value,
+        document.getElementById("posto-password-criar").value,
+        document.getElementById("posto-website-criar").value,
+        document.getElementById("posto-horario-abertura-criar").value,
+        document.getElementById("posto-horario-fecho-criar").value,
+        document.getElementById("posto-tempo-consulta-criar").value,
+        document.getElementById("posto-morada-criar").value,
+        document.getElementById("posto-cod_postal-criar").value,
+        $('.select-localidades').find(':selected').val(),
+        document.getElementById("posto-drive-criar").checked,
+        document.getElementById("posto-call-criar").checked
+        )
+      }
+    });
+  }
+  
+  //Ver palavra-passe
+  BindViewPasswordCheckbox(checkbox, target) {
+    // Ativa a checbox de "ver password" dos formulários do login e do registo
+    document.getElementById(checkbox).addEventListener("click", () => {
+      if (document.getElementById(checkbox).checked == true) {
+        document.getElementById(target).setAttribute("type", "text");
+      } else {
+        document.getElementById(target).setAttribute("type", "password");
+      }
+    });
+  }
 }

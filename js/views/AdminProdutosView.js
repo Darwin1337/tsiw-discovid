@@ -71,7 +71,7 @@ export default class AdminProdutosView {
     }
   }
 
-  ListAllProducts() {
+  ListAllProducts() { 
     // Lista todos os utilizadores registados
     const x = this.lojaController.getAllProdutos();
     for (let i = 0; i < x.length; i++) {
@@ -98,7 +98,7 @@ export default class AdminProdutosView {
            document.getElementById("produto-nome-edit").value = x[i].nome;
            document.getElementById("produto-preco-edit").value = x[i].preco;
            document.getElementById("produto-descricao-edit").value = x[i].descricao;
-           document.getElementById("btn-update-user").id = x[i].id;
+           document.querySelector(".editar-produto").id = x[i].id;
           }
         }
       });
