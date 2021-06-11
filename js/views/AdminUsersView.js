@@ -1,13 +1,10 @@
 import UserController from '../controllers/UserController.js';
-import PostoController from '../controllers/PostosController.js';
 import LocaleController from '../controllers/LocaleController.js';
 
 export default class AdminUsersView {
   constructor() {
     // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
     this.userController = new UserController();
-
-    this.postoController = new PostoController();
 
     // Instanciar o LocaleController para ser possível adicionar as localidades aos selects
     this.localeController = new LocaleController();
@@ -25,18 +22,17 @@ export default class AdminUsersView {
       this.VerifyScreenResolution(true);
 
       // Carregar os dados dos utilizadores para a tabela
-      
       // Se estivermos na página de utilizadores
       if (this.currentPage.id == "admin-entidades") {
         this.ListAllPostos();
         this.SetPostosInfo();
         this.AtualizarDadosPosto();
         this.AddNewPosto();
-        
+
         // Adicionar as localidades presentes na localstorage ao select de localidades
         this.AddLocalesToSelect(".select-localidades");
         this.AddLocalesToSelect(".select-localidades-edit");
-        this.BindViewPasswordCheckbox("view-password","posto-password-edit");
+        this.BindViewPasswordCheckbox("view-password", "posto-password-edit");
       } else if (this.currentPage.id == "admin-utilizadores") {
         this.ListAllUsers();
         this.SetProfileInfo();
@@ -264,77 +260,82 @@ export default class AdminUsersView {
   }
 
   SetProfileInfo() {
-   for (const btnEdit of document.getElementsByClassName("aaaa")) {
-     btnEdit.addEventListener("click", () => {
-       const x = this.userController.getAllNormalUsers();
-       const x1 = this.userController.getAllNormalEnderecos();
-       for (let i = 0; i < x1.length; i++) {
-         if(btnEdit.id==x1[i].id_utilizador){
-           document.getElementById("user-morada").value = x1[i].morada;
-           document.getElementById("user-cep").value = x1[i].cod_postal;
-         }
-         else{
-           document.getElementById("user-morada").value = "";
-           document.getElementById("user-cep").value = "";
-         }
-       }
-       for (let i = 0; i < x.length; i++) {
-         if(x[i].id==btnEdit.id){
-           document.getElementById("nome-user-a-editar").innerHTML = x[i].pnome + " "+x[i].unome;
-           document.getElementById("avatar-profile").src = x[i].avatar;
-           document.getElementById("avatar-profile-edit").value = x[i].avatar;
-           document.getElementById("user-id").value = x[i].id;
-           document.getElementById("user-pnome").value = x[i].pnome;
-           document.getElementById("user-email").value = x[i].email;
-           document.getElementById("user-unome").value = x[i].unome;
-           document.getElementById("user-password").value = x[i].password;
-           document.getElementById("user-tlm").value = x[i].tlm;
-           document.getElementById("user-pontos").innerHTML = x[i].pontos;
-         }
-       }
-     });
-   }
+    for (const btnEdit of document.getElementsByClassName("aaaa")) {
+      btnEdit.addEventListener("click", () => {
+        const x = this.userController.getAllNormalUsers();
+        const x1 = this.userController.getAllNormalEnderecos();
+        for (let i = 0; i < x1.length; i++) {
+          if (btnEdit.id == x1[i].id_utilizador) {
+            document.getElementById("user-morada").value = x1[i].morada;
+            document.getElementById("user-cep").value = x1[i].cod_postal;
+          } else {
+            document.getElementById("user-morada").value = "";
+            document.getElementById("user-cep").value = "";
+          }
+        }
+        for (let i = 0; i < x.length; i++) {
+          if (x[i].id == btnEdit.id) {
+            document.getElementById("nome-user-a-editar").innerHTML = x[i].pnome + " " + x[i].unome;
+            document.getElementById("avatar-profile").src = x[i].avatar;
+            document.getElementById("avatar-profile-edit").value = x[i].avatar;
+            document.getElementById("user-id").value = x[i].id;
+            document.getElementById("user-pnome").value = x[i].pnome;
+            document.getElementById("user-email").value = x[i].email;
+            document.getElementById("user-unome").value = x[i].unome;
+            document.getElementById("user-password").value = x[i].password;
+            document.getElementById("user-tlm").value = x[i].tlm;
+            document.getElementById("user-pontos").innerHTML = x[i].pontos;
+          }
+        }
+      });
+    }
   }
 
-  AtualizarDadosUser(){
-   document.querySelector("#avatar-profile-edit").addEventListener("change", ()=>{
-     document.getElementById("avatar-profile").src=document.getElementById("avatar-profile-edit").value
-   })
-   document.querySelector("#btn-update-user").addEventListener("click", () => {
-     this.userController.Atualizar(
-       document.getElementById("user-id").value,
-       document.getElementById("avatar-profile-edit").value,
-       document.getElementById("user-pnome").value,
-       document.getElementById("user-unome").value,
-       document.getElementById("user-email").value,
-       document.getElementById("user-password").value,
-       document.getElementById("user-tlm").value,
-       document.getElementById("user-morada").value,
-       document.getElementById("user-cep").value
-       );
-   });
+  AtualizarDadosUser() {
+    document.querySelector("#avatar-profile-edit").addEventListener("change", () => {
+      document.getElementById("avatar-profile").src = document.getElementById("avatar-profile-edit").value
+    })
+    document.querySelector("#btn-update-user").addEventListener("click", () => {
+      //EDITAR ISTO
+      //EDITAR ISTO
+      //EDITAR ISTO
+      //EDITAR ISTO
+      //EDITAR ISTO
+      //EDITAR ISTO
+      this.userController.EntityUser_Edit(
+        document.getElementById("user-id").value,
+        document.getElementById("avatar-profile-edit").value,
+        document.getElementById("user-pnome").value,
+        document.getElementById("user-unome").value,
+        document.getElementById("user-email").value,
+        document.getElementById("user-password").value,
+        document.getElementById("user-tlm").value,
+        document.getElementById("user-morada").value,
+        document.getElementById("user-cep").value
+      );
+    });
   }
+
   //Postos
-  ListAllPostos(){
+  ListAllPostos() {
     const x = this.userController.getAllEntityUsers();
-    let a="";
+    let a = "";
     for (let i = 0; i < x.length; i++) {
-      if(x[i].verificado==false){
-        a="Não"
-      }
-      else{
-        a="Sim"
+      if (x[i].verificado == false) {
+        a = "Não"
+      } else {
+        a = "Sim"
       }
       document.getElementById("tabela-postos").innerHTML += `
-      <tr class="align-middle text-center">
-        <td>${x[i].id}</td>
-        <td>${x[i].nome}</td>
-        <td>${x[i].nif}</td>
-        <td>${x[i].email}</td>
-        <td>${a}</td>
-        <td><span class="icon-naoVerificar"><i class="fas fa-times-circle"></i></span><span class="icon-verificar"><i class="fas fa-check-double"></i></span></td>
-        <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span data-bs-toggle="modal" data-bs-target="#admin-edit-postos" class="icon-remover-posto" id="${x[i].id}"><i class="far fa-edit"></i></span></td>
-      </tr>`;
+     <tr class="align-middle text-center">
+       <td>${x[i].id}</td>
+       <td>${x[i].nome}</td>
+       <td>${x[i].nif}</td>
+       <td>${x[i].email}</td>
+       <td>${a}</td>
+       <td><span class="icon-naoVerificar"><i class="fas fa-times-circle"></i></span><span class="icon-verificar"><i class="fas fa-check-double"></i></span></td>
+       <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span data-bs-toggle="modal" data-bs-target="#admin-edit-postos" class="icon-remover-posto" id="${x[i].id}"><i class="far fa-edit"></i></span></td>
+     </tr>`;
     }
   }
 
@@ -344,7 +345,7 @@ export default class AdminUsersView {
         const x = this.userController.getAllEntityUsers();
         const x1 = this.userController.getAllEntityEnderecos();
         for (let i = 0; i < x1.length; i++) {
-          if(btnEdit.id==x1[i].id_entidade){
+          if (btnEdit.id == x1[i].id_entidade) {
             document.getElementById("posto-morada-edit").value = x1[i].morada;
             document.getElementById("posto-cod_postal-edit").value = x1[i].cod_postal;
             $('.select-localidades-edit').val([x1[i].id_localidade]);
@@ -352,7 +353,7 @@ export default class AdminUsersView {
           }
         }
         for (let i = 0; i < x.length; i++) {
-          if(x[i].id==btnEdit.id){
+          if (x[i].id == btnEdit.id) {
             document.getElementById("nome-posto-a-editar").innerHTML = ` (${x[i].nome})`;
             document.getElementById("posto-nome-edit").value = x[i].nome;
             document.getElementById("posto-email-edit").value = x[i].email;
@@ -368,10 +369,10 @@ export default class AdminUsersView {
         }
       });
     }
-    
+
   }
 
-  AtualizarDadosPosto(){
+  AtualizarDadosPosto() {
     document.querySelector("#posto-form-edit").addEventListener("submit", () => {
       this.postoController.EditPosto(
         document.querySelector(".editar-posto").id,
@@ -384,12 +385,11 @@ export default class AdminUsersView {
         document.getElementById("posto-tempo-consulta-edit").value,
         document.getElementById("posto-morada-edit").value,
         document.getElementById("posto-cod_postal-edit").value,
-        $('.select-localidades-edit').find(':selected').val(),
         document.getElementById("posto-drive-edit").checked,
         document.getElementById("posto-call-edit").checked
-        );
+      );
     });
-   }
+  }
 
   AddLocalesToSelect(target) {
     const localidades = this.localeController.GetAllLocales();
@@ -398,31 +398,36 @@ export default class AdminUsersView {
       select.innerHTML += `<option value="${localidade['id']}">${localidade['nome']}</option>`;
     }
   }
-  
-  AddNewPosto(){
-    document.querySelector("#posto-form-criar").addEventListener("submit", () => {  
+
+  AddNewPosto() {
+    document.querySelector("#posto-form-criar").addEventListener("submit", () => {
       this.BindViewPasswordCheckbox("view-password-criar", "posto-password-criar");
-      if ( $('.select-localidades').find(':selected').val() != $('.select-localidades').find('option').first().val()) {
+      if ($('.select-localidades').find(':selected').val() != $('.select-localidades').find('option').first().val()) {
         console.log($('.select-localidades').find(':selected').val())
-      this.postoController.AddPosto(
-        document.getElementById("posto-nome-criar").value,
-        document.getElementById("posto-nif-criar").value,
-        document.getElementById("posto-email-criar").value,
-        document.getElementById("posto-password-criar").value,
-        document.getElementById("posto-website-criar").value,
-        document.getElementById("posto-horario-abertura-criar").value,
-        document.getElementById("posto-horario-fecho-criar").value,
-        document.getElementById("posto-tempo-consulta-criar").value,
-        document.getElementById("posto-morada-criar").value,
-        document.getElementById("posto-cod_postal-criar").value,
-        $('.select-localidades').find(':selected').val(),
-        document.getElementById("posto-drive-criar").checked,
-        document.getElementById("posto-call-criar").checked
-        )
+        // EDITAR ISTO
+        // EDITAR ISTO
+        // EDITAR ISTO
+        // EDITAR ISTO
+        // EDITAR ISTO
+        // this.postoController.AddTest(
+        //   document.getElementById("posto-nome-criar").value,
+        //   document.getElementById("posto-nif-criar").value,
+        //   document.getElementById("posto-email-criar").value,
+        //   document.getElementById("posto-password-criar").value,
+        //   document.getElementById("posto-website-criar").value,
+        //   document.getElementById("posto-horario-abertura-criar").value,
+        //   document.getElementById("posto-horario-fecho-criar").value,
+        //   document.getElementById("posto-tempo-consulta-criar").value,
+        //   document.getElementById("posto-morada-criar").value,
+        //   document.getElementById("posto-cod_postal-criar").value,
+        //   $('.select-localidades').find(':selected').val(),
+        //   document.getElementById("posto-drive-criar").checked,
+        //   document.getElementById("posto-call-criar").checked
+        // );
       }
     });
   }
-  
+
   //Ver palavra-passe
   BindViewPasswordCheckbox(checkbox, target) {
     // Ativa a checbox de "ver password" dos formulários do login e do registo

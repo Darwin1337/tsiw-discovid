@@ -16,6 +16,14 @@ export default class EncomendasView {
       this.MostrarEncomendas();
       this.SetInfoEncomenda();
     }
+
+    // VERIFICAR SE O UTILIZADOR É NORMAL
+    // VERIFICAR SE O UTILIZADOR É NORMAL
+    // VERIFICAR SE O UTILIZADOR É NORMAL
+    // VERIFICAR SE O UTILIZADOR É NORMAL
+    // VERIFICAR SE O UTILIZADOR É NORMAL
+    // VERIFICAR SE O UTILIZADOR É NORMAL
+    // VERIFICAR SE O UTILIZADOR É NORMAL
   }
 
   MostrarEncomendas(){
@@ -57,7 +65,7 @@ export default class EncomendasView {
             <div class="col-md-6 color-azul-princ">
               <h5 class="color-laranja" id="numero-encomenda">Encomenda #${x[i].id_encomenda}</h5>
               <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${x[i].data_compra}</p>
-              
+
             </div>
             <div class="col-md-3 color-azul-princ ">
               <p><b>Estado: </b>Processado</p>
@@ -113,7 +121,7 @@ export default class EncomendasView {
                   </div>
                 </div>
                 <hr>`
-                
+
               }
             }
           }

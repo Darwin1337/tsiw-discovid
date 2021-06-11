@@ -71,7 +71,7 @@ export default class AdminProdutosView {
     }
   }
 
-  ListAllProducts() { 
+  ListAllProducts() {
     // Lista todos os utilizadores registados
     const x = this.lojaController.getAllProdutos();
     for (let i = 0; i < x.length; i++) {

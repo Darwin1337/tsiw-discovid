@@ -77,7 +77,7 @@ export default class LojaView {
                 </div>
                 <hr>
               </div>
-              
+
               `
               break
             }

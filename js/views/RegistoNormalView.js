@@ -100,7 +100,6 @@ export default class RegistoNormalView {
                 });
               }
             }
-            // https://maps.googleapis.com/maps/api/geocode/json?address=Lugar+do+pa%C3%A7o+fontelas&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4
           Swal.fire('Sucesso!', 'O registo foi concluído com sucesso!', 'success');
           setTimeout(() => {
             location.replace("autenticacao.html");

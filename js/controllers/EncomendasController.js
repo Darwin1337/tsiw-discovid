@@ -3,7 +3,7 @@ export default class EncomendasController {
     constructor() {
       this.encomendas = localStorage.encomendas? JSON.parse(localStorage.encomendas) : [];
       this.detalhes_encomenda = localStorage.detalhes_encomenda? JSON.parse(localStorage.detalhes_encomenda) : [];
- 
+
     }
     GetAllEncomendas() {
         return this.encomendas;
@@ -12,7 +12,7 @@ export default class EncomendasController {
     GetAllDetalhesEncomenda() {
         return this.detalhes_encomenda;
     }
-   
+
     AddNewEncomenda(id_utilizador, data_compra, preco_total){
         const newId = this.encomendas.length > 0 ? this.encomendas[this.encomendas.length - 1].id_encomenda + 1 : 1;
         this.encomendas.push(new EncomendasModel(newId, id_utilizador, data_compra, preco_total));

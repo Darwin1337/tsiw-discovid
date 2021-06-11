@@ -137,7 +137,6 @@
 
 /* Página de editar perfil */
 
-
 .botao-guardar{
   padding-left: 60px;
   padding-right: 60px;
@@ -341,7 +340,8 @@
 }
 
 #moradas-content button,
-#tests-content button {
+#tests-content button,
+.card-morada button {
   outline: none;
   border: 0;
   background-color: transparent;

@@ -10,17 +10,15 @@ export default class PostosController {
   GetAllPostos() {
     return this.postos;
   }
-  
   GetAllEnderecos() {
     return this.enderecos;
   }
-
   GetAllLocalidades() {
     return this.localidades;
   }
 
-  EditPosto(id, nome, email, password, website, horario_inicio, horario_fim, intervalo_consulta, morada, cod_postal,localidade, drive_thru, call_me){
-    let x=true
+  EditPosto(id, nome, email, password, website, horario_inicio, horario_fim, intervalo_consulta, morada, cod_postal, drive_thru, call_me){
+    let x = true;
     // console.log(id)
     // console.log(nome)
     // console.log(nif)
@@ -33,12 +31,12 @@ export default class PostosController {
     // console.log(drive_thru)
     // console.log(call_me)
     for (let i = 0; i < this.postos.length; i++) {
-      if (this.postos[i]["id"]==id) {
-        x=false
+      if (this.postos[i]["id"] == id) {
+        x = false;
       }
-      if (x==false) {
-        //Falta alterar a longitude e latitude
+      if (x == false) {
         this.postos[i].nome = nome;
+        //this.postos[i].nif = nif;
         this.postos[i].email = email;
         this.postos[i].password = password;
         this.postos[i].website = website;
@@ -56,7 +54,6 @@ export default class PostosController {
         if (id==this.enderecos[i]["id_entidade"]) {
           this.enderecos[i].morada=morada;
           this.enderecos[i].cod_postal=cod_postal;
-          this.enderecos[i].id_localidade=localidade;
         }
       }
       localStorage.removeItem("enderecos_entidade");
@@ -69,12 +66,9 @@ export default class PostosController {
     }
 }
 
-  AddPosto(nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta, morada, cod_postal, localidade,drive,call) {
-    const newId = this.postos.length > 0 ? this.postos[this.postos.length - 1].id + 1 : 1;
-    const newId2 = this.enderecos.length > 0 ? this.enderecos[this.enderecos.length - 1].id_endereco + 1 : 1;
-    this.postos.push(new UtilizadorEntidadeModel(newId,nome,nif,email,password,website,hora_abertura,hora_fecho,tempo_consulta,drive,call,false));
-    this.enderecos.push(new EnderecoEntidadeModel(newId2, newId,morada,cod_postal,localidade,0,0));
-    localStorage.setItem("utilizadores_entidades", JSON.stringify(this.postos));
-    localStorage.setItem("enderecos_entidade", JSON.stringify(this.enderecos));
-  }
+  // AddTest(nome) {
+  //   const newId = this.testes.length > 0 ? this.testes[this.testes.length - 1].id_teste + 1 : 1;
+  //   this.testes.push(new Postos(newId, nome));
+  //   localStorage.setItem("testes", JSON.stringify(this.testes));
+  // }
 }

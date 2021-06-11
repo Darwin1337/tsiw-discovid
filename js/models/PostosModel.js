@@ -1,6 +1,7 @@
 export class UtilizadorEntidadeModel {
   constructor(id, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado) {
     this.id = id;
+    this.avatar = "https://i.ibb.co/BZTyP4Z/icon.png";
     this.nome = nome;
     this.nif = nif;
     this.email = email;

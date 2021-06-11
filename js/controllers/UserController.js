@@ -81,35 +81,6 @@ export default class UserController {
     }
   }
 
-  Atualizar(id, avatar, pnome, unome, email, password, tlm, morada, cep) {
-   for (let i = 0; i < this.normalUsers.length; i++) {
-     if (this.normalUsers[i]["id"] == id) {
-       if (avatar!="https://i.ibb.co/BZTyP4Z/icon.png") {
-         this.normalUsers[i].avatar_mudado = true;
-       }
-       this.normalUsers[i].avatar = avatar;
-       this.normalUsers[i].pnome = pnome;
-       this.normalUsers[i].unome = unome;
-       this.normalUsers[i].email = email;
-       this.normalUsers[i].password = password;
-       this.normalUsers[i].tlm = tlm;
-       break;
-     }
-   }
-   for (let i = 0; i < this.endNormal.length; i++) {
-     if (this.endNormal[i]["id_utilizador"] == id) {
-       this.endNormal[i].cod_postal = cep;
-       this.endNormal[i].morada = morada;
-       break;
-     }
-   }
-
-   localStorage.removeItem("enderecos_normal");
-   localStorage.setItem("enderecos_normal", JSON.stringify(this.endNormal));
-   localStorage.removeItem("utilizadores_normais");
-   localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
- }
-
   ChangeUserType(email, tipo) {
     const userIdx = this.normalUsers.findIndex(user => user.email === email);
     if (tipo == "admin") {
@@ -120,6 +91,85 @@ export default class UserController {
     localStorage.removeItem("utilizadores_normais");
     localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers))
   }
+
+  // Edição
+
+  NormalUser_Edit(id, avatar, pnome, unome, email, password, tlm, morada, cep) {
+    // Falta completar edição das moradas
+    // Falta completar edição das moradas
+    // Falta completar edição das moradas
+    // Falta completar edição das moradas
+
+    const userIdx = this.normalUsers.findIndex(user => parseInt(user.id) == parseInt(id));
+    const addIdx = this.endNormal.findIndex(morada => parseInt(morada.id_utilizador) == parseInt(id));
+    if (!this.entityUsers.some(user => user.email == email) && !this.normalUsers.some(user => user.email == email)) {
+      if (this.normalUsers[userIdx].avatar == "https://i.ibb.co/BZTyP4Z/icon.png" && avatar != "https://i.ibb.co/BZTyP4Z/icon.png") {
+        if (!this.normalUsers[userIdx].avatar_mudado) {
+          // Creditar o utilizador com os pontos
+          // Creditar o utilizador com os pontos
+          // Creditar o utilizador com os pontos
+
+          this.normalUsers[userIdx].avatar_mudado = true;
+        }
+      }
+
+      this.normalUsers[userIdx].avatar = avatar;
+      this.normalUsers[userIdx].pnome = pnome;
+      this.normalUsers[userIdx].unome = unome;
+      this.normalUsers[userIdx].email = email;
+      this.normalUsers[userIdx].password = password;
+      this.normalUsers[userIdx].tlm = tlm;
+
+      this.endNormal[addIdx].cod_postal = cep;
+      this.endNormal[addIx].morada = morada;
+
+     localStorage.removeItem("enderecos_normal");
+     localStorage.setItem("enderecos_normal", JSON.stringify(this.endNormal));
+     localStorage.removeItem("utilizadores_normais");
+     localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+   } else {
+     throw Error("O e-mail introduzido já está a ser utilizado por outro utilizador!");
+   }
+ }
+
+  EntityUser_Edit(id, nome, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, morada, cod_postal, id_localidade, lat, long) {
+
+   const userIdx = this.entityUsers.findIndex(user => parseInt(user.id) == parseInt(id));
+   const addIdx = this.endEntidade.findIndex(morada => parseInt(morada.id_entidade) == parseInt(id));
+
+   // Verificar se o e-mail foi alterado
+   if (email != this.getLoggedInUserData().email) {
+     // Se sim, verificar se esse email já está a ser usado
+     if (this.entityUsers.some(user => user.email == email) || this.normalUsers.some(user => user.email == email)) {
+       throw Error("O e-mail introduzido já está a ser utilizado por outro utilizador!");
+     }
+   }
+
+   // Informações gerais
+   this.entityUsers[userIdx].nome = nome;
+   this.entityUsers[userIdx].email = email;
+   this.entityUsers[userIdx].password = password;
+   this.entityUsers[userIdx].website = website;
+   this.entityUsers[userIdx].horario_inicio = horario_inicio;
+   this.entityUsers[userIdx].horario_fim = horario_fim;
+   this.entityUsers[userIdx].intervalo_consulta = intervalo_consulta;
+   this.entityUsers[userIdx].drive_thru = drive_thru;
+   this.entityUsers[userIdx].call_me = call_me;
+
+   // Informação da morada
+   this.endEntidade[addIdx].morada = morada;
+   this.endEntidade[addIdx].cod_postal = cod_postal;
+   this.endEntidade[addIdx].id_localidade = id_localidade;
+   this.endEntidade[addIdx].lat = lat;
+   this.endEntidade[addIdx].long = long;
+
+   localStorage.removeItem("enderecos_entidade");
+   localStorage.setItem("enderecos_entidade", JSON.stringify(this.endEntidade));
+   localStorage.removeItem("utilizadores_entidades");
+   localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
+}
+
+  // Registos
 
   NormalUser_Register(pnome, unome, email, password, tlm, nif, data_nasc, consentimento_email) {
     if (!this.normalUsers.some(user => user.email == email) && !this.normalUsers.some(user => user.nif == nif)) {
@@ -158,6 +208,31 @@ export default class UserController {
     this.testesEntidade.push(new TesteEntidadeModel(id_entidade, id_teste, preco));
     localStorage.setItem("testes_entidade", JSON.stringify(this.testesEntidade));
   }
+
+  EntityUser_RemoveTest(id_entidade, id_teste) {
+    // Verificar se o utilizador fica com mais algum teste se este for removido
+    let testsCount = 0;
+    for (let i = 0; i < this.testesEntidade.length; i++) {
+      if (parseInt(this.testesEntidade[i].id_entidade) == parseInt(id_entidade)) {
+        testsCount++;
+      }
+    }
+
+    if ((testsCount - 1) > 0) {
+      for (let i = 0; i < this.testesEntidade.length; i++) {
+        if ((parseInt(this.testesEntidade[i].id_entidade) == parseInt(id_entidade)) && (parseInt(this.testesEntidade[i].id_teste) == parseInt(id_teste))) {
+          this.testesEntidade.splice(i, 1);
+          break;
+        }
+      }
+      localStorage.removeItem("testes_entidade");
+      localStorage.setItem("testes_entidade", JSON.stringify(this.testesEntidade));
+    } else {
+      throw Error("Tem de ter pelo menos 1 teste adicionado!");
+    }
+  }
+
+  // Login
 
   UserLogin(email, password) {
     // Adicionar possibilidade das entidades darem login também

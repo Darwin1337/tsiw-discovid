@@ -34,11 +34,10 @@
                 <div class="jumbotron-buttons">
                   <a class="btn btn-primary btn-lg" id="ceder-localizacao" role="button">Ceder Localização</a>
                   <p>ou</p>
-                  <div class="input-group">
-                    <input type="text" class="form-control" id="localidade-banner" placeholder="Introduza uma localidade...">
-                    <div class="input-group-append">
-                      <button class="btn input-group-text"><i class="fas fa-chevron-right"></i></button>
-                    </div>
+                  <div style="min-width: 200px;">
+                    <select class="select-localidades-2" style="width: 100%; height: 40px;" name="state">
+                      <option disabled="disabled" value="0" selected>Localidade</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -66,8 +65,9 @@
             <div class="col-lg-8">
               <div style="width: 100%; padding: 0px 15px;">
                 <h2 class="results-title">Postos encontrados</h2>
-                <h3 class="results-description pb-4">(3 resultados)</h3>
+                <h3 id="qnt-resultados" class="results-description pb-4">(0 resultados)</h3>
                 <div class="results-cards" id="postos-encontrados">
+                  <p class="color-azul-princ"><b>Selecione uma localidade para obter resultados...</b></p>
                 </div>
               </div>
             </div>
@@ -311,7 +311,7 @@
   <script type="text/javascript" src="js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
   <script type="text/javascript" src="js\lib\sweetalert2\sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="js\misc.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4&callback=initMap"></script>
+  <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4&callback=InitMap"></script> -->
   <script type="text/javascript">
     $(document).ready(function() {
       $('.select-localidades').select2({
@@ -319,6 +319,9 @@
       });
       $('.select-testes').select2({
         searchInputPlaceholder: 'Pesquisar tipo...'
+      });
+      $('.select-localidades-2').select2({
+        searchInputPlaceholder: 'Pesquisar localidade...'
       });
       $(function () { $('[data-toggle="tooltip"]').tooltip() });
     });
