@@ -13,8 +13,27 @@ export default class EncomendasView {
 
     this.currentPage = document.querySelector("body");
     if (this.currentPage.id=="encomendas") {
-      this.MostrarEncomendas();
-      this.SetInfoEncomenda();
+      if(this.userController.getLoggedInUserType()=="posto"){
+        // Se não for administrador mostrar uma mensagem de erro
+        this.currentPage.innerHTML = `
+        <div class="container text-center d-flex justify-content-center flex-column" style="min-height: 100vh;">
+          <div style="font-size: 3rem;">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h1>A página requisitada não está disponível</h1>
+          <div>
+            <button class="btn btn-laranja">Página Inicial</button>
+          </div>
+        </div>`;
+
+      document.querySelector("button").addEventListener('click', event => {
+        window.location.replace("..\\..\\");
+      });
+      }
+      else{
+        this.MostrarEncomendas();
+        this.SetInfoEncomenda();
+      }
     }
 
     // VERIFICAR SE O UTILIZADOR É NORMAL
@@ -89,6 +108,11 @@ export default class EncomendasView {
         document.getElementById("numero-encomenda-modal").innerHTML=""
         document.getElementById("subtotal").innerHTML=""
         document.getElementById("preco-total").innerHTML=""
+        document.getElementById("metodo-pagamento").innerHTML=""
+        document.getElementById("rua-envio").innerHTML = "";
+        document.getElementById("cp-envio").innerHTML = "";
+        document.getElementById("localidade-envio").innerHTML = "";
+        document.getElementById("contacto-envio").innerHTML = "";
 
         const x = this.encomendasController.GetAllEncomendas();
         const x1 = this.lojaController.getAllProdutos();
@@ -100,6 +124,11 @@ export default class EncomendasView {
             document.getElementById("data-encomenda").innerHTML += `Encomenda realizada a ${x[i].data_compra}`;
             document.getElementById("subtotal").innerHTML += `${x[i].preco_total}€`;
             document.getElementById("preco-total").innerHTML += `${total}€`;
+            document.getElementById("metodo-pagamento").innerHTML += `${x[i].metodo_pagamento}`;
+            document.getElementById("rua-envio").innerHTML += `${x[i].endereco_envio}`;
+            document.getElementById("cp-envio").innerHTML += `${x[i].cp_envio}`;
+            document.getElementById("localidade-envio").innerHTML += `${x[i].localidade_envio}`;
+            document.getElementById("contacto-envio").innerHTML += `${x[i].contacto}`;
           }
         }
         for (let s = 0; s < x1.length; s++) {

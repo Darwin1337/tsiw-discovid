@@ -1,14 +1,37 @@
 import LojaController from '../controllers/LojaController.js';
+import UserController from '../controllers/UserController.js';
 
 export default class LojaView {
   constructor() {
-    // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
+    // Instanciar o LojaController para ser possível aceder ao métodos dos utilizadores
     this.lojaController = new LojaController();
+  // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
+  this.userController = new UserController();
 
     this.currentPage = document.querySelector("body");
     if (this.currentPage.id=="loja") {
-      this.ListAllProducts()
-      this.AddToCart()
+      if(this.userController.getLoggedInUserType()=="posto"){
+        // Se não for administrador mostrar uma mensagem de erro
+        this.currentPage.innerHTML = `
+        <div class="container text-center d-flex justify-content-center flex-column" style="min-height: 100vh;">
+          <div style="font-size: 3rem;">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h1>A página requisitada não está disponível</h1>
+          <div>
+            <button class="btn btn-laranja">Página Inicial</button>
+          </div>
+        </div>`;
+
+      document.querySelector("button").addEventListener('click', event => {
+        window.location.replace("..\\..\\");
+      });
+      }
+      else{
+        this.ListAllProducts()
+        this.AddToCart()
+        this.AddEncomenda()
+      }
     }
   }
 
@@ -125,5 +148,27 @@ export default class LojaView {
         }
       });
     }
+  }
+
+  AddEncomenda(){
+    //verificar se carrinho tem produtos
+    //verificar se carrinho tem produtos
+    //verificar se carrinho tem produtos
+    //verificar se carrinho tem produtos
+    document.getElementById("finalizar-encomenda-botao").addEventListener("click", ()=>{
+      if(document.getElementById("carrinho-de-compras").innerHTML.includes("")){
+        alert("nao tem produtos no carrinho")
+      }
+      else{
+        
+        alert("aa")
+        // document.getElementById("finalizar-encomenda-botao").setAttribute("data-togle","modal")
+        // document.getElementById("finalizar-encomenda-botao").setAttribute("data-bs-toggl","modal")
+        // document.getElementById("finalizar-encomenda-botao").setAttribute("data-bs-target","#finalizar-encomenda")
+        // //data-toggle="modal" data-bs-toggle="modal" data-bs-target="#finalizar-encomenda"
+      }
+      // console.log(document.getElementById("carrinho-de-compras").innerHTML)
+    });
+    
   }
 }

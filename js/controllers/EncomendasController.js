@@ -13,9 +13,9 @@ export default class EncomendasController {
         return this.detalhes_encomenda;
     }
 
-    AddNewEncomenda(id_utilizador, data_compra, preco_total){
+    AddNewEncomenda(id_utilizador, data_compra, preco_total,morada,cp,localidade,pagamento,contacto){
         const newId = this.encomendas.length > 0 ? this.encomendas[this.encomendas.length - 1].id_encomenda + 1 : 1;
-        this.encomendas.push(new EncomendasModel(newId, id_utilizador, data_compra, preco_total));
+        this.encomendas.push(new EncomendasModel(newId, id_utilizador, data_compra, preco_total, morada,cp,localidade,pagamento,contacto));
         localStorage.setItem("encomendas", JSON.stringify(this.encomendas));
     }
     AddNewDetalhesEncomenda(id_encomenda, id_produto, quantidade){

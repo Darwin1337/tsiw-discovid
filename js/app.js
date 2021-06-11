@@ -136,8 +136,8 @@ class App {
     if (!localStorage.encomendas) {
       this.encomendasController = new EncomendasController();
 
-      this.encomendasController.AddNewEncomenda(1, "12/01/2020", "12");
-      this.encomendasController.AddNewEncomenda(2, "12/01/2020", "12");
+      this.encomendasController.AddNewEncomenda(1, "12/01/2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
+      this.encomendasController.AddNewEncomenda(2, "12/01/2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
     }
 
     // Detalhes encomenda

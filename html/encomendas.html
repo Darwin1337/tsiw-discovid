@@ -54,7 +54,7 @@
 
         </div>
         <div class="modal fade" id="modal-detalhes-encomenda" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-          <div class="modal-dialog modal-fullscreen">
+          <div class="modal-dialog modal-detalhes-encomenda">
             <div class="modal-content background-modal">
               <div class="row">
                 <div class="col-md-12 fechar-modal">
@@ -64,18 +64,13 @@
               <div class="modal-body">
                 <div class="container">
                   <div class="row mt-5">
-                    <div class="col-sm-12 col-md-12 col-xl-10">
+                    <div class="col-sm-12 col-md-12 col-xl-12">
                       <div class="col-md-12 color-azul-princ">
                         <h5 class="color-laranja mb-3" id="numero-encomenda-modal"></h5>
                         <p><b>Estado: </b>Processado</p>
                         <p id="data-encomenda"></p>
-                        <!-- <div class="row ">
-                          <div class="col-md-12 bg-cinza border-7px mb-3">
-                            <p class="mt-3"><b>Prazo previsto para entrega até 25 de abril</b></p>
-                          </div>
-                        </div> -->
                         <div class="row">
-                          <div class="col-xl-6 col-md-12 bg-pd-br">
+                          <div class="col-xl-12 col-md-12 bg-pd-br">
                             <div class="col-md-12 d-flex justify-content-between flex-wrap">
                               <p>Artigos</p>
                               <p>Preço</p>
@@ -108,29 +103,18 @@
                           <div class="col-md-6 mt-4">
                             <p>Endereço de envio</p>
                             <hr>
-                            <p class="mb-1">Rua de trás, 123</p>
-                            <p class="mb-1">1234-123</p>
-                            <p class="mb-1">Gondomar</p>
-                            <p class="mb-1">912345678</p>
-                          </div>
-                          <div class="col-md-6 mt-4">
-                            <p>Faturação</p>
-                            <hr>
-                            <p class="mb-1">António José</p>
-                            <p class="mb-1">Rua de trás, 123</p>
-                            <p class="mb-1">1234-123</p>
-                            <p class="mb-1">Gondomar</p>
+                            <p class="mb-1" id="rua-envio"></p>
+                            <p class="mb-1" id="cp-envio"></p>
+                            <p class="mb-1" id="localidade-envio"></p>
+                            <p class="mb-1" id="contacto-envio"></p>
                           </div>
                           <div class="col-md-6 mt-4">
                             <p>Pagamento</p>
                             <hr>
-                            <p class="mb-1">Paypal</p>
+                            <p class="mb-1" id="metodo-pagamento"></p>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <div class="col-md-12 col-xl-2 ">
-                      <button class="border-7px bg-laranja botao-imprimir w-100">Imprimir fatura</button>
                     </div>
                   </div>
                 </div>
