@@ -8,12 +8,14 @@ import RegistoEntidadeView from "./views/RegistoEntidadeView.js";
 import LojaView from "./views/LojaView.js";
 import IndexView from "./views/IndexView.js";
 import PostosView from "./views/PostosView.js";
+import EncomendasView from "./views/EncomendasView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
 import TestsController from "./controllers/TestsController.js";
 import LocaleController from "./controllers/LocaleController.js";
 import LojaController from "./controllers/LojaController.js";
+import EncomendasController from "./controllers/EncomendasController.js";
 
 class App {
   constructor() {
@@ -29,7 +31,7 @@ class App {
       'checkout-3': [NavbarView],
       'editar-perfil': [NavbarView, ProfileView],
       'marcacoes': [NavbarView],
-      'encomendas': [NavbarView],
+      'encomendas': [NavbarView, EncomendasView],
       'notificacoes': [NavbarView],
       'loja': [NavbarView, LojaView],
       'postos': [NavbarView, PostosView],
@@ -65,6 +67,7 @@ class App {
     if (!localStorage.produtos) {
       this.loja = new LojaController();
       this.loja.ProdutoAdd("Mascara 50uni", "Mascara 50uni para proteção diaria contra virus","6","https://i.ibb.co/2Z2swPF/icon.png");
+      this.loja.ProdutoAdd("Mascara 50uni  2", "Mascara 50uni para proteção diaria contra virus","2","https://i.ibb.co/2Z2swPF/icon.png");
     }
 
     // Utilizadores
@@ -107,6 +110,23 @@ class App {
 
       this.userController.EntityUser_Register("Vale Saúde", "514987472", "valesaude@clinica.pt", "123", "valesaude.pt", "08:00", "20:00", "20", false, true, true);
       this.userController.EntityUser_RegisterAddress(this.userController.getEntityUserByEmail("valesaude@clinica.pt").id, "R. Dom João de Castro Nº 509", "4435-674", 110, 41.182707868135395, -8.5291363332414);
+    }
+
+    // Encomendas
+    if (!localStorage.encomendas) {
+      this.encomendasController = new EncomendasController();
+
+      this.encomendasController.AddNewEncomenda(1, "12/01/2020", "12");
+      this.encomendasController.AddNewEncomenda(2, "12/01/2020", "12");
+    }
+
+    // Detalhes encomenda
+    if (!localStorage.detalhes_encomenda) {
+      this.encomendasController = new EncomendasController();
+
+      this.encomendasController.AddNewDetalhesEncomenda(1, 2, 1);
+      this.encomendasController.AddNewDetalhesEncomenda(1, 1, 2);
+      this.encomendasController.AddNewDetalhesEncomenda(2, 1, 2);
     }
   }
 

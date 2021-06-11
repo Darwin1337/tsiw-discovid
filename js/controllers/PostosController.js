@@ -10,9 +10,11 @@ export default class PostosController {
   GetAllPostos() {
     return this.postos;
   }
+  
   GetAllEnderecos() {
     return this.enderecos;
   }
+
   GetAllLocalidades() {
     return this.localidades;
   }
