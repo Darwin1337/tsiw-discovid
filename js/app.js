@@ -95,8 +95,6 @@ class App {
       // User 1: Morada
       this.userController.NormalUser_RegisterAddress(
         this.userController.getNormalUserByEmail("diogo@borges.pt").id, "Rua da Âncora 100", "4400-297", 295, 37.080801, -8.307273199999999, "Gaia", true);
-      this.userController.NormalUser_RegisterAddress(
-        this.userController.getNormalUserByEmail("diogo@borges.pt").id, "Rua Nuno Álvares 87", "4420-024", 110, 41.14293268029151, -8.564717419708497, "Gondomar", true);
     }
 
     // Utilizadores entidades

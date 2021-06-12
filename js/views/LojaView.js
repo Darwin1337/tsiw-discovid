@@ -1,6 +1,7 @@
 import LojaController from '../controllers/LojaController.js';
 import UserController from '../controllers/UserController.js';
 import EncomendasController from '../controllers/EncomendasController.js';
+import LocaleController from '../controllers/LocaleController.js';
 
 export default class LojaView {
   constructor() {
@@ -10,6 +11,9 @@ export default class LojaView {
     this.userController = new UserController();
     // Instanciar o EncomendasController para ser possível aceder ao métodos dos utilizadores
     this.encomendasController = new EncomendasController();
+    // Instanciar o LocaleController para ser possível aceder ao métodos dos utilizadores
+    this.localeController = new LocaleController();
+    
 
     this.array=[]
 
@@ -170,6 +174,14 @@ export default class LojaView {
       }
       else{
         $("#finalizar-encomenda").modal("show")
+        const x2=this.userController.getAllNormalEnderecos();
+        for (let d = 0; d< x2.length; d++) {
+          if (x2[d].id_utilizador==this.userController.getLoggedInUserData().id) {
+            document.getElementById("morada-a-enviar").value=`${x2[d].morada}, ${x2[d].cod_postal}, ${this.localeController.GetNameById(x2[d].id_localidade).nome}` 
+            break;
+          }
+        }
+        document.getElementById("preco-total-encomenda").innerHTML=document.getElementById("preco-total").innerHTML
         this.FinalizarCompra()
       }
     });
@@ -182,11 +194,20 @@ export default class LojaView {
       let data=""
       let preco_total=0
       let quantidade=0
+      let morada=""
+      let tlm=""
+      let cp=""
+      let localidade=""
       const x=this.lojaController.getAllProdutos();
+      const x1=this.userController.getAllNormalUsers();
+      const x2=this.userController.getAllNormalEnderecos();
+      const x3=this.encomendasController.GetAllLocalidades();
       //Acabar adicionar encomenda
       //Acabar adicionar encomenda
       //Acabar adicionar encomenda
       //Acabar adicionar encomenda
+
+      // //ir buscar a data
       const currentDate = new Date();
       if (parseInt(currentDate.getMonth())+1 < 10) {
         data= `${currentDate.getDate()}-0${parseInt(currentDate.getMonth())+1}-${currentDate.getFullYear()}`
@@ -194,6 +215,22 @@ export default class LojaView {
       else{
         data= `${currentDate.getDate()}-${parseInt(currentDate.getMonth())+1}-${currentDate.getFullYear()}`
       }
+
+      //Guardar informações do utilizador logado
+      for (let d = 0; d< x2.length; d++) {
+        for (let i = 0; i< x1.length; i++) {
+          for (let z = 0; z< x3.length; z++) {
+            if (x1[i].id==this.userController.getLoggedInUserData().id && x2[d].id_utilizador==x1[i].id && x2[d].id_localidade==x3[z].id) {
+              tlm=x1[i].tlm
+              morada=x2[d].morada
+              cp=x2[d].cod_postal
+              localidade=x3[z].nome
+            }
+          }
+        }
+      }
+
+      //Verificar qual o radio button selecionado
       var radios = document.getElementsByName('pagamento-metodo');
       for (var i = 0, length = radios.length; i < length; i++) {
         if (radios[i].checked) {
@@ -202,14 +239,18 @@ export default class LojaView {
               if (x[i].id==this.array[z]) {
                 quantidade=document.querySelector(`#quantidade-produto-${x[i].id}`).value
                 preco_total+=parseFloat(x[i].preco)*parseFloat(quantidade)
+                //adicionar novo detalhes encomenda
                 this.encomendasController.AddNewDetalhesEncomenda(this.encomendasController.encomendas[this.encomendasController.encomendas.length - 1].id_encomenda + 1,this.array[z], parseInt(quantidade))
               }
             }
           }
-          this.encomendasController.AddNewEncomenda(this.userController.getLoggedInUserData().id,data,preco_total,"teste","4122-222","porto",radios[i].value,document.getElementById("n_telemovel").value)
+          //adicionar nova encomenda
+          this.encomendasController.AddNewEncomenda(this.userController.getLoggedInUserData().id,data,preco_total,morada,cp,localidade,radios[i].value,tlm)
           break;
         }
       }
+
+      
       Swal.fire('Sucesso!', "Encomenda realizada com sucesso", 'success');
       setTimeout(function(){ window.location.replace("encomendas.html"); }, 2000);
     });

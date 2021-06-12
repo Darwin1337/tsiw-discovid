@@ -3,7 +3,11 @@ export default class EncomendasController {
     constructor() {
       this.encomendas = localStorage.encomendas? JSON.parse(localStorage.encomendas) : [];
       this.detalhes_encomenda = localStorage.detalhes_encomenda? JSON.parse(localStorage.detalhes_encomenda) : [];
+      this.localidades = localStorage.localidades ? JSON.parse(localStorage.localidades) : [];
 
+    }
+    GetAllLocalidades(){
+        return this.localidades;
     }
     GetAllEncomendas() {
         return this.encomendas;
