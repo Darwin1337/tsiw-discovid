@@ -1,17 +1,22 @@
 import LojaController from '../controllers/LojaController.js';
 import UserController from '../controllers/UserController.js';
+import EncomendasController from '../controllers/EncomendasController.js';
 
 export default class LojaView {
   constructor() {
     // Instanciar o LojaController para ser possível aceder ao métodos dos utilizadores
     this.lojaController = new LojaController();
-  // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
-  this.userController = new UserController();
+    // Instanciar o UserController para ser possível aceder ao métodos dos utilizadores
+    this.userController = new UserController();
+    // Instanciar o EncomendasController para ser possível aceder ao métodos dos utilizadores
+    this.encomendasController = new EncomendasController();
+
+    this.array=[]
 
     this.currentPage = document.querySelector("body");
     if (this.currentPage.id=="loja") {
       if(this.userController.getLoggedInUserType()=="posto"){
-        // Se não for administrador mostrar uma mensagem de erro
+        // Se não for user normal mostrar uma mensagem de erro
         this.currentPage.innerHTML = `
         <div class="container text-center d-flex justify-content-center flex-column" style="min-height: 100vh;">
           <div style="font-size: 3rem;">
@@ -30,7 +35,7 @@ export default class LojaView {
       else{
         this.ListAllProducts()
         this.AddToCart()
-        this.AddEncomenda()
+        this.VerificarCarrinho()
       }
     }
   }
@@ -102,6 +107,7 @@ export default class LojaView {
               </div>
 
               `
+              this.array.push(x[i].id)
               break
             }
           }
@@ -111,6 +117,7 @@ export default class LojaView {
         this.CalcularTotal()
         this.RemoverProdutoCarrinho()
         aux=false
+        
       });
     }
   }
@@ -144,31 +151,67 @@ export default class LojaView {
           if (btnRemove.id==row.id) {
             row.remove();
             this.CalcularTotal();
+            for(let i=0; i<this.array.length;i++){
+              if(btnRemove.id==this.array[i]){
+                this.array.splice(i,1)
+              }
+            }
           }
         }
       });
     }
   }
 
-  AddEncomenda(){
-    //verificar se carrinho tem produtos
-    //verificar se carrinho tem produtos
-    //verificar se carrinho tem produtos
-    //verificar se carrinho tem produtos
+  VerificarCarrinho(){
+  //verificar se carrinho tem produtos
     document.getElementById("finalizar-encomenda-botao").addEventListener("click", ()=>{
-      if(document.getElementById("carrinho-de-compras").innerHTML.includes("")){
-        alert("nao tem produtos no carrinho")
+      if(this.array.length==0){
+        Swal.fire('Erro!', "Para finalizar uma encomenda tem de ter algum produto no carrinho!", 'error');
       }
       else{
-        
-        alert("aa")
-        // document.getElementById("finalizar-encomenda-botao").setAttribute("data-togle","modal")
-        // document.getElementById("finalizar-encomenda-botao").setAttribute("data-bs-toggl","modal")
-        // document.getElementById("finalizar-encomenda-botao").setAttribute("data-bs-target","#finalizar-encomenda")
-        // //data-toggle="modal" data-bs-toggle="modal" data-bs-target="#finalizar-encomenda"
+        $("#finalizar-encomenda").modal("show")
+        this.FinalizarCompra()
       }
-      // console.log(document.getElementById("carrinho-de-compras").innerHTML)
     });
     
   }
+
+  FinalizarCompra(){
+    document.getElementById("form-encomenda").addEventListener("submit", event=>{
+      event.preventDefault();
+      let data=""
+      let preco_total=0
+      let quantidade=0
+      const x=this.lojaController.getAllProdutos();
+      //Acabar adicionar encomenda
+      //Acabar adicionar encomenda
+      //Acabar adicionar encomenda
+      //Acabar adicionar encomenda
+      const currentDate = new Date();
+      if (parseInt(currentDate.getMonth())+1 < 10) {
+        data= `${currentDate.getDate()}-0${parseInt(currentDate.getMonth())+1}-${currentDate.getFullYear()}`
+      }
+      else{
+        data= `${currentDate.getDate()}-${parseInt(currentDate.getMonth())+1}-${currentDate.getFullYear()}`
+      }
+      var radios = document.getElementsByName('pagamento-metodo');
+      for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+          for(let i=0; i<x.length;i++){
+            for(let z=0; z<this.array.length;z++){
+              if (x[i].id==this.array[z]) {
+                quantidade=document.querySelector(`#quantidade-produto-${x[i].id}`).value
+                preco_total+=parseFloat(x[i].preco)*parseFloat(quantidade)
+                this.encomendasController.AddNewDetalhesEncomenda(this.encomendasController.encomendas[this.encomendasController.encomendas.length - 1].id_encomenda + 1,this.array[z], parseInt(quantidade))
+              }
+            }
+          }
+          this.encomendasController.AddNewEncomenda(this.userController.getLoggedInUserData().id,data,preco_total,"teste","4122-222","porto",radios[i].value,document.getElementById("n_telemovel").value)
+          break;
+        }
+      }
+      Swal.fire('Sucesso!', "Encomenda realizada com sucesso", 'success');
+      setTimeout(function(){ window.location.replace("encomendas.html"); }, 2000);
+    });
+  }  
 }

@@ -740,6 +740,12 @@
   }
 }
 
+@media (max-width: 992px) {
+  .model-finalizar-encomenda{
+    max-width: 100%;
+    width: 100%;
+  }
+}
 @media (max-width: 767px) {
   .content-area .jumbotron .jumbotron-buttons {
     flex-direction: column;

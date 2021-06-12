@@ -35,17 +35,15 @@ export default class EncomendasView {
         this.SetInfoEncomenda();
       }
     }
-
-    // VERIFICAR SE O UTILIZADOR É NORMAL
-    // VERIFICAR SE O UTILIZADOR É NORMAL
-    // VERIFICAR SE O UTILIZADOR É NORMAL
-    // VERIFICAR SE O UTILIZADOR É NORMAL
-    // VERIFICAR SE O UTILIZADOR É NORMAL
-    // VERIFICAR SE O UTILIZADOR É NORMAL
-    // VERIFICAR SE O UTILIZADOR É NORMAL
   }
 
   MostrarEncomendas(){
+
+    //MOSTRAR APENAS AS ENCOMENDAS DO UTILIZADOR LOGADO
+    //MOSTRAR APENAS AS ENCOMENDAS DO UTILIZADOR LOGADO
+    //MOSTRAR APENAS AS ENCOMENDAS DO UTILIZADOR LOGADO
+    //MOSTRAR APENAS AS ENCOMENDAS DO UTILIZADOR LOGADO
+
     const x = this.encomendasController.GetAllEncomendas();
     let first=true
     for (let i = 0; i < x.length; i++) {
@@ -131,10 +129,11 @@ export default class EncomendasView {
             document.getElementById("contacto-envio").innerHTML += `${x[i].contacto}`;
           }
         }
-        for (let s = 0; s < x1.length; s++) {
-          for (let d = 0; d < x2.length; d++) {
-            if (x1[s].id==x2[d].id_encomenda) {
+        for (let d = 0; d < x2.length; d++) {
+          for (let s = 0; s < x1.length; s++) {
+            if (x1[s].id==x2[d].id_produto) {
               if(btnVerEncomenda.id==x2[d].id_encomenda){
+                console.log(x2[d].quantidade)
                 let sub=x1[s].preco * x2[d].quantidade;
                 document.getElementById("produtos-encomenda").innerHTML += `
                 <div class="row">

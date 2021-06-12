@@ -53,7 +53,7 @@
         </div>
         <div class="modal-body">
           <div class="container">
-            <div class="row mt-5">
+            <div class="row mt-2">
               <div class="col-sm-12 col-md-12 col-xl-12">
                 <div class="col-md-12 color-azul-princ">
                   
@@ -62,61 +62,70 @@
                   <!--Adicionar as moradas registadas no user-->
                   <!--Adicionar as moradas registadas no user-->
                   <!--Adicionar as moradas registadas no user-->
-                
+                  <h3 class="color-azul-princ mb-3 text-center mb-5">Finalizar encomenda</h3>
                   <div class="row">
-                    <div class="col-xl-12 col-md-12 bg-pd-br">
-                      <h5 class="color-laranja mb-3">Morada</h5>
-                      <div class="col-md-12 d-flex justify-content-between flex-wrap">
-                        <p>Artigos</p>
-                        <p>Preço</p>
-                      </div>
-                      <hr>
-                      <div id="produtos-encomenda">
-                      </div>
+                    <form id="form-encomenda" method="POST">
+                      <div class="col-xl-12 col-md-12 bg-pd-br mb-3">
+                        <h5 class="color-laranja mb-3">Morada</h5>
+                        <div class="col-md-12 d-flex justify-content-between flex-wrap">
+                          <p>Artigos</p>
+                          <p>Preço</p>
+                        </div>
+                        <hr>
+                        <div id="produtos-encomenda">
+                        </div>
 
-                      <div class="row">
-                        <div class="col-12 d-flex justify-content-end">
-                          <p class="me-4">Subtotal</p>
-                          <p id="subtotal"></p>
+                        <div class="row">
+                          <div class="col-12 d-flex justify-content-end">
+                            <p class="me-4">Subtotal</p>
+                            <p id="subtotal"></p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 d-flex justify-content-end">
+                            <p class="me-4">Envio</p>
+                            <p>2,00€</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-12 d-flex justify-content-end bg-cinza border-7px mb-3 ">
+                            <p class="me-4 mt-3"><b>Total</b></p>
+                            <p class="mt-3"><b id="preco-total"></b></p>
+                          </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-12 d-flex justify-content-end">
-                          <p class="me-4">Envio</p>
-                          <p>2,00€</p>
+                      <div class="col-xl-12 col-md-12 bg-pd-br mb-3">
+                        <h5 class="color-laranja mb-3">Nº Telemovel</h5>
+                        <div class="col-md-12 ">
+                          <input type="number" class="w-100 input-login-registar" min="111111111" max="999999999" id="n_telemovel" required>
+                        </div>
+                        
+                      </div>
+                      <div class="col-xl-12 col-md-12 bg-pd-br mb-3">
+                        <h5 class="color-laranja mb-3">Metodo de pagemento</h5>
+                        <div class="row">
+                          <div class="col-md-4 text-center">
+                            <input type="radio" value="PayPal" name="pagamento-metodo" checked>
+                            <img src="..\img\PayPal-Logo.png">
+                          </div>
+                          <div class="col-md-4 mt-2 text-center">
+                            <input type="radio" value="Multibanco" name="pagamento-metodo">
+                            <img src="..\img\multibanco-logo.png">
+                          </div>
+                          <div class="col-md-4 mt-3 text-center">
+                            <input type="radio" value="MBWay" name="pagamento-metodo">
+                            <img src="..\img\mbway-Logo.png">
+                          </div>
                         </div>
                       </div>
-                      <div class="row">
-                        <div class="col-12 d-flex justify-content-end bg-cinza border-7px mb-3 ">
-                          <p class="me-4 mt-3"><b>Total</b></p>
-                          <p class="mt-3"><b id="preco-total"></b></p>
-                        </div>
+                      <div class="col-md-12 col-xl-12 ">
+                        <button class="border-7px bg-laranja botao-imprimir w-100" id="finalizar-compra-modal">Finalizar Compra</button>
                       </div>
-                    </div>
-                    
-                    <div class="col-xl-12 col-md-12 bg-pd-br">
-                      <h5 class="color-laranja mb-3">Metodo de pagemento</h5>
-                      <div class="row">
-                        <div class="col-md-4 text-center">
-                          <input type="radio" value="" name="pagamento-metodo">
-                          <img src="..\img\PayPal-Logo.png">
-                        </div>
-                        <div class="col-md-4 mt-2 text-center">
-                          <input type="radio" value="" name="pagamento-metodo">
-                          <img src="..\img\multibanco-logo.png">
-                        </div>
-                        <div class="col-md-4 mt-3 text-center">
-                          <input type="radio" value="" name="pagamento-metodo">
-                          <img src="..\img\mbway-Logo.png">
-                        </div>
-                      </div>
-                    </div>
+                    </form>
                   </div>
                 </div>
               </div>
-              <div class="col-md-12 col-xl-12 ">
-                <button class="border-7px bg-laranja botao-imprimir w-100">Finalizar Compra</button>
-              </div>
+              
             </div>
           </div>
         </div>
