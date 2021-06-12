@@ -2,6 +2,7 @@ import LojaController from '../controllers/LojaController.js';
 import UserController from '../controllers/UserController.js';
 import EncomendasController from '../controllers/EncomendasController.js';
 import LocaleController from '../controllers/LocaleController.js';
+import GamificacoesController from '../controllers/GamificacoesController.js';
 
 export default class LojaView {
   constructor() {
@@ -13,6 +14,8 @@ export default class LojaView {
     this.encomendasController = new EncomendasController();
     // Instanciar o LocaleController para ser possível aceder ao métodos dos utilizadores
     this.localeController = new LocaleController();
+    // Instanciar o GamificacoesController para ser possível aceder ao métodos dos utilizadores
+    this.gamificacoesController = new GamificacoesController();
     
 
     this.array=[]
@@ -175,17 +178,41 @@ export default class LojaView {
       else{
         $("#finalizar-encomenda").modal("show")
         const x2=this.userController.getAllNormalEnderecos();
-        for (let d = 0; d< x2.length; d++) {
-          if (x2[d].id_utilizador==this.userController.getLoggedInUserData().id) {
-            document.getElementById("morada-a-enviar").value=`${x2[d].morada}, ${x2[d].cod_postal}, ${this.localeController.GetNameById(x2[d].id_localidade).nome}` 
-            break;
-          }
-        }
+        const x1=this.userController.getAllNormalUsers();
         document.getElementById("preco-total-encomenda").innerHTML=document.getElementById("preco-total").innerHTML
+        for (let d = 0; d< x2.length; d++) {
+          for (let i = 0; i< x1.length; i++) {
+            if (x2[d].id_utilizador==this.userController.getLoggedInUserData().id && x1[i].id==this.userController.getLoggedInUserData().id) {
+              document.getElementById("morada-a-enviar").value=`${x2[d].morada}, ${x2[d].cod_postal}, ${this.localeController.GetNameById(x2[d].id_localidade).nome}` 
+              
+                document.getElementById("radio-usar-pontos").addEventListener("click", ()=>{
+                  if (document.getElementById("radio-usar-pontos").checked==true) {
+                    if (x1[i].pontos>parseFloat(document.getElementById("preco-total").innerHTML.split("€",1))*100) {
+                      alert("Os pontos ultrapassao o valor da encomenda! Acrescente algo mais ao carrinho")
+                      document.getElementById("radio-usar-pontos").checked=false
+                      
+                    }
+                    else{
+                      document.getElementById("radio-usar-pontos").checked=true
+                      document.getElementById("pontos-encomenda").innerHTML=document.getElementById("pontos-user-usar").value
+                      document.getElementById("preco-total-encomenda").innerHTML=parseFloat(document.getElementById("preco-total").innerHTML.split("€",1))-parseFloat(document.getElementById("pontos-encomenda").innerHTML/100)+"€"
+                    }
+                  }
+                  else{
+                    document.getElementById("pontos-encomenda").innerHTML="0"
+                    document.getElementById("preco-total-encomenda").innerHTML=document.getElementById("preco-total").innerHTML
+                  }
+                })
+              document.getElementById("pontos-user").innerHTML=`${x1[i].pontos} = ${parseFloat(x1[i].pontos)/100}€`
+              document.getElementById("pontos-user-usar").value=`${x1[i].pontos}`
+              break;
+              }
+              
+            }
+          }
         this.FinalizarCompra()
       }
     });
-    
   }
 
   FinalizarCompra(){
@@ -238,7 +265,7 @@ export default class LojaView {
             for(let z=0; z<this.array.length;z++){
               if (x[i].id==this.array[z]) {
                 quantidade=document.querySelector(`#quantidade-produto-${x[i].id}`).value
-                preco_total+=parseFloat(x[i].preco)*parseFloat(quantidade)
+                preco_total=parseFloat(document.getElementById("preco-total-encomenda").innerHTML.split("€",1))
                 //adicionar novo detalhes encomenda
                 this.encomendasController.AddNewDetalhesEncomenda(this.encomendasController.encomendas[this.encomendasController.encomendas.length - 1].id_encomenda + 1,this.array[z], parseInt(quantidade))
               }
@@ -246,6 +273,14 @@ export default class LojaView {
           }
           //adicionar nova encomenda
           this.encomendasController.AddNewEncomenda(this.userController.getLoggedInUserData().id,data,preco_total,morada,cp,localidade,radios[i].value,tlm)
+          if (document.getElementById("radio-usar-pontos").checked==true) {
+            this.userController.RemoveUserPoints()
+            this.userController.UpdateUserPoints(this.gamificacoesController.pontos_encomenda[0].pontos)
+          }
+          else{
+            this.userController.UpdateUserPoints(this.gamificacoesController.pontos_encomenda[0].pontos)
+          }
+          
           break;
         }
       }

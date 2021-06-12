@@ -70,9 +70,15 @@
                         <input type="text" class="w-100 input-login-registar" id="morada-a-enviar" disabled>
                         <hr>
                         <div class="row">
-                          <div class="col-12 d-flex justify-content-end bg-cinza border-7px mb-3 ">
-                            <p class="me-4 mt-3"><b>Total</b></p>
-                            <p class="mt-3"><b id="preco-total-encomenda"></b></p>
+                          <div class="col-6">
+                            <p class="me-4 mt-3"><b>Pontos || <span id="pontos-user"></span></b></p>
+                            <input type="number" class="input-login-registar" id="pontos-user-usar" disabled>
+                            <span>Utilizar pontos</span>
+                            <input type="checkbox" name="usar-pontos" value="usar-pontos" id="radio-usar-pontos">
+                          </div>
+                          <div class="col-6 d-flex justify-content-end bg-cinza border-7px mb-3 ">
+                            <p class="me-4 mt-3"><b>Total <span id="preco-total-encomenda"></span></b></p>
+                            <p class="me-4 mt-3"><b>Pontos a utilizar <span id="pontos-encomenda"></span></b></p>
                           </div>
                         </div>
                       </div>

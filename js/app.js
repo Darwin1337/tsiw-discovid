@@ -16,6 +16,7 @@ import TestsController from "./controllers/TestsController.js";
 import LocaleController from "./controllers/LocaleController.js";
 import LojaController from "./controllers/LojaController.js";
 import EncomendasController from "./controllers/EncomendasController.js";
+import GamificacoesController from "./controllers/GamificacoesController.js";
 
 class App {
   constructor() {
@@ -134,8 +135,8 @@ class App {
     if (!localStorage.encomendas) {
       this.encomendasController = new EncomendasController();
 
-      this.encomendasController.AddNewEncomenda(1, "12/01/2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
-      this.encomendasController.AddNewEncomenda(2, "12/01/2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
+      this.encomendasController.AddNewEncomenda(1, "12-01-2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
+      this.encomendasController.AddNewEncomenda(2, "12-01-2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
     }
 
     // Detalhes encomenda
@@ -145,6 +146,13 @@ class App {
       this.encomendasController.AddNewDetalhesEncomenda(1, 2, 1);
       this.encomendasController.AddNewDetalhesEncomenda(1, 1, 2);
       this.encomendasController.AddNewDetalhesEncomenda(2, 1, 2);
+    }
+
+    //Pontos
+    if (!localStorage.pontos_encomenda) {
+      this.gamificacoesController = new GamificacoesController();
+
+      this.gamificacoesController.AddPontosEncomenda(100);
     }
   }
 

@@ -31,70 +31,143 @@ export default class EncomendasView {
       });
       }
       else{
-        this.MostrarEncomendas();
+        this.MostrarEncomendas(1);
         this.SetInfoEncomenda();
+        this.OrdenarEncomendas();
       }
     }
   }
 
-  MostrarEncomendas(){
-
-    const x = this.encomendasController.GetAllEncomendas();
+  MostrarEncomendas(ordem){
+    document.getElementById("encomenda-cartao").innerHTML=""
+    const encomendas = this.encomendasController.GetAllEncomendas();
     let first=true
-    for (let i = 0; i < x.length; i++) {
-      if (x[i].id_utilizador==this.userController.getLoggedInUserData().id) {
-        if (first==true) {
-          document.getElementById("encomenda-cartao").innerHTML += `
-          <div class="col-md-9 encomenda " >
-            <div class="row d-flex align-items-center">
-              <div class="col-md-6 color-azul-princ">
-                <h5 class="color-laranja">Encomenda #${x[i].id_encomenda}</h5>
-                <p class="pt-4 mb-1">Encomenda realizada a ${x[i].data_compra}</p>
+    if (ordem==1) {
+      for (let i = 0; i < encomendas.length; i++) {
+        if (encomendas[i].id_utilizador==this.userController.getLoggedInUserData().id) {
+          if (first==true) {
+            document.getElementById("encomenda-cartao").innerHTML += `
+            <div class="col-md-12 encomendas-cartoes-display">
+              <div class="col-xl-9 col-xs-12 encomenda " >
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-6 color-azul-princ">
+                    <h5 class="color-laranja">Encomenda #${encomendas[i].id_encomenda}</h5>
+                    <p class="pt-4 mb-1">Encomenda realizada a ${encomendas[i].data_compra}</p>
+                  </div>
+                  <div class="col-md-3 color-azul-princ ">
+                    <p><b>Estado: </b>Processado</p>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda" id="${encomendas[i].id_encomenda}">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-3 color-azul-princ ">
-                <p><b>Estado: </b>Processado</p>
-              </div>
-              <div class="col-md-3">
-                <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda" id="${x[i].id_encomenda}">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 color-azul-princ ">
-            <h5 class="color-laranja">Ordenar por data</h5>
-            <div class="d-flex align-items-center pt-3">
-              <input type="checkbox" class="check-style"><span class="span-checkbox">Mais recente para mais antigo</span>
-            </div>
-            <div class="d-flex align-items-center pt-3 pb-3">
-              <input type="checkbox" class="check-style"><span class="span-checkbox">Mais antigo para mais recente</span>
-            </div>
-          </div>
-          `
-        first=false
-        }
-        else{
-          document.getElementById("encomenda-cartao").innerHTML += `
-          <div class="col-md-9 encomenda mt-3" >
-            <div class="row d-flex align-items-center">
-              <div class="col-md-6 color-azul-princ">
-                <h5 class="color-laranja" id="numero-encomenda">Encomenda #${x[i].id_encomenda}</h5>
-                <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${x[i].data_compra}</p>
-  
-              </div>
-              <div class="col-md-3 color-azul-princ ">
-                <p><b>Estado: </b>Processado</p>
-              </div>
-              <div class="col-md-3">
-                <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda" id="${x[i].id_encomenda}">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+            
+              <div class="col-md-3 color-azul-princ p-3">
+                <h5 class="color-laranja">Ordenar por data</h5>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio"  name="ordem" value="recente-antigo" id="ordem-2" class="check-style"><span class="span-checkbox">Mais recente para mais antigo</span>
+                </div>
+                <div class="d-flex align-items-center pt-3 pb-3">
+                  <input type="radio" checked name="ordem" value="antigo-recente" id="ordem-1" class="check-style"><span class="span-checkbox">Mais antigo para mais recente</span>
+                </div>
               </div>
             </div>
-          </div>
             `
+            
+
+          first=false
+          }
+          else{
+            document.getElementById("encomenda-cartao").innerHTML += `
+            <div class="col-md-12 encomendas-cartoes-display">
+              <div class="col-xl-9 col-xs-12 encomenda mt-3" >
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-6 color-azul-princ">
+                    <h5 class="color-laranja" id="numero-encomenda">Encomenda #${encomendas[i].id_encomenda}</h5>
+                    <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${encomendas[i].data_compra}</p>
+      
+                  </div>
+                  <div class="col-md-3 color-azul-princ ">
+                    <p><b>Estado: </b>Processado</p>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda" id="${encomendas[i].id_encomenda}">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+              `
+          }
         }
       }
     }
+    else{
+      for (let i = parseInt(encomendas.length)-1; i > -1; i--) {
+        if (encomendas[i].id_utilizador==this.userController.getLoggedInUserData().id) {
+          if (first==true) {
+            document.getElementById("encomenda-cartao").innerHTML += `
+            <div class="col-md-12 encomendas-cartoes-display">
+              <div class="col-xl-9 col-xs-12 encomenda " >
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-6 color-azul-princ">
+                    <h5 class="color-laranja">Encomenda #${encomendas[i].id_encomenda}</h5>
+                    <p class="pt-4 mb-1">Encomenda realizada a ${encomendas[i].data_compra}</p>
+                  </div>
+                  <div class="col-md-3 color-azul-princ ">
+                    <p><b>Estado: </b>Processado</p>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda" id="${encomendas[i].id_encomenda}">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+                  </div>
+                </div>
+              </div>
+            
+              <div class="col-md-3 color-azul-princ p-3">
+                <h5 class="color-laranja">Ordenar por data</h5>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio"  name="ordem" value="recente-antigo" id="ordem-2" class="check-style"><span class="span-checkbox">Mais recente para mais antigo</span>
+                </div>
+                <div class="d-flex align-items-center pt-3 pb-3">
+                  <input type="radio" checked name="ordem" value="antigo-recente" id="ordem-1" class="check-style"><span class="span-checkbox">Mais antigo para mais recente</span>
+                </div>
+              </div>
+            </div>
+            `
+            
+
+          first=false
+          }
+          else{
+            document.getElementById("encomenda-cartao").innerHTML += `
+            <div class="col-md-12 encomendas-cartoes-display">
+              <div class="col-xl-9 col-xs-12 encomenda mt-3" >
+                <div class="row d-flex align-items-center">
+                  <div class="col-md-6 color-azul-princ">
+                    <h5 class="color-laranja" id="numero-encomenda">Encomenda #${encomendas[i].id_encomenda}</h5>
+                    <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${encomendas[i].data_compra}</p>
+      
+                  </div>
+                  <div class="col-md-3 color-azul-princ ">
+                    <p><b>Estado: </b>Processado</p>
+                  </div>
+                  <div class="col-md-3">
+                    <button class="ver-encomenda" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modal-detalhes-encomenda" id="${encomendas[i].id_encomenda}">Ver encomenda <span><i class="fas fa-arrow-right"></i></span> </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+              `
+          }
+        }
+      }
+    }
+    this.OrdenarEncomendas()
+    this.SetInfoEncomenda()
   }
 
   SetInfoEncomenda(){
+    //Atribuir os valores do localstorage aos campos
     for (const btnVerEncomenda of document.getElementsByClassName("ver-encomenda")) {
       btnVerEncomenda.addEventListener("click", () => {
 
@@ -109,37 +182,37 @@ export default class EncomendasView {
         document.getElementById("localidade-envio").innerHTML = "";
         document.getElementById("contacto-envio").innerHTML = "";
 
-        const x = this.encomendasController.GetAllEncomendas();
-        const x1 = this.lojaController.getAllProdutos();
-        const x2 = this.encomendasController.GetAllDetalhesEncomenda();
-        for (let i = 0; i < x.length; i++) {
-          if(btnVerEncomenda.id==x[i].id_encomenda){
-            let total=parseInt(x[i].preco_total) + parseInt(2);
-            document.getElementById("numero-encomenda-modal").innerHTML += `Encomenda #${x[i].id_encomenda}`;
-            document.getElementById("data-encomenda").innerHTML += `Encomenda realizada a ${x[i].data_compra}`;
-            document.getElementById("subtotal").innerHTML += `${x[i].preco_total}€`;
+        const encomendas = this.encomendasController.GetAllEncomendas();
+        const produtos = this.lojaController.getAllProdutos();
+        const detalhes_encomenda = this.encomendasController.GetAllDetalhesEncomenda();
+        for (let i = 0; i < encomendas.length; i++) {
+          if(btnVerEncomenda.id==encomendas[i].id_encomenda){
+            let total=parseInt(encomendas[i].preco_total) + parseInt(2);
+            document.getElementById("numero-encomenda-modal").innerHTML += `Encomenda #${encomendas[i].id_encomenda}`;
+            document.getElementById("data-encomenda").innerHTML += `Encomenda realizada a ${encomendas[i].data_compra}`;
+            document.getElementById("subtotal").innerHTML += `${encomendas[i].preco_total}€`;
             document.getElementById("preco-total").innerHTML += `${total}€`;
-            document.getElementById("metodo-pagamento").innerHTML += `${x[i].metodo_pagamento}`;
-            document.getElementById("rua-envio").innerHTML += `${x[i].endereco_envio}`;
-            document.getElementById("cp-envio").innerHTML += `${x[i].cp_envio}`;
-            document.getElementById("localidade-envio").innerHTML += `${x[i].localidade_envio}`;
-            document.getElementById("contacto-envio").innerHTML += `${x[i].contacto}`;
+            document.getElementById("metodo-pagamento").innerHTML += `${encomendas[i].metodo_pagamento}`;
+            document.getElementById("rua-envio").innerHTML += `${encomendas[i].endereco_envio}`;
+            document.getElementById("cp-envio").innerHTML += `${encomendas[i].cp_envio}`;
+            document.getElementById("localidade-envio").innerHTML += `${encomendas[i].localidade_envio}`;
+            document.getElementById("contacto-envio").innerHTML += `${encomendas[i].contacto}`;
           }
         }
-        for (let d = 0; d < x2.length; d++) {
-          for (let s = 0; s < x1.length; s++) {
-            if (x1[s].id==x2[d].id_produto) {
-              if(btnVerEncomenda.id==x2[d].id_encomenda){
-                console.log(x2[d].quantidade)
-                let sub=x1[s].preco * x2[d].quantidade;
+        for (let d = 0; d < detalhes_encomenda.length; d++) {
+          for (let s = 0; s < produtos.length; s++) {
+            if (produtos[s].id==detalhes_encomenda[d].id_produto) {
+              if(btnVerEncomenda.id==detalhes_encomenda[d].id_encomenda){
+                console.log(detalhes_encomenda[d].quantidade)
+                let sub=produtos[s].preco * detalhes_encomenda[d].quantidade;
                 document.getElementById("produtos-encomenda").innerHTML += `
                 <div class="row">
                   <div class="col-2">
                     <img src="../img/loja/M01.png" class="w-100" alt="">
                   </div>
                   <div class="col-8">
-                    <p><span class="color-laranja"><b>${x2[d].quantidade}x</b> </span><b class="color-azul-princ">${x1[s].nome}</b></p>
-                    <p id="id-produto">#0001 <span>${x1[s].preco}€</span></p>
+                    <p><span class="color-laranja"><b>${detalhes_encomenda[d].quantidade}x</b> </span><b class="color-azul-princ">${produtos[s].nome}</b></p>
+                    <p id="id-produto">#${produtos[s].id} <span>${produtos[s].preco}€</span></p>
                   </div>
                   <div class="col-2 d-flex justify-content-end ">
                     <p id="preco-total-produto">${sub}€</p>
@@ -153,5 +226,17 @@ export default class EncomendasView {
         }
       });
     }
+  }
+
+  OrdenarEncomendas(){
+    //Ordenar encomendas por data
+    document.getElementById("ordem-1").addEventListener("click",()=>{
+      this.MostrarEncomendas(1)
+      document.getElementById("ordem-1").checked=true
+    })
+    document.getElementById("ordem-2").addEventListener("click",()=>{
+      this.MostrarEncomendas(2)
+      document.getElementById("ordem-2").checked=true
+    })
   }
 }

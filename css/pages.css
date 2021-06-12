@@ -392,7 +392,9 @@
 
 /* Página da loja */
 
-
+.encomendas-cartoes-display{
+  display: flex;
+}
 
 .model-finalizar-encomenda{
   max-width: 100%;
@@ -744,6 +746,9 @@
   .model-finalizar-encomenda{
     max-width: 100%;
     width: 100%;
+  }
+  .encomendas-cartoes-display{
+    flex-direction: column-reverse;
   }
 }
 @media (max-width: 767px) {
