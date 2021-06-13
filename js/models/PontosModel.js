@@ -13,3 +13,4 @@ export class PontosAvaliacao {
     this.pontos = pontos;
   }
 }
+

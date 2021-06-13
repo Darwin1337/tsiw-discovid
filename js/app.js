@@ -9,6 +9,7 @@ import LojaView from "./views/LojaView.js";
 import IndexView from "./views/IndexView.js";
 //import PostosView from "./views/PostosView.js";
 import EncomendasView from "./views/EncomendasView.js";
+import AdminGamificacoesView from "./views/AdminGamificacoesView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -43,8 +44,8 @@ class App {
       'tracking': [NavbarView],
       'admin-entidades': [AdminUsersView],
       'admin-utilizadores': [AdminUsersView],
-      'admin-produtos': [AdminUsersView, AdminProdutosView]
-      // 'admin-gamificacoes': [AdminView]
+      'admin-produtos': [AdminUsersView, AdminProdutosView],
+      'admin-gamificacoes': [AdminUsersView, AdminGamificacoesView]
     };
 
     this.#importDataFixtures();
@@ -137,8 +138,8 @@ class App {
     if (!localStorage.encomendas) {
       this.encomendasController = new EncomendasController();
 
-      this.encomendasController.AddNewEncomenda(1, "12/01/2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
-      this.encomendasController.AddNewEncomenda(2, "12/01/2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
+      this.encomendasController.AddNewEncomenda(1, "12-01-2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
+      this.encomendasController.AddNewEncomenda(2, "12-01-2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
     }
 
     // Detalhes encomenda

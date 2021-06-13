@@ -62,7 +62,6 @@ export default class EncomendasView {
                   </div>
                 </div>
               </div>
-
               <div class="col-md-3 color-azul-princ p-3">
                 <h5 class="color-laranja">Ordenar por data</h5>
                 <div class="d-flex align-items-center pt-3">
@@ -75,7 +74,6 @@ export default class EncomendasView {
             </div>
             `
 
-
           first=false
           }
           else{
@@ -86,7 +84,6 @@ export default class EncomendasView {
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja" id="numero-encomenda">Encomenda #${encomendas[i].id_encomenda}</h5>
                     <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${encomendas[i].data_compra}</p>
-
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>Processado</p>
@@ -122,7 +119,6 @@ export default class EncomendasView {
                   </div>
                 </div>
               </div>
-
               <div class="col-md-3 color-azul-princ p-3">
                 <h5 class="color-laranja">Ordenar por data</h5>
                 <div class="d-flex align-items-center pt-3">
@@ -134,8 +130,6 @@ export default class EncomendasView {
               </div>
             </div>
             `
-
-
           first=false
           }
           else{
@@ -146,7 +140,6 @@ export default class EncomendasView {
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja" id="numero-encomenda">Encomenda #${encomendas[i].id_encomenda}</h5>
                     <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${encomendas[i].data_compra}</p>
-
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>Processado</p>

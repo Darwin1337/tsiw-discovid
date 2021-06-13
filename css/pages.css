@@ -392,6 +392,10 @@
 
 /* Página da loja */
 
+.encomendas-cartoes-display{
+  display: flex;
+}
+
 .model-finalizar-encomenda{
   max-width: 100%;
   width: 50%;
