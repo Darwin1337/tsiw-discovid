@@ -163,34 +163,30 @@ class App {
       this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 5, 5, "topp");
     }
 
+    this.gamificacoesController = new GamificacoesController();
+
     // Pontos
     if (!localStorage.pontos_encomenda) {
-      this.gamificacoesController = new GamificacoesController();
-
       this.gamificacoesController.AddPontosEncomenda(100);
     }
 
     // Pontos Avatar
     if (!localStorage.pontos_avatar) {
-      this.gamificacoesController = new GamificacoesController();
       this.gamificacoesController.AddPontosAvatar(50);
     }
 
     // Pontos Avaliação
     if (!localStorage.pontos_avaliacao) {
-      this.gamificacoesController = new GamificacoesController();
       this.gamificacoesController.AddPontosAvaliacao(200);
     }
 
     // Premio
     if (!localStorage.percentagem_premio) {
-      this.gamificacoesController = new GamificacoesController();
       this.gamificacoesController.AddPercentagemPremio(5, "1,2");
     }
 
     // Teste gratis
     if (!localStorage.quantidade_para_teste_gratis) {
-      this.gamificacoesController = new GamificacoesController();
       this.gamificacoesController.AddTesteGratis(5);
     }
 
@@ -206,7 +202,7 @@ class App {
     }
 
     // Resultados
-    if (!localStorage.estados) {
+    if (!localStorage.resultados) {
       this.marcacoesController.AddResultado("Pendente");
       this.marcacoesController.AddResultado("Positivo");
       this.marcacoesController.AddResultado("Negativo");
