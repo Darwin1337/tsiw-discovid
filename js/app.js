@@ -138,8 +138,8 @@ class App {
     if (!localStorage.encomendas) {
       this.encomendasController = new EncomendasController();
 
-      this.encomendasController.AddNewEncomenda(1, "12-01-2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
-      this.encomendasController.AddNewEncomenda(2, "12-01-2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
+      this.encomendasController.AddNewEncomenda(2, "12-01-2020", 12, "Rua Nuno Álvares 87","4420-024","Gondomar", "Paypal","123456789");
+      this.encomendasController.AddNewEncomenda(2, "12-01-2020", 12, "Rua Nuno Álvares 87","4420-024","Gondomar", "MBWay","123456789");
     }
 
     // Detalhes encomenda
@@ -164,8 +164,31 @@ class App {
     // Pontos
     if (!localStorage.pontos_encomenda) {
       this.gamificacoesController = new GamificacoesController();
-
       this.gamificacoesController.AddPontosEncomenda(100);
+    }
+
+    // Pontos Avatar
+    if (!localStorage.pontos_avatar) {
+      this.gamificacoesController = new GamificacoesController();
+      this.gamificacoesController.AddPontosAvatar(50);
+    }
+
+    // Pontos Avaliação
+    if (!localStorage.pontos_avaliacao) {
+      this.gamificacoesController = new GamificacoesController();
+      this.gamificacoesController.AddPontosAvaliacao(200);
+    }
+
+    // Premio
+    if (!localStorage.percentagem_premio) {
+      this.gamificacoesController = new GamificacoesController();
+      this.gamificacoesController.AddPercentagemPremio(5, "1,2");
+    }
+
+    // Teste gratis
+    if (!localStorage.quantidade_para_teste_gratis) {
+      this.gamificacoesController = new GamificacoesController();
+      this.gamificacoesController.AddTesteGratis(5);
     }
   }
 

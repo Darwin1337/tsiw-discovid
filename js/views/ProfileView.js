@@ -258,6 +258,9 @@ export default class NavbarView {
     document.getElementById("user-unome").value = userInfo.unome;
     document.getElementById("user-password").value = userInfo.password;
     document.getElementById("user-tlm").value = userInfo.tlm;
+    document.getElementById("avatar-profile-text").addEventListener("change",()=>{
+      document.getElementById("avatar-profile").src = document.getElementById("avatar-profile-text").value;
+    })
   }
 
   UpdatePostosInfo() {

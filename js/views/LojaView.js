@@ -131,6 +131,7 @@ export default class LojaView {
   QuantidadeAlterada(){
     for (const btn of document.getElementsByClassName("quantidade-produto")) {
       btn.addEventListener("change", () => {
+        btn.setAttribute('value', btn.value);
         this.CalcularTotal()
       });
     }
@@ -175,6 +176,8 @@ export default class LojaView {
         Swal.fire('Erro!', "Para finalizar uma encomenda tem de ter algum produto no carrinho!", 'error');
       }
       else{
+        document.getElementById("radio-usar-pontos").checked=false
+        document.getElementById("pontos-encomenda").innerHTML="0"
         $("#finalizar-encomenda").modal("show")
         const x2=this.userController.getAllNormalEnderecos();
         const x1=this.userController.getAllNormalUsers();
@@ -186,7 +189,7 @@ export default class LojaView {
                 document.getElementById("radio-usar-pontos").addEventListener("click", ()=>{
                   if (document.getElementById("radio-usar-pontos").checked==true) {
                     if (x1[i].pontos>parseFloat(document.getElementById("preco-total").innerHTML.split("€",1))*100) {
-                      alert("Os pontos ultrapassao o valor da encomenda! Acrescente algo mais ao carrinho")
+                      Swal.fire('Erro!', "Os pontos são superiores ao valor da compra, por favor adicione algo mais ao seu carrinho", 'error');
                       document.getElementById("radio-usar-pontos").checked=false
                     }
                     else{

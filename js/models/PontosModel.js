@@ -13,4 +13,14 @@ export class PontosAvaliacao {
     this.pontos = pontos;
   }
 }
-
+export class PercentagemPremio {
+  constructor(percentagem, produtos_oferta) {
+    this.percentagem = percentagem;
+    this.produtos_oferta=produtos_oferta
+  }
+}
+export class QuantidadeParaTesteGratis {
+  constructor(quantidade) {
+    this.quantidade = quantidade;
+  }
+}
