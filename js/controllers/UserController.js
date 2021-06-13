@@ -11,8 +11,6 @@ export default class UserController {
     this.entityUsers = localStorage.utilizadores_entidades ? JSON.parse(localStorage.utilizadores_entidades) : [];
     this.endEntidade = localStorage.enderecos_entidade ? JSON.parse(localStorage.enderecos_entidade) : [];
     this.testesEntidade = localStorage.testes_entidade ? JSON.parse(localStorage.testes_entidade) : [];
-
-    
   }
 
   getAllNormalEnderecos() {
@@ -171,30 +169,6 @@ export default class UserController {
    localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
 }
 
-  UpdateUserPoints(pontos){
-    //Atualizar pontos ao realizar uma compra
-    let loggedUser=this.getLoggedInUserData().id
-    for(let i=0; i<this.normalUsers.length;i++){
-      if (loggedUser==this.normalUsers[i].id) {
-        this.normalUsers[i].pontos+=pontos
-        localStorage.removeItem("utilizadores_normais");
-        localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
-      }
-    }
-  }
-
-  RemoveUserPoints(){
-    //Atualizar pontos ao realizar uma compra
-    let loggedUser=this.getLoggedInUserData().id
-    for(let i=0; i<this.normalUsers.length;i++){
-      if (loggedUser==this.normalUsers[i].id) {
-        this.normalUsers[i].pontos=0
-        localStorage.removeItem("utilizadores_normais");
-        localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
-      }
-    }
-  }
-
   // Registos
 
   NormalUser_Register(pnome, unome, email, password, tlm, nif, data_nasc, consentimento_email) {
@@ -337,10 +311,10 @@ export default class UserController {
 
   UpdateUserPoints(pontos){
     //Atualizar pontos ao realizar uma compra
-    let loggedUser=this.getLoggedInUserData().id;
+    let loggedUser=this.getLoggedInUserData().id
     for(let i=0; i<this.normalUsers.length;i++){
       if (loggedUser==this.normalUsers[i].id) {
-        this.normalUsers[i].pontos+=pontos;
+        this.normalUsers[i].pontos+=pontos
         localStorage.removeItem("utilizadores_normais");
         localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
       }
@@ -348,14 +322,14 @@ export default class UserController {
   }
 
   RemoveUserPoints(){
-  //Atualizar pontos ao realizar uma compra
-  let loggedUser=this.getLoggedInUserData().id;
-  for(let i=0; i<this.normalUsers.length;i++){
-    if (loggedUser==this.normalUsers[i].id) {
-      this.normalUsers[i].pontos=0;
-      localStorage.removeItem("utilizadores_normais");
-      localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+    //Atualizar pontos ao realizar uma compra
+    let loggedUser=this.getLoggedInUserData().id
+    for(let i=0; i<this.normalUsers.length;i++){
+      if (loggedUser==this.normalUsers[i].id) {
+        this.normalUsers[i].pontos=0
+        localStorage.removeItem("utilizadores_normais");
+        localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+      }
     }
   }
-}
 }

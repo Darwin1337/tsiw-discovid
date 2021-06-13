@@ -5,7 +5,7 @@ export default class AdminGamificacoesView {
     // Instanciar o GamificacoesController
     this.gamificacoesController = new GamificacoesController();
     this.ListAllGamificacoesEncomenda()
-    this.ListAllGamificacoesAvatar() 
+    this.ListAllGamificacoesAvatar()
     this.ListAllGamificacoesAvaliacao()
     this.ListAllGamificacoesPremio()
     this.ListAllGamificacoesTesteGratis()
@@ -36,7 +36,7 @@ export default class AdminGamificacoesView {
       $("#admin-edit-gamificao-encomenda").modal("show")
       document.getElementById("pontos-quantidade").value=x[0][0].pontos
       document.getElementById("gamificacao-encomenda-form").addEventListener("submit", (event)=>{
-        event.preventDefault(); 
+        event.preventDefault();
         this.EditGamificacaoEncomenda();
         Swal.fire('Sucesso!', "Alteração efetuada com sucesso!", 'success');
         setTimeout(() => {
@@ -67,7 +67,7 @@ export default class AdminGamificacoesView {
     document.getElementById("edit-pontos-avatar").addEventListener("click", ()=>{
       document.getElementById("pontos-quantidade-avatar").value=x[1][0].pontos
       document.getElementById("gamificacao-avatar-form").addEventListener("submit", (event)=>{
-        event.preventDefault(); 
+        event.preventDefault();
         this.EditGamificacaoAvatar();
         Swal.fire('Sucesso!', "Alteração efetuada com sucesso!", 'success');
         setTimeout(() => {
@@ -98,7 +98,7 @@ export default class AdminGamificacoesView {
     document.getElementById("edit-pontos-avaliacao").addEventListener("click", ()=>{
       document.getElementById("pontos-quantidade-avaliacao").value=x[2][0].pontos
       document.getElementById("gamificacao-avaliacao-form").addEventListener("submit", (event)=>{
-        event.preventDefault(); 
+        event.preventDefault();
         this.EditGamificacaoAvaliacao();
         Swal.fire('Sucesso!', "Alteração efetuada com sucesso!", 'success');
         setTimeout(() => {
@@ -130,7 +130,7 @@ export default class AdminGamificacoesView {
       document.getElementById("percentagem-premio").value=x[3][0].percentagem
       document.getElementById("artigos-premio").value=x[3][0].produtos_oferta
       document.getElementById("gamificacao-premio-form").addEventListener("submit", (event)=>{
-        event.preventDefault(); 
+        event.preventDefault();
         this.EditGamificacaoPremio();
         Swal.fire('Sucesso!', "Alteração efetuada com sucesso!", 'success');
         setTimeout(() => {
@@ -161,7 +161,7 @@ export default class AdminGamificacoesView {
     document.getElementById("edit-teste-gratis").addEventListener("click", ()=>{
       document.getElementById("quantidade-teste-gratis").value=x[4][0].quantidade
       document.getElementById("gamificacao-teste-gratis-form").addEventListener("submit", (event)=>{
-        event.preventDefault(); 
+        event.preventDefault();
         this.EditGamificacaoTesteGratis();
         Swal.fire('Sucesso!', "Alteração efetuada com sucesso!", 'success');
         setTimeout(() => {
@@ -174,5 +174,5 @@ export default class AdminGamificacoesView {
   EditGamificacaoTesteGratis(){
     this.gamificacoesController.EditTesteGratis(parseInt(document.getElementById("quantidade-teste-gratis").value))
   }
-  
+
 }

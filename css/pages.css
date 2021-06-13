@@ -392,11 +392,6 @@
 
 /* Página da loja */
 
-.encomendas-cartoes-display{
-  display: flex;
-  flex-direction: row;
-}
-
 .model-finalizar-encomenda{
   max-width: 100%;
   width: 50%;
@@ -523,6 +518,12 @@
 
 .store-cart .cart-content .btn-laranja {
   width: 18rem;
+}
+
+.encomendas-cartoes-display{
+  display: flex;
+  flex-direction: column-reverse;
+  flex-direction: row;
 }
 
 /* Checkout - 2 */

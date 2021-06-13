@@ -62,7 +62,7 @@ export default class GamificacoesController {
         this.quantidade_para_teste_gratis.push(new QuantidadeParaTesteGratis(quantidade));
         localStorage.setItem("quantidade_para_teste_gratis", JSON.stringify(this.quantidade_para_teste_gratis));
     }
-    
+
     EditTesteGratis(quantidade){
         this.quantidade_para_teste_gratis[0].quantidade=quantidade;
         localStorage.removeItem("quantidade_para_teste_gratis");

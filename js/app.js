@@ -19,6 +19,7 @@ import LojaController from "./controllers/LojaController.js";
 import EncomendasController from "./controllers/EncomendasController.js";
 import AvaliacoesController from "./controllers/AvaliacoesController.js";
 import GamificacoesController from "./controllers/GamificacoesController.js";
+import MarcacoesController from "./controllers/MarcacoesController.js";
 
 class App {
   constructor() {
@@ -46,6 +47,7 @@ class App {
       'admin-utilizadores': [AdminUsersView],
       'admin-produtos': [AdminUsersView, AdminProdutosView],
       'admin-gamificacoes': [AdminUsersView, AdminGamificacoesView]
+      // 'admin-gamificacoes': [AdminView]
     };
 
     this.#importDataFixtures();
@@ -164,6 +166,7 @@ class App {
     // Pontos
     if (!localStorage.pontos_encomenda) {
       this.gamificacoesController = new GamificacoesController();
+
       this.gamificacoesController.AddPontosEncomenda(100);
     }
 
@@ -189,6 +192,36 @@ class App {
     if (!localStorage.quantidade_para_teste_gratis) {
       this.gamificacoesController = new GamificacoesController();
       this.gamificacoesController.AddTesteGratis(5);
+    }
+
+    this.marcacoesController = new MarcacoesController();
+
+    // Estados
+    if (!localStorage.estados) {
+      this.marcacoesController.AddEstado("Agendado");
+      this.marcacoesController.AddEstado("Não disponível");
+      this.marcacoesController.AddEstado("Resultado pendente");
+      this.marcacoesController.AddEstado("Cancelado");
+      this.marcacoesController.AddEstado("Terminado");
+    }
+
+    // Resultados
+    if (!localStorage.estados) {
+      this.marcacoesController.AddResultado("Pendente");
+      this.marcacoesController.AddResultado("Positivo");
+      this.marcacoesController.AddResultado("Negativo");
+      this.marcacoesController.AddResultado("Inconclusivo");
+    }
+
+    // Marcações
+    if (!localStorage.marcacoes) {
+      this.marcacoesController.AddNewMarcacao(
+        this.userController.getNormalUserByEmail("diogo@borges.pt").id,
+        this.userController.getEntityUserByEmail("vendanova@clinica.pt").id,
+        new Date("2021-06-12T14:20:00"),
+        1,
+        false
+      );
     }
   }
 

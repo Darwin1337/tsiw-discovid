@@ -1,15 +1,15 @@
 export class MarcacoesModel {
-    constructor(id_marcacao, id_utilizador, id_entidade, data_criacao, data_marcacao, id_teste, cancelamente_requerido, call_me, id_estado, id_resultado) {
+    constructor(id_marcacao, id_utilizador, id_entidade, data_marcacao, id_teste, call_me) {
       this.id_marcacao = id_marcacao;
       this.id_utilizador = id_utilizador;
       this.id_entidade = id_entidade;
-      this.data_criacao = data_criacao;
+      this.data_criacao = new Date();
       this.data_marcacao = data_marcacao;
       this.id_teste = id_teste;
-      this.cancelamente_requerido = cancelamente_requerido;
+      this.cancelamente_requerido = false;
       this.call_me = call_me;
-      this.id_estado = id_estado;
-      this.id_resultado = id_resultado;
+      this.id_estado = 1; // Agendado
+      this.id_resultado = 1; // Pendente
     }
 }
 export class DetalhesEstadoModel {

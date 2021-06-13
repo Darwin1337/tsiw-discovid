@@ -2,6 +2,7 @@ import UserController from '../controllers/UserController.js'
 import LocaleController from '../controllers/LocaleController.js'
 import TestsController from '../controllers/TestsController.js'
 import AvaliacoesController from '../controllers/AvaliacoesController.js'
+import MarcacoesController from '../controllers/MarcacoesController.js'
 import indexInstance from '../app.js'
 
 export default class IndexView {
@@ -17,6 +18,9 @@ export default class IndexView {
 
     // Instanciar a AvaliacoesController para ser possível aceder às avaliações dos utilizadores
     this.avaliacoesController = new AvaliacoesController();
+
+    // Instanciar a MarcacoesController para ser possível aceder às marcações de cada entidade
+    this.marcacoesController = new MarcacoesController();
 
     // Adicionar as localidades presentes na localstorage ao select de localidades
     this.AddLocalesToSelect(".select-localidades");
@@ -42,6 +46,11 @@ export default class IndexView {
     // Array que ficará com os markers do mapa
     this.arrMapMarkers = []
 
+    // Assim que o mapa tiver disponível mandar a info do user para os botões
+    window.addEventListener("DOMContentLoaded", this.SelectUserLocale.bind(this));
+  }
+
+  SelectUserLocale() {
     // Verificar se o utilizador estiver logado, se estiver, settar o select das localidades com a sua morada
     if (this.userController.isAnyUserLoggedIn()) {
       if (this.userController.getLoggedInUserType() == "normal") {
@@ -51,7 +60,6 @@ export default class IndexView {
         $('.select-localidades').trigger('change');
         $('.select-localidades-2').val(usrAddress.id_localidade);
         $('.select-localidades-2').trigger('change');
-        document.getElementById("btn-apply-filters").click();
       }
     }
   }
@@ -127,6 +135,7 @@ export default class IndexView {
       scrollwheel: false
     });
     this.geocoder = new google.maps.Geocoder();
+    if (this.userController.isAnyUserLoggedIn() && this.userController.getLoggedInUserType() == "normal") { document.getElementById("btn-apply-filters").click(); }
   }
 
   UpdateResultCards() {
@@ -284,6 +293,22 @@ export default class IndexView {
               </div>`;
           }
         }
+
+        // let usedDates = []
+        // for (let j = 0; j < this.marcacoesController.marcacoes.length; j++) {
+        //   if (parseInt(btnDetalhes.id) == parseInt(this.marcacoesController.marcacoes[j].id_entidade)) {
+        //     const curData = new Date(this.marcacoesController.marcacoes[j].data_marcacao);
+        //     usedDates.append(
+        //       {
+        //         "dia": curData.getDay(),
+        //         "mes": curData.getMonth(),
+        //         "ano": curData.getYear(),
+        //         "ho"
+        //       }
+        //     );
+        //   }
+        // }
+
         document.getElementById("quant-avaliacoes").innerHTML = `Avaliações <span>(${quantClassi} classificação/ções)</span>`;
         classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
         document.getElementById("pontuacao").innerHTML = String(parseFloat(classi).toFixed(2)).replace(".", ",");
