@@ -1,5 +1,6 @@
 import UserController from '../controllers/UserController.js';
 import LocaleController from '../controllers/LocaleController.js';
+import TestsController from '../controllers/TestsController.js';
 
 export default class AdminUsersView {
   constructor() {
@@ -8,6 +9,9 @@ export default class AdminUsersView {
 
     // Instanciar o LocaleController para ser possível adicionar as localidades aos selects
     this.localeController = new LocaleController();
+
+    // Instanciar o LocaleController para ser possível adicionar as localidades aos selects
+    this.testsController = new TestsController();
 
     // Página atual - todos os .html têm um id na tag body que descreve o nome da página
     this.currentPage = document.querySelector("body");
@@ -24,15 +28,24 @@ export default class AdminUsersView {
       // Carregar os dados dos utilizadores para a tabela
       // Se estivermos na página de utilizadores
       if (this.currentPage.id == "admin-entidades") {
+        // Listar as entidades na tabela
         this.ListAllPostos();
-        this.SetPostosInfo();
-        this.AtualizarDadosPosto();
-        this.AddNewPosto();
-
         // Adicionar as localidades presentes na localstorage ao select de localidades
         this.AddLocalesToSelect(".select-localidades");
         this.AddLocalesToSelect(".select-localidades-edit");
-        this.BindViewPasswordCheckbox("view-password", "posto-password-edit");
+        // Adicionar os tipos de teste da localstorage ao select
+        this.AddTestsToSelect(".select-testes");
+        this.AddTestsToSelect(".select-testes-nova-entidade");
+        // Colocar as informações nos inputs
+        this.SetPostosInfo();
+        // Event listener para o botão de editar informações
+        this.AtualizarDadosPosto();
+        // Event listener para o botão de adicionar posto
+        this.AddNewPosto();
+        // Array que vai ficar com os testes adicionados caso seja instanciada uma entidade
+        this.availableTests = [];
+        // Event listener para o botão de adicionar testes no forumlário de adicionar postos
+        this.PostosAdd_AddTest();
       } else if (this.currentPage.id == "admin-utilizadores") {
         this.ListAllUsers();
         this.SetProfileInfo();
@@ -61,7 +74,6 @@ export default class AdminUsersView {
   }
 
   VerifyScreenResolution(ignore) {
-    console.log("resized");
     // Verifica se a largura da window corresponde a mobile ou a desktop e aplica as devidas funções
     // Se o argumento "true" for enviado o método irá ignorar a resolução da window e irá aplicar a navbar de acordo com o estado da variável this.isDisplayMobile
     ignore = (ignore == true) ? true : false;
@@ -87,7 +99,7 @@ export default class AdminUsersView {
           </button>
           <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
               <ul class="main-nav navbar-nav w-100 justify-content-center">
-                  <li id="admin-postos" class="nav-item">
+                  <li id="admin-entidades" class="nav-item">
                       <a class="nav-link" href="admin-entidades.html"><i class="fas fa-building"></i>  Postos</a>
                   </li>
                   <li id="admin-produtos" class="nav-item">
@@ -138,7 +150,7 @@ export default class AdminUsersView {
           <div class="navbar-collapse collapse w-100" id="collapsingNavbar">
               <ul class="main-nav navbar-nav w-100 justify-content-start">
                   <li><hr class="dropdown-divider"></li>
-                  <li id="admin-postos" class="nav-item active"><a class="nav-link" href="../html/admin-entidades.html"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
+                  <li id="admin-entidades" class="nav-item active"><a class="nav-link" href="../html/admin-entidades.html"><i class="fas fa-chevron-right"></i>  POSTOS</a></li>
                   <li id="admin-produtos" class="nav-item"><a class="nav-link" href="../html/admin-produtos.html">PRODUTOS</a></li>
                   <li id="admin-utilizadores" class="nav-item"><a class="nav-link" href="../html/admin-utilizadores.html">UTILIZADORES</a></li>
                   <li id="admin-geral" class="nav-item"><a class="nav-link" href="../html/admin-gamificacoes.html">GERAL</a></li>
@@ -318,79 +330,410 @@ export default class AdminUsersView {
 
   //Postos
   ListAllPostos() {
-    const x = this.userController.getAllEntityUsers();
-    let a = "";
-    for (let i = 0; i < x.length; i++) {
-      if (x[i].verificado == false) {
-        a = "Não"
-      } else {
-        a = "Sim"
-      }
+    const user = this.userController.getAllEntityUsers();
+
+    for (let i = 0; i < user.length; i++) {
+      let isVerified = !user[i].verificado ? "Não" : "Sim";
+      let getNif = !user[i].registado ? "Indisponível" : user[i].nif;
+      let isBlocked = !user[i].bloqueado ? `<button class="btn-table btn-ban" style="color: red;" id="${user[i].id}"><i class="fas fa-ban"></i></button>` : `<button class="btn-table btn-unban" style="color: red;" id="${user[i].id}"><i class="fas fa-unlock"></i></button>`;
       document.getElementById("tabela-postos").innerHTML += `
-     <tr class="align-middle text-center">
-       <td>${x[i].id}</td>
-       <td>${x[i].nome}</td>
-       <td>${x[i].nif}</td>
-       <td>${x[i].email}</td>
-       <td>${a}</td>
-       <td><span class="icon-naoVerificar"><i class="fas fa-times-circle"></i></span><span class="icon-verificar"><i class="fas fa-check-double"></i></span></td>
-       <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><span data-bs-toggle="modal" data-bs-target="#admin-edit-postos" class="icon-remover-posto" id="${x[i].id}"><i class="far fa-edit"></i></span></td>
-     </tr>`;
+        <tr class="align-middle text-center">
+          <td>${user[i].id}</td>
+          <td>${user[i].nome}</td>
+          <td>${getNif}</td>
+          <td>${user[i].email}</td>
+          <td>${isVerified}</td>
+          <td>
+            <button class="btn-table btn-unverificar" style="color: red;" id="${user[i].id}"><i class="fas fa-times-circle"></i></button>
+            <button class="btn-table btn-verificar" style="color: green;" id="${user[i].id}"><i class="fas fa-check-circle"></i></i></button>
+          </td>
+          <td>
+            ${isBlocked}
+            <button class="btn-table btn-edit" style="color: darkblue;" id="${user[i].id}" data-bs-toggle="modal" data-bs-target="#admin-edit-postos"><i class="fas fa-edit"></i></button>
+          </td>
+        </tr>`;
+      // Event listener para as ações
+      this.VerificarPosto();
+      this.RemoverVerificacaoPosto();
+      this.BloquearPosto();
+      this.AtivarPosto();
     }
   }
 
   SetPostosInfo() {
-    for (const btnEdit of document.getElementsByClassName("icon-remover-posto")) {
+    for (const btnEdit of document.getElementsByClassName("btn-edit")) {
       btnEdit.addEventListener("click", () => {
-        const x = this.userController.getAllEntityUsers();
-        const x1 = this.userController.getAllEntityEnderecos();
-        for (let i = 0; i < x1.length; i++) {
-          if (btnEdit.id == x1[i].id_entidade) {
-            document.getElementById("posto-morada-edit").value = x1[i].morada;
-            document.getElementById("posto-cod_postal-edit").value = x1[i].cod_postal;
-            $('.select-localidades-edit').val([x1[i].id_localidade]);
+        const userInfo = this.userController.entityUsers.find(user => parseInt(user.id) == parseInt(btnEdit.id));
+
+        for (let i = 0; i < this.userController.endEntidade.length; i++) {
+          if (userInfo.id == this.userController.endEntidade[i].id_entidade) {
+            document.getElementById("posto-morada").value = this.userController.endEntidade[i].morada;
+            document.getElementById("posto-cod_postal").value = this.userController.endEntidade[i].cod_postal;
+            $('.select-localidades-edit').val(this.userController.endEntidade[i].id_localidade);
             $('.select-localidades-edit').trigger('change');
+            break;
           }
         }
-        for (let i = 0; i < x.length; i++) {
-          if (x[i].id == btnEdit.id) {
-            document.getElementById("nome-posto-a-editar").innerHTML = ` (${x[i].nome})`;
-            document.getElementById("posto-nome-edit").value = x[i].nome;
-            document.getElementById("posto-email-edit").value = x[i].email;
-            document.getElementById("posto-password-edit").value = x[i].password;
-            document.getElementById("posto-website-edit").value = x[i].website;
-            document.getElementById("posto-horario-abertura-edit").value = x[i].horario_inicio;
-            document.getElementById("posto-horario-fecho-edit").value = x[i].horario_fim;
-            document.getElementById("posto-tempo-consulta-edit").value = x[i].intervalo_consulta;
-            document.getElementById("posto-drive-edit").checked = x[i].drive_thru;
-            document.getElementById("posto-call-edit").checked = x[i].call_me;
-            document.querySelector(".editar-posto").id = x[i].id;
+
+        const getNif = !userInfo.registado ? "Indisponível" : userInfo.nif;
+        document.getElementById("id-posto").innerHTML = userInfo.id;
+        document.getElementById("posto-nome").value = userInfo.nome;
+        document.getElementById("posto-email").value = userInfo.email;
+        document.getElementById("posto-nif").innerHTML = getNif;
+        document.getElementById("posto-password").value = userInfo.password;
+        document.getElementById("posto-website").value = userInfo.website;
+        document.getElementById("posto-horario-abertura").value = userInfo.horario_inicio;
+        document.getElementById("posto-horario-fecho").value = userInfo.horario_fim;
+        document.getElementById("posto-tempo-consulta").value = userInfo.intervalo_consulta;
+        document.getElementById("posto-drive").checked = userInfo.drive_thru;
+        document.getElementById("posto-call").checked = userInfo.call_me;
+        document.getElementById("testes-conteudo").innerHTML = "";
+
+        for (let i = 0; i < this.userController.testesEntidade.length; i++) {
+          if (userInfo.id == this.userController.testesEntidade[i].id_entidade) {
+            document.getElementById("testes-conteudo").innerHTML += `
+            <div style="background-color: var(--cinza-claro);" class="d-flex mt-3 mb-4 card-morada align-items-center" id="card-${i}">
+              <p class="m-0 p-0 etiqueta-${i}">${this.testsController.GetNameById(parseInt(this.userController.testesEntidade[i].id_teste)).nome_teste} | ${this.userController.testesEntidade[i].preco}€</p>
+              <div class="ms-auto">
+                <button type="button" class="m-remove" id="${i}"><i class="fas fa-trash morada-remove"></i></button>
+              </div>
+            </div>`;
           }
         }
+        document.getElementById("testes-conteudo").innerHTML += `
+          <div class="mb-3">
+            <button type="button" id="add-teste" class="btn btn-azul-pri" data-bs-toggle="modal" data-bs-target="#add-teste-modal">Adicionar teste</button>
+          </div>`;
+        // Event listener para o botão de adicionar/remover teste
+        this.PostosEdit_AddTest();
+        this.PostosEdit_RemoveTest();
       });
     }
-
   }
 
   AtualizarDadosPosto() {
-    document.querySelector("#posto-form-edit").addEventListener("submit", () => {
-      this.postoController.EditPosto(
-        document.querySelector(".editar-posto").id,
-        document.getElementById("posto-nome-edit").value,
-        document.getElementById("posto-email-edit").value,
-        document.getElementById("posto-password-edit").value,
-        document.getElementById("posto-website-edit").value,
-        document.getElementById("posto-horario-abertura-edit").value,
-        document.getElementById("posto-horario-fecho-edit").value,
-        document.getElementById("posto-tempo-consulta-edit").value,
-        document.getElementById("posto-morada-edit").value,
-        document.getElementById("posto-cod_postal-edit").value,
-        document.getElementById("posto-drive-edit").checked,
-        document.getElementById("posto-call-edit").checked
-      );
+    document.querySelector("#posto-form-edit").addEventListener("submit", event => {
+      event.preventDefault();
+      if ($('.select-localidades-edit').find(':selected').val() != $('.select-localidades-edit').find('option').first().val()) {
+        // Obter a latitude e longitude da nova morada
+        $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + document.getElementById("posto-morada").value.trim().split(" ").join("+").replace(",", "") + "+" + document.getElementById("posto-cod_postal").value.trim().split(" ").join("+") + '+' + this.localeController.GetNameById(parseInt($('.select-localidades-edit').find(':selected').val())).nome.trim().split(" ").join("+") + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', function(data) {
+          let lng = null;
+          let lat = null;
+          if (data.status == "OK") {
+            lng = data.results[0].geometry.location.lng;
+            lat = data.results[0].geometry.location.lat;
+          }
+          // Como estamos num método async não temos acesso à instância da classe UserController portanto terá de ser instanciada uma para esse propósito
+          const specificUserController = new UserController();
+          try {
+            specificUserController.EntityUser_Edit(
+              parseInt(document.getElementById("id-posto").innerHTML),
+              document.getElementById("posto-nome").value,
+              document.getElementById("posto-email").value,
+              document.getElementById("posto-password").value,
+              document.getElementById("posto-website").value,
+              document.getElementById("posto-horario-abertura").value,
+              document.getElementById("posto-horario-fecho").value,
+              document.getElementById("posto-tempo-consulta").value,
+              document.getElementById("posto-drive").checked,
+              document.getElementById("posto-call").checked,
+              document.getElementById("posto-morada").value,
+              document.getElementById("posto-cod_postal").value,
+              $('.select-localidades-edit').find(':selected').val(),
+              lat,
+              lng);
+            Swal.fire('Sucesso!', "Os dados foram editados com sucesso!", 'success');
+            setTimeout(function(){ window.location.reload(); }, 1500);
+          } catch (e) {
+            Swal.fire('Erro!', String(e).substring(7), 'error');
+          }
+        });
+      } else {
+        Swal.fire('Erro!', "Escolha uma morada válida!", 'error');
+      }
     });
   }
 
+  AddNewPosto() {
+    document.querySelector("#posto-form-criar").addEventListener("submit", event => {
+      event.preventDefault();
+      try {
+        // Verificar se há pelo menos 1 teste válido adicionado
+        let usableTests = 0;
+        for (let i = 0; i < this.availableTests.length; i++) {
+          if (this.availableTests[i][3] == false) {
+            usableTests++;
+          }
+        }
+        if (usableTests > 0) {
+          // Verificar morada
+          if (document.getElementById("posto-morada-criar").value && document.getElementById("posto-cod_postal-criar").value && $('.select-localidades').find(':selected').val() != $('.select-localidades').find('option').first().val()) {
+            $.getJSON('https://maps.googleapis.com/maps/api/geocode/json?address=' + document.getElementById("posto-morada-criar").value.trim().split(" ").join("+").replace(",", "") + "+" + document.getElementById("posto-cod_postal-criar").value.trim().split(" ").join("+") + '+' + this.localeController.GetNameById(parseInt($('.select-localidades').find(':selected').val())).nome.trim().split(" ").join("+") + '&key=AIzaSyBOFQ0OVgZsAodKndRbtDlnXhBvyCaOpQ4', data => {
+              let coords = [null, null];
+              if (data.status == "OK") {
+                coords[0] = data.results[0].geometry.location.lat;
+                coords[1] = data.results[0].geometry.location.lng;
+              }
+              // Como estamos num método async não temos acesso à instância da classe UserController portanto terá de ser instanciada uma para esse propósito
+              const specificUserController = new UserController();
+
+              // Registar a entidade
+              specificUserController.EntityUser_Register(
+                document.getElementById("posto-nome-criar").value,
+                null,
+                document.getElementById("posto-email-criar").value,
+                null,
+                null,
+                document.getElementById("posto-horario-abertura-criar").value,
+                document.getElementById("posto-horario-fecho-criar").value,
+                document.getElementById("posto-tempo-consulta-criar").value,
+                document.getElementById("posto-drive-criar").checked,
+                document.getElementById("posto-call-criar").checked,
+                false);
+
+              const usersRegistados = specificUserController.getAllEntityUsers();
+              const userID = usersRegistados[usersRegistados.length - 1].id;
+
+              // Registar os tipos de teste
+              for (let i = 0; i < this.availableTests.length; i++) {
+                if (this.availableTests[i][3] == false) {
+                  this.userController.EntityUser_RegisterTest(
+                    userID,
+                    parseInt(this.availableTests[i][0]),
+                    this.availableTests[i][1],
+                    this.availableTests[i][2]);
+                }
+              }
+
+              // Registar as moradas
+              specificUserController.EntityUser_RegisterAddress(userID, document.getElementById("posto-morada-criar").value, document.getElementById("posto-cod_postal-criar").value, parseInt($('.select-localidades').find(':selected').val()), coords[0], coords[1]);
+              Swal.fire('Sucesso!', 'O registo foi concluído com sucesso!', 'success');
+              this.availableTests = [];
+              setTimeout(() => {
+                window.location.reload();
+              }, 1500);
+            });
+          } else {
+            Swal.fire('Erro!', "Verifique a morada introduzida", 'error');
+          }
+        } else {
+          Swal.fire('Erro!', "Adicione pelo menos 1 teste!", 'error');
+        }
+      } catch (e) {
+        Swal.fire('Erro!', String(e).substring(7), 'error');
+      }
+    });
+  }
+
+  PostosAdd_AddTest() {
+    document.getElementById("teste-form-nova-entidade").addEventListener('submit', event => {
+      event.preventDefault();
+
+      // Uso do JQuery: https://select2.org/programmatic-control/add-select-clear-items
+      const tipo = $('.select-testes-nova-entidade');
+      const preco_euros = document.getElementById("teste-preco-euros-nova-entidade");
+      const preco_centimos = document.getElementById("teste-preco-centimos-nova-entidade");
+
+
+      // Verificar se o select tem algo selecionado...
+      if ((tipo.find(':selected').val() != 0) && (preco_euros.value > 0) && (preco_centimos.value < 100)) {
+        // Verificar se o tipo selecionado já está presente no array
+        if (!this.availableTests.some(teste => parseInt(teste[0]) == parseInt(tipo.find(':selected').val()) && teste[3] == false)) {
+          this.availableTests.push([tipo.find(':selected').val(), preco_euros.value, preco_centimos.value, false]);
+          document.getElementById("tests-content").innerHTML += `
+            <div class="d-flex mt-3 mb-4 card-morada align-items-center" style="background-color: var(--cinza-claro);" id="card-${this.availableTests.length}">
+              <p class="m-0 p-0 etiqueta-${this.availableTests.length}">${this.testsController.GetNameById(parseInt(tipo.find(':selected').val())).nome_teste} | ${parseFloat(preco_euros.value + "." + preco_centimos.value).toFixed(2)}€</p>
+              <div class="ms-auto">
+                <button type="button" class="m-remove-new-entidade" id="${this.availableTests.length}"><i class="fas fa-trash morada-remove"></i></button>
+              </div>
+            </div>`;
+
+            // Event listener para o botão de remover
+            this.PostosAdd_RemoveTest();
+
+            // Fechar o modal
+            // Uso do JQuery: https://www.tutorialrepublic.com/faq/how-to-close-a-bootstrap-modal-window-using-jquery.php
+            $("#add-teste-modal-nova-entidade").modal('hide');
+
+            // Limpar os campos do formulário
+            preco_euros.value = "";
+            preco_centimos.value = "";
+
+            // Selecionar a opção por defeito do select
+            // Uso do JQuery: https://select2.org/programmatic-control/add-select-clear-items
+            tipo.val(0);
+            tipo.trigger('change');
+            Swal.fire('Sucesso!', 'O teste foi adicionado com sucesso!', 'success');
+        } else {
+          Swal.fire('Erro!', "O tipo de teste já se encontra adicionado!", 'error');
+        }
+      } else {
+        Swal.fire('Erro!', "Verifique os dados introduzidos", 'error');
+      }
+    });
+  }
+
+  PostosAdd_RemoveTest() {
+    for (const btnRemove of document.getElementsByClassName("m-remove-new-entidade")) {
+      btnRemove.addEventListener("click", event => {
+        // https://developer.mozilla.org/pt-BR/docs/Web/API/Event/currentTarget
+        const id = event.currentTarget.id;
+
+        Swal.fire({
+          title: 'Tem a certeza que quer eliminar o teste?',
+          showDenyButton: true,
+          confirmButtonText: `Sim`,
+          denyButtonText: `Cancelar`
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Trocar o index 3 do array para true
+            this.availableTests[id - 1][3] = true;
+
+            // Elimnar do html
+            document.getElementById("card-" + id).remove();
+            if (!this.availableTests.some(teste => teste[3] == false)) {
+              document.getElementById("tests-content").innerHTML = `<p style="font-weight: 500; color: var(--azul-pri);">Não tem testes adicionados</p>`;
+            }
+            Swal.fire('Sucesso!', 'O teste foi removido com sucesso!', 'success');
+          }
+        });
+      });
+    }
+  }
+
+  PostosEdit_AddTest() {
+    document.getElementById("teste-form").addEventListener('submit', event => {
+      event.preventDefault();
+
+      // Uso do JQuery: https://select2.org/programmatic-control/add-select-clear-items
+      const tipo = $('.select-testes');
+      const preco_euros = document.getElementById("teste-preco-euros");
+      const preco_centimos = document.getElementById("teste-preco-centimos");
+
+
+      // Verificar se o select tem algo selecionado...
+      if ((tipo.find(':selected').val() != 0) && (preco_euros.value > 0) && (preco_centimos.value < 100)) {
+        // Verificar se o tipo selecionado já está presente na entidade
+        let isTestAlreadyPresent = false;
+        for (let i = 0; i < this.userController.testesEntidade.length; i++) {
+          if (parseInt(this.userController.testesEntidade[i].id_entidade) == parseInt(document.getElementById("id-posto").innerHTML)) {
+            if (parseInt(tipo.find(':selected').val()) == parseInt(this.userController.testesEntidade[i].id_teste)) {
+              isTestAlreadyPresent = true;
+              break;
+            }
+          }
+        }
+
+        if (!isTestAlreadyPresent) {
+          this.userController.EntityUser_RegisterTest(
+            parseInt(document.getElementById("id-posto").innerHTML),
+            parseInt(tipo.find(':selected').val()),
+            preco_euros.value,
+            preco_centimos.value
+          );
+
+          // Fechar o modal
+          // Uso do JQuery: https://www.tutorialrepublic.com/faq/how-to-close-a-bootstrap-modal-window-using-jquery.php
+          $("#add-teste-modal").modal('hide');
+          Swal.fire('Sucesso!', 'O teste foi adicionado com sucesso!', 'success');
+          setTimeout(function(){ window.location.reload(); }, 1500);
+        } else {
+          Swal.fire('Erro!', "O tipo de teste já se encontra adicionado!", 'error');
+        }
+      } else {
+        Swal.fire('Erro!', "Verifique os dados introduzidos", 'error');
+      }
+    });
+  }
+
+  PostosEdit_RemoveTest() {
+    for (const btnRemove of document.getElementsByClassName("m-remove")) {
+      btnRemove.addEventListener("click", event => {
+        // https://developer.mozilla.org/pt-BR/docs/Web/API/Event/currentTarget
+        const id = event.currentTarget.id;
+
+        Swal.fire({
+          title: 'Tem a certeza que quer eliminar o teste?',
+          showDenyButton: true,
+          confirmButtonText: `Sim`,
+          denyButtonText: `Cancelar`
+        }).then((result) => {
+          if (result.isConfirmed) {
+            try {
+              this.userController.EntityUser_RemoveTest(
+                parseInt(document.getElementById("id-posto").innerHTML),
+                this.userController.testesEntidade[id].id_teste
+              );
+              Swal.fire('Sucesso!', 'O teste foi removido com sucesso!', 'success');
+              setTimeout(function(){ window.location.reload(); }, 1500);
+            } catch (e) {
+              Swal.fire('Erro!', String(e).substring(7), 'error');
+            }
+          }
+        });
+      });
+    }
+  }
+
+  BloquearPosto() {
+    for (const btnBan of document.getElementsByClassName("btn-ban")) {
+      btnBan.addEventListener("click", () => {
+        try {
+          this.userController.EntityUser_Block(btnBan.id);
+          window.location.reload();
+        } catch (e) {
+          Swal.fire('Erro!', String(e).substring(7), 'error');
+        }
+      });
+    }
+  }
+
+  AtivarPosto() {
+    for (const btnUnban of document.getElementsByClassName("btn-unban")) {
+      btnUnban.addEventListener("click", () => {
+        try {
+          this.userController.EntityUser_Unblock(btnUnban.id);
+          window.location.reload();
+        } catch (e) {
+          Swal.fire('Erro!', String(e).substring(7), 'error');
+        }
+      });
+    }
+  }
+
+  VerificarPosto() {
+    for (const btnVerify of document.getElementsByClassName("btn-verificar")) {
+      btnVerify.addEventListener("click", () => {
+        try {
+          this.userController.EntityUser_Verify(
+            this.userController.getLoggedInUserData().id,
+            btnVerify.id
+          );
+          window.location.reload();
+        } catch (e) {
+          Swal.fire('Erro!', String(e).substring(7), 'error');
+        }
+      });
+    }
+  }
+
+  RemoverVerificacaoPosto() {
+    for (const btnUnverify of document.getElementsByClassName("btn-unverificar")) {
+      btnUnverify.addEventListener("click", () => {
+        try {
+          this.userController.EntityUser_Unverify(
+            this.userController.getLoggedInUserData().id,
+            btnUnverify.id
+          );
+          window.location.reload();
+        } catch (e) {
+          Swal.fire('Erro!', String(e).substring(7), 'error');
+        }
+      });
+    }
+  }
+
+  // Misc
   AddLocalesToSelect(target) {
     const localidades = this.localeController.GetAllLocales();
     const select = document.querySelector(target);
@@ -399,44 +742,11 @@ export default class AdminUsersView {
     }
   }
 
-  AddNewPosto() {
-    document.querySelector("#posto-form-criar").addEventListener("submit", () => {
-      this.BindViewPasswordCheckbox("view-password-criar", "posto-password-criar");
-      if ($('.select-localidades').find(':selected').val() != $('.select-localidades').find('option').first().val()) {
-        console.log($('.select-localidades').find(':selected').val())
-        // EDITAR ISTO
-        // EDITAR ISTO
-        // EDITAR ISTO
-        // EDITAR ISTO
-        // EDITAR ISTO
-        // this.postoController.AddTest(
-        //   document.getElementById("posto-nome-criar").value,
-        //   document.getElementById("posto-nif-criar").value,
-        //   document.getElementById("posto-email-criar").value,
-        //   document.getElementById("posto-password-criar").value,
-        //   document.getElementById("posto-website-criar").value,
-        //   document.getElementById("posto-horario-abertura-criar").value,
-        //   document.getElementById("posto-horario-fecho-criar").value,
-        //   document.getElementById("posto-tempo-consulta-criar").value,
-        //   document.getElementById("posto-morada-criar").value,
-        //   document.getElementById("posto-cod_postal-criar").value,
-        //   $('.select-localidades').find(':selected').val(),
-        //   document.getElementById("posto-drive-criar").checked,
-        //   document.getElementById("posto-call-criar").checked
-        // );
-      }
-    });
-  }
-
-  //Ver palavra-passe
-  BindViewPasswordCheckbox(checkbox, target) {
-    // Ativa a checbox de "ver password" dos formulários do login e do registo
-    document.getElementById(checkbox).addEventListener("click", () => {
-      if (document.getElementById(checkbox).checked == true) {
-        document.getElementById(target).setAttribute("type", "text");
-      } else {
-        document.getElementById(target).setAttribute("type", "password");
-      }
-    });
+  AddTestsToSelect(target) {
+    const tests = this.testsController.GetAllTests();
+    const select = document.querySelector(target);
+    for (const test of tests) {
+      select.innerHTML += `<option value="${test['id_teste']}">${test['nome_teste']}</option>`;
+    }
   }
 }

@@ -16,7 +16,7 @@ export default class LojaView {
     this.localeController = new LocaleController();
     // Instanciar o GamificacoesController para ser possível aceder ao métodos dos utilizadores
     this.gamificacoesController = new GamificacoesController();
-    
+
 
     this.array=[]
 
@@ -124,7 +124,7 @@ export default class LojaView {
         this.CalcularTotal()
         this.RemoverProdutoCarrinho()
         aux=false
-        
+
       });
     }
   }
@@ -183,14 +183,14 @@ export default class LojaView {
         for (let d = 0; d< x2.length; d++) {
           for (let i = 0; i< x1.length; i++) {
             if (x2[d].id_utilizador==this.userController.getLoggedInUserData().id && x1[i].id==this.userController.getLoggedInUserData().id) {
-              document.getElementById("morada-a-enviar").value=`${x2[d].morada}, ${x2[d].cod_postal}, ${this.localeController.GetNameById(x2[d].id_localidade).nome}` 
-              
+              document.getElementById("morada-a-enviar").value=`${x2[d].morada}, ${x2[d].cod_postal}, ${this.localeController.GetNameById(x2[d].id_localidade).nome}`
+
                 document.getElementById("radio-usar-pontos").addEventListener("click", ()=>{
                   if (document.getElementById("radio-usar-pontos").checked==true) {
                     if (x1[i].pontos>parseFloat(document.getElementById("preco-total").innerHTML.split("€",1))*100) {
                       alert("Os pontos ultrapassao o valor da encomenda! Acrescente algo mais ao carrinho")
                       document.getElementById("radio-usar-pontos").checked=false
-                      
+
                     }
                     else{
                       document.getElementById("radio-usar-pontos").checked=true
@@ -207,7 +207,7 @@ export default class LojaView {
               document.getElementById("pontos-user-usar").value=`${x1[i].pontos}`
               break;
               }
-              
+
             }
           }
         this.FinalizarCompra()
@@ -280,14 +280,14 @@ export default class LojaView {
           else{
             this.userController.UpdateUserPoints(this.gamificacoesController.pontos_encomenda[0].pontos)
           }
-          
+
           break;
         }
       }
 
-      
+
       Swal.fire('Sucesso!', "Encomenda realizada com sucesso", 'success');
       setTimeout(function(){ window.location.replace("encomendas.html"); }, 2000);
     });
-  }  
+  }
 }

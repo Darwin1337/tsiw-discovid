@@ -11,8 +11,6 @@ export default class UserController {
     this.entityUsers = localStorage.utilizadores_entidades ? JSON.parse(localStorage.utilizadores_entidades) : [];
     this.endEntidade = localStorage.enderecos_entidade ? JSON.parse(localStorage.enderecos_entidade) : [];
     this.testesEntidade = localStorage.testes_entidade ? JSON.parse(localStorage.testes_entidade) : [];
-
-    
   }
 
   getAllNormalEnderecos() {
@@ -140,7 +138,7 @@ export default class UserController {
    const addIdx = this.endEntidade.findIndex(morada => parseInt(morada.id_entidade) == parseInt(id));
 
    // Verificar se o e-mail foi alterado
-   if (email != this.getLoggedInUserData().email) {
+   if (email != this.entityUsers[userIdx].email) {
      // Se sim, verificar se esse email já está a ser usado
      if (this.entityUsers.some(user => user.email == email) || this.normalUsers.some(user => user.email == email)) {
        throw Error("O e-mail introduzido já está a ser utilizado por outro utilizador!");
@@ -171,30 +169,6 @@ export default class UserController {
    localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
 }
 
-  UpdateUserPoints(pontos){
-    //Atualizar pontos ao realizar uma compra
-    let loggedUser=this.getLoggedInUserData().id
-    for(let i=0; i<this.normalUsers.length;i++){
-      if (loggedUser==this.normalUsers[i].id) {
-        this.normalUsers[i].pontos+=pontos
-        localStorage.removeItem("utilizadores_normais");
-        localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
-      }
-    }
-  }
-
-  RemoveUserPoints(){
-    //Atualizar pontos ao realizar uma compra
-    let loggedUser=this.getLoggedInUserData().id
-    for(let i=0; i<this.normalUsers.length;i++){
-      if (loggedUser==this.normalUsers[i].id) {
-        this.normalUsers[i].pontos=0
-        localStorage.removeItem("utilizadores_normais");
-        localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
-      }
-    }
-  }
-
   // Registos
 
   NormalUser_Register(pnome, unome, email, password, tlm, nif, data_nasc, consentimento_email) {
@@ -220,7 +194,7 @@ export default class UserController {
   }
 
   EntityUser_Register(nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado) {
-    if (!this.entityUsers.some(user => user.email == email) && !this.entityUsers.some(user => user.nif == nif)) {
+    if (!this.entityUsers.some(user => user.email == email) && !this.entityUsers.some(user => nif != null && user.nif == nif)) {
       const newId = this.entityUsers.length > 0 ? this.entityUsers[this.entityUsers.length - 1].id + 1 : 1;
       this.entityUsers.push(new UtilizadorEntidadeModel(newId, nome, nif, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, registado));
       localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
@@ -258,6 +232,50 @@ export default class UserController {
     }
   }
 
+  EntityUser_Verify(id_admin, id_entidade) {
+    // Se a entidade for registada mandar notificação de que foi verificada
+    // Se a entidade for registada mandar notificação de que foi verificada
+    // Se a entidade for registada mandar notificação de que foi verificada
+    // Se a entidade for registada mandar notificação de que foi verificada
+    // Se a entidade for registada mandar notificação de que foi verificada
+    const entidade = this.entityUsers.findIndex(user => parseInt(user.id) == parseInt(id_entidade));
+    console.log(this.entityUsers[entidade])
+    if (!this.entityUsers[entidade].verificado) {
+      this.entityUsers[entidade].verificado = true;
+      this.entityUsers[entidade].id_verificador = id_admin;
+      localStorage.removeItem("utilizadores_entidades");
+      localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
+    } else {
+      throw Error("A entidade selecionada já está verificada!")
+    }
+  }
+
+  EntityUser_Unverify(id_admin, id_entidade) {
+    const entidade = this.entityUsers.findIndex(user => parseInt(user.id) == parseInt(id_entidade));
+    if (this.entityUsers[entidade].verificado) {
+      this.entityUsers[entidade].verificado = false;
+      this.entityUsers[entidade].id_verificador = null;
+      localStorage.removeItem("utilizadores_entidades");
+      localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
+    } else {
+      throw Error("A entidade selecionada já não está verificada!")
+    }
+  }
+
+  EntityUser_Block(id_entidade) {
+    const entidade = this.entityUsers.findIndex(user => parseInt(user.id) == parseInt(id_entidade));
+    this.entityUsers[entidade].bloqueado = true;
+    localStorage.removeItem("utilizadores_entidades");
+    localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
+  }
+
+  EntityUser_Unblock(id_entidade) {
+    const entidade = this.entityUsers.findIndex(user => parseInt(user.id) == parseInt(id_entidade));
+    this.entityUsers[entidade].bloqueado = false;
+    localStorage.removeItem("utilizadores_entidades");
+    localStorage.setItem("utilizadores_entidades", JSON.stringify(this.entityUsers));
+  }
+
   // Login
 
   UserLogin(email, password) {
@@ -288,4 +306,30 @@ export default class UserController {
       sessionStorage.removeItem('loggedInUserInfo');
     }
   }
+
+  // Misc
+
+  UpdateUserPoints(pontos){
+    //Atualizar pontos ao realizar uma compra
+    let loggedUser=this.getLoggedInUserData().id;
+    for(let i=0; i<this.normalUsers.length;i++){
+      if (loggedUser==this.normalUsers[i].id) {
+        this.normalUsers[i].pontos+=pontos;
+        localStorage.removeItem("utilizadores_normais");
+        localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+      }
+    }
+  }
+
+  RemoveUserPoints(){
+  //Atualizar pontos ao realizar uma compra
+  let loggedUser=this.getLoggedInUserData().id;
+  for(let i=0; i<this.normalUsers.length;i++){
+    if (loggedUser==this.normalUsers[i].id) {
+      this.normalUsers[i].pontos=0;
+      localStorage.removeItem("utilizadores_normais");
+      localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+    }
+  }
+}
 }

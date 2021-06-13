@@ -49,8 +49,6 @@
         <div class="map-results pt-3 pb-2">
           <div class="container">
             <h3 id="localidade-resultados">Escolha uma localidade!</h3>
-            <button class="btn btn-laranja" id="teste1">Testar</button>
-            <button class="btn btn-laranja" id="teste2">Apagar</button>
           </div>
         </div>
         <div class="map-frame">
@@ -65,7 +63,7 @@
             <div class="col-lg-8">
               <div style="width: 100%; padding: 0px 15px;">
                 <h2 class="results-title">Postos encontrados</h2>
-                <h3 id="qnt-resultados" class="results-description pb-4">(0 resultados)</h3>
+                <h3 id="qnt-resultados" class="results-description pb-4">(0 resultado(s))</h3>
                 <div class="results-cards" id="postos-encontrados">
                   <p class="color-azul-princ"><b>Selecione uma localidade para obter resultados...</b></p>
                 </div>
@@ -132,7 +130,7 @@
                     <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
                   </div>
                   <div>
-                    <button type="button" class="btn w-100 btn-azul-pri">Aplicar filtros</button>
+                    <button type="button" class="btn w-100 btn-azul-pri" id="btn-apply-filters">Aplicar filtros</button>
                   </div>
                 </div>
               </div>
@@ -156,80 +154,62 @@
                 <div class="col-sm-12 col-md-12 col-xl-7 ">
                   <h4 class="text-start color-azul-princ mb-4">Informação do posto</h4>
                   <div class="col-md-12 info-posto-marcacao color-azul-princ">
-                    <h5 id="posto-nome">MULTIUSOS DE GONDOMAR</h5>
-                    <p id="posto-morada">Av. Multiusos, 4420-230 S. Cosme</p>
-                    <p id="posto-distancia">5KM</p>
-                    <p id="posto-horario">09:00h - 20:00h</p>
+                    <h5 id="posto-nome"></h5>
+                    <p id="posto-morada"></p>
+                    <p id="posto-horario"></p>
                     <div class="row ">
                       <div class="col-md-4 text-center mb-3">
-                        <h4 class="color-laranja pontuacao">5,0</h4>
-                        <img src="..\img\56786.png">
-                        <img src="..\img\56786.png">
-                        <img src="..\img\56786.png">
-                        <img src="..\img\56786.png">
-                        <img src="..\img\56786.png">
+                        <h4 class="color-laranja pontuacao" id="pontuacao"></h4>
+                        <div id="render-stars"></div>
                       </div>
                       <div class="col-md-6 ">
                         <div class=" d-flex align-items-center ">
                           <span id="valor">5</span>
-                          <span class="span-5estrelas "></span>
+                          <span class="span-5estrelas"></span>
                         </div>
                         <div class="col-xl-3"></div>
                         <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                         <div class="d-flex align-items-center ">
                           <span id="valor">4</span>
-                          <span class="span-4estrelas "></span>
+                          <span class="span-4estrelas"></span>
                         </div>
                         <div class="col-xl-3"></div>
                         <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                         <div class="d-flex align-items-center ">
                           <span id="valor">3</span>
-                          <span class="span-3estrelas "></span>
+                          <span class="span-3estrelas"></span>
                         </div>
                         <div class="col-xl-3"></div>
                         <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                         <div class="d-flex align-items-center ">
                           <span id="valor">2</span>
-                          <span class="span-2estrelas "></span>
+                          <span class="span-2estrelas"></span>
                         </div>
                         <div class="col-xl-3"></div>
                         <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                         <div class="d-flex align-items-center ">
                           <span id="valor">1</span>
-                          <span class="span-1estrelas "></span>
+                          <span class="span-1estrelas"></span>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <h4 class="text-start color-azul-princ mt-4 mb-4">Avaliações<span> (1 classificação)</span></h4>
-                  <div class="bg-pd-br d-flex mb-4">
-                    <div class="col-md-2 d-flex flex-wrap align-items-center">
-                      <img src="..\img\icon.png" class="w-75" alt="">
-                      <p>gama_10</p>
-                    </div>
-                    <div class="col-md-8 text-start avaliacao-entidade">
-                      <h6 class="color-laranja w-100">Excelente</h6>
-                      <img src="..\img\56786.png">
-                      <img src="..\img\56786.png">
-                      <img src="..\img\56786.png">
-                      <img src="..\img\56786.png">
-                      <img src="..\img\56786.png">
-                      <p class="color-azul-princ mt-3">Excelente atendimento e bastante rápido.<br>Boa organização.<br>Recomendo</p>
-                    </div>
-                    <div class="col-md-2 d-flex  align-items-end">
-                      <p class="color-azul-princ">Há 2 meses</p>
-                    </div>
-                  </div>
+                  <h4 class="text-start color-azul-princ mt-4 mb-4" id="quant-avaliacoes">Avaliações <span>(1 classificação)</span></h4>
+                  <div id="content-avaliacoes"></div>
                 </div>
                 <div class="col-md-1 text-start"></div>
                 <div class="col-sm-12 col-md-12 col-xl-4 text-start ">
                   <h4 class="color-azul-princ mb-4">Marcação</h4>
-                  <select class="select-testes" style="width: 100%" name="state">
-                    <option disabled="disabled" value="0" selected>Tipo de teste</option>
-                  </select>
-                  <select class="select-testes" style="width: 100%" name="state">
-                    <option disabled="disabled" value="0" selected>Data e hora</option>
-                  </select>
+                  <div class="mb-3">
+                    <select class="select-testes" style="width: 100%" name="state">
+                      <option disabled="disabled" value="0" selected>Tipo de teste</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <select class="select-hora" style="width: 100%" name="state">
+                      <option disabled="disabled" value="0" selected>Data e hora</option>
+                    </select>
+                  </div>
                   <h4 class="mt-3 mb-3 color-azul-princ">Método de pagamento</h4>
                   <div class="metodo-pagamento mb-3 d-flex justify-content-center">
                     <img src="..\img\PayPal-Logo.png">
@@ -317,13 +297,17 @@
       $('.select-localidades').select2({
         searchInputPlaceholder: 'Pesquisar localidade...'
       });
-      $('.select-testes').select2({
-        searchInputPlaceholder: 'Pesquisar tipo...'
-      });
       $('.select-localidades-2').select2({
         searchInputPlaceholder: 'Pesquisar localidade...'
       });
-      $(function () { $('[data-toggle="tooltip"]').tooltip() });
+      $('.select-testes').select2({
+        dropdownParent: $('#detalhes-posto-modal'),
+        searchInputPlaceholder: 'Pesquisar tipo...'
+      });
+      $('.select-hora').select2({
+        dropdownParent: $('#detalhes-posto-modal'),
+        searchInputPlaceholder: 'Pesquisar tipo...'
+      });
     });
   </script>
 </body>

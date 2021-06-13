@@ -16,10 +16,12 @@ import TestsController from "./controllers/TestsController.js";
 import LocaleController from "./controllers/LocaleController.js";
 import LojaController from "./controllers/LojaController.js";
 import EncomendasController from "./controllers/EncomendasController.js";
+import AvaliacoesController from "./controllers/AvaliacoesController.js";
 import GamificacoesController from "./controllers/GamificacoesController.js";
 
 class App {
   constructor() {
+    this.indexInstance = null;
     this.routes = {
       '': [NavbarView, IndexView],
       'index': [NavbarView, IndexView],
@@ -101,7 +103,7 @@ class App {
     // Utilizadores entidades
     if (!localStorage.utilizadores_entidades) {
       this.userController.EntityUser_Register("Clínica da Venda Nova", "502747668", "vendanova@clinica.pt", "123", "vendanovaclinica.pt", "08:00", "20:00", "20", false, false, true);
-      this.userController.EntityUser_Register("Centro Hospitalar Universitário de São João", "509821197", "saojoao@hospital.pt", null, null, "08:00", "20:00", "20", false, false, false);
+      this.userController.EntityUser_Register("Centro Hospitalar Universitário de São João", null, "saojoao@hospital.pt", null, null, "08:00", "20:00", "20", false, false, false);
       this.userController.EntityUser_Register("Vale Saúde", "514987472", "valesaude@clinica.pt", "123", "valesaude.pt", "08:00", "20:00", "20", false, true, true);
     }
 
@@ -135,8 +137,8 @@ class App {
     if (!localStorage.encomendas) {
       this.encomendasController = new EncomendasController();
 
-      this.encomendasController.AddNewEncomenda(1, "12-01-2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
-      this.encomendasController.AddNewEncomenda(2, "12-01-2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
+      this.encomendasController.AddNewEncomenda(1, "12/01/2020", "12", "Rua 123","4213-234","Gondomar", "Paypal","912345678");
+      this.encomendasController.AddNewEncomenda(2, "12/01/2020", "12", "Rua 345","4213-234","Gondomar", "MBWay","923456789");
     }
 
     // Detalhes encomenda
@@ -148,7 +150,17 @@ class App {
       this.encomendasController.AddNewDetalhesEncomenda(2, 1, 2);
     }
 
-    //Pontos
+    // Classificações
+    if (!localStorage.avaliacoes) {
+      this.avaliacoesController = new AvaliacoesController();
+      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 1, 3, "meh...");
+      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 2, 4, "fixolas xD!");
+      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 3, 2, "injetaram-me sida");
+      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 4, 1, "a enfermeira desmaiou");
+      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 5, 5, "topp");
+    }
+
+    // Pontos
     if (!localStorage.pontos_encomenda) {
       this.gamificacoesController = new GamificacoesController();
 
@@ -172,7 +184,11 @@ class App {
     }
     const views = this.#getViews(route);
     for (const view of views) {
-      new view();
+      if (view == IndexView) {
+        this.indexInstance = new view();
+      } else {
+        new view();
+      }
     }
   }
 
@@ -181,4 +197,5 @@ class App {
   }
 }
 
-new App();
+const appInstance = new App();
+export default appInstance.indexInstance;

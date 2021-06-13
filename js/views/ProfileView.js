@@ -113,8 +113,7 @@ export default class NavbarView {
       </div>`;
 
       // Renderizar os testes disponíveis da presente entidade
-      document.getElementById("other-content").innerHTML = `
-      <p class="color-laranja mt-4"><b>Testes disponíveis</b></p>`;
+      document.getElementById("other-content").innerHTML = `<p class="color-laranja mt-4"><b>Testes disponíveis</b></p>`;
 
       for (let i = 0; i < this.userController.testesEntidade.length; i++) {
         if (parseInt(this.userController.testesEntidade[i].id_entidade) == parseInt(this.userController.getLoggedInUserData().id)) {

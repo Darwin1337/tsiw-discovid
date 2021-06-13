@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
-  <meta name="keywords" content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="keywords"
+    content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -24,7 +25,7 @@
       <h4 class="text-center mt-5">Entidades</h4>
       <div class="row">
         <div class="col-md-12 text-center mt-3">
-          <button class="btn btn-success btn-sm " href="#" role="button" id="adicionar-posto-admin" data-bs-toggle="modal" data-bs-target="#admin-add-postos" ><i class="fas fa-plus-circle me-1"></i>Adicionar Entidade</button>
+          <button class="btn btn-success btn-sm " href="#" role="button" id="adicionar-posto-admin" data-bs-toggle="modal" data-bs-target="#admin-add-postos"><i class="fas fa-plus-circle me-1"></i>Adicionar Entidade</button>
         </div>
       </div>
       <table class="table table-striped mt-4">
@@ -36,7 +37,7 @@
             <th scope="col">Email</th>
             <th scope="col">Verificado</th>
             <th scope="col">Verificar</th>
-            <th scope="col">Acções</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody id="tabela-postos">
@@ -52,49 +53,51 @@
           <h5 class="modal-title text-center">Editar Posto<span id="nome-posto-a-editar"></span></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="posto-form-edit">
+        <div class="modal-body">
           <div class="container">
-            <div class="modal-body">
+            <form id="posto-form-edit">
               <div class="row">
+                <p class="color-laranja"><b>Informações gerais</b></p>
+                <p hidden id="id-posto"></p>
                 <div class="col-md-6 mt-3">
                   <span>Nome</span>
-                  <input type="text" class="input-login-registar" id="posto-nome-edit" value="">
+                  <input type="text" class="input-login-registar" id="posto-nome" required>
+                </div>
+                <div class="col-md-6 mt-3">
+                  <span>NIF</span>
+                  <p class="input-login-registar" id="posto-nif">Indisponível</p>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>E-mail</span>
-                  <input type="text" class="input-login-registar" id="posto-email-edit" value="">
+                  <input type="text" class="input-login-registar" id="posto-email" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Palavra-Passe</span>
-                  <input type="password" class="input-login-registar"  id="posto-password-edit"  value="">
-                  <div class="d-flex align-items-center mt-3 ver-pw">
-                    <input type="checkbox" id="view-password" class="check-style">
-                    <label for="view-password" class="span-checkbox">Ver palavra-passe</label>
-                  </div>
+                  <input type="text" class="input-login-registar" id="posto-password">
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Website</span>
-                  <input type="text" class="input-login-registar" id="posto-website-edit"  value="">
+                  <input type="text" class="input-login-registar" id="posto-website">
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Hora de abertura</span>
-                  <input type="time" class="input-login-registar" id="posto-horario-abertura-edit"  value="">
+                  <input type="time" class="input-login-registar" id="posto-horario-abertura" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Hora de fecho</span>
-                  <input type="time" class="input-login-registar" id="posto-horario-fecho-edit"  value="">
+                  <input type="time" class="input-login-registar" id="posto-horario-fecho" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Tempo de consulta</span>
-                  <input type="text" class="input-login-registar" id="posto-tempo-consulta-edit"  value="">
+                  <input type="text" class="input-login-registar" id="posto-tempo-consulta" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Morada</span>
-                  <input type="text" class="input-login-registar" id="posto-morada-edit"  value="">
+                  <input type="text" class="input-login-registar" id="posto-morada" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Codigo Postal</span>
-                  <input type="text" class="input-login-registar" id="posto-cod_postal-edit"  value="">
+                  <input type="text" class="input-login-registar" id="posto-cod_postal" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Localidade</span>
@@ -102,24 +105,30 @@
                     <option disabled="disabled" value="0" selected>Localidade</option>
                   </select>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-3 mt-3">
-                  <span>Drive</span>
-                  <input type="checkbox" class="input-login-registar" id="posto-drive-edit"  value="">
+                <div class="col-md-6 mt-3">
+                  <div class="d-flex align-items-center">
+                    <input type="checkbox" id="posto-drive" class="check-style">
+                    <label for="posto-drive" class="span-checkbox"><strong>Posto drive-thru</strong></label>
+                  </div>
                 </div>
-                <div class="col-md-3 mt-3">
-                  <span>Call Me</span>
-                  <input type="checkbox" class="input-login-registar" id="posto-call-edit"  value="">
+                <div class="col-md-6 mt-3">
+                  <div class="d-flex align-items-center">
+                    <input type="checkbox" id="posto-call" class="check-style">
+                    <label for="posto-call" class="span-checkbox"><strong>Permitir call-me</strong></label>
+                  </div>
+                </div>
+                <div class="my-4">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-laranja editar-posto" id="btn-update-posto">Atualizar</button>
                 </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-laranja editar-posto" id="btn-update-posto">Atualizar produto</button>
+            </form>
+            <div>
+              <p class="color-laranja mt-4"><b>Testes disponíveis</b></p>
+              <div id="testes-conteudo"></div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
@@ -131,53 +140,39 @@
           <h5 class="modal-title text-center">Adicionar Posto<span id="nome-posto-criar"></span></h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form id="posto-form-criar">
+        <div class="modal-body">
           <div class="container">
-            <div class="modal-body">
+            <form id="posto-form-criar">
               <div class="row">
+                <p class="color-laranja"><b>Informações gerais</b></p>
+                <p hidden id="id-posto"></p>
                 <div class="col-md-6 mt-3">
                   <span>Nome</span>
-                  <input type="text" class="input-login-registar" id="posto-nome-criar" required value="">
-                </div>
-                <div class="col-md-6 mt-3">
-                  <span>NIF</span>
-                  <input type="number" min="111111111" max="999999999" class="input-login-registar" id="posto-nif-criar" required value="">
+                  <input type="text" class="input-login-registar" id="posto-nome-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>E-mail</span>
-                  <input type="text" class="input-login-registar" id="posto-email-criar" required value="">
-                </div>
-                <div class="col-md-6 mt-3">
-                  <span>Palavra-Passe</span>
-                  <input type="password" class="input-login-registar"  id="posto-password-criar" required value="">
-                  <div class="d-flex align-items-center mt-3 ver-pw">
-                    <input type="checkbox" id="view-password-criar" class="check-style">
-                    <label for="view-password" class="span-checkbox">Ver palavra-passe</label>
-                  </div>
-                </div>
-                <div class="col-md-6 mt-3">
-                  <span>Website</span>
-                  <input type="text" class="input-login-registar" id="posto-website-criar" required value="">
+                  <input type="text" class="input-login-registar" id="posto-email-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Hora de abertura</span>
-                  <input type="time" class="input-login-registar" id="posto-horario-abertura-criar" required value="">
+                  <input type="time" class="input-login-registar" id="posto-horario-abertura-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Hora de fecho</span>
-                  <input type="time" class="input-login-registar" id="posto-horario-fecho-criar" required value="">
+                  <input type="time" class="input-login-registar" id="posto-horario-fecho-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Tempo de consulta</span>
-                  <input type="text" class="input-login-registar" id="posto-tempo-consulta-criar" required value="">
+                  <input type="text" class="input-login-registar" id="posto-tempo-consulta-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Morada</span>
-                  <input type="text" class="input-login-registar" id="posto-morada-criar" required value="">
+                  <input type="text" class="input-login-registar" id="posto-morada-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Codigo Postal</span>
-                  <input type="text" class="input-login-registar" id="posto-cod_postal-criar" required  value="">
+                  <input type="text" class="input-login-registar" id="posto-cod_postal-criar" required>
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Localidade</span>
@@ -185,22 +180,95 @@
                     <option disabled="disabled" value="0" selected>Localidade</option>
                   </select>
                 </div>
+                <div class="col-md-6 mt-3">
+                  <div class="d-flex align-items-center">
+                    <input type="checkbox" id="posto-drive-criar" class="check-style">
+                    <label for="posto-drive-criar" class="span-checkbox"><strong>Posto drive-thru</strong></label>
+                  </div>
+                </div>
+                <div class="col-md-6 mt-3">
+                  <div class="d-flex align-items-center">
+                    <input type="checkbox" id="posto-call-criar" class="check-style">
+                    <label for="posto-call-criar" class="span-checkbox"><strong>Permitir call-me</strong></label>
+                  </div>
+                </div>
+                <div class="my-4">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                  <button type="submit" class="btn btn-laranja editar-posto" id="btn-criar-posto">Criar entidade</button>
+                </div>
               </div>
-              <div class="row">
-                <div class="col-md-3 mt-3">
-                  <span>Drive</span>
-                  <input type="checkbox" class="input-login-registar" id="posto-drive-criar"  value="">
-                </div>
-                <div class="col-md-3 mt-3">
-                  <span>Call Me</span>
-                  <input type="checkbox" class="input-login-registar" id="posto-call-criar"  value="">
-                </div>
+            </form>
+            <div>
+              <p class="color-laranja mt-4"><b>Testes disponíveis</b></p>
+              <div id="tests-content">
+                <p style="font-weight: 500; color: var(--azul-pri);">Não tem testes adicionados</p>
+              </div>
+              <button type="button" id="add-teste-nova-entidade" class="btn btn-azul-pri" data-bs-toggle="modal" data-bs-target="#add-teste-modal-nova-entidade">Adicionar teste</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add-teste-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar teste</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form id="teste-form">
+          <div class="modal-body">
+            <div class="mb-4">
+              <select class="select-testes" style="width: 100%; height: 40px;" required>
+                <option disabled="disabled" value="0" selected>Teste</option>
+              </select>
+            </div>
+            <div class="row">
+              <div class="col mb-4">
+                <input type="number" id="teste-preco-euros" class="input-login-registar" placeholder="Euros" required>
+              </div>
+              <div class="col mb-4">
+                <input type="number" id="teste-preco-centimos" class="input-login-registar" placeholder="Cêntimos" required>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-laranja editar-posto" id="btn-criar-posto">Atualizar produto</button>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-laranja" id="btn-add-teste">Adicionar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="add-teste-modal-nova-entidade" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Adicionar teste</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+          <form id="teste-form-nova-entidade">
+          <div class="modal-body">
+            <div class="mb-4">
+              <select class="select-testes-nova-entidade" style="width: 100%; height: 40px;" required>
+                <option disabled="disabled" value="0" selected>Teste</option>
+              </select>
             </div>
+            <div class="row">
+              <div class="col mb-4">
+                <input type="number" id="teste-preco-euros-nova-entidade" class="input-login-registar" placeholder="Euros" required>
+              </div>
+              <div class="col mb-4">
+                <input type="number" id="teste-preco-centimos-nova-entidade" class="input-login-registar" placeholder="Cêntimos" required>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-laranja" id="btn-add-teste-nova-entidade">Adicionar</button>
           </div>
         </form>
       </div>
@@ -263,15 +331,25 @@
   <script type="text/javascript" src="..\js\lib\sweetalert2\sweetalert2.all.min.js"></script>
   <script type="text/javascript" src="..\js\misc.js"></script>
   <script type="text/javascript">
-  $('.select-localidades').select2({
-    dropdownParent: $('#admin-add-postos'),
-    searchInputPlaceholder: 'Pesquisar localidade...'
-  });
-  $('.select-localidades-edit').select2({
-    dropdownParent: $('#admin-edit-postos'),
-    searchInputPlaceholder: 'Pesquisar localidade...'
-  });
-    // Scripts here
+    $('.select-localidades').select2({
+      dropdownParent: $('#admin-add-postos'),
+      searchInputPlaceholder: 'Pesquisar localidade...'
+    });
+
+    $('.select-localidades-edit').select2({
+      dropdownParent: $('#admin-edit-postos'),
+      searchInputPlaceholder: 'Pesquisar localidade...'
+    });
+
+    $('.select-testes').select2({
+      dropdownParent: $('#add-teste-modal'),
+      searchInputPlaceholder: 'Pesquisar teste...'
+    });
+
+    $('.select-testes-nova-entidade').select2({
+      dropdownParent: $('#add-teste-modal-nova-entidade'),
+      searchInputPlaceholder: 'Pesquisar teste...'
+    });
   </script>
 </body>
 
