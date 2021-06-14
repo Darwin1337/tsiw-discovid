@@ -10,6 +10,7 @@ import IndexView from "./views/IndexView.js";
 //import PostosView from "./views/PostosView.js";
 import EncomendasView from "./views/EncomendasView.js";
 import AdminGamificacoesView from "./views/AdminGamificacoesView.js";
+import MarcacoesView from "./views/MarcacoesView.js";
 
 // Import de controllers para a 'dummy data' ficar mais legível e não muito extensa
 import UserController from "./controllers/UserController.js";
@@ -35,7 +36,7 @@ class App {
       'checkout-2': [NavbarView],
       'checkout-3': [NavbarView],
       'editar-perfil': [NavbarView, ProfileView],
-      'marcacoes': [NavbarView],
+      'marcacoes': [NavbarView, MarcacoesView],
       'encomendas': [NavbarView, EncomendasView],
       'notificacoes': [NavbarView],
       'loja': [NavbarView, LojaView],
@@ -204,6 +205,7 @@ class App {
     // Resultados
     if (!localStorage.resultados) {
       this.marcacoesController.AddResultado("Pendente");
+      this.marcacoesController.AddResultado("Não disponível");
       this.marcacoesController.AddResultado("Positivo");
       this.marcacoesController.AddResultado("Negativo");
       this.marcacoesController.AddResultado("Inconclusivo");
@@ -216,6 +218,20 @@ class App {
         this.userController.getEntityUserByEmail("vendanova@clinica.pt").id,
         new Date("2021-06-12T14:20:00"),
         1,
+        false
+      );
+      this.marcacoesController.AddNewMarcacao(
+        this.userController.getNormalUserByEmail("diogo@borges.pt").id,
+        this.userController.getEntityUserByEmail("saojoao@hospital.pt").id,
+        new Date("2021-06-12T22:23:00"),
+        2,
+        false
+      );
+      this.marcacoesController.AddNewMarcacao(
+        this.userController.getNormalUserByEmail("goncalo@gama.pt").id,
+        this.userController.getEntityUserByEmail("vendanova@clinica.pt").id,
+        new Date("2021-06-12T22:23:00"),
+        2,
         false
       );
     }
