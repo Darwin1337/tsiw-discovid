@@ -33,7 +33,7 @@ export default class EncomendasView {
       else{
         this.MostrarEncomendas(1);
         this.SetInfoEncomenda();
-        this.OrdenarEncomendas();
+        
       }
     }
   }
@@ -41,10 +41,12 @@ export default class EncomendasView {
   MostrarEncomendas(ordem){
     document.getElementById("encomenda-cartao").innerHTML=""
     const encomendas = this.encomendasController.GetAllEncomendas();
+    let aux=true
     let first=true
     if (ordem==1) {
       for (let i = 0; i < encomendas.length; i++) {
         if (encomendas[i].id_utilizador==this.userController.getLoggedInUserData().id) {
+          aux=false
           if (first==true) {
             document.getElementById("encomenda-cartao").innerHTML += `
             <div class="col-md-12 encomendas-cartoes-display">
@@ -105,6 +107,7 @@ export default class EncomendasView {
     else{
       for (let i = parseInt(encomendas.length)-1; i > -1; i--) {
         if (encomendas[i].id_utilizador==this.userController.getLoggedInUserData().id) {
+          aux=false
           if (first==true) {
             document.getElementById("encomenda-cartao").innerHTML += `
             <div class="col-md-12 encomendas-cartoes-display">
@@ -162,8 +165,16 @@ export default class EncomendasView {
         }
       }
     }
-    this.OrdenarEncomendas()
-    this.SetInfoEncomenda()
+    if (aux==true) {
+      document.getElementById("pills-encomendas").innerHTML=`
+      <h1 class="text-center">Não tem encomendas feitas</h1>
+      `
+    }
+    else {
+      this.OrdenarEncomendas()
+      this.SetInfoEncomenda()
+    }
+    
   }
 
   SetInfoEncomenda(){

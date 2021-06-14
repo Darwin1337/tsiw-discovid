@@ -228,6 +228,17 @@
   width: auto;
 }
 
+.editar-marcacao {
+  background: green;
+  color: white;
+  border: none;
+  border-radius: 7px;
+  padding: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: auto;
+}
+
 .descricao-marcacao {
   font-weight: 500;
   color: var(--cinza-escuro);

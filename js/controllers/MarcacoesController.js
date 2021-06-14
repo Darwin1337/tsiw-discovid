@@ -46,15 +46,18 @@ export default class MarcacoesController {
       localStorage.removeItem("marcacoes");
       localStorage.setItem("marcacoes", JSON.stringify(this.marcacoes));
     }
+
     UpdateEstadoMarcacao(id_marcacao, id_estado){
       for (let i = 0; i < this.marcacoes.length; i++) {
         if (this.marcacoes[i].id_marcacao == id_marcacao) {
+          
           this.marcacoes[i].id_estado=id_estado
         }
       }
       localStorage.removeItem("marcacoes");
       localStorage.setItem("marcacoes", JSON.stringify(this.marcacoes));
     }
+
     UpdateResultadoMarcacao(id_marcacao, id_resultado){
       for (let i = 0; i < this.marcacoes.length; i++) {
         if (this.marcacoes[i].id_marcacao == id_marcacao) {
