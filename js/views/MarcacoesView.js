@@ -46,11 +46,11 @@ export default class EncomendasView {
           let resultado=this.marcacaoController.resultados.find(resultado => resultado.id_resultado==marcacoes[i].id_resultado)
 
           const d=new Date(marcacoes[i].data_marcacao)
-          const a=new Date()   
+          const a=new Date()
 
-          let data=new Date(marcacoes[i].data_marcacao.slice(0,-1) + "+01:00")
+          let data=new Date(marcacoes[i].data_marcacao)
           data=data.toLocaleDateString()
-          let horas=new Date(marcacoes[i].data_marcacao.slice(0,-1) + "+01:00")
+          let horas=new Date(marcacoes[i].data_marcacao)
           if (horas.getMinutes()<10) {
             horas=horas.getHours()+":0"+horas.getMinutes()
           }
@@ -66,8 +66,8 @@ export default class EncomendasView {
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja">${postoData.nome}</h5>
                     <p class="pt-4 mb-1">${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} </p>
-                    <p>${marcacoes[i].preco}</p>
-                    <p class="descricao-marcacao">Marcação realizada em: ${data} às ${horas} | Teste ${testes.nome_teste} &nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                    <p>${marcacoes[i].preco_teste}€</p>
+                    <p class="descricao-marcacao">Data do teste: ${data} às ${horas}h | Teste ${testes.nome_teste} &nbsp;&nbsp;<button class="btn-table" onclick="window.location.replace('./testes.html');" style="color: var(--cinza-escuro)"><i class="far fa-question-circle" style="margin-left: 5px;"></i></button></p>
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>${estadoData.nome}</p>
@@ -89,7 +89,7 @@ export default class EncomendasView {
               </div>
             </div>
             `
-            
+
             if (estadoData.id_estado!=4 && d>a) {
               document.getElementById(`cancelar-ver-${marcacoes[i].id_marcacao}`).innerHTML+=`
               <button class="cancelar-marcacao mb-4" id="${marcacoes[i].id_marcacao}">Cancelar <span><i class="fas fa-times"></i></span> </button>
@@ -102,7 +102,7 @@ export default class EncomendasView {
               `
             }
             first=false
-            
+
           }
           else{
             document.getElementById("pills-marcacoes").innerHTML += `
@@ -112,8 +112,8 @@ export default class EncomendasView {
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja">${postoData.nome}</h5>
                     <p class="pt-4 mb-1">${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} </p>
-                    <p>${marcacoes[i].preco}</p>
-                    <p class="descricao-marcacao">Marcação realizada em: ${data} às ${horas} | Teste ${testes.nome_teste} &nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                    <p>${marcacoes[i].preco_teste}€</p>
+                    <p class="descricao-marcacao">Data do teste em: ${data} às ${horas}h | Teste ${testes.nome_teste} &nbsp;&nbsp;<button class="btn-table" onclick="window.location.replace('./testes.html');" style="color: var(--cinza-escuro)"><i class="far fa-question-circle" style="margin-left: 5px;"></i></button></p>
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>${estadoData.nome}</p>
@@ -125,7 +125,7 @@ export default class EncomendasView {
               </div>
             </div>
               `
-              
+
             if (estadoData.id_estado!=4 && d>a) {
               document.getElementById(`cancelar-ver-${marcacoes[i].id_marcacao}`).innerHTML+=`
               <button class="cancelar-marcacao mb-4" id="${marcacoes[i].id_marcacao}">Cancelar <span><i class="fas fa-times"></i></span> </button>
@@ -153,12 +153,12 @@ export default class EncomendasView {
 
 
           const d=new Date(marcacoes[i].data_marcacao)
-          const a=new Date()  
+          const a=new Date()
 
 
-          let data=new Date(marcacoes[i].data_marcacao.slice(0,-1) + "+01:00")
+          let data=new Date(marcacoes[i].data_marcacao)
           data=data.toLocaleDateString()
-          let horas=new Date(marcacoes[i].data_marcacao.slice(0,-1) + "+01:00")
+          let horas=new Date(marcacoes[i].data_marcacao)
           if (horas.getMinutes()<10) {
             horas=horas.getHours()+":0"+horas.getMinutes()
           }
@@ -174,8 +174,8 @@ export default class EncomendasView {
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja">${postoData.nome}</h5>
                     <p class="pt-4 mb-1">${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} </p>
-                    <p>${marcacoes[i].preco}</p>
-                    <p class="descricao-marcacao">Marcação realizada em: ${data} às ${horas} | Teste ${testes.nome_teste} &nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                    <p>${marcacoes[i].preco_teste}€</p>
+                    <p class="descricao-marcacao">Data do teste em: ${data} às ${horas}h | Teste ${testes.nome_teste} &nbsp;&nbsp;<button class="btn-table" onclick="window.location.replace('./testes.html');" style="color: var(--cinza-escuro)"><i class="far fa-question-circle" style="margin-left: 5px;"></i></button></p>
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>${estadoData.nome}</p>
@@ -196,7 +196,7 @@ export default class EncomendasView {
               </div>
             </div>
             `
-               
+
             if (estadoData.id_estado!=4 && d>a ) {
               document.getElementById(`cancelar-ver-${marcacoes[i].id_marcacao}`).innerHTML+=`
               <button class="cancelar-marcacao mb-4" id="${marcacoes[i].id_marcacao}">Cancelar <span><i class="fas fa-times"></i></span> </button>
@@ -209,7 +209,7 @@ export default class EncomendasView {
               `
             }
             first=false
-            
+
           }
           else{
             document.getElementById("pills-marcacoes").innerHTML += `
@@ -219,8 +219,8 @@ export default class EncomendasView {
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja">${postoData.nome}</h5>
                     <p class="pt-4 mb-1">${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} </p>
-                    <p>${marcacoes[i].preco}</p>
-                    <p class="descricao-marcacao">Marcação realizada em: ${data} às ${horas} | Teste ${testes.nome_teste} &nbsp;&nbsp;<i class="far fa-question-circle"></i></p>
+                    <p>${marcacoes[i].preco_teste}€</p>
+                    <p class="descricao-marcacao">Data do teste em: ${data} às ${horas}h | Teste ${testes.nome_teste} &nbsp;&nbsp;<button class="btn-table" onclick="window.location.replace('./testes.html');" style="color: var(--cinza-escuro)"><i class="far fa-question-circle" style="margin-left: 5px;"></i></button></p>
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>${estadoData.nome}</p>
@@ -232,8 +232,8 @@ export default class EncomendasView {
               </div>
             </div>
               `
-           
-            
+
+
             if (estadoData.id_estado!=4 && d>a ) {
               document.getElementById(`cancelar-ver-${marcacoes[i].id_marcacao}`).innerHTML+=`
               <button class="cancelar-marcacao mb-4" id="${marcacoes[i].id_marcacao}">Cancelar <span><i class="fas fa-times"></i></span> </button>
@@ -259,7 +259,7 @@ export default class EncomendasView {
       this.SetInfoEncomenda()
       this.CancelarMarcacao()
     }
-   
+
   }
 
   SetInfoEncomenda(){
@@ -289,9 +289,9 @@ export default class EncomendasView {
             classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
 
             //Ir buscar a data e a hora da marcação
-            let data=new Date(marcacoes[i].data_marcacao.slice(0,-1) + "+01:00")
+            let data=new Date(marcacoes[i].data_marcacao)
             data=data.toLocaleDateString()
-            let horas=new Date(marcacoes[i].data_marcacao.slice(0,-1) + "+01:00")
+            let horas=new Date(marcacoes[i].data_marcacao)
             if (horas.getMinutes()<10) {
               horas=horas.getHours()+":0"+horas.getMinutes()
             }
@@ -299,15 +299,13 @@ export default class EncomendasView {
               horas=horas.getHours()+":"+horas.getMinutes()
             }
 
-            
-
             document.getElementById("nome-posto").innerHTML = `${postoData.nome}`;
             document.getElementById("morada-posto").innerHTML = `${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} `;
             document.getElementById("horario-posto").innerHTML = `${postoData.horario_inicio} - ${postoData.horario_fim}`;
             document.getElementById("classificacao-posto").innerHTML = `${classi}`;
             document.getElementById("tipo-teste").innerHTML = `${testes.nome_teste}`;
             document.getElementById("hora-teste").innerHTML = `${data} ${horas}`;
-            document.getElementById("valor-teste").innerHTML = `${marcacoes[i].preco}`;
+            document.getElementById("valor-teste").innerHTML = `${marcacoes[i].preco_teste}€`;
             document.getElementById("nome-user-nif").innerHTML = `${this.userController.getLoggedInUserData().pnome} ${this.userController.getLoggedInUserData().unome} | NIF: ${this.userController.getLoggedInUserData().nif}`;
             document.getElementById("morada-user").innerHTML = `${moradasUser.morada}, ${moradasUser.cod_postal}, ${this.localeController.GetNameById(moradasUser.id_localidade).nome}`;
             document.getElementById("contacto-user-email").innerHTML = `${this.userController.getLoggedInUserData().tlm} | ${this.userController.getLoggedInUserData().email}`;
@@ -373,11 +371,11 @@ export default class EncomendasView {
     const marcacoes = this.marcacaoController.GetAllMarcacoes();
     for (let i = 0; i <marcacoes.length; i++) {
       if (marcacoes[i].id_utilizador==this.userController.getLoggedInUserData().id) {
-        
+
         let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
 
         const d=new Date(marcacoes[i].data_marcacao)
-        const a=new Date()   
+        const a=new Date()
 
 
         if (postoData.registado==false) {
@@ -404,7 +402,7 @@ export default class EncomendasView {
             this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,1)
           }
         }
-        
+
       }
     }
   }

@@ -48,6 +48,9 @@ export default class IndexView {
 
     // Assim que o mapa tiver disponível mandar a info do user para os botões
     window.addEventListener("DOMContentLoaded", this.SelectUserLocale.bind(this));
+
+    // Event listener do botão de fazer marcação
+    this.FinalizeAppointment();
   }
 
   SelectUserLocale() {
@@ -142,8 +145,6 @@ export default class IndexView {
     document.getElementById("btn-apply-filters").addEventListener("click", () => {
       // Procurar postos com a localiade selecionada
       // Uso do JQuery: https://select2.org/programmatic-control/add-select-clear-items
-      console.log(":)");
-
       // Eliminar os markers todas as vezes que o botão for carregado
       for (let i= 0; i < this.arrMapMarkers.length; i++) {
         this.arrMapMarkers[i].setMap(null);
@@ -257,9 +258,18 @@ export default class IndexView {
   SetModalInfo() {
     for (const btnDetalhes of document.getElementsByClassName("detalhes-posto")) {
       btnDetalhes.addEventListener("click", () => {
+        // Limpar algumas coisas primeiro
+        document.getElementById("content-avaliacoes").innerHTML = "";
+        document.getElementById("btn-call-me").innerHTML = "";
+        document.getElementById("preco-total").innerHTML = "Selecione todos dados necessários...";
+        document.getElementById("quant-avaliacoes").innerHTML = "";
+        document.getElementById("mar-id").innerHTML = "";
+
         const dataEntidade = this.userController.entityUsers.find(entidade => parseInt(entidade.id) == parseInt(btnDetalhes.id));
         const moradaEntidade = this.userController.endEntidade.find(entidade => parseInt(entidade.id_entidade) == parseInt(btnDetalhes.id));
-        document.getElementById("posto-morada").innerHTML = `${moradaEntidade.morada}<br>${moradaEntidade.cod_postal} - ${this.localeController.GetNameById(moradaEntidade.id_localidade).nome}`;
+        let isDriveThru = dataEntidade.drive_thru ? `<br><b>Este posto é drive-thru!</b>` : ``;
+        document.getElementById("posto-morada").innerHTML = `${moradaEntidade.morada}<br>${moradaEntidade.cod_postal} - ${this.localeController.GetNameById(moradaEntidade.id_localidade).nome}${isDriveThru}`;
+        document.getElementById("mar-id").innerHTML += `${btnDetalhes.id}`;
         document.getElementById("posto-nome").innerHTML = dataEntidade.nome;
         document.getElementById("posto-horario").innerHTML = `Horário: ${dataEntidade.horario_inicio} - ${dataEntidade.horario_fim}`;
         // verificar a classificação da entidade
@@ -293,21 +303,84 @@ export default class IndexView {
               </div>`;
           }
         }
+        const dataHoje = new Date();
+        let usedDates = []
+        for (let j = 0; j < this.marcacoesController.marcacoes.length; j++) {
+          if (parseInt(btnDetalhes.id) == parseInt(this.marcacoesController.marcacoes[j].id_entidade)) {
+            const curData = new Date(this.marcacoesController.marcacoes[j].data_marcacao.slice(0, -1) + "+01:00");
+            // Se as marcações forem numa data e hora superior ao presente adicionar às datas disponíveis
+            if (curData > dataHoje) {
+              usedDates.push(
+                {
+                  "dia": curData.getDate(),
+                  "mes": curData.getMonth(),
+                  "ano": curData.getFullYear(),
+                  "hora": curData.getHours(),
+                  "min": curData.getMinutes()
+                }
+              );
+            }
+          }
+        }
 
-        // let usedDates = []
-        // for (let j = 0; j < this.marcacoesController.marcacoes.length; j++) {
-        //   if (parseInt(btnDetalhes.id) == parseInt(this.marcacoesController.marcacoes[j].id_entidade)) {
-        //     const curData = new Date(this.marcacoesController.marcacoes[j].data_marcacao);
-        //     usedDates.append(
-        //       {
-        //         "dia": curData.getDay(),
-        //         "mes": curData.getMonth(),
-        //         "ano": curData.getYear(),
-        //         "ho"
-        //       }
-        //     );
-        //   }
-        // }
+        const diasMeses = [31, 28, 30, 31, 30, 30, 31, 31, 30, 31, 30, 31];
+        let thisMonth = parseInt(dataHoje.getMonth()) + 1
+        let thisMonthTotalDays = diasMeses[thisMonth - 1];
+        let firstDay = parseInt(dataHoje.getDate()) + 1 > thisMonthTotalDays ? 1 : parseInt(dataHoje.getDate()) + 1;
+        document.querySelector(".select-dia").innerHTML = `<option disabled="disabled" value="0" selected>Escolha um dia...</option>`;
+        for (let j = 0; j < 14; j++) {
+          document.querySelector(".select-dia").innerHTML += `<option value="${firstDay}/${thisMonth}/${dataHoje.getFullYear()}">${firstDay}/${thisMonth}</option>`;
+          firstDay++;
+          if (firstDay > thisMonthTotalDays) {
+            thisMonth++;
+            firstDay = 1;
+          }
+        }
+
+        // Uso do JQuery: https://select2.org/programmatic-control/events
+        // Gerar as horas disponíveis para cada dia
+        $('.select-dia').on('select2:select', function (e) {
+          // É imperativo a data de abertura e a data de fecho serem horas certas (por ex: 08:00h ou 14:00h)
+          document.querySelector(".select-hora").innerHTML = `<option disabled="disabled" value="0" selected>Escolha uma hora...</option>`;
+          const minAbertura = parseInt(dataEntidade.horario_inicio.split(":")[0]) * 60;
+          const minFecho = parseInt(dataEntidade.horario_fim.split(":")[0]) * 60;
+          const minAbertos = minAbertura == minFecho ? 1140 : minFecho - minAbertura;
+          const quantTestesPorDia = Math.floor(minAbertos / parseInt(dataEntidade.intervalo_consulta));
+          const selectedDay = $('.select-dia').find(':selected').val();
+          let horaInicial = new Date(selectedDay.split("/")[2] + "-" + ('0' + selectedDay.split("/")[1]).slice(-2) + "-" + selectedDay.split("/")[0] + "T" + dataEntidade.horario_inicio + ":00.000+01:00")
+
+          for (let j = 0; j < quantTestesPorDia; j++) {
+            let wasDateAlreadyUsed = false
+            for (let z = 0; z < usedDates.length; z++) {
+              if (horaInicial.getFullYear() == usedDates[z].ano && horaInicial.getMonth() == usedDates[z].mes && horaInicial.getDate() == usedDates[z].dia && horaInicial.getHours() == usedDates[z].hora && horaInicial.getMinutes() == usedDates[z].min) {
+                document.querySelector(".select-hora").innerHTML += `<option disabled value="${('0' + horaInicial.getHours()).slice(-2)}:${('0' + horaInicial.getMinutes()).slice(-2)}">${('0' + horaInicial.getHours()).slice(-2)}:${('0' + horaInicial.getMinutes()).slice(-2)}h</option>`;
+                wasDateAlreadyUsed = true;
+              }
+            }
+            if (!wasDateAlreadyUsed) {
+              document.querySelector(".select-hora").innerHTML += `<option value="${('0' + horaInicial.getHours()).slice(-2)}:${('0' + horaInicial.getMinutes()).slice(-2)}">${('0' + horaInicial.getHours()).slice(-2)}:${('0' + horaInicial.getMinutes()).slice(-2)}h</option>`;
+            }
+            horaInicial = new Date(horaInicial.getTime() + parseInt(dataEntidade.intervalo_consulta) * 60000);
+          }
+        });
+
+        // Uso do JQuery: https://select2.org/programmatic-control/events
+        // Mostrar testes e o preço de cada
+        document.querySelector(".select-testes-modal").innerHTML = `<option disabled="disabled" value="0" selected>Tipo de teste</option>`;
+        for (let z = 0; z < this.userController.testesEntidade.length; z++) {
+          if (parseInt(this.userController.testesEntidade[z].id_entidade) == parseInt(dataEntidade.id)) {
+            document.getElementsByClassName("select-testes-modal")[0].innerHTML += `<option value="${this.userController.testesEntidade[z].id_teste}">${this.testsController.GetNameById(parseInt(this.userController.testesEntidade[z].id_teste)).nome_teste}</option>`;
+          }
+        }
+        const allEntityTests = this.userController.testesEntidade;
+        $('.select-testes-modal').on('select2:select', function (e) {
+          for (let z = 0; z < allEntityTests.length; z++) {
+            if (parseInt(allEntityTests[z].id_teste) == parseInt($('.select-testes-modal').find(':selected').val())) {
+              document.getElementById("preco-total").innerHTML = "Valor: " + allEntityTests[z].preco + "€";
+              break;
+            }
+          }
+        });
 
         document.getElementById("quant-avaliacoes").innerHTML = `Avaliações <span>(${quantClassi} classificação/ções)</span>`;
         classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
@@ -325,7 +398,45 @@ export default class IndexView {
             document.getElementsByClassName("span-" + k + "estrelas")[0].style.backgroundColor = "#C8C8C8";
           }
         }
+        if (dataEntidade.call_me) {
+          document.getElementById("btn-call-me").innerHTML = `<button class="btn btn-azul-pri w-100">Pedir para me ligar</button>`;
+        }
       });
     }
+  }
+
+  FinalizeAppointment() {
+    document.getElementById("btn-realizar-marcacao").addEventListener("click", () => {
+      // Uso do JQuery: https://select2.org/programmatic-control/add-select-clear-items
+      const tipo_teste = $('.select-testes-modal');
+      const data = $('.select-dia');
+      const hora = $('.select-hora');
+
+      if ((tipo_teste.find(':selected').val() != tipo_teste.find('option').first().val()) && (data.find(':selected').val() != data.find('option').first().val()) && (hora.find(':selected').val() != hora.find('option').first().val())) {
+        try {
+          this.marcacoesController.AddNewMarcacao(
+            this.userController.getLoggedInUserData().id,
+            parseInt(document.getElementById("mar-id").innerHTML),
+            new Date(data.find(':selected').val().split("/")[2] + "-" + ('0' + data.find(':selected').val().split("/")[1]).slice(-2) + "-" + data.find(':selected').val().split("/")[0] + "T" + hora.find(':selected').val() + ":00.000+01:00"),
+            parseInt(tipo_teste.find(':selected').val()),
+            false,
+            parseFloat(document.getElementById("preco-total").innerHTML.split("Valor: ")[1].split("€")[0].trim()).toFixed(2)
+          );
+          Swal.fire('Sucesso!', 'A marcação foi feita com sucesso!', 'success');
+          // Fazer a percentagem de ganhar o premio
+          // Fazer a percentagem de ganhar o premio
+          // Fazer a percentagem de ganhar o premio
+          // Fazer a percentagem de ganhar o premio
+          // Fazer a percentagem de ganhar o premio
+          setTimeout(() => {
+            location.replace("html/marcacoes.html");
+          }, 2000);
+        } catch (e) {
+          Swal.fire('Erro!', String(e).substring(7), 'error');
+        }
+      } else {
+        Swal.fire('Erro!', "Escolha uma opção de todas as informações!", 'error');
+      }
+    });
   }
 }

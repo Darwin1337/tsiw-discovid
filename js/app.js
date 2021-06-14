@@ -109,12 +109,14 @@ class App {
       this.userController.EntityUser_Register("Clínica da Venda Nova", "502747668", "vendanova@clinica.pt", "123", "vendanovaclinica.pt", "08:00", "20:00", "20", false, false, true);
       this.userController.EntityUser_Register("Centro Hospitalar Universitário de São João", null, "saojoao@hospital.pt", null, null, "08:00", "20:00", "20", false, false, false);
       this.userController.EntityUser_Register("Vale Saúde", "514987472", "valesaude@clinica.pt", "123", "valesaude.pt", "08:00", "20:00", "20", false, true, true);
+      this.userController.EntityUser_Register("Unilabs Póvoa de Varzim", null, "povoavarzim@unilabs.pt", null, null, "10:00", "16:00", "5", true, false, false);
     }
 
     if (!localStorage.enderecos_entidade) {
       this.userController.EntityUser_RegisterAddress(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, "R. da Ferraria 96", "4435-250", 110, 41.1749771, -8.5462703);
       this.userController.EntityUser_RegisterAddress(this.userController.getEntityUserByEmail("saojoao@hospital.pt").id, "Alameda Prof. Hernâni Monteiro", "4200-319", 210, 41.18282823595165, -8.600261664418193);
       this.userController.EntityUser_RegisterAddress(this.userController.getEntityUserByEmail("valesaude@clinica.pt").id, "R. Dom João de Castro Nº 509", "4435-674", 110, 41.182707868135395, -8.5291363332414);
+      this.userController.EntityUser_RegisterAddress(this.userController.getEntityUserByEmail("povoavarzim@unilabs.pt").id, "R. Dr. Leonardo Coimbra", "4490-621", 215, 41.3841745864648, -8.76049572402462);
     }
 
     if (!localStorage.testes_entidade) {
@@ -129,6 +131,8 @@ class App {
       this.userController.EntityUser_RegisterTest(this.userController.getEntityUserByEmail("valesaude@clinica.pt").id, 1, "10", "99");
       this.userController.EntityUser_RegisterTest(this.userController.getEntityUserByEmail("valesaude@clinica.pt").id, 2, "15", "50");
       this.userController.EntityUser_RegisterTest(this.userController.getEntityUserByEmail("valesaude@clinica.pt").id, 3, "25", "99");
+
+      this.userController.EntityUser_RegisterTest(this.userController.getEntityUserByEmail("povoavarzim@unilabs.pt").id, 2, "12", "50");
     }
 
     if (!localStorage.produtos) {
@@ -216,23 +220,26 @@ class App {
       this.marcacoesController.AddNewMarcacao(
         this.userController.getNormalUserByEmail("diogo@borges.pt").id,
         this.userController.getEntityUserByEmail("vendanova@clinica.pt").id,
-        new Date("2021-06-12T14:20:00"),
+        new Date("2021-06-21T14:20:00"),
         1,
-        false
+        false,
+        "10.00"
       );
       this.marcacoesController.AddNewMarcacao(
         this.userController.getNormalUserByEmail("diogo@borges.pt").id,
         this.userController.getEntityUserByEmail("saojoao@hospital.pt").id,
-        new Date("2021-06-12T22:23:00"),
+        new Date("2021-06-12T08:20:00"),
         2,
-        false
+        false,
+        "7.50"
       );
       this.marcacoesController.AddNewMarcacao(
         this.userController.getNormalUserByEmail("goncalo@gama.pt").id,
         this.userController.getEntityUserByEmail("vendanova@clinica.pt").id,
         new Date("2021-06-12T22:23:00"),
         2,
-        false
+        false,
+        "7.50"
       );
     }
   }

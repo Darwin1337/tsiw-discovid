@@ -31,9 +31,9 @@ export default class MarcacoesController {
       localStorage.setItem("resultados", JSON.stringify(this.resultados));
     }
 
-    AddNewMarcacao(id_utilizador, id_entidade, data_marcacao, id_teste, call_me){
+    AddNewMarcacao(id_utilizador, id_entidade, data_marcacao, id_teste, call_me, preco){
       const newId = this.marcacoes.length > 0 ? this.marcacoes[this.marcacoes.length - 1].id_marcacao + 1 : 1;
-      this.marcacoes.push(new MarcacoesModel(newId, id_utilizador, id_entidade, data_marcacao, id_teste, call_me));
+      this.marcacoes.push(new MarcacoesModel(newId, id_utilizador, id_entidade, data_marcacao, id_teste, preco, call_me));
       localStorage.setItem("marcacoes", JSON.stringify(this.marcacoes));
     }
 
