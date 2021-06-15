@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="description" content="Projeto interdisciplinar de 1º ano - Tecnologias e Sistemas de Informação para a Web 2020/2021">
-  <meta name="keywords" content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
+  <meta name="keywords"
+    content="HTML, CSS, JavaScript, JQuery, FontAwesome, Covid, Testes, Tracking, Marcação de Testes, Instituto Politécnico do Porto, Escola Superior de Media Artes e Design, Tecnologias e Sistemas de Informação para a Web, Projeto I">
   <meta name="author" content="Gonçalo Gama, Diogo Borges, Diogo Oliveira">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -23,167 +24,235 @@
 
   <div class="custom-scrollbar container-fluid">
     <div class="row">
-        <div class="col-md-4 col-lg-4 col-xl-3 px-0" style="background-color: white; box-shadow: 5px 0 5px -2px #ccc;">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark">
-              <a class="d-flex align-items-center mb-md-0 me-md-auto text-decoration-none" style="color: var(--azul-pri);">
-                  <span class="fs-5 d-sm-inline" style="font-weight: 700;"><span class="discovid-icon me-3">&#xe900;</span>Filtrar resultados</span>
-              </a>
-              <div class="side-nav mb-4">
-                <hr class="w-100 mb-3">
-                <div class="w-100">
-                  <p class="m-0 text-center"><b>Diversos</b></p>
+      <div class="col-md-4 col-lg-4 col-xl-3 px-0" style="background-color: white; box-shadow: 5px 0 5px -2px #ccc;">
+        <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-dark">
+          <a class="d-flex align-items-center mb-md-0 me-md-auto text-decoration-none" style="color: var(--azul-pri);">
+            <span class="fs-5 d-sm-inline" style="font-weight: 700;"><span class="discovid-icon me-3">&#xe900;</span>Filtrar resultados</span>
+          </a>
+          <div class="side-nav mb-4">
+            <hr class="w-100 mb-3">
+            <div class="w-100">
+              <p class="m-0 text-center"><b>Diversos</b></p>
+            </div>
+            <hr class="w-100 mb-3">
+            <div class="filters filter-locale w-100">
+              <select class="select-localidades" style="width: 100%; height: 40px;" name="state">
+                <option value="0" selected>Qualquer</option>
+              </select>
+            </div>
+            <hr class="w-100 mb-3">
+            <div class="filters filter-test-type w-100">
+              <select class="select-testes" style="width: 100%" name="state">
+                <option value="0" selected>Qualquer</option>
+              </select>
+            </div>
+            <hr class="w-100 mb-3">
+            <div class="filters filter-price w-100">
+              <label for="preco" class="form-label">Preço mínimo (em euros)</label><br>
+              <div class="row d-flex align-items-center">
+                <div class="col-4 d-flex">
+                  <span>0.50€</span>
                 </div>
-                <hr class="w-100 mb-3">
-                <div class="filters filter-locale w-100">
-                  <select class="select-localidades" style="width: 100%; height: 40px;" name="state">
-                    <option disabled="disabled" selected>Localidade</option>
-                    <option value="1">Porto</option>
-                    <option value="2">Póvoa de Varzim</option>
-                    <option value="3">Vila do Conde</option>
-                    <option value="3">Gondomar</option>
-                    <option value="3">Peso da Régua</option>
-                  </select>
+                <div class="col-4 d-flex justify-content-center">
+                  <span id="currentMinPriceValue"><b>0.50€</b></span>
                 </div>
-                <hr class="w-100 mb-3">
-                <div class="filters filter-test-type w-100">
-                  <select class="select-testes" style="width: 100%" name="state">
-                    <option disabled="disabled" selected>Tipo de teste</option>
-                    <option value="1">Diagnóstico</option>
-                    <option value="2">Antigénio</option>
-                    <option value="3">Serológico</option>
-                  </select>
+                <div class="col-4 d-flex justify-content-end">
+                  <span>200.00€</span>
                 </div>
-                <hr class="w-100 mb-3">
-                <div class="filters filter-price w-100">
-                  <label for="preco" class="form-label">Preço mínimo (em euros)</label><br>
-                  <div class="row d-flex align-items-center">
-                    <div class="col-4 d-flex">
-                      <span>0.50€</span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center">
-                      <span id="currentMinPriceValue"><b>0.50€</b></span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-end">
-                      <span>200.00€</span>
-                    </div>
-                  </div>
-                  <input class="w-100" type="range" min="0.50" max="200" step="0.50" value="0.50" id="preco_min" oninput="updateRange('currentMinPriceValue', this.value);" onchange="updateRange('currentMinPriceValue', this.value);">
+              </div>
+              <input class="w-100" type="range" min="0.50" max="200" step="0.50" value="0.50" id="preco_min">
+            </div>
+            <hr class="w-100 mb-3">
+            <div class="filters filter-price w-100">
+              <label for="preco" class="form-label">Preço máximo (em euros)</label><br>
+              <div class="row d-flex align-items-center">
+                <div class="col-4 d-flex">
+                  <span id="maxMinPrice">0.50€</span>
                 </div>
-                <hr class="w-100 mb-3">
-                <div class="filters filter-price w-100">
-                  <label for="preco" class="form-label">Preço máximo (em euros)</label><br>
-                  <div class="row d-flex align-items-center">
-                    <div class="col-4 d-flex">
-                      <span id="maxMinPrice">0.50€</span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center">
-                      <span id="currentMaxPriceValue"><b>200.00€</b></span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-end">
-                      <span>200.00€</span>
-                    </div>
-                  </div>
-                  <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max" oninput="updateRange('currentMaxPriceValue', this.value);" onchange="updateRange('currentMaxPriceValue', this.value);">
+                <div class="col-4 d-flex justify-content-center">
+                  <span id="currentMaxPriceValue"><b>200.00€</b></span>
                 </div>
-                <hr class="w-100 mb-3">
-                <div class="filters filter-distance w-100">
-                  <label for="distancia" class="form-label">Distância (em quilómetros)</label><br>
-                  <div class="row d-flex align-items-center">
-                    <div class="col-4 d-flex">
-                      <span>1km</span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-center">
-                      <span id="currentDistanceValue"><b>15km</b></span>
-                    </div>
-                    <div class="col-4 d-flex justify-content-end">
-                      <span>300km</span>
-                    </div>
-                  </div>
-                  <input class="w-100" type="range" min="1" max="300" step="1" value="15" id="distancia" oninput="updateRange('currentDistanceValue', this.value);" onchange="updateRange('currentDistanceValue', this.value);">
+                <div class="col-4 d-flex justify-content-end">
+                  <span>200.00€</span>
                 </div>
-                <hr class="w-100">
-                <div class="filters filters-schedules w-100">
-                  <div class="d-flex align-items-center pt-3">
-                    <input type="checkbox" id="drive-thru" class="check-style">
-                    <label for="drive-thru" class="span-checkbox">Posto Drive-Thru</label>
-                  </div>
-                  <div class="d-flex align-items-center pt-3">
-                    <input type="checkbox" id="call-me" class="check-style">
-                    <label for="call-me" class="span-checkbox"><i>Call me</i> disponível</label>
-                  </div>
+              </div>
+              <input class="w-100" type="range" min="0.50" max="200" value="200" step="0.50" id="preco_max">
+            </div>
+            <hr class="w-100 mb-3">
+            <div class="filters filter-distance w-100">
+              <label for="distancia" class="form-label">Distância (em quilómetros)</label><br>
+              <div class="row d-flex align-items-center">
+                <div class="col-4 d-flex">
+                  <span>1km</span>
                 </div>
-                <hr class="w-100 mb-3">
-                <p class="m-0 text-center"><b>Estatísticas</b></p>
-                <hr class="w-100 mb-3">
-                <div class="filters filters-schedules w-100">
-                  <div>
-                    <p class="m-0" style="font-size: .9rem;"><strong>Agendamentos</strong></p>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="schedules-high" class="check-style">
-                      <label for="schedules-high" class="span-checkbox">Mais agendamentos</label>
-                    </div>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="schedules-low" class="check-style">
-                      <label for="schedules-low" class="span-checkbox">Menos agendamentos</label>
-                    </div>
-                  </div>
+                <div class="col-4 d-flex justify-content-center">
+                  <span id="currentDistanceValue"><b>15km</b></span>
                 </div>
-                <hr class="w-100">
-                <div class="filters filters-likes w-100">
-                  <div>
-                    <p class="m-0" style="font-size: .9rem;"><strong>Gostos</strong></p>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="likes-high" class="check-style">
-                      <label for="likes-high" class="span-checkbox">Mais gostos</label>
-                    </div>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="likes-low" class="check-style">
-                      <label for="likes-low" class="span-checkbox">Menos gostos</label>
-                    </div>
-                  </div>
+                <div class="col-4 d-flex justify-content-end">
+                  <span>300km</span>
                 </div>
-                <hr class="w-100">
-                <div class="filters filters-ratings w-100">
-                  <div>
-                    <p class="m-0" style="font-size: .9rem;"><strong>Classificação</strong></p>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="rating-high" class="check-style">
-                      <label for="rating-high" class="span-checkbox">Mais alta</label>
-                    </div>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="rating-low" class="check-style">
-                      <label for="rating-low" class="span-checkbox">Mais baixa</label>
-                    </div>
-                  </div>
-                </div>
-                <hr class="w-100">
-                <div class="filters filters-availability w-100">
-                  <div>
-                    <p class="m-0" style="font-size: .9rem;"><strong>Disponibilidade</strong></p>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="availability-high" class="check-style">
-                      <label for="availability-high" class="span-checkbox">Mais rápida</label>
-                    </div>
-                    <div class="d-flex align-items-center pt-3">
-                      <input type="checkbox" id="availability-low" class="check-style">
-                      <label for="availability-low" class="span-checkbox">Mais demorada</label>
-                    </div>
-                  </div>
-                </div>
-                <hr class="w-100">
+              </div>
+              <input class="w-100" type="range" min="1" max="300" step="1" value="15" id="distancia">
+            </div>
+            <hr class="w-100">
+            <div class="filters filters-schedules w-100">
+              <div class="d-flex align-items-center pt-3">
+                <input type="checkbox" id="drive-thru" class="check-style">
+                <label for="drive-thru" class="span-checkbox">Posto Drive-Thru</label>
+              </div>
+              <div class="d-flex align-items-center pt-3">
+                <input type="checkbox" id="call-me" class="check-style">
+                <label for="call-me" class="span-checkbox"><i>Call me</i> disponível</label>
               </div>
             </div>
-            <div class="w-100 mb-3 text-center">
-              <button type="button" class="btn btn-azul-pri" style="width: 80%;">Aplicar filtros</button>
+            <hr class="w-100 mb-3">
+            <p class="m-0 text-center"><b>Estatísticas</b></p>
+            <hr class="w-100 mb-3">
+            <div class="filters filters-schedules w-100">
+              <div>
+                <p class="m-0" style="font-size: .9rem;"><strong>Agendamentos</strong></p>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio" id="schedules-high" name="schedules" class="check-style">
+                  <label for="schedules-high" class="span-checkbox">Mais agendamentos</label>
+                </div>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio" id="schedules-low" name="schedules" class="check-style">
+                  <label for="schedules-low" class="span-checkbox">Menos agendamentos</label>
+                </div>
+              </div>
             </div>
+            <hr class="w-100">
+            <div class="filters filters-ratings w-100">
+              <div>
+                <p class="m-0" style="font-size: .9rem;"><strong>Classificação</strong></p>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio" id="rating-high" name="rating" class="check-style">
+                  <label for="rating-high" class="span-checkbox">Mais alta</label>
+                </div>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio" id="rating-low" name="rating" class="check-style">
+                  <label for="rating-low" class="span-checkbox">Mais baixa</label>
+                </div>
+              </div>
+            </div>
+            <hr class="w-100">
+            <div class="filters filters-availability w-100">
+              <div>
+                <p class="m-0" style="font-size: .9rem;"><strong>Disponibilidade</strong></p>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio" id="availability-high" name="availability" class="check-style">
+                  <label for="availability-high" class="span-checkbox">Mais rápida</label>
+                </div>
+                <div class="d-flex align-items-center pt-3">
+                  <input type="radio" id="availability-low" name="availability" class="check-style">
+                  <label for="availability-low" class="span-checkbox">Mais demorada</label>
+                </div>
+              </div>
+            </div>
+            <hr class="w-100">
+          </div>
         </div>
-        <div class="col-md-8 col-lg-8 col-xl-9 py-3">
-          <div style="width: 100%; padding: 0px 15px;">
-            <h2 class="results-title mb-3">Postos encontrados <span class="results-description" style="font-weight: 300; font-size: 1.25rem;">(3 resultados)</span></h2>
-            <div class="results-cards" id="postos-encontrados">
+        <div class="w-100 mb-3 text-center">
+          <button type="button" class="btn btn-azul-pri" style="width: 80%;" id="apply-filters">Aplicar filtros</button>
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-8 col-xl-9 py-3">
+        <div style="width: 100%; padding: 0px 15px;">
+          <h2 class="results-title mb-3">Postos encontrados <span class="results-description" id="qnt-resultados" style="font-weight: 300; font-size: 1.25rem;">(3 resultados)</span></h2>
+          <div class="results-cards" id="postos-encontrados">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Modal-->
+  <div class="modal fade" id="detalhes-posto-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content background-modal">
+        <div class="row">
+          <div class="col-md-12 fechar-modal">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row mt-5">
+              <div class="col-sm-12 col-md-12 col-xl-7 ">
+                <h4 class="text-start color-azul-princ mb-4">Informação do posto</h4>
+                <div class="col-md-12 info-posto-marcacao color-azul-princ">
+                  <h5 id="posto-nome"></h5>
+                  <p id="posto-morada"></p>
+                  <p hidden id="mar-id"></p>
+                  <p id="posto-horario"></p>
+                  <div class="row ">
+                    <div class="col-md-4 text-center mb-3">
+                      <h4 class="color-laranja pontuacao" id="pontuacao"></h4>
+                      <div id="render-stars"></div>
+                    </div>
+                    <div class="col-md-6 ">
+                      <div class=" d-flex align-items-center ">
+                        <span id="valor">5</span>
+                        <span class="span-5estrelas"></span>
+                      </div>
+                      <div class="col-xl-3"></div>
+                      <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                      <div class="d-flex align-items-center ">
+                        <span id="valor">4</span>
+                        <span class="span-4estrelas"></span>
+                      </div>
+                      <div class="col-xl-3"></div>
+                      <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                      <div class="d-flex align-items-center ">
+                        <span id="valor">3</span>
+                        <span class="span-3estrelas"></span>
+                      </div>
+                      <div class="col-xl-3"></div>
+                      <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                      <div class="d-flex align-items-center ">
+                        <span id="valor">2</span>
+                        <span class="span-2estrelas"></span>
+                      </div>
+                      <div class="col-xl-3"></div>
+                      <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
+                      <div class="d-flex align-items-center ">
+                        <span id="valor">1</span>
+                        <span class="span-1estrelas"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <h4 class="text-start color-azul-princ mt-4 mb-4" id="quant-avaliacoes">Avaliações <span>(1 classificação)</span></h4>
+                <div id="content-avaliacoes"></div>
+              </div>
+              <div class="col-md-1 text-start"></div>
+              <div class="col-sm-12 col-md-12 col-xl-4 text-start ">
+                <h4 class="color-azul-princ mb-4">Marcação</h4>
+                <div class="mb-3">
+                  <select class="select-testes-modal" style="width: 100%">
+                    <option disabled="disabled" value="0" selected>Tipo de teste</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <select class="select-dia" style="width: 100%">
+                    <option disabled="disabled" value="0" selected>Escolha um dia...</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <select class="select-hora" style="width: 100%">
+                    <option disabled="disabled" value="0" selected>Escolha uma hora...</option>
+                  </select>
+                </div>
+                <div class="d-flex justify-content-center">
+                  <h5 id="preco-total">Selecione todos dados necessários...</h5>
+                </div>
+                <button class="w-100 imprimir-fatura mt-3" id="btn-realizar-marcacao">Fazer marcação</button>
+                <div id="btn-call-me" class="mt-4 w-100 text-center"></div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
 
@@ -241,16 +310,25 @@
   <script type="text/javascript" src="..\js\lib\select2\js\select2.full.min.js"></script>
   <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
   <script type="text/javascript" src="..\js\lib\sweetalert2\sweetalert2.all.min.js"></script>
-  <script type="text/javascript" src="..\js\misc.js"></script>
   <script type="text/javascript">
-    $(document).ready(function() {
-      $('.select-localidades').select2({
-        searchInputPlaceholder: 'Pesquisar localidade...'
-      });
-      $('.select-testes').select2({
-        searchInputPlaceholder: 'Pesquisar tipo...'
-      });
-      $(function () { $('[data-toggle="tooltip"]').tooltip() });
+    $('.select-testes-modal').select2({
+      dropdownParent: $('#detalhes-posto-modal'),
+      searchInputPlaceholder: 'Pesquisar tipo...'
+    });
+    $('.select-dia').select2({
+      dropdownParent: $('#detalhes-posto-modal')
+    });
+    $('.select-hora').select2({
+      dropdownParent: $('#detalhes-posto-modal')
+    });
+    $('.select-localidades').select2({
+      searchInputPlaceholder: 'Pesquisar localidade...'
+    });
+    $('.select-testes').select2({
+      searchInputPlaceholder: 'Pesquisar tipo...'
+    });
+    $(function() {
+      $('[data-toggle="tooltip"]').tooltip()
     });
   </script>
 </body>

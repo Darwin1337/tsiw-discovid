@@ -17,7 +17,7 @@ export default class EncomendasView {
     this.testsController = new TestsController();
     // Instanciar o AvaliacoesController para ser possível aceder ao métodos dos utilizadores
     this.avaliacoesController = new AvaliacoesController();
-    // Instanciar o GamificacoesController para ser possível aceder ao métodos dos utilizadores
+    // Instanciar o GamificacoesController para ser possível adicionar pontos ao utilizador
     this.gamificacoesController = new GamificacoesController();
 
     this.currentPage = document.querySelector("body");
@@ -123,9 +123,9 @@ export default class EncomendasView {
 
             this.AddEstadosToSelect(`#estado-marcacao-${marcacoes[i].id_marcacao}`, estadoData.id_estado)
             this.AddResultadosToSelect(`#resultado-marcacao-${marcacoes[i].id_marcacao}`, resultado.id_resultado)
-            
+
             first=false
-            
+
           }
           else{
             document.getElementById("pills-marcacoes").innerHTML += `
@@ -152,7 +152,7 @@ export default class EncomendasView {
               `
             this.AddEstadosToSelect(`#estado-marcacao-${marcacoes[i].id_marcacao}`, estadoData.id_estado)
             this.AddResultadosToSelect(`#resultado-marcacao-${marcacoes[i].id_marcacao}`, resultado.id_resultado)
-           
+
           }
         }
       }
@@ -215,9 +215,9 @@ export default class EncomendasView {
 
             this.AddEstadosToSelect(`#estado-marcacao-${marcacoes[i].id_marcacao}`, estadoData.id_estado)
             this.AddResultadosToSelect(`#resultado-marcacao-${marcacoes[i].id_marcacao}`, resultado.id_resultado)
-            
+
             first=false
-            
+
           }
           else{
             document.getElementById("pills-marcacoes").innerHTML += `
@@ -244,12 +244,12 @@ export default class EncomendasView {
               `
             this.AddEstadosToSelect(`#estado-marcacao-${marcacoes[i].id_marcacao}`, estadoData.id_estado)
             this.AddResultadosToSelect(`#resultado-marcacao-${marcacoes[i].id_marcacao}`, resultado.id_resultado)
-           
+
           }
         }
       }
     }
-    
+
     if (aux==true) {
       document.getElementById("pills-marcacoes").innerHTML=`
       <h1 class="text-center">Não tem marcações feitas</h1>
@@ -264,7 +264,7 @@ export default class EncomendasView {
   }
 
   EditarMarcacaoEstadoPosto(){
-    
+
     for (const btnEditarMarcacao of document.getElementsByClassName("editar-marcacao")) {
       btnEditarMarcacao.addEventListener("click", () => {
       this.marcacaoController.UpdateResultadoMarcacao(parseInt(btnEditarMarcacao.id), parseInt(document.getElementById(`resultado-marcacao-${btnEditarMarcacao.id}`).value))
@@ -514,9 +514,10 @@ export default class EncomendasView {
       btnVerMarcacao.addEventListener("click", () => {
         const marcacoes = this.marcacaoController.GetAllMarcacoes();
         let test=null
-        document.getElementById("content-avaliacoes").innerHTML =""
+        document.getElementById("render-stars").innerHTML = "";
+        document.getElementById("content-avaliacoes").innerHTML = "";
         //limpar div botao avaliar
-        document.getElementById("info-marcacao").innerHTML=""
+        document.getElementById("info-marcacao").innerHTML = "";
         for (let i = 0; i < marcacoes.length; i++) {
           if(btnVerMarcacao.id==marcacoes[i].id_marcacao){
             test=marcacoes[i].id_entidade
@@ -525,7 +526,7 @@ export default class EncomendasView {
             let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
             let userData=this.userController.normalUsers.find(user => user.id==marcacoes[i].id_utilizador)
             let testes=this.testsController.testes.find(teste => teste.id_teste==marcacoes[i].id_teste)
-            
+
 
             // //Ir buscar a classificação media do posto
             // let classi = 0.0;
@@ -567,7 +568,7 @@ export default class EncomendasView {
                 break;
               }
             }
-           
+
             if (j!=null) {
               document.getElementById("comentario-marcacao").innerHTML=`
                 <div >
@@ -649,7 +650,8 @@ export default class EncomendasView {
     for (const btnVerMarcacao of document.getElementsByClassName("ver-marcacao")) {
       btnVerMarcacao.addEventListener("click", () => {
         document.getElementById("content-avaliacoes").innerHTML = "";
-        
+        document.getElementById("render-stars").innerHTML = "";
+
         const dataEntidade = this.userController.entityUsers.find(entidade => parseInt(entidade.id) == parseInt(btnVerMarcacao.id));
         const moradaEntidade = this.userController.endEntidade.find(entidade => parseInt(entidade.id_entidade) == parseInt(btnVerMarcacao.id));
         const marcacoes = this.marcacaoController.GetAllMarcacoes();
@@ -663,7 +665,7 @@ export default class EncomendasView {
             let moradas=this.userController.endEntidade.find(morada => morada.id_entidade==marcacoes[i].id_entidade)
             let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
             let testes=this.testsController.testes.find(teste => teste.id_teste==marcacoes[i].id_teste)
-            
+
 
             //Ir buscar a classificação media do posto
             let classi = 0.0;
@@ -687,10 +689,11 @@ export default class EncomendasView {
               horas=horas.getHours()+":"+horas.getMinutes()
             }
 
-            // document.getElementById("nome-posto").innerHTML = `${postoData.nome}`;
-            // document.getElementById("morada-posto").innerHTML = `${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} `;
-            // document.getElementById("horario-posto").innerHTML = `${postoData.horario_inicio} - ${postoData.horario_fim}`;
-            // // document.getElementById("classificacao-posto").innerHTML = `${classi}`;
+            document.getElementById("posto-morada").innerHTML = `${moradas.morada}<br>${moradas.cod_postal} - ${this.localeController.GetNameById(moradas.id_localidade).nome}`;
+            document.getElementById("mar-id").innerHTML += `${btnVerMarcacao.id}`;
+            document.getElementById("posto-nome").innerHTML = postoData.nome;
+            document.getElementById("posto-horario").innerHTML = `Horário: ${postoData.horario_inicio} - ${postoData.horario_fim}`;
+            document.getElementById("pontuacao").innerHTML = `${classi}`;
             document.getElementById("tipo-teste").innerHTML = `${testes.nome_teste}`;
             document.getElementById("hora-teste").innerHTML = `${data} ${horas}`;
             document.getElementById("valor-teste").innerHTML = `${marcacoes[i].preco_teste}€`;
@@ -698,7 +701,7 @@ export default class EncomendasView {
             document.getElementById("morada-user").innerHTML = `${moradasUser.morada}, ${moradasUser.cod_postal}, ${this.localeController.GetNameById(moradasUser.id_localidade).nome}`;
             document.getElementById("contacto-user-email").innerHTML = `${this.userController.getLoggedInUserData().tlm} | ${this.userController.getLoggedInUserData().email}`;
 
-            
+
             document.getElementById("comentario-marcacao").innerHTML=""
 
             let j=null;
@@ -747,11 +750,11 @@ export default class EncomendasView {
                 <button class="w-100 avaliar-posto mt-3" id="avaliar-posto">Avaliar posto</button>
               </form>
                 `
-              
               this.AvaliarPosto(postoData.id,marcacoes[i].id_marcacao)
               this.AtribuirPontosAvaliacao()
               break
               }
+
             }
           }
         }
@@ -796,6 +799,9 @@ export default class EncomendasView {
         }
         document.getElementById("render-stars").innerHTML = classi == 0.0 ? "<b>Sem classificação</b>" : `${renderStars}`;
         // Pintar a tira que corresponde oa número na classificação
+        for (let k = 1; k <= 5; k++) {
+          document.getElementsByClassName("span-" + k + "estrelas")[0].style.backgroundColor = "#C8C8C8";
+        }
         if (Math.floor(classi) > 0) {
           document.getElementsByClassName("span-" + parseInt(Math.floor(classi)) + "estrelas")[0].style.backgroundColor = "green";
         } else {
@@ -807,12 +813,6 @@ export default class EncomendasView {
 
       });
     }
-  }
-
-  AtribuirPontosAvaliacao(){
-    document.getElementById("avaliar-posto").addEventListener("click", ()=>{
-      this.userController.UpdateUserPoints(this.gamificacoesController.pontos_avaliacao[0].pontos)
-    })
   }
 
   OrdenarMarcacoes(){
@@ -858,6 +858,12 @@ export default class EncomendasView {
     })
   }
 
+  AtribuirPontosAvaliacao(){
+    document.getElementById("avaliar-posto").addEventListener("click", ()=>{
+      this.userController.UpdateUserPoints(this.gamificacoesController.pontos_avaliacao[0].pontos)
+    })
+  }
+
   UpdateEstadosResultados(){
     const marcacoes = this.marcacaoController.GetAllMarcacoes();
     for (let i = 0; i <marcacoes.length; i++) {
@@ -866,10 +872,10 @@ export default class EncomendasView {
       if (this.userController.getLoggedInUserType()=="posto") {
         if(marcacoes[i].id_entidade==this.userController.getLoggedInUserData().id){
           let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
-  
+
           const d=new Date(marcacoes[i].data_marcacao)
           const a=new Date()
-          
+
           if (marcacoes[i].id_estado==4) {
             this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,2)
           }
@@ -885,23 +891,23 @@ export default class EncomendasView {
             else if(a>d){
               this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,3)
             }
-           
+
           }
           else if(d>a && marcacoes[i].id_estado==5){
             this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,3)
             this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,1)
           }
-       
+
         }
       }
       else{
         if (marcacoes[i].id_utilizador==this.userController.getLoggedInUserData().id) {
 
           let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
-  
+
           const d=new Date(marcacoes[i].data_marcacao)
           const a=new Date()
-          
+
           if (postoData.registado==true) {
             if (marcacoes[i].id_estado==4) {
               this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,2)
@@ -918,7 +924,7 @@ export default class EncomendasView {
               else if(a>d){
                 this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,3)
               }
-             
+
             }
             else if(d>a && marcacoes[i].id_estado==5){
               this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,3)
@@ -933,12 +939,8 @@ export default class EncomendasView {
               this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,2)
             }
           }
-        
-          
-  
         }
       }
-      
     }
   }
 }

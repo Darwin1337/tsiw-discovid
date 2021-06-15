@@ -94,42 +94,34 @@ export default class UserController {
 
   // Edição
 
-  NormalUser_Edit(id, avatar, pnome, unome, email, password, tlm, morada, cep) {
-    // Falta completar edição das moradas
-    // Falta completar edição das moradas
-    // Falta completar edição das moradas
-    // Falta completar edição das moradas
-
+  NormalUser_Edit(id, avatar, pnome, unome, email, password, tlm) {
     const userIdx = this.normalUsers.findIndex(user => parseInt(user.id) == parseInt(id));
-    const addIdx = this.endNormal.findIndex(morada => parseInt(morada.id_utilizador) == parseInt(id));
-    if (!this.entityUsers.some(user => user.email == email) && !this.normalUsers.some(user => user.email == email)) {
-      if (this.normalUsers[userIdx].avatar == "https://i.ibb.co/BZTyP4Z/icon.png" && avatar != "https://i.ibb.co/BZTyP4Z/icon.png") {
-        if (!this.normalUsers[userIdx].avatar_mudado) {
-          // Creditar o utilizador com os pontos
-          // Creditar o utilizador com os pontos
-          // Creditar o utilizador com os pontos
 
-          this.normalUsers[userIdx].avatar_mudado = true;
-        }
+    // Verificar se o e-mail foi alterado
+    if (email != this.normalUsers[userIdx].email) {
+      // Se sim, verificar se esse email já está a ser usado
+      if (this.entityUsers.some(user => user.email == email) || this.normalUsers.some(user => user.email == email)) {
+        throw Error("O e-mail introduzido já está a ser utilizado por outro utilizador!");
       }
+    }
 
-      this.normalUsers[userIdx].avatar = avatar;
-      this.normalUsers[userIdx].pnome = pnome;
-      this.normalUsers[userIdx].unome = unome;
-      this.normalUsers[userIdx].email = email;
-      this.normalUsers[userIdx].password = password;
-      this.normalUsers[userIdx].tlm = tlm;
+    if (this.normalUsers[userIdx].avatar == "https://i.ibb.co/BZTyP4Z/icon.png" && avatar != "https://i.ibb.co/BZTyP4Z/icon.png") {
+      if (!this.normalUsers[userIdx].avatar_mudado) {
+        console.log("é a primeira vez que adciona foto")
+        this.normalUsers[userIdx].pontos += 50;
+        this.normalUsers[userIdx].avatar_mudado = true;
+      }
+    }
+    this.normalUsers[userIdx].avatar = avatar;
+    this.normalUsers[userIdx].pnome = pnome;
+    this.normalUsers[userIdx].unome = unome;
+    this.normalUsers[userIdx].email = email;
+    this.normalUsers[userIdx].password = password;
+    this.normalUsers[userIdx].tlm = tlm;
 
-      this.endNormal[addIdx].cod_postal = cep;
-      this.endNormal[addIx].morada = morada;
+    localStorage.removeItem("utilizadores_normais");
+    localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
 
-     localStorage.removeItem("enderecos_normal");
-     localStorage.setItem("enderecos_normal", JSON.stringify(this.endNormal));
-     localStorage.removeItem("utilizadores_normais");
-     localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
-   } else {
-     throw Error("O e-mail introduzido já está a ser utilizado por outro utilizador!");
-   }
  }
 
   EntityUser_Edit(id, nome, email, password, website, horario_inicio, horario_fim, intervalo_consulta, drive_thru, call_me, morada, cod_postal, id_localidade, lat, long) {
@@ -233,13 +225,7 @@ export default class UserController {
   }
 
   EntityUser_Verify(id_admin, id_entidade) {
-    // Se a entidade for registada mandar notificação de que foi verificada
-    // Se a entidade for registada mandar notificação de que foi verificada
-    // Se a entidade for registada mandar notificação de que foi verificada
-    // Se a entidade for registada mandar notificação de que foi verificada
-    // Se a entidade for registada mandar notificação de que foi verificada
     const entidade = this.entityUsers.findIndex(user => parseInt(user.id) == parseInt(id_entidade));
-    console.log(this.entityUsers[entidade])
     if (!this.entityUsers[entidade].verificado) {
       this.entityUsers[entidade].verificado = true;
       this.entityUsers[entidade].id_verificador = id_admin;
@@ -260,6 +246,20 @@ export default class UserController {
     } else {
       throw Error("A entidade selecionada já não está verificada!")
     }
+  }
+
+  NormalUser_Block(id_user) {
+    const user = this.normalUsers.findIndex(user => parseInt(user.id) == parseInt(id_user));
+    this.normalUsers[user].bloqueado = true;
+    localStorage.removeItem("utilizadores_normais");
+    localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+  }
+
+  NormalUser_Unblock(id_user) {
+    const user = this.normalUsers.findIndex(user => parseInt(user.id) == parseInt(id_user));
+    this.normalUsers[user].bloqueado = false;
+    localStorage.removeItem("utilizadores_normais");
+    localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
   }
 
   EntityUser_Block(id_entidade) {
@@ -332,4 +332,24 @@ export default class UserController {
       }
     }
   }
+
+  AdicionarMarcacao(id) {
+    const idx = this.normalUsers.findIndex(user => parseInt(user.id) == parseInt(id));
+    this.normalUsers[idx].quant_marcacoes += 1;
+    localStorage.removeItem("utilizadores_normais");
+    localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+  }
+
+  RemoveAllMarcacoes(id) {
+    const idx = this.normalUsers.findIndex(user => parseInt(user.id) == parseInt(id));
+    this.normalUsers[idx].quant_marcacoes = 0;
+    localStorage.removeItem("utilizadores_normais");
+    localStorage.setItem("utilizadores_normais", JSON.stringify(this.normalUsers));
+  }
+  // getBands(localidade = '', tipo_teste = '') {
+  //   let filteredPostos = this.entityUsers.filter(posto => (posto.id_localidade == localidade) && (band.genre == filterGenre || filterGenre === ''));
+  //
+  //   return filteredPostos
+  // }
+
 }

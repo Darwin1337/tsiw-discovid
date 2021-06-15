@@ -41,7 +41,6 @@ export default class RegistoNormalView {
     else{
       this.BindRegistrationSubmit();
     }
-    
 
     // O botão presente no formulário está escondido (id = RegistoSUBMIT) por isso o botão que está vísivel (id = href-submit), quando clicado irá simular o click no botão escondido.
     // O botão do forumlário está escondido para não ter que ser removido de dentro do formulário (por causa das moradas)

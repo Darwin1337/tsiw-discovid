@@ -172,7 +172,6 @@ export default class IndexView {
             if (testeSelecionado == 0) {
               for (let r = 0; r < this.userController.testesEntidade.length; r++) {
                 if (parseInt(this.userController.testesEntidade[r].id_entidade) == parseInt(entidade.id)) {
-                  console.log(parseFloat(this.userController.testesEntidade[r].preco));
                   if (parseFloat(this.userController.testesEntidade[r].preco) >= minPrice && parseFloat(this.userController.testesEntidade[r].preco) <= maxPrice) {
                     this.RenderCard(entidade, i);
                     break;
@@ -357,6 +356,7 @@ export default class IndexView {
         }
         if (dataEntidade.call_me) {
           document.getElementById("btn-call-me").innerHTML = `<button class="btn btn-azul-pri w-100">Pedir para me ligar</button>`;
+          this.FinalizeAppointmentCallMe();
         }
       });
     }
@@ -382,7 +382,13 @@ export default class IndexView {
               false,
               parseFloat(document.getElementById("preco-total").innerHTML.split("Valor: ")[1].split("€")[0].trim()).toFixed(2)
             );
-            Swal.fire('Sucesso!', 'A marcação foi feita com sucesso!', 'success');
+            this.userController.AdicionarMarcacao(parseInt(this.userController.getLoggedInUserData().id));
+            if (parseInt(this.userController.getLoggedInUserData().quant_marcacoes) == parseInt(this.gamificacoesController.quantidade_para_teste_gratis[0].quantidade)) {
+              this.userController.RemoveAllMarcacoes(parseInt(this.userController.getLoggedInUserData().id));
+              Swal.fire("Parabéns, esta marcação é gratuita!");
+            } else {
+              Swal.fire('Sucesso!', 'A marcação foi feita com sucesso!', 'success');
+            }
 
             // Verificar se o utilizador ganhou a rifa
             const gen_num = Math.floor(Math.random() * 100);
@@ -410,7 +416,75 @@ export default class IndexView {
               setTimeout(() => { }, 3000);
             }
             setTimeout(() => {
-              location.replace("html/marcacoes.html");
+              location.replace("./html/marcacoes.html");
+            }, 2000);
+          } catch (e) {
+            Swal.fire('Erro!', String(e).substring(7), 'error');
+          }
+        } else {
+          Swal.fire('Erro!', "Escolha uma opção de todas as informações!", 'error');
+        }
+      } else {
+        Swal.fire('Erro!', "O seu tipo de utilizador não pode fazer marcações!", 'error');
+      }
+    });
+  }
+
+  FinalizeAppointmentCallMe() {
+    document.getElementById("btn-call-me").addEventListener("click", () => {
+      // Uso do JQuery: https://select2.org/programmatic-control/add-select-clear-items
+      const tipo_teste = $('.select-testes-modal');
+      const data = $('.select-dia');
+      const hora = $('.select-hora');
+
+      if (this.userController.getLoggedInUserType() == "normal") {
+        const moradaUser = this.userController.endNormal.find(morada => parseInt(morada.id_utilizador) == parseInt(this.userController.getLoggedInUserData().id));
+
+        if ((tipo_teste.find(':selected').val() != tipo_teste.find('option').first().val()) && (data.find(':selected').val() != data.find('option').first().val()) && (hora.find(':selected').val() != hora.find('option').first().val())) {
+          try {
+            this.marcacoesController.AddNewMarcacao(
+              this.userController.getLoggedInUserData().id,
+              parseInt(document.getElementById("mar-id").innerHTML),
+              new Date(data.find(':selected').val().split("/")[2] + "-" + ('0' + data.find(':selected').val().split("/")[1]).slice(-2) + "-" + data.find(':selected').val().split("/")[0] + "T" + hora.find(':selected').val() + ":00.000+01:00"),
+              parseInt(tipo_teste.find(':selected').val()),
+              true,
+              parseFloat(document.getElementById("preco-total").innerHTML.split("Valor: ")[1].split("€")[0].trim()).toFixed(2)
+            );
+            this.userController.AdicionarMarcacao(parseInt(this.userController.getLoggedInUserData().id));
+            if (parseInt(this.userController.getLoggedInUserData().quant_marcacoes) == parseInt(this.gamificacoesController.quantidade_para_teste_gratis[0].quantidade)) {
+              this.userController.RemoveAllMarcacoes(parseInt(this.userController.getLoggedInUserData().id));
+              Swal.fire("Parabéns, esta marcação é gratuita!");
+            } else {
+              Swal.fire('Sucesso!', 'A marcação foi feita com sucesso!', 'success');
+            }
+
+            // Verificar se o utilizador ganhou a rifa
+            const gen_num = Math.floor(Math.random() * 100);
+            if (gen_num <= parseInt(this.gamificacoesController.percentagem_premio[0].percentagem) - 1) {
+              // Ganhou!!
+              this.encomendasController.AddNewEncomenda(
+                parseInt(this.userController.getLoggedInUserData().id),
+                new Date(),
+                0.00,
+                moradaUser.morada,
+                moradaUser.cod_postal,
+                this.localeController.GetNameById(moradaUser.id_localidade).nome,
+                "Gratuito",
+                this.userController.getLoggedInUserData().tlm
+              );
+              const produtosAOferecer = this.gamificacoesController.percentagem_premio[0].produtos_oferta.split(",");
+              for (let y = 0; y < produtosAOferecer.length; y++) {
+                this.encomendasController.AddNewDetalhesEncomenda(
+                  this.encomendasController.encomendas.length,
+                  parseInt(produtosAOferecer[y]),
+                  1
+                );
+              }
+              Swal.fire("Parabéns, A marcação foi concluída com sucesso e ganhou um kit de prevenção à COVID-19!");
+              setTimeout(() => { }, 3000);
+            }
+            setTimeout(() => {
+              location.replace("./html/marcacoes.html");
             }, 2000);
           } catch (e) {
             Swal.fire('Erro!', String(e).substring(7), 'error');

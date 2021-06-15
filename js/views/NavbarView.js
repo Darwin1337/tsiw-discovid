@@ -21,6 +21,54 @@ export default class NavbarView {
 
     // Verifica mudanças na resolução e aplica a devida navbar (ApplyMobileNavbar ou ApplyDesktopNavbar)
     window.addEventListener('resize', this.VerifyScreenResolution.bind(this));
+
+    // Event listener para pills
+    this.UpdatePills();
+
+    // Funções especificas para certas páginas
+    if (this.currentPage.id == "index" || this.currentPage.id == "postos") {
+      document.getElementById("distancia").addEventListener("input", this.UpdateRange.bind(this));
+      document.getElementById("distancia").addEventListener("change", this.UpdateRange.bind(this));
+
+      document.getElementById("preco_min").addEventListener("input", this.UpdateRange.bind(this));
+      document.getElementById("preco_min").addEventListener("change", this.UpdateRange.bind(this));
+
+      document.getElementById("preco_max").addEventListener("input", this.UpdateRange.bind(this));
+      document.getElementById("preco_max").addEventListener("change", this.UpdateRange.bind(this));
+    } else if (this.currentPage.id == "sintomas") {
+      this.PreventMultipleChoice();
+    }
+  }
+
+  UpdateRange() {
+    let a = null;
+    let b = null;
+    if (event.target.id == "distancia") {
+      a = "currentDistanceValue";
+      b = event.target.value;
+    } else if (event.target.id == "preco_min") {
+      a = "currentMinPriceValue";
+      b = event.target.value;
+    } else if (event.target.id == "preco_max") {
+      a = "currentMaxPriceValue";
+      b = event.target.value;
+    }
+    if (a == "currentMinPriceValue") {
+      document.getElementById(a).innerHTML = `<b>${parseFloat(b).toFixed(2)}€</b>`;
+      document.getElementById("preco_max").setAttribute("min", parseFloat(b).toFixed(2));
+      let sthg = ((parseFloat(200) + parseFloat(parseFloat(b).toFixed(2))));
+      if (String(sthg).indexOf(".") > -1) {
+        sthg = parseInt(String(sthg).split(".")[0]);
+      }
+      document.getElementById("preco_max").setAttribute("value", sthg / 2);
+      document.getElementById("preco_max").value = sthg / 2;
+      document.getElementById("maxMinPrice").innerHTML = `${parseFloat(b).toFixed(2)}€`;
+      document.getElementById("currentMaxPriceValue").innerHTML = `<b>${parseFloat(sthg / 2).toFixed(2)}€</b>`;
+    } else if (a == "currentDistanceValue") {
+      document.getElementById(a).innerHTML = `<b>${b}km</b>`;
+    } else if (a == "currentMaxPriceValue") {
+      document.getElementById(a).innerHTML = `<b>${parseFloat(b).toFixed(2)}€</b>`;
+    }
   }
 
   VerifyScreenResolution(ignore) {
@@ -375,5 +423,64 @@ export default class NavbarView {
           </div>
         </div>
       </div>`;
+  }
+
+  UpdatePills() {
+    try {
+      for (const btn of document.getElementsByClassName("btn-pills")) {
+        btn.addEventListener("click", () => {
+          for (const pill of document.getElementsByClassName("btn-pills")) {
+            if (pill != event.target) {
+              if (pill.classList.contains("active-tab")) {
+                pill.classList.remove("active-tab");
+              }
+              if (!pill.classList.contains("unactive-tab")) {
+                pill.classList.add("unactive-tab");
+              }
+            }
+          }
+
+          event.target.classList.remove("unactive-tab");
+          event.target.classList.add("active-tab");
+
+          for (const tab of document.getElementsByClassName("tab-pane")) {
+            if (tab.classList.contains("show")) {
+              tab.classList.remove("show");
+            }
+            if (tab.classList.contains("active")) {
+              tab.classList.remove("active");
+            }
+          }
+
+          if (!document.getElementById(event.target.getAttribute("data-bs-target").split("#")[1]).classList.contains("show")) {
+            document.getElementById(event.target.getAttribute("data-bs-target").split("#")[1]).classList.add("show");
+          }
+          if (!document.getElementById(event.target.getAttribute("data-bs-target").split("#")[1]).classList.contains("active")) {
+            document.getElementById(event.target.getAttribute("data-bs-target").split("#")[1]).classList.add("active");
+          }
+        });
+      }
+    } catch {
+      // Não há pills portanto n dá
+    }
+  }
+
+  PreventMultipleChoice() {
+    document.getElementsByClassName("b")[0].addEventListener("click", event => {
+      for (const sintoma of document.getElementsByClassName("a")) {
+        sintoma.disabled = document.getElementsByClassName("b")[0].checked;
+      }
+    });
+
+    for (const sintoma of document.getElementsByClassName("a")) {
+      sintoma.addEventListener("click", event => {
+        let isAnyChecked = Array.from(document.getElementsByClassName("a")).some(sin => sin.checked == true);
+        if (isAnyChecked) {
+          document.getElementsByClassName("b")[0].disabled = true;
+        } else {
+          document.getElementsByClassName("b")[0].disabled = false;
+        }
+      });
+    }
   }
 }

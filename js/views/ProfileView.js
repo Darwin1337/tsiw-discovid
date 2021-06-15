@@ -152,23 +152,6 @@ export default class NavbarView {
       // Settar as informações do user logado nos inputs
       this.SetProfileInfoPosto();
     } else {
-      // Obter as moradas do utilizador
-      let renderUserAddresses = ``;
-      for (let i = 0; i < this.userController.endNormal.length; i++) {
-        if (this.userController.endNormal[i].id_utilizador == this.userController.getLoggedInUserData().id) {
-          let renderDefault = this.userController.endNormal[i].predefinido ? `<i class="fas fa-diamond me-3 morada-default"></i>` : `<i class="far fa-diamond me-3 morada-default"></i>`;
-          renderUserAddresses += `
-          <div class="d-flex mt-3 mb-3 card-morada align-items-center" id="card-${i}">
-            <div class="f-icon">${renderDefault}</div>
-            <p class="m-0 p-0 etiqueta-${i}">${this.userController.endNormal[i].etiqueta}</p>
-            <div class="ms-auto">
-              <button type="button" class="m-edit" id="${i}" data-bs-toggle="modal" data-bs-target="#edit-morada"><i class="fas fa-edit morada-edit me-3"></i></button>
-              <button type="button" class="m-remove" id="${i}"><i class="fas fa-trash morada-remove"></i></button>
-            </div>
-          </div>`;
-        }
-      }
-
       // Injetar o código HTML para a edição de perfil de utilizadores normais
       document.querySelector("#campos-editar-perfil").innerHTML = `
       <p class="color-laranja"><b>Informações gerais:</b></p>
@@ -202,11 +185,7 @@ export default class NavbarView {
         <span>Nº de telemóvel</span>
         <input type="text" class="input-login-registar" id="user-tlm" disabled required>
       </div>
-      <p class="color-azul-princ mt-5"><b>Pontos conquistados: <span id="user-pontos"></span></b></p>
-      <hr class="mt-4">
-      <p class="color-laranja"><b>Moradas</b></p>
-      ${renderUserAddresses}
-      <button type="submit" class="btn btn-azul-pri mb-3" data-bs-toggle="modal" data-bs-target="#add-morada">Adicionar morada</button>`;
+      <p class="color-azul-princ mt-5"><b>Pontos conquistados: <span id="user-pontos"></span></b></p>`;
 
       // Event listener para adicionar morada
       this.AddAddress();
@@ -250,7 +229,6 @@ export default class NavbarView {
 
   SetProfileInfoNormal() {
     const userInfo = this.userController.getLoggedInUserData();
-
     document.getElementById("avatar-profile").src = userInfo.avatar;
     document.getElementById("avatar-profile-text").value = userInfo.avatar;
     document.getElementById("user-pnome").value = userInfo.pnome;
@@ -258,9 +236,10 @@ export default class NavbarView {
     document.getElementById("user-unome").value = userInfo.unome;
     document.getElementById("user-password").value = userInfo.password;
     document.getElementById("user-tlm").value = userInfo.tlm;
+    document.getElementById("user-pontos").innerHTML = userInfo.pontos;
     document.getElementById("avatar-profile-text").addEventListener("change",()=>{
       document.getElementById("avatar-profile").src = document.getElementById("avatar-profile-text").value;
-    })
+    });
   }
 
   UpdatePostosInfo() {
@@ -305,24 +284,19 @@ export default class NavbarView {
 
   UpdateUserInfo() {
     try {
-      console.log("Event listener a funcionar :)");
-      // if ($("#TipoUser").val() == "Utilizador normal") {
-      //   this.userController.NormalUser_Edit(
-      //     this.registoPNOME.value,
-      //     this.registoUNOME.value,
-      //     this.registoEMAIL.value,
-      //     this.registoPASSWORD.value,
-      //     this.registoTLM.value,
-      //     this.registoNIF.value,
-      //     this.registoDATANASC.value,
-      //     this.registoCONSEMAIL.checked);
-      // } else {
-      //   // pass
-      // }
-      // Swal.fire('Sucesso!', 'O registo foi concluído com sucesso!', 'success');
-      // setTimeout(() => {
-      //   location.reload();
-      // }, 2000);
+      this.userController.NormalUser_Edit(
+        this.userController.getLoggedInUserData().id,
+        document.getElementById("avatar-profile-text").value,
+        document.getElementById("user-pnome").value,
+        document.getElementById("user-unome").value,
+        document.getElementById("user-email").value,
+        document.getElementById("user-password").value,
+        document.getElementById("user-tlm").value);
+
+      Swal.fire('Sucesso!', 'O registo foi concluído com sucesso!', 'success');
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
     } catch (e) {
       Swal.fire('Erro!', String(e).substring(7), 'error');
     }

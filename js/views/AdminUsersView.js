@@ -259,6 +259,8 @@ export default class AdminUsersView {
     // Lista todos os utilizadores registados
     const x = this.userController.getAllNormalUsers();
     for (let i = 0; i < x.length; i++) {
+      let isAdmin = x[i].admin ? `<td><button type="button" class="btn-table turn-admin" id="` + x[i].id + `"><i class="fas fa-times-square"></i></button></td>` : `<td><button type="button" class="btn-table turn-admin" id="` + x[i].id + `"><i class="fas fa-check-square"></i></button></td>`;
+      let isBlocked = !x[i].bloqueado ? `<button class="btn-table btn-ban-user" style="color: red;" id="${x[i].id}"><i class="fas fa-ban"></i></button>` : `<button class="btn-table btn-ban-user" style="color: red;" id="${x[i].id}"><i class="fas fa-unlock"></i></button>`;
       document.getElementById("tabela-users").innerHTML += `
       <tr class="align-middle text-center">
         <td scope="row"><img style="width:3rem" src="${x[i].avatar}"></td>
@@ -266,8 +268,52 @@ export default class AdminUsersView {
         <td>${x[i].pnome}</td>
         <td>${x[i].unome}</td>
         <td>${x[i].email}</td>
-        <td><span class="icon-remover-user"><i class="fas fa-trash"></i></span><button type="submit" data-bs-toggle="modal" data-bs-target="#admin-edit-perfil" class="aaaa" style="color:black" id="${x[i].id}"><span class="icon-remover-edit"><i class="far fa-edit"></i></span></button></td>
+        <td>
+          <button type="submit" data-bs-toggle="modal" data-bs-target="#admin-edit-perfil" class="aaaa btn-table" style="color:black" id="${x[i].id}">
+            <span><i class="far fa-edit"></i></span>
+          </button>
+          ${isBlocked}
+        </td>
+        ${isAdmin}
       </tr>`;
+    }
+    this.TurnUserAdmin();
+    this.BlockUser();
+  }
+
+  BlockUser() {
+    for (const adminBtn of document.getElementsByClassName("btn-ban-user")) {
+      adminBtn.addEventListener("click", () => {
+        const user = this.userController.normalUsers.find(user => user.id == parseInt(event.currentTarget.id));
+        if (user.id != this.userController.getLoggedInUserData().id) {
+          if (user.bloqueado) {
+            this.userController.NormalUser_Unblock(user.id);
+          } else {
+            this.userController.NormalUser_Block(user.id);
+          }
+          window.location.reload();
+        } else {
+          Swal.fire('Erro!', "Não pode bloquear-se a si próprio!", 'error');
+        }
+      });
+    }
+  }
+
+  TurnUserAdmin() {
+    for (const adminBtn of document.getElementsByClassName("turn-admin")) {
+      adminBtn.addEventListener("click", () => {
+        const user = this.userController.normalUsers.find(user => user.id == parseInt(event.currentTarget.id));
+        if (user.id != this.userController.getLoggedInUserData().id) {
+          if (user.admin) {
+            this.userController.ChangeUserType(user.email, "user");
+          } else {
+            this.userController.ChangeUserType(user.email, "admin");
+          }
+          window.location.reload();
+        } else {
+          Swal.fire('Erro!', "Não pode retirar-se de admin!", 'error');
+        }
+      });
     }
   }
 
@@ -275,28 +321,18 @@ export default class AdminUsersView {
     for (const btnEdit of document.getElementsByClassName("aaaa")) {
       btnEdit.addEventListener("click", () => {
         const x = this.userController.getAllNormalUsers();
-        const x1 = this.userController.getAllNormalEnderecos();
-        for (let i = 0; i < x1.length; i++) {
-          if (btnEdit.id == x1[i].id_utilizador) {
-            document.getElementById("user-morada").value = x1[i].morada;
-            document.getElementById("user-cep").value = x1[i].cod_postal;
-          } else {
-            document.getElementById("user-morada").value = "";
-            document.getElementById("user-cep").value = "";
-          }
-        }
         for (let i = 0; i < x.length; i++) {
           if (x[i].id == btnEdit.id) {
             document.getElementById("nome-user-a-editar").innerHTML = x[i].pnome + " " + x[i].unome;
             document.getElementById("avatar-profile").src = x[i].avatar;
             document.getElementById("avatar-profile-edit").value = x[i].avatar;
-            document.getElementById("user-id").value = x[i].id;
             document.getElementById("user-pnome").value = x[i].pnome;
             document.getElementById("user-email").value = x[i].email;
             document.getElementById("user-unome").value = x[i].unome;
             document.getElementById("user-password").value = x[i].password;
             document.getElementById("user-tlm").value = x[i].tlm;
             document.getElementById("user-pontos").innerHTML = x[i].pontos;
+            document.getElementById("get-id").innerHTML = x[i].id;
           }
         }
       });
@@ -306,25 +342,23 @@ export default class AdminUsersView {
   AtualizarDadosUser() {
     document.querySelector("#avatar-profile-edit").addEventListener("change", () => {
       document.getElementById("avatar-profile").src = document.getElementById("avatar-profile-edit").value
-    })
+    });
+
     document.querySelector("#btn-update-user").addEventListener("click", () => {
-      //EDITAR ISTO
-      //EDITAR ISTO
-      //EDITAR ISTO
-      //EDITAR ISTO
-      //EDITAR ISTO
-      //EDITAR ISTO
-      this.userController.EntityUser_Edit(
-        document.getElementById("user-id").value,
-        document.getElementById("avatar-profile-edit").value,
-        document.getElementById("user-pnome").value,
-        document.getElementById("user-unome").value,
-        document.getElementById("user-email").value,
-        document.getElementById("user-password").value,
-        document.getElementById("user-tlm").value,
-        document.getElementById("user-morada").value,
-        document.getElementById("user-cep").value
-      );
+      try {
+        this.userController.NormalUser_Edit(
+          parseInt(document.getElementById("get-id").innerHTML),
+          document.getElementById("avatar-profile-edit").value,
+          document.getElementById("user-pnome").value,
+          document.getElementById("user-unome").value,
+          document.getElementById("user-email").value,
+          document.getElementById("user-password").value,
+          document.getElementById("user-tlm").value
+        );
+        window.location.reload();
+      } catch (e) {
+        Swal.fire('Erro!', String(e).substring(7), 'error');
+      }
     });
   }
 

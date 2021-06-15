@@ -271,7 +271,7 @@ export default class LojaView {
             }
           }
           //adicionar nova encomenda
-          this.encomendasController.AddNewEncomenda(this.userController.getLoggedInUserData().id,data,parseFloat(preco_total),morada,cp,localidade,radios[i].value,tlm)
+          this.encomendasController.AddNewEncomenda(this.userController.getLoggedInUserData().id,new Date(),parseFloat(preco_total),morada,cp,localidade,radios[i].value,tlm)
           if (document.getElementById("radio-usar-pontos").checked==true) {
             this.userController.RemoveUserPoints()
             this.userController.UpdateUserPoints(this.gamificacoesController.pontos_encomenda[0].pontos)

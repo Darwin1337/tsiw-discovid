@@ -22,11 +22,6 @@
   <div class="content-area">
     <div class="container my-5 color-azul-princ">
       <h4 class="text-center mt-5">Utilizadores</h4>
-      <div class="row">
-        <div class="col-md-12 text-center mt-3">
-          <button class="btn btn-success btn-sm " href="#" role="button"><i class="fas fa-plus-circle me-1"></i>Adicionar Utilizador</button>
-        </div>
-      </div>
       <table class="table table-striped mt-5">
         <thead class="">
           <tr class="text-center">
@@ -36,8 +31,8 @@
             <th scope="col">Ultimo Nome</th>
             <th scope="col">Email</th>
             <th scope="col">Ações</th>
+            <th scope="col">Tornar admin</th>
           </tr>
-
         </thead>
         <tbody id="tabela-users"></tbody>
       </table>
@@ -55,13 +50,10 @@
           <div class="container">
             <div class="modal-body">
               <div class="row">
+                <p hidden id="get-id"></p>
                 <div class="col-md-12 d-flex flex-column align-items-center align-self-center">
                   <img class="" id="avatar-profile">
                   <input type="text" class="mt-3" value="" id="avatar-profile-edit">
-                </div>
-                <div class="col-md-6 mt-3">
-                  <span>ID</span>
-                  <input type="text" class="input-login-registar" id="user-id" value="">
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Primeiro Nome</span>
@@ -80,16 +72,8 @@
                   <input type="text" class="input-login-registar"  id="user-password"  value="">
                 </div>
                 <div class="col-md-6 mt-3">
-                  <span>Morada</span>
-                  <input type="text" class="input-login-registar" id="user-morada"  value="">
-                </div>
-                <div class="col-md-6 mt-3">
                   <span>Nº Telemovel</span>
                   <input type="text" class="input-login-registar" id="user-tlm"  value="">
-                </div>
-                <div class="col-md-6 mt-3">
-                  <span>CEP</span>
-                  <input type="text" class="input-login-registar" id="user-cep"  value="">
                 </div>
                 <div class="col-md-6 mt-3">
                   <span>Pontos Conquistados: <span id="user-pontos"></span></span>
@@ -98,7 +82,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-              <button type="submit" class="btn btn-laranja" id="btn-update-user">Adicionar</button>
+              <button type="button" class="btn btn-laranja" id="btn-update-user">Guardar</button>
             </div>
           </div>
         </form>
@@ -160,7 +144,6 @@
   <script type="text/javascript" src="..\js\lib\select2\js\select2.full.min.js"></script>
   <script type="text/javascript" src="..\js\lib\select2\js\select2-searchInputPlaceholder.js"></script>
   <script type="text/javascript" src="..\js\lib\sweetalert2\sweetalert2.all.min.js"></script>
-  <script type="text/javascript" src="..\js\misc.js"></script>
   <script type="text/javascript">
     // Scripts here
   </script>

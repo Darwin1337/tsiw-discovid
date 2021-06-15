@@ -6,7 +6,6 @@ export class UtilizadorNormalModel {
     this.email = email;
     this.password = password;
     this.data_usessao = new Date();
-    this.bloqueado=false;
     this.tlm = tlm;
     this.nif = nif;
     this.data_nasc = data_nasc;
@@ -16,6 +15,8 @@ export class UtilizadorNormalModel {
     this.data_criacao = new Date();
     this.consentimento_email = consentimento_email;
     this.admin = false;
+    this.quant_marcacoes = 0;
+    this.bloqueado=false;
   }
 }
 
