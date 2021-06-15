@@ -145,8 +145,8 @@ class App {
     if (!localStorage.encomendas) {
       this.encomendasController = new EncomendasController();
 
-      this.encomendasController.AddNewEncomenda(2, "12-01-2020", 12, "Rua Nuno Álvares 87","4420-024","Gondomar", "Paypal","123456789");
-      this.encomendasController.AddNewEncomenda(2, "12-01-2020", 12, "Rua Nuno Álvares 87","4420-024","Gondomar", "MBWay","123456789");
+      this.encomendasController.AddNewEncomenda(this.userController.getNormalUserByEmail("goncalo@gama.pt").id, new Date("2020-01-12"), 12.00, "Rua Nuno Álvares 87","4420-024","Gondomar", "Paypal","123456789");
+      this.encomendasController.AddNewEncomenda(this.userController.getNormalUserByEmail("goncalo@gama.pt").id, new Date("2020-01-12"), 12.00, "Rua Nuno Álvares 87","4420-024","Gondomar", "MBWay","123456789");
     }
 
     // Detalhes encomenda
@@ -162,9 +162,9 @@ class App {
     if (!localStorage.avaliacoes) {
       this.avaliacoesController = new AvaliacoesController();
       this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 3, "meh...");
-      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 2, 4, "fixolas xD!");
-      this.avaliacoesController.RegisterReview(2,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 3, 2, "injetaram-me sida");
-      this.avaliacoesController.RegisterReview(3,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 4, 1, "a enfermeira desmaiou");
+      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 2, 4, "foi bom");
+      this.avaliacoesController.RegisterReview(2,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 3, 2, "podia ser melhor");
+      this.avaliacoesController.RegisterReview(3,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 4, 1, "correu mal");
       this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 5, 5, "topp");
     }
 

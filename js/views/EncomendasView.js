@@ -33,7 +33,6 @@ export default class EncomendasView {
       else{
         this.MostrarEncomendas(1);
         this.SetInfoEncomenda();
-        
       }
     }
   }
@@ -48,13 +47,14 @@ export default class EncomendasView {
         if (encomendas[i].id_utilizador==this.userController.getLoggedInUserData().id) {
           aux=false
           if (first==true) {
+            aux=false
             document.getElementById("encomenda-cartao").innerHTML += `
             <div class="col-md-12 encomendas-cartoes-display">
               <div class="col-xl-9 col-xs-12 encomenda " >
                 <div class="row d-flex align-items-center">
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja">Encomenda #${encomendas[i].id_encomenda}</h5>
-                    <p class="pt-4 mb-1">Encomenda realizada a ${encomendas[i].data_compra}</p>
+                    <p class="pt-4 mb-1">Encomenda realizada a ${new Date(encomendas[i].data_compra).toLocaleDateString()}</p>
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>Processado</p>
@@ -87,7 +87,7 @@ export default class EncomendasView {
                 <div class="row d-flex align-items-center">
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja" id="numero-encomenda">Encomenda #${encomendas[i].id_encomenda}</h5>
-                    <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${encomendas[i].data_compra}</p>
+                    <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${new Date(encomendas[i].data_compra).toLocaleDateString()}</p>
 
                   </div>
                   <div class="col-md-3 color-azul-princ ">
@@ -109,13 +109,14 @@ export default class EncomendasView {
         if (encomendas[i].id_utilizador==this.userController.getLoggedInUserData().id) {
           aux=false
           if (first==true) {
+            aux=false
             document.getElementById("encomenda-cartao").innerHTML += `
             <div class="col-md-12 encomendas-cartoes-display">
               <div class="col-xl-9 col-xs-12 encomenda " >
                 <div class="row d-flex align-items-center">
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja">Encomenda #${encomendas[i].id_encomenda}</h5>
-                    <p class="pt-4 mb-1">Encomenda realizada a ${encomendas[i].data_compra}</p>
+                    <p class="pt-4 mb-1">Encomenda realizada a ${new Date(encomendas[i].data_compra).toLocaleDateString()}</p>
                   </div>
                   <div class="col-md-3 color-azul-princ ">
                     <p><b>Estado: </b>Processado</p>
@@ -148,7 +149,7 @@ export default class EncomendasView {
                 <div class="row d-flex align-items-center">
                   <div class="col-md-6 color-azul-princ">
                     <h5 class="color-laranja" id="numero-encomenda">Encomenda #${encomendas[i].id_encomenda}</h5>
-                    <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${encomendas[i].data_compra}</p>
+                    <p class="pt-4 mb-1" id="dia-encomenda">Encomenda realizada a ${new Date(encomendas[i].data_compra).toLocaleDateString()}</p>
 
                   </div>
                   <div class="col-md-3 color-azul-princ ">
@@ -174,7 +175,6 @@ export default class EncomendasView {
       this.OrdenarEncomendas()
       this.SetInfoEncomenda()
     }
-    
   }
 
   SetInfoEncomenda(){
@@ -200,7 +200,7 @@ export default class EncomendasView {
           if(btnVerEncomenda.id==encomendas[i].id_encomenda){
             let total=parseInt(encomendas[i].preco_total) + parseInt(2);
             document.getElementById("numero-encomenda-modal").innerHTML += `Encomenda #${encomendas[i].id_encomenda}`;
-            document.getElementById("data-encomenda").innerHTML += `Encomenda realizada a ${encomendas[i].data_compra}`;
+            document.getElementById("data-encomenda").innerHTML += `Encomenda realizada a ${new Date(encomendas[i].data_compra).toLocaleDateString()}`;
             document.getElementById("subtotal").innerHTML += `${encomendas[i].preco_total}€`;
             document.getElementById("preco-total").innerHTML += `${total}€`;
             document.getElementById("metodo-pagamento").innerHTML += `${encomendas[i].metodo_pagamento}`;

@@ -81,7 +81,7 @@
                   </div>
                   <div class="filter-test-type pb-4">
                     <select class="select-testes" style="width: 100%" name="state">
-                      <option disabled="disabled" value="0" selected>Tipo de teste</option>
+                      <option value="0" selected>Qualquer</option>
                     </select>
                   </div>
                   <div class="filter-distance pb-4">
@@ -295,7 +295,6 @@
         searchInputPlaceholder: 'Pesquisar localidade...'
       });
       $('.select-testes').select2({
-        dropdownParent: $('#detalhes-posto-modal'),
         searchInputPlaceholder: 'Pesquisar tipo...'
       });
       $('.select-testes-modal').select2({

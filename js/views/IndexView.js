@@ -3,6 +3,8 @@ import LocaleController from '../controllers/LocaleController.js'
 import TestsController from '../controllers/TestsController.js'
 import AvaliacoesController from '../controllers/AvaliacoesController.js'
 import MarcacoesController from '../controllers/MarcacoesController.js'
+import GamificacoesController from '../controllers/GamificacoesController.js'
+import EncomendasController from '../controllers/EncomendasController.js'
 import indexInstance from '../app.js'
 
 export default class IndexView {
@@ -21,6 +23,12 @@ export default class IndexView {
 
     // Instanciar a MarcacoesController para ser possível aceder às marcações de cada entidade
     this.marcacoesController = new MarcacoesController();
+
+    // Instanciar o GamificacoesController para ser possível aceder às percentagens da rifa
+    this.gamificacoesController = new GamificacoesController();
+
+    // Instanciar o EncomendasController para ser possível aceder adicionar a rifa ao utilizador
+    this.encomendasController = new EncomendasController();
 
     // Adicionar as localidades presentes na localstorage ao select de localidades
     this.AddLocalesToSelect(".select-localidades");
@@ -151,101 +159,45 @@ export default class IndexView {
       }
 
       const localidadeSelecionada = parseInt($('.select-localidades').find(':selected').val());
+      const testeSelecionado = parseInt($('.select-testes').find(':selected').val());
       if (localidadeSelecionada != parseInt($('.select-localidades').find('option').first().val())) {
         document.getElementById("localidade-resultados").innerHTML = `A mostrar resultados de: <span>${this.localeController.GetNameById(localidadeSelecionada).nome}</span>`
-        let countResults = 0;
+        this.countResults = 0;
         document.getElementById("postos-encontrados").innerHTML = "";
         for (let i = 0; i < this.userController.endEntidade.length; i++) {
           if (parseInt(this.userController.endEntidade[i].id_localidade) == localidadeSelecionada) {
-            countResults++;
-            const entidadeData = this.userController.entityUsers.find(entidade => parseInt(entidade.id) == parseInt(this.userController.endEntidade[i].id_entidade));
-            const isDriveThru = entidadeData.drive_thru ? `<span><i class="fas fa-car" data-toggle="tooltip" data-placement="top" title="Posto drive-thru"></i></span>` : ``;
-            const allowsCallMe = entidadeData.call_me ? `<span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>` : ``;
-            let lowestPrice = parseFloat("9999.99");
-            let availableTests = [];
-            // verificar a classificação da entidade
-            let classi = 0.0;
-            let quantClassi = 0;
-            for (let j = 0; j < this.avaliacoesController.avaliacoes.length; j++) {
-              if (parseInt(this.avaliacoesController.avaliacoes[j].id_entidade) == parseInt(entidadeData.id)) {
-                classi += parseFloat(this.avaliacoesController.avaliacoes[j].avaliacao);
-                quantClassi++;
+            const entidade = this.userController.entityUsers.find(entidade => parseInt(entidade.id) == parseInt(this.userController.endEntidade[i].id_entidade))
+            let minPrice = parseFloat(document.getElementById("preco_min").value);
+            let maxPrice = parseFloat(document.getElementById("preco_max").value);
+            if (testeSelecionado == 0) {
+              for (let r = 0; r < this.userController.testesEntidade.length; r++) {
+                if (parseInt(this.userController.testesEntidade[r].id_entidade) == parseInt(entidade.id)) {
+                  console.log(parseFloat(this.userController.testesEntidade[r].preco));
+                  if (parseFloat(this.userController.testesEntidade[r].preco) >= minPrice && parseFloat(this.userController.testesEntidade[r].preco) <= maxPrice) {
+                    this.RenderCard(entidade, i);
+                    break;
+                  }
+                }
               }
-            }
-            classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
-            let renderStars = classi == 0.0 ? "<span stlye='font-weight: 900;'>Sem classificação</span>" : "";
-            for (let j = 0; j < Math.floor(classi); j++) {
-              renderStars += `<i class="fas fa-star"></i>`;
-            }
-            for (let j = 0; j < this.userController.testesEntidade.length; j++) {
-              if (parseInt(this.userController.testesEntidade[j].id_entidade) == parseInt(entidadeData.id)) {
-                availableTests.push(this.testsController.GetNameById(parseInt(this.userController.testesEntidade[j].id_teste)).nome_teste);
-                if (parseFloat(this.userController.testesEntidade[j].preco) <= parseFloat(lowestPrice)) {
-                  lowestPrice = parseFloat(this.userController.testesEntidade[j].preco);
+            } else if (this.userController.testesEntidade.some(teste => parseInt(teste.id_teste) == testeSelecionado && parseInt(teste.id_entidade) == parseInt(entidade.id))) {
+              for (let r = 0; r < this.userController.testesEntidade.length; r++) {
+                if (parseInt(this.userController.testesEntidade[r].id_entidade) == parseInt(entidade.id)) {
+                  if (parseFloat(this.userController.testesEntidade[r].preco) >= minPrice && parseFloat(this.userController.testesEntidade[r].preco) <= maxPrice) {
+                    this.RenderCard(entidade, i);
+                    break;
+                  }
                 }
               }
             }
-            // Mostrar os cartões
-            document.getElementById("postos-encontrados").innerHTML += `
-              <div class="card-sta">
-                <div class="row" >
-                  <div class="col-md-5 col-xl-8">
-                    <div class="card-text">
-                      <div class="card-title">
-                        <p>${entidadeData.nome}</p>
-                      </div>
-                      <div class="card-subtitle mb-3">
-                        <p>${this.userController.endEntidade[i].morada}, ${this.userController.endEntidade[i].cod_postal}, ${this.localeController.GetNameById(parseInt(localidadeSelecionada)).nome}</p>
-                      </div>
-                      <div class="card-description mb-1">
-                        <p>${availableTests.join(" | ")}<button class="btn-table" onclick="window.location.replace('./html/testes.html');" style="color: var(--cinza-escuro)"><i class="far fa-question-circle" style="margin-left: 5px;"></i></button></p>
-                      </div>
-                      <div class="card-rating">
-                        <span class="">${parseFloat(classi).toFixed(2)} • </span>
-                        ${renderStars}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-7 col-xl-4">
-                    <div class="card-buttons d-flex">
-                      <div class="row first-row">
-                        <div class="col-4">
-                          <span>${lowestPrice.toFixed(2)}€</span>
-                        </div>
-                        <div class="col-8">
-                          <button type="button" style="min-width: 115px;" class="btn btn-laranja detalhes-posto" data-bs-toggle="modal" data-bs-target="#detalhes-posto-modal" id="${entidadeData.id}" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
-                        </div>
-                      </div>
-                      <div class="row second-row">
-                        <div class="card-icons col d-flex justify-content-flex-end">
-                          ${isDriveThru}
-                          ${allowsCallMe}
-                          <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>`;
-
-            // Adicionar markers das localizações ao mapa
-            const map = this.map
-            const myLatLng = { lat: this.userController.endEntidade[i].lat, lng: this.userController.endEntidade[i].long };
-            this.arrMapMarkers.push(
-              new google.maps.Marker({
-                position: myLatLng,
-                map
-              })
-            );
           }
         }
-        if (countResults == 0) {
+        if (this.countResults == 0) {
           document.getElementById("postos-encontrados").innerHTML = "<b>Não foram encontrados resultados para os termos pesquisados.</b>"
           document.getElementById("qnt-resultados").innerHTML = "(0 resultado(s))"
         } else {
           // Ativar as tooltips dos cartões
           $(function () { $('[data-toggle="tooltip"]').tooltip() });
-          document.getElementById("qnt-resultados").innerHTML = "(" + countResults + " resultado(s))"
+          document.getElementById("qnt-resultados").innerHTML = "(" + this.countResults + " resultado(s))"
           // Event listener de informações do posto
           this.SetModalInfo();
         }
@@ -307,18 +259,21 @@ export default class IndexView {
         let usedDates = []
         for (let j = 0; j < this.marcacoesController.marcacoes.length; j++) {
           if (parseInt(btnDetalhes.id) == parseInt(this.marcacoesController.marcacoes[j].id_entidade)) {
-            const curData = new Date(this.marcacoesController.marcacoes[j].data_marcacao.slice(0, -1) + "+01:00");
+            const curData = new Date(this.marcacoesController.marcacoes[j].data_marcacao);
             // Se as marcações forem numa data e hora superior ao presente adicionar às datas disponíveis
             if (curData > dataHoje) {
-              usedDates.push(
-                {
-                  "dia": curData.getDate(),
-                  "mes": curData.getMonth(),
-                  "ano": curData.getFullYear(),
-                  "hora": curData.getHours(),
-                  "min": curData.getMinutes()
-                }
-              );
+              /// verificar se a marcação não está cancelada
+              if (this.marcacoesController.marcacoes[j].id_estado != 4) {
+                usedDates.push(
+                  {
+                    "dia": curData.getDate(),
+                    "mes": curData.getMonth(),
+                    "ano": curData.getFullYear(),
+                    "hora": curData.getHours(),
+                    "min": curData.getMinutes()
+                  }
+                );
+              }
             }
           }
         }
@@ -375,9 +330,11 @@ export default class IndexView {
         const allEntityTests = this.userController.testesEntidade;
         $('.select-testes-modal').on('select2:select', function (e) {
           for (let z = 0; z < allEntityTests.length; z++) {
-            if (parseInt(allEntityTests[z].id_teste) == parseInt($('.select-testes-modal').find(':selected').val())) {
-              document.getElementById("preco-total").innerHTML = "Valor: " + allEntityTests[z].preco + "€";
-              break;
+            if (parseInt(allEntityTests[z].id_entidade) == parseInt(dataEntidade.id)) {
+              if (parseInt(allEntityTests[z].id_teste) == parseInt($('.select-testes-modal').find(':selected').val())) {
+                document.getElementById("preco-total").innerHTML = "Valor: " + allEntityTests[z].preco + "€";
+                break;
+              }
             }
           }
         });
@@ -412,31 +369,141 @@ export default class IndexView {
       const data = $('.select-dia');
       const hora = $('.select-hora');
 
-      if ((tipo_teste.find(':selected').val() != tipo_teste.find('option').first().val()) && (data.find(':selected').val() != data.find('option').first().val()) && (hora.find(':selected').val() != hora.find('option').first().val())) {
-        try {
-          this.marcacoesController.AddNewMarcacao(
-            this.userController.getLoggedInUserData().id,
-            parseInt(document.getElementById("mar-id").innerHTML),
-            new Date(data.find(':selected').val().split("/")[2] + "-" + ('0' + data.find(':selected').val().split("/")[1]).slice(-2) + "-" + data.find(':selected').val().split("/")[0] + "T" + hora.find(':selected').val() + ":00.000+01:00"),
-            parseInt(tipo_teste.find(':selected').val()),
-            false,
-            parseFloat(document.getElementById("preco-total").innerHTML.split("Valor: ")[1].split("€")[0].trim()).toFixed(2)
-          );
-          Swal.fire('Sucesso!', 'A marcação foi feita com sucesso!', 'success');
-          // Fazer a percentagem de ganhar o premio
-          // Fazer a percentagem de ganhar o premio
-          // Fazer a percentagem de ganhar o premio
-          // Fazer a percentagem de ganhar o premio
-          // Fazer a percentagem de ganhar o premio
-          setTimeout(() => {
-            location.replace("html/marcacoes.html");
-          }, 2000);
-        } catch (e) {
-          Swal.fire('Erro!', String(e).substring(7), 'error');
+      if (this.userController.getLoggedInUserType() == "normal") {
+        const moradaUser = this.userController.endNormal.find(morada => parseInt(morada.id_utilizador) == parseInt(this.userController.getLoggedInUserData().id));
+
+        if ((tipo_teste.find(':selected').val() != tipo_teste.find('option').first().val()) && (data.find(':selected').val() != data.find('option').first().val()) && (hora.find(':selected').val() != hora.find('option').first().val())) {
+          try {
+            this.marcacoesController.AddNewMarcacao(
+              this.userController.getLoggedInUserData().id,
+              parseInt(document.getElementById("mar-id").innerHTML),
+              new Date(data.find(':selected').val().split("/")[2] + "-" + ('0' + data.find(':selected').val().split("/")[1]).slice(-2) + "-" + data.find(':selected').val().split("/")[0] + "T" + hora.find(':selected').val() + ":00.000+01:00"),
+              parseInt(tipo_teste.find(':selected').val()),
+              false,
+              parseFloat(document.getElementById("preco-total").innerHTML.split("Valor: ")[1].split("€")[0].trim()).toFixed(2)
+            );
+            Swal.fire('Sucesso!', 'A marcação foi feita com sucesso!', 'success');
+
+            // Verificar se o utilizador ganhou a rifa
+            const gen_num = Math.floor(Math.random() * 100);
+            if (gen_num <= parseInt(this.gamificacoesController.percentagem_premio[0].percentagem) - 1) {
+              // Ganhou!!
+              this.encomendasController.AddNewEncomenda(
+                parseInt(this.userController.getLoggedInUserData().id),
+                new Date(),
+                0.00,
+                moradaUser.morada,
+                moradaUser.cod_postal,
+                this.localeController.GetNameById(moradaUser.id_localidade).nome,
+                "Gratuito",
+                this.userController.getLoggedInUserData().tlm
+              );
+              const produtosAOferecer = this.gamificacoesController.percentagem_premio[0].produtos_oferta.split(",");
+              for (let y = 0; y < produtosAOferecer.length; y++) {
+                this.encomendasController.AddNewDetalhesEncomenda(
+                  this.encomendasController.encomendas.length,
+                  parseInt(produtosAOferecer[y]),
+                  1
+                );
+              }
+              Swal.fire("Parabéns, A marcação foi concluída com sucesso e ganhou um kit de prevenção à COVID-19!");
+              setTimeout(() => { }, 3000);
+            }
+            setTimeout(() => {
+              location.replace("html/marcacoes.html");
+            }, 2000);
+          } catch (e) {
+            Swal.fire('Erro!', String(e).substring(7), 'error');
+          }
+        } else {
+          Swal.fire('Erro!', "Escolha uma opção de todas as informações!", 'error');
         }
       } else {
-        Swal.fire('Erro!', "Escolha uma opção de todas as informações!", 'error');
+        Swal.fire('Erro!', "O seu tipo de utilizador não pode fazer marcações!", 'error');
       }
     });
+  }
+
+  RenderCard(entidadeData, i) {
+    this.countResults++;
+    const localidadeSelecionada = parseInt($('.select-localidades').find(':selected').val());
+    const isDriveThru = entidadeData.drive_thru ? `<span><i class="fas fa-car" data-toggle="tooltip" data-placement="top" title="Posto drive-thru"></i></span>` : ``;
+    const allowsCallMe = entidadeData.call_me ? `<span><i class="fas fa-phone" data-toggle="tooltip" data-placement="top" title="Call me disponível"></i></span>` : ``;
+    let lowestPrice = parseFloat("9999.99");
+    let availableTests = [];
+    // verificar a classificação da entidade
+    let classi = 0.0;
+    let quantClassi = 0;
+    for (let j = 0; j < this.avaliacoesController.avaliacoes.length; j++) {
+      if (parseInt(this.avaliacoesController.avaliacoes[j].id_entidade) == parseInt(entidadeData.id)) {
+        classi += parseFloat(this.avaliacoesController.avaliacoes[j].avaliacao);
+        quantClassi++;
+      }
+    }
+    classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
+    let renderStars = classi == 0.0 ? "<span stlye='font-weight: 900;'>Sem classificação</span>" : "";
+    for (let j = 0; j < Math.floor(classi); j++) {
+      renderStars += `<i class="fas fa-star"></i>`;
+    }
+    for (let j = 0; j < this.userController.testesEntidade.length; j++) {
+      if (parseInt(this.userController.testesEntidade[j].id_entidade) == parseInt(entidadeData.id)) {
+        availableTests.push(this.testsController.GetNameById(parseInt(this.userController.testesEntidade[j].id_teste)).nome_teste);
+        if (parseFloat(this.userController.testesEntidade[j].preco) <= parseFloat(lowestPrice)) {
+          lowestPrice = parseFloat(this.userController.testesEntidade[j].preco);
+        }
+      }
+    }
+    // Mostrar os cartões
+    document.getElementById("postos-encontrados").innerHTML += `
+      <div class="card-sta">
+        <div class="row" >
+          <div class="col-md-5 col-xl-8">
+            <div class="card-text">
+              <div class="card-title">
+                <p>${entidadeData.nome}</p>
+              </div>
+              <div class="card-subtitle mb-3">
+                <p>${this.userController.endEntidade[i].morada}, ${this.userController.endEntidade[i].cod_postal}, ${this.localeController.GetNameById(parseInt(localidadeSelecionada)).nome}</p>
+              </div>
+              <div class="card-description mb-1">
+                <p>${availableTests.join(" | ")}<button class="btn-table" onclick="window.location.replace('./html/testes.html');" style="color: var(--cinza-escuro)"><i class="far fa-question-circle" style="margin-left: 5px;"></i></button></p>
+              </div>
+              <div class="card-rating">
+                <span class="">${parseFloat(classi).toFixed(2)} • </span>
+                ${renderStars}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-7 col-xl-4">
+            <div class="card-buttons d-flex">
+              <div class="row first-row">
+                <div class="col-4">
+                  <span>${lowestPrice.toFixed(2)}€</span>
+                </div>
+                <div class="col-8">
+                  <button type="button" style="min-width: 115px;" class="btn btn-laranja detalhes-posto" data-bs-toggle="modal" data-bs-target="#detalhes-posto-modal" id="${entidadeData.id}" name="button">Detalhes&nbsp;<i style="font-size: .75rem" class="fas fa-chevron-right"></i></button>
+                </div>
+              </div>
+              <div class="row second-row">
+                <div class="card-icons col d-flex justify-content-flex-end">
+                  ${isDriveThru}
+                  ${allowsCallMe}
+                  <span><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="top" title="Entidade confirmada"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    // Adicionar markers das localizações ao mapa
+    const map = this.map
+    const myLatLng = { lat: this.userController.endEntidade[i].lat, lng: this.userController.endEntidade[i].long };
+    this.arrMapMarkers.push(
+      new google.maps.Marker({
+        position: myLatLng,
+        map
+      })
+    );
   }
 }

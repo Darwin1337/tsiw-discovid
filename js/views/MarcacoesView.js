@@ -40,7 +40,6 @@ export default class EncomendasView {
       else{
         select.innerHTML += `<option value="${estado.id_estado}">${estado['nome']}</option>`;
       }
-     
     }
   }
   AddResultadosToSelect(target,id) {
@@ -55,7 +54,7 @@ export default class EncomendasView {
       }
     }
   }
- 
+
   MostrarMarcacoesPosto(ordem){
     this.UpdateEstadosResultados()
     document.getElementById("pills-marcacoes").innerHTML=""
@@ -817,38 +816,6 @@ export default class EncomendasView {
             }
           }
         
-          // let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
-  
-          // const d=new Date(marcacoes[i].data_marcacao)
-          // const a=new Date()
-  
-          // if (marcacoes[i].id_estado==4 && postoData.registado==true) {
-          //   this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,2)
-          // }
-          // if (postoData.registado==false) {
-          //   if (marcacoes[i].id_estado!=2 && marcacoes[i].id_estado!=4) {
-          //     this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,2)
-          //   }
-          //   if (marcacoes[i].id_resultado!=2) {
-          //     this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,2)
-          //   }
-          // }
-          // if (postoData.registado==true && d>a) {
-          //   if (marcacoes[i].id_estado!=1 && marcacoes[i].id_estado!=4) {
-          //     this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,1)
-          //   }
-          //   if (marcacoes[i].id_resultado!=1 && marcacoes[i].id_resultado!=2) {
-          //     this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,1)
-          //   }
-          // }
-          // if (postoData.registado==true && a>d ) {
-          //   if (marcacoes[i].id_estado<4) {
-          //     this.marcacaoController.UpdateEstadoMarcacao(marcacoes[i].id_marcacao,1)
-          //   }
-          //   if (marcacoes[i].id_resultado<3) {
-          //     this.marcacaoController.UpdateResultadoMarcacao(marcacoes[i].id_marcacao,1)
-          //   }
-          // }
           
   
         }
