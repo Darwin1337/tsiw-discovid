@@ -519,7 +519,7 @@ export default class EncomendasView {
             let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
             let userData=this.userController.normalUsers.find(user => user.id==marcacoes[i].id_utilizador)
             let testes=this.testsController.testes.find(teste => teste.id_teste==marcacoes[i].id_teste)
-            let avaliacoes=this.avaliacoesController.avaliacoes.find(avaliacao => avaliacao.id_entidade==marcacoes[i].id_entidade)
+            
 
             //Ir buscar a classificação media do posto
             let classi = 0.0;
@@ -554,30 +554,36 @@ export default class EncomendasView {
             document.getElementById("morada-user").innerHTML = `${moradasUser.morada}, ${moradasUser.cod_postal}, ${this.localeController.GetNameById(moradasUser.id_localidade).nome}`;
             document.getElementById("contacto-user-email").innerHTML = `${userData.tlm} | ${userData.email}`;
 
-            if (condition) {
-              
+            document.getElementById("comentario-marcacao").innerHTML=""      
+            let j=null;
+            for (let d = 0; d < this.avaliacoesController.avaliacoes.length; d++) {
+              if (parseInt(this.avaliacoesController.avaliacoes[d].id_marcacao)==parseInt(btnVerMarcacao.id)) {
+                j=d;
+                break;
+              }
             }
-            // if ((avaliacoes==undefined && marcacoes[i].id_estado==5) || (avaliacoes==undefined && postoData.registado==false)) {
-            //   document.getElementById("info-marcacao").innerHTML+=`
-            //   <form id="avaliar-form">
-            //   <h3 class="mt-3">Avaliar</h3>
-            //     <div class="row">
-            //       <div class="col-12 d-flex flex-direction-column">
-            //         <span>Estrelas a atribuir</span>
-            //         <input type="number" min="1" max="5" id="avaliacao-a-dar" required>
-            //       </div>
-            //     </div>
-            //     <div class="row d-flex ">
-            //       <div class="col-12 d-flex flex-direction-column">
-            //         <span>Comentário</span>
-            //         <input type="text" id="comentario-a-dar" required>
-            //       </div>
-            //     </div>
-            //     <button class="w-100 avaliar-posto mt-3" id="avaliar-posto">Avaliar posto</button>
-            //   </form>
-            //     `
-            //   this.AvaliarPosto(postoData.id,marcacoes[i].id_marcacao)
-            // }
+            if (j!=null) {
+              document.getElementById("comentario-marcacao").innerHTML=`
+                <div >
+                  <h4 class="color-azul-princ mt-4 mb-2">Avaliação do cliente</h4>
+                  <div class="bg-pd-br">
+                    <div class="row">
+                      <div class="col-md-4 d-flex flex-column align-items-center">
+                        <img src="${userData.avatar}">
+                        <p>${userData.pnome}</p>
+                      </div>
+                      <div class="col-md-8 d-flex flex-column justify-content-around">
+                      <span> ${this.avaliacoesController.avaliacoes[j].avaliacao} Estrelas </span>
+                      <span> ${this.avaliacoesController.avaliacoes[j].comentario}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `
+            }
+            else{
+              document.getElementById("comentario-marcacao").innerHTML="O utilizador ainda não fez comentário"
+            }
           }
         }
       });
@@ -597,7 +603,7 @@ export default class EncomendasView {
             let moradas=this.userController.endEntidade.find(morada => morada.id_entidade==marcacoes[i].id_entidade)
             let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
             let testes=this.testsController.testes.find(teste => teste.id_teste==marcacoes[i].id_teste)
-            let avaliacoes=this.avaliacoesController.avaliacoes.find(avaliacao => avaliacao.id_entidade==marcacoes[i].id_entidade)
+            
 
             //Ir buscar a classificação media do posto
             let classi = 0.0;
@@ -632,9 +638,38 @@ export default class EncomendasView {
             document.getElementById("morada-user").innerHTML = `${moradasUser.morada}, ${moradasUser.cod_postal}, ${this.localeController.GetNameById(moradasUser.id_localidade).nome}`;
             document.getElementById("contacto-user-email").innerHTML = `${this.userController.getLoggedInUserData().tlm} | ${this.userController.getLoggedInUserData().email}`;
 
+            
+            document.getElementById("comentario-marcacao").innerHTML=""
 
-            if ((avaliacoes==undefined && marcacoes[i].id_estado==5) || (avaliacoes==undefined && postoData.registado==false)) {
-              document.getElementById("info-marcacao").innerHTML+=`
+            let j=null;
+            for (let d = 0; d < this.avaliacoesController.avaliacoes.length; d++) {
+              if (parseInt(this.avaliacoesController.avaliacoes[d].id_marcacao)==parseInt(btnVerMarcacao.id)) {
+                j=d;
+                break;
+              }
+            }
+            if (j!=null) {
+                document.getElementById("comentario-marcacao").innerHTML=`
+                  <div >
+                    <h4 class="color-azul-princ mt-4 mb-2">Avaliação do cliente</h4>
+                    <div class="bg-pd-br">
+                      <div class="row">
+                        <div class="col-md-4 d-flex flex-column align-items-center">
+                          <img src="${this.userController.getLoggedInUserData().avatar}">
+                          <p>${this.userController.getLoggedInUserData().pnome}</p>
+                        </div>
+                        <div class="col-md-8 d-flex flex-column justify-content-around">
+                        <span> ${this.avaliacoesController.avaliacoes[j].avaliacao} Estrelas </span>
+                        <span> ${this.avaliacoesController.avaliacoes[j].comentario}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                `
+            }
+            else{
+              if (marcacoes[i].id_estado==5) {
+                document.getElementById("info-marcacao").innerHTML+=`
               <form id="avaliar-form">
               <h3 class="mt-3">Avaliar</h3>
                 <div class="row">
@@ -653,6 +688,9 @@ export default class EncomendasView {
               </form>
                 `
               this.AvaliarPosto(postoData.id,marcacoes[i].id_marcacao)
+              break
+              }
+              
             }
           }
         }
@@ -695,7 +733,8 @@ export default class EncomendasView {
   }
 
   AvaliarPosto(id_entidade,id_marcacao){
-    document.getElementById("avaliar-form").addEventListener("submit", ()=>{
+    document.getElementById("avaliar-form").addEventListener("submit", event=>{
+      event.preventDefault();
       this.avaliacoesController.RegisterReview(this.userController.getLoggedInUserData().id,id_entidade,id_marcacao,document.getElementById("avaliacao-a-dar").value,document.getElementById("comentario-a-dar").value)
       Swal.fire('Sucesso!', 'O seu comentario foi registado com sucesso!', 'success');
       setTimeout(function(){location.reload()},2000);

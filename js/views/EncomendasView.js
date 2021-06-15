@@ -219,7 +219,7 @@ export default class EncomendasView {
                 document.getElementById("produtos-encomenda").innerHTML += `
                 <div class="row">
                   <div class="col-2">
-                    <img src="../img/loja/M01.png" class="w-100" alt="">
+                    <img src="${produtos[s].imagem}" class="w-100" alt="">
                   </div>
                   <div class="col-8">
                     <p><span class="color-laranja"><b>${detalhes_encomenda[d].quantidade}x</b> </span><b class="color-azul-princ">${produtos[s].nome}</b></p>

@@ -288,7 +288,7 @@ export default class IndexView {
             const stringsClassi = ["Muito Mau", "Mau", "Razoável", "Bom", "Excelente"];
             document.getElementById("content-avaliacoes").innerHTML += `
               <div class="bg-pd-br d-flex mb-4">
-                <div class="col-md-2 d-flex flex-wrap justify-center align-center me-3">
+                <div class="col-md-2 d-flex flex-column align-items-center me-3">
                   <img src="${dadosUser.avatar}" class="w-75">
                   <p class="text-center">${dadosUser.pnome}</p>
                 </div>

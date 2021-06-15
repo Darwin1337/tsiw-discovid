@@ -161,11 +161,11 @@ class App {
     // Classificações
     if (!localStorage.avaliacoes) {
       this.avaliacoesController = new AvaliacoesController();
-      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 1, 3, "meh...");
-      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 2, 4, "fixolas xD!");
-      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 3, 2, "injetaram-me sida");
-      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 4, 1, "a enfermeira desmaiou");
-      this.avaliacoesController.RegisterReview(this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 5, 5, "topp");
+      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 3, "meh...");
+      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 2, 4, "fixolas xD!");
+      this.avaliacoesController.RegisterReview(2,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 3, 2, "injetaram-me sida");
+      this.avaliacoesController.RegisterReview(3,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 4, 1, "a enfermeira desmaiou");
+      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 5, 5, "topp");
     }
 
     this.gamificacoesController = new GamificacoesController();
