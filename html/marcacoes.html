@@ -70,52 +70,50 @@
               <div class="col-sm-12 col-md-12 col-xl-7 ">
                 <h4 class="text-start color-azul-princ mb-4">Informação do posto</h4>
                 <div class="col-md-12 info-posto-marcacao color-azul-princ">
-                  <h5 id="nome-posto"></h5>
-                  <p id="morada-posto"></p>
-                  <p id="horario-posto"></p>
+                  <h5 id="posto-nome"></h5>
+                  <p id="posto-morada"></p>
+                  <p hidden id="mar-id"></p>
+                  <p id="posto-horario"></p>
                   <div class="row ">
                     <div class="col-md-4 text-center mb-3">
-                      <h4 class="color-laranja pontuacao" id="classificacao-posto">5,0</h4>
-                      <img src="..\img\star.png">
-                      <img src="..\img\star.png">
-                      <img src="..\img\star.png">
-                      <img src="..\img\star.png">
-                      <img src="..\img\star.png">
+                      <h4 class="color-laranja pontuacao" id="pontuacao"></h4>
+                      <div id="render-stars"></div>
                     </div>
                     <div class="col-md-6 ">
                       <div class=" d-flex align-items-center ">
                         <span id="valor">5</span>
-                        <span class="span-5estrelas "></span>
+                        <span class="span-5estrelas"></span>
                       </div>
                       <div class="col-xl-3"></div>
                       <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                       <div class="d-flex align-items-center ">
                         <span id="valor">4</span>
-                        <span class="span-4estrelas "></span>
+                        <span class="span-4estrelas"></span>
                       </div>
                       <div class="col-xl-3"></div>
                       <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                       <div class="d-flex align-items-center ">
                         <span id="valor">3</span>
-                        <span class="span-3estrelas "></span>
+                        <span class="span-3estrelas"></span>
                       </div>
                       <div class="col-xl-3"></div>
                       <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                       <div class="d-flex align-items-center ">
                         <span id="valor">2</span>
-                        <span class="span-2estrelas "></span>
+                        <span class="span-2estrelas"></span>
                       </div>
                       <div class="col-xl-3"></div>
                       <div class="col-md-12 col-xl-3 col-sm-12 col-12"></div>
                       <div class="d-flex align-items-center ">
                         <span id="valor">1</span>
-                        <span class="span-1estrelas "></span>
+                        <span class="span-1estrelas"></span>
                       </div>
                     </div>
                   </div>
                 </div>
-                <h4 class="text-start color-azul-princ mt-4 mb-4">Avaliações<span> (1 classificação)</span></h4>
-                <div class="bg-pd-br d-flex mb-4">
+                <h4 class="text-start color-azul-princ mt-4 mb-4" id="quant-avaliacoes">Avaliações<span> (1 classificação)</span></h4>
+                <div id="content-avaliacoes"></div>
+                <!-- <div class="bg-pd-br d-flex mb-4">
                   <div class="col-md-2 d-flex flex-wrap align-items-center">
                     <img src="..\img\icon.png" class="w-75" alt="">
                     <p>gama_10</p>
@@ -132,7 +130,7 @@
                   <div class="col-md-2 d-flex  align-items-end">
                     <p class="color-azul-princ">Há 2 meses</p>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="col-md-1 text-start"></div>
               <div class="col-sm-12 col-md-12 col-xl-4 text-start" >
@@ -157,12 +155,7 @@
     </div>
   </div>
 
-  <div class="modal fade" id="avaliar-posto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content background-modal">
-      </div>
-    </div>
-  </div>
+
 
 
   <footer class="text-center text-lg-start text-muted">

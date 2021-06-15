@@ -162,10 +162,8 @@ class App {
     if (!localStorage.avaliacoes) {
       this.avaliacoesController = new AvaliacoesController();
       this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 1, 3, "meh...");
-      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 2, 4, "foi bom");
+      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("saojoao@hospital.pt").id, 2, 4, "foi bom");
       this.avaliacoesController.RegisterReview(2,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 3, 2, "podia ser melhor");
-      this.avaliacoesController.RegisterReview(3,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 4, 1, "correu mal");
-      this.avaliacoesController.RegisterReview(1,this.userController.getEntityUserByEmail("vendanova@clinica.pt").id, 5, 5, "topp");
     }
 
     this.gamificacoesController = new GamificacoesController();

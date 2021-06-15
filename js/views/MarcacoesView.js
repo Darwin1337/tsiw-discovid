@@ -42,6 +42,7 @@ export default class EncomendasView {
       }
     }
   }
+
   AddResultadosToSelect(target,id) {
     const resultados = this.marcacaoController.GetAllResultados();
     const select = document.querySelector(target);
@@ -509,10 +510,13 @@ export default class EncomendasView {
     for (const btnVerMarcacao of document.getElementsByClassName("ver-marcacao")) {
       btnVerMarcacao.addEventListener("click", () => {
         const marcacoes = this.marcacaoController.GetAllMarcacoes();
+        let test=null
+        document.getElementById("content-avaliacoes").innerHTML =""
         //limpar div botao avaliar
         document.getElementById("info-marcacao").innerHTML=""
         for (let i = 0; i < marcacoes.length; i++) {
           if(btnVerMarcacao.id==marcacoes[i].id_marcacao){
+            test=marcacoes[i].id_entidade
             let moradasUser=this.userController.endNormal.find(morada => morada.id_utilizador==marcacoes[i].id_utilizador)
             let moradas=this.userController.endEntidade.find(morada => morada.id_entidade==marcacoes[i].id_entidade)
             let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
@@ -520,16 +524,16 @@ export default class EncomendasView {
             let testes=this.testsController.testes.find(teste => teste.id_teste==marcacoes[i].id_teste)
             
 
-            //Ir buscar a classificação media do posto
-            let classi = 0.0;
-            let quantClassi = 0;
-            for (let j = 0; j < this.avaliacoesController.avaliacoes.length; j++) {
-              if (parseInt(this.avaliacoesController.avaliacoes[j].id_entidade) == parseInt(postoData.id)) {
-                classi += parseFloat(this.avaliacoesController.avaliacoes[j].avaliacao);
-                quantClassi++;
-              }
-            }
-            classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
+            // //Ir buscar a classificação media do posto
+            // let classi = 0.0;
+            // let quantClassi = 0;
+            // for (let j = 0; j < this.avaliacoesController.avaliacoes.length; j++) {
+            //   if (parseInt(this.avaliacoesController.avaliacoes[j].id_entidade) == parseInt(postoData.id)) {
+            //     classi += parseFloat(this.avaliacoesController.avaliacoes[j].avaliacao);
+            //     quantClassi++;
+            //   }
+            // }
+            // classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
 
             //Ir buscar a data e a hora da marcação
             let data=new Date(marcacoes[i].data_marcacao)
@@ -542,10 +546,10 @@ export default class EncomendasView {
               horas=horas.getHours()+":"+horas.getMinutes()
             }
 
-            document.getElementById("nome-posto").innerHTML = `${postoData.nome}`;
-            document.getElementById("morada-posto").innerHTML = `${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} `;
-            document.getElementById("horario-posto").innerHTML = `${postoData.horario_inicio} - ${postoData.horario_fim}`;
-            document.getElementById("classificacao-posto").innerHTML = `${classi}`;
+            // document.getElementById("nome-posto").innerHTML = `${postoData.nome}`;
+            // document.getElementById("morada-posto").innerHTML = `${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} `;
+            // document.getElementById("horario-posto").innerHTML = `${postoData.horario_inicio} - ${postoData.horario_fim}`;
+            // document.getElementById("classificacao-posto").innerHTML = `${classi}`;
             document.getElementById("tipo-teste").innerHTML = `${testes.nome_teste}`;
             document.getElementById("hora-teste").innerHTML = `${data} ${horas}`;
             document.getElementById("valor-teste").innerHTML = `${marcacoes[i].preco_teste}€`;
@@ -553,7 +557,6 @@ export default class EncomendasView {
             document.getElementById("morada-user").innerHTML = `${moradasUser.morada}, ${moradasUser.cod_postal}, ${this.localeController.GetNameById(moradasUser.id_localidade).nome}`;
             document.getElementById("contacto-user-email").innerHTML = `${userData.tlm} | ${userData.email}`;
 
-            document.getElementById("comentario-marcacao").innerHTML=""      
             let j=null;
             for (let d = 0; d < this.avaliacoesController.avaliacoes.length; d++) {
               if (parseInt(this.avaliacoesController.avaliacoes[d].id_marcacao)==parseInt(btnVerMarcacao.id)) {
@@ -561,6 +564,7 @@ export default class EncomendasView {
                 break;
               }
             }
+           
             if (j!=null) {
               document.getElementById("comentario-marcacao").innerHTML=`
                 <div >
@@ -585,6 +589,54 @@ export default class EncomendasView {
             }
           }
         }
+        // verificar a classificação da entidade
+        let classi = 0.0;
+        let quantClassi = 0;
+        for (let f = 0; f < this.avaliacoesController.avaliacoes.length; f++) {
+          if (parseInt(this.avaliacoesController.avaliacoes[f].id_entidade) == test) {
+            quantClassi++;
+            classi += parseFloat(this.avaliacoesController.avaliacoes[f].avaliacao);
+            // Mostrar os comentários do utilizador
+            const dadosUser = this.userController.normalUsers.find(user => parseInt(user.id) == parseInt(this.avaliacoesController.avaliacoes[f].id_utilizador));
+            let renderUserReview = "";
+            for (let p = 0; p < parseInt(this.avaliacoesController.avaliacoes[f].avaliacao); p++) {
+              renderUserReview += `<img src="..\\img\\star.png">`;
+            }
+            const stringsClassi = ["Muito Mau", "Mau", "Razoável", "Bom", "Excelente"];
+            document.getElementById("content-avaliacoes").innerHTML += `
+              <div class="bg-pd-br d-flex mb-4">
+                <div class="col-md-2 d-flex flex-column align-items-center me-3">
+                  <img src="${dadosUser.avatar}" class="w-75">
+                  <p class="text-center">${dadosUser.pnome}</p>
+                </div>
+                <div class="col-md-8 text-start avaliacao-entidade">
+                  <h6 class="color-laranja w-100">${stringsClassi[parseInt(this.avaliacoesController.avaliacoes[f].avaliacao) - 1]}</h6>
+                  ${renderUserReview}
+                  <p class="color-azul-princ mt-3">${this.avaliacoesController.avaliacoes[f].comentario}</p>
+                </div>
+                <div class="col-md-2 d-flex  align-items-end">
+                  <p class="color-azul-princ">${new Date(this.avaliacoesController.avaliacoes[f].data).toLocaleDateString()}</p>
+                </div>
+              </div>`;
+          }
+        }
+
+        document.getElementById("quant-avaliacoes").innerHTML = `Avaliações <span>(${quantClassi} classificação/ções)</span>`;
+        classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
+        document.getElementById("pontuacao").innerHTML = String(parseFloat(classi).toFixed(2)).replace(".", ",");
+        let renderStars = "";
+        for (let j = 0; j < Math.floor(classi); j++) {
+          renderStars += `<img src="..\\img\\star.png">`;
+        }
+        document.getElementById("render-stars").innerHTML = classi == 0.0 ? "<b>Sem classificação</b>" : `${renderStars}`;
+        // Pintar a tira que corresponde oa número na classificação
+        if (Math.floor(classi) > 0) {
+          document.getElementsByClassName("span-" + parseInt(Math.floor(classi)) + "estrelas")[0].style.backgroundColor = "green";
+        } else {
+          for (let k = 1; k <= 5; k++) {
+            document.getElementsByClassName("span-" + k + "estrelas")[0].style.backgroundColor = "#C8C8C8";
+          }
+        }
       });
     }
   }
@@ -593,11 +645,17 @@ export default class EncomendasView {
     //Atribuir os valores do localstorage aos campos
     for (const btnVerMarcacao of document.getElementsByClassName("ver-marcacao")) {
       btnVerMarcacao.addEventListener("click", () => {
+        document.getElementById("content-avaliacoes").innerHTML = "";
+        
+        const dataEntidade = this.userController.entityUsers.find(entidade => parseInt(entidade.id) == parseInt(btnVerMarcacao.id));
+        const moradaEntidade = this.userController.endEntidade.find(entidade => parseInt(entidade.id_entidade) == parseInt(btnVerMarcacao.id));
         const marcacoes = this.marcacaoController.GetAllMarcacoes();
+        let test=null
         //limpar div botao avaliar
         document.getElementById("info-marcacao").innerHTML=""
         for (let i = 0; i < marcacoes.length; i++) {
           if(btnVerMarcacao.id==marcacoes[i].id_marcacao){
+            test=marcacoes[i].id_entidade
             let moradasUser=this.userController.endNormal.find(morada => morada.id_utilizador==marcacoes[i].id_utilizador)
             let moradas=this.userController.endEntidade.find(morada => morada.id_entidade==marcacoes[i].id_entidade)
             let postoData=this.userController.entityUsers.find(posto => posto.id==marcacoes[i].id_entidade)
@@ -626,10 +684,10 @@ export default class EncomendasView {
               horas=horas.getHours()+":"+horas.getMinutes()
             }
 
-            document.getElementById("nome-posto").innerHTML = `${postoData.nome}`;
-            document.getElementById("morada-posto").innerHTML = `${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} `;
-            document.getElementById("horario-posto").innerHTML = `${postoData.horario_inicio} - ${postoData.horario_fim}`;
-            document.getElementById("classificacao-posto").innerHTML = `${classi}`;
+            // document.getElementById("nome-posto").innerHTML = `${postoData.nome}`;
+            // document.getElementById("morada-posto").innerHTML = `${moradas.morada}, ${moradas.cod_postal}, ${this.localeController.GetNameById(moradas.id_localidade).nome} `;
+            // document.getElementById("horario-posto").innerHTML = `${postoData.horario_inicio} - ${postoData.horario_fim}`;
+            // // document.getElementById("classificacao-posto").innerHTML = `${classi}`;
             document.getElementById("tipo-teste").innerHTML = `${testes.nome_teste}`;
             document.getElementById("hora-teste").innerHTML = `${data} ${horas}`;
             document.getElementById("valor-teste").innerHTML = `${marcacoes[i].preco_teste}€`;
@@ -693,6 +751,56 @@ export default class EncomendasView {
             }
           }
         }
+        // verificar a classificação da entidade
+        let classi = 0.0;
+        let quantClassi = 0;
+        for (let f = 0; f < this.avaliacoesController.avaliacoes.length; f++) {
+          if (parseInt(this.avaliacoesController.avaliacoes[f].id_entidade) == test) {
+            quantClassi++;
+            classi += parseFloat(this.avaliacoesController.avaliacoes[f].avaliacao);
+            // Mostrar os comentários do utilizador
+            const dadosUser = this.userController.normalUsers.find(user => parseInt(user.id) == parseInt(this.avaliacoesController.avaliacoes[f].id_utilizador));
+            let renderUserReview = "";
+            for (let p = 0; p < parseInt(this.avaliacoesController.avaliacoes[f].avaliacao); p++) {
+              renderUserReview += `<img src="..\\img\\star.png">`;
+            }
+            const stringsClassi = ["Muito Mau", "Mau", "Razoável", "Bom", "Excelente"];
+            document.getElementById("content-avaliacoes").innerHTML += `
+              <div class="bg-pd-br d-flex mb-4">
+                <div class="col-md-2 d-flex flex-column align-items-center me-3">
+                  <img src="${dadosUser.avatar}" class="w-75">
+                  <p class="text-center">${dadosUser.pnome}</p>
+                </div>
+                <div class="col-md-8 text-start avaliacao-entidade">
+                  <h6 class="color-laranja w-100">${stringsClassi[parseInt(this.avaliacoesController.avaliacoes[f].avaliacao) - 1]}</h6>
+                  ${renderUserReview}
+                  <p class="color-azul-princ mt-3">${this.avaliacoesController.avaliacoes[f].comentario}</p>
+                </div>
+                <div class="col-md-2 d-flex  align-items-end">
+                  <p class="color-azul-princ">${new Date(this.avaliacoesController.avaliacoes[f].data).toLocaleDateString()}</p>
+                </div>
+              </div>`;
+          }
+        }
+
+        document.getElementById("quant-avaliacoes").innerHTML = `Avaliações <span>(${quantClassi} classificação/ções)</span>`;
+        classi = quantClassi > 0 ? parseFloat(classi / quantClassi).toFixed(2) : parseFloat(0.0).toFixed(2);
+        document.getElementById("pontuacao").innerHTML = String(parseFloat(classi).toFixed(2)).replace(".", ",");
+        let renderStars = "";
+        for (let j = 0; j < Math.floor(classi); j++) {
+          renderStars += `<img src="..\\img\\star.png">`;
+        }
+        document.getElementById("render-stars").innerHTML = classi == 0.0 ? "<b>Sem classificação</b>" : `${renderStars}`;
+        // Pintar a tira que corresponde oa número na classificação
+        if (Math.floor(classi) > 0) {
+          document.getElementsByClassName("span-" + parseInt(Math.floor(classi)) + "estrelas")[0].style.backgroundColor = "green";
+        } else {
+          for (let k = 1; k <= 5; k++) {
+            document.getElementsByClassName("span-" + k + "estrelas")[0].style.backgroundColor = "#C8C8C8";
+          }
+        }
+
+
       });
     }
   }
