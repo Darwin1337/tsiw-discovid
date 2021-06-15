@@ -16,8 +16,18 @@ export default class RegistoEntidadeView {
     // Carregar os inputs para variáveis
     this.LoadInputs();
 
+    
     // Event listener para o submit do forumlário
-    this.BindRegistrationSubmit();
+    if (this.userController.getLoggedInUserData()!=null) {
+      Swal.fire('Erro!', "Já se encontra logado", 'error');
+      setTimeout(() => {
+        location.replace("../../")
+      }, 2000);
+    }
+    else{
+      this.BindRegistrationSubmit();
+    }
+    
 
     // Event listener para quando a checkbox de "ver password" é checkada
     this.BindViewPasswordCheckbox("view-password", "RegistoPASSWORD");

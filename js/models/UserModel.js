@@ -6,6 +6,7 @@ export class UtilizadorNormalModel {
     this.email = email;
     this.password = password;
     this.data_usessao = new Date();
+    this.bloqueado=false;
     this.tlm = tlm;
     this.nif = nif;
     this.data_nasc = data_nasc;

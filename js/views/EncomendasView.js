@@ -230,7 +230,6 @@ export default class EncomendasView {
                   </div>
                 </div>
                 <hr>`
-
               }
             }
           }

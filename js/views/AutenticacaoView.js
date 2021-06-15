@@ -9,7 +9,15 @@ export default class AutenticacaoView {
     this.LoadLoginInputs();
 
     // Event listener para quando o formulário de login é submetido
-    this.BindLoginSubmit();
+    if (this.userController.getLoggedInUserData()!=null) {
+      Swal.fire('Erro!', "Já se encontra logado", 'error');
+      setTimeout(() => {
+        location.replace("../../")
+      }, 2000);
+    }
+    else{
+      this.BindLoginSubmit();
+    }
 
     // Event listener para quando a checkbox de "ver password" é checkada
     this.BindViewPasswordCheckbox("view-password", "loginPASSWORD");
@@ -25,15 +33,26 @@ export default class AutenticacaoView {
   BindLoginSubmit() {
     this.loginFORM.addEventListener('submit', event => {
       event.preventDefault();
-      try {
-        this.userController.UserLogin(this.loginEMAIL.value, this.loginPASSWORD.value);
-        Swal.fire('Sucesso!', 'A sessão foi iniciada com sucesso!', 'success');
-        setTimeout(() => {
-          location.replace("../../")
-        }, 2000);
-      } catch (e) {
-        Swal.fire('Erro!', String(e).substring(7), 'error');
+      const users=this.userController.getAllNormalUsers();
+      for(let i=0; i<users.length;i++){
+        if (this.loginEMAIL.value==users[i].email) {
+          if (users[i].bloqueado==false) {
+            try {
+              this.userController.UserLogin(this.loginEMAIL.value, this.loginPASSWORD.value);
+              Swal.fire('Sucesso!', 'A sessão foi iniciada com sucesso!', 'success');
+              setTimeout(() => {
+                location.replace("../../")
+              }, 2000);
+            } catch (e) {
+              Swal.fire('Erro!', String(e).substring(7), 'error');
+            }
+          }
+          else{
+            Swal.fire('Erro!', "O utilizador está bloqueado", 'error');
+          }
+        }
       }
+      
     });
   }
 

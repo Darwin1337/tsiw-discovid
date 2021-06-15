@@ -3,6 +3,7 @@ import MarcacoesController from '../controllers/MarcacoesController.js';
 import LocaleController from '../controllers/LocaleController.js';
 import TestsController from '../controllers/TestsController.js';
 import AvaliacoesController from '../controllers/AvaliacoesController.js';
+import GamificacoesController from '../controllers/GamificacoesController.js';
 
 export default class EncomendasView {
   constructor() {
@@ -16,6 +17,8 @@ export default class EncomendasView {
     this.testsController = new TestsController();
     // Instanciar o AvaliacoesController para ser possível aceder ao métodos dos utilizadores
     this.avaliacoesController = new AvaliacoesController();
+    // Instanciar o GamificacoesController para ser possível aceder ao métodos dos utilizadores
+    this.gamificacoesController = new GamificacoesController();
 
     this.currentPage = document.querySelector("body");
     if (this.currentPage.id=="marcacoes") {
@@ -744,10 +747,11 @@ export default class EncomendasView {
                 <button class="w-100 avaliar-posto mt-3" id="avaliar-posto">Avaliar posto</button>
               </form>
                 `
+              
               this.AvaliarPosto(postoData.id,marcacoes[i].id_marcacao)
+              this.AtribuirPontosAvaliacao()
               break
               }
-              
             }
           }
         }
@@ -803,6 +807,12 @@ export default class EncomendasView {
 
       });
     }
+  }
+
+  AtribuirPontosAvaliacao(){
+    document.getElementById("avaliar-posto").addEventListener("click", ()=>{
+      this.userController.UpdateUserPoints(this.gamificacoesController.pontos_avaliacao[0].pontos)
+    })
   }
 
   OrdenarMarcacoes(){
